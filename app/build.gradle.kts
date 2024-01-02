@@ -47,7 +47,9 @@ dependencies {
 
 
     implementation("com.github.bumptech.glide:glide:4.12.0")
+   implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.23") //gif
     annotationProcessor("com.github.bumptech.glide:compiler:4.13.2")
+
 
 
 

@@ -12,14 +12,28 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/shape_toolbar">
-
+        <ImageButton
+            android:id="@+id/backLoginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/transparent"
+            android:padding="5dp"
+            android:src="@drawable/ic_back_white"
+            tools:ignore="TouchTargetSizeCheck">
+        </ImageButton>
         <ImageView
             android:id="@+id/iconIv"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
-            android:src="@drawable/logo"></ImageView>
+            android:src="@drawable/logo">
+
+        </ImageView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,7 +43,9 @@
             android:fontFamily="sans-serif-condensed"
             android:text="Please Login"
             android:textColor="@color/white"
-            android:textSize="30dp"></TextView>
+            android:textSize="30dp">
+
+        </TextView>
 
     </RelativeLayout>
 
