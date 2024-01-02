@@ -71,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 else if (itemId == R.id.navLibrary){
                     loadFragment(new LibraryFragment(),false);
                 }
-                if (itemId != R.id.navHome) {
-                    loadFragment(new HomeFragment(), true);
-                }
                 return true;
             }
         });

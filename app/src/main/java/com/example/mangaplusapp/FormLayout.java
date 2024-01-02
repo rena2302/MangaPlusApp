@@ -21,19 +21,19 @@ public class FormLayout extends AppCompatActivity {
         // BEGIN FORM Validition
 
         //handle loginBtn click    , start login screen
-        findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(FormLayout.this,LoginActivity.class));
-            }
-        });
-        //handle skipBtn click    , start login screen
-
-        findViewById(R.id.skipBtn).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(FormLayout.this,DashBoardUserActivity.class));
-            }
-        });
+//        findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                startActivity(new Intent(FormLayout.this,LoginActivity.class));
+//            }
+//        });
+//        //handle skipBtn click    , start login screen
+//
+//        findViewById(R.id.skipBtn).setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                startActivity(new Intent(FormLayout.this,DashBoardUserActivity.class));
+//            }
+//        });
     }
 }
