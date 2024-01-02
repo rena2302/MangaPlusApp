@@ -138,7 +138,7 @@
                     android:layout_width="match_parent"
                     android:drawableStart="@drawable/password_icon"
                     android:drawablePadding="10dp"
-                    android:hint="Confirm Passowrd "
+                    android:hint="Confirm Passowrd"
                     android:inputType="textPassword">
                 </EditText>
 
@@ -160,6 +160,7 @@
     </ScrollView>
     <!-- Question For have a account-->
     <TextView
+        android:id="@+id/toLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/questionHaveAccount"
