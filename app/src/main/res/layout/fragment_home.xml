@@ -13,9 +13,11 @@
         android:textStyle="bold"
         android:textSize="16dp"
         android:text="@string/Home"
+
         />
     <GridView
         android:id="@+id/gdvDSTruyen"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </FrameLayout>
