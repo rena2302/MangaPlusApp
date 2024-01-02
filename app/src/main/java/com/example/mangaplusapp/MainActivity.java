@@ -51,10 +51,12 @@ public class MainActivity extends AppCompatActivity {
     private void focusFragment(){ // ham chay ra main cua fragment
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
         frameLayout = findViewById(R.id.frameLayout);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item){
                 int itemId = item.getItemId();
+
                 if(itemId == R.id.navHome)
                 {
                     loadFragment(new HomeFragment(),false);
