@@ -9,7 +9,8 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_above="@+id/bottom_nav_view"
+        android:layout_height="wrap_content">
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
