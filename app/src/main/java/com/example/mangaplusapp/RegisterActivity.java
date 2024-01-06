@@ -10,14 +10,23 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import Database.CreateDatabase;
+
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // LAY ID
         setContentView(R.layout.activity_register);
         TextView toLogin=findViewById(R.id.toLogin);
         ImageButton btnToLogin = findViewById(R.id.backRegisterBtn);
+        // LAY ID
+
+        // CONNECT DATABASE
+        CreateDatabase db = new CreateDatabase(this);
+        db.open();
+
         toLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,6 +37,8 @@ public class RegisterActivity extends AppCompatActivity {
         btnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // CHUYEN LAYOUT
                 Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                 startActivity(intent);
             }
