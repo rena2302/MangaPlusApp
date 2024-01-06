@@ -21,6 +21,7 @@ public class HomeFragment extends Fragment {
     EditText edtTimKiem;
     private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
