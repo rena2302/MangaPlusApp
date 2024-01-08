@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_login"
+    android:background="@drawable/backround_register"
     tools:context=".LoginActivity">
     <RelativeLayout
         android:id="@+id/toolbarRl"
@@ -31,11 +31,10 @@
             android:hint="Hey, Welcome to "
             android:textSize="25dp"
             android:textFontWeight="900"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_marginTop="35dp"
             android:fontFamily="sans-serif-condensed">
         </TextView>
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -115,7 +114,6 @@
                     android:hint="Confirm Passowrd"
                     android:inputType="textPassword">
                 </EditText>
-
             </com.google.android.material.textfield.TextInputLayout>
             <!--     Button Register       -->
             <Button
@@ -141,6 +139,6 @@
         android:textSize="16dp"
         android:padding="10dp"
         android:layout_marginBottom="50dp"
-        android:textColor="@color/black">
+        android:textColor="@color/white">
     </TextView>
 </RelativeLayout>
