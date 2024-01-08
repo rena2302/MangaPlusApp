@@ -6,9 +6,14 @@
     <string name="Search">Search</string>
     <string name="Creator">Creator</string>
     <string name="Library">Library</string>
-    <string name="newMemberSignUp">New User ? <b>SignUp</b> </string>
+    <string name="newMemberSignUp"><b>Create Account</b> </string>
     <string name="questionHaveAccount">Have a <b>Account ?</b> </string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+
+
 </resources>
