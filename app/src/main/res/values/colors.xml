@@ -8,5 +8,7 @@
     <color name="gray">#ccc</color>
     <color name="gray1">#777777</color>
     <color name="main_color_form">#4ADEDE</color>
-
+    <color name="color_input">#E4CBA2</color>
+    <color name="btn_login">#C3662D</color>
+    <color name="text_login_input">#455A64</color>
 </resources>

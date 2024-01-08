@@ -4,51 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back01"
+    android:background="@drawable/background_login"
     tools:context=".LoginActivity">
-
     <RelativeLayout
         android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@drawable/shape_toolbar">
-<!--        <ImageButton-->
-<!--            android:id="@+id/backLoginBtn"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_marginEnd="10dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:background="@color/transparent"-->
-<!--            android:padding="5dp"-->
-<!--            android:src="@drawable/ic_back_white"-->
-<!--            tools:ignore="TouchTargetSizeCheck">-->
-<!--        </ImageButton>-->
-        <ImageView
-            android:id="@+id/iconIv"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/logo">
-
-        </ImageView>
-
-        <TextView
+        android:layout_height="250dp">
+        <ImageButton
+            android:id="@+id/backLoginBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/iconIv"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/transparent"
+            android:padding="5dp"
+            android:src="@drawable/ic_back_black"
+            tools:ignore="TouchTargetSizeCheck">
+        </ImageButton>
+        <TextView
+            android:id="@+id/loginTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Please Login"
-            android:textColor="@color/white"
-            android:textSize="30dp">
-
+            android:hint="Hey, Welcome to "
+            android:textSize="25dp"
+            android:textFontWeight="900"
+            android:textColor="@color/black"
+            android:layout_marginTop="35dp"
+            android:fontFamily="sans-serif-condensed">
         </TextView>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/loginTittle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-30dp"
+            android:src="@drawable/tittlemain"></ImageView>
     </RelativeLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -64,8 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/shape_edittext"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/shape_login_input"
                 android:textColorHint="@color/gray">
                 <EditText
                     android:id="@+id/editTextEmail"
@@ -76,7 +71,6 @@
                     android:hint="Email"
                     android:inputType="textEmailAddress">
                 </EditText>
-
             </com.google.android.material.textfield.TextInputLayout>
             <!--      Password      -->
             <com.google.android.material.textfield.TextInputLayout
@@ -85,46 +79,46 @@
                 android:layout_below="@+id/loginEmail_act"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
+                android:layout_marginBottom="20dp"
                 app:passwordToggleEnabled="true"
-                android:background="@drawable/shape_edittext"
+                android:background="@drawable/shape_login_input"
                 android:textColorHint="@color/gray">
                 <EditText
                     android:id="@+id/editTextPassword"
                     android:layout_height="wrap_content"
-
                     android:layout_width="match_parent"
                     android:drawableStart="@drawable/password_icon"
                     android:drawablePadding="10dp"
                     android:hint="Password"
                     android:inputType="textPassword">
                 </EditText>
-
             </com.google.android.material.textfield.TextInputLayout>
             <!--      FORGOT PASSWORD      -->
             <TextView
                 android:id="@+id/forgotPassword_act"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_below="@+id/loginPassword"
-                android:layout_marginTop="5dp"
-                android:text="Forgot Password ?"
+                android:layout_alignParentEnd="true"
                 android:padding="5dp"
-                android:textColor="@color/gray1">
+
+                android:text="Forgot Password ?"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                tools:ignore="TextSizeCheck">
             </TextView>
             <!--     Button Login       -->
             <Button
                 android:id="@+id/loginBtn_act"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="10dp"
                 android:layout_below="@+id/forgotPassword_act"
                 android:textColor="@color/white"
-                android:background="@color/main_color_form"
-                android:text="Login"
-                >
+                android:textSize="16dp"
+                android:backgroundTint="@color/btn_login"
+                android:text="Login">
             </Button>
-
         </RelativeLayout>
     </ScrollView>
             <!--  No Account, to Register  -->
@@ -136,6 +130,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:padding="10dp"
+        android:textSize="20dp"
+        android:layout_marginBottom="50dp"
         android:textColor="@color/black">
     </TextView>
 </RelativeLayout>

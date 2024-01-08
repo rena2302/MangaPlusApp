@@ -4,15 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back01"
+    android:background="@drawable/background_login"
     tools:context=".LoginActivity">
-
     <RelativeLayout
         android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@drawable/shape_toolbar">
-
+        android:layout_height="250dp">
         <ImageButton
             android:id="@+id/backRegisterBtn"
             android:layout_width="wrap_content"
@@ -23,32 +20,30 @@
             android:layout_marginBottom="10dp"
             android:background="@color/transparent"
             android:padding="5dp"
-            android:src="@drawable/ic_back_white"
+            android:src="@drawable/ic_back_black"
             tools:ignore="TouchTargetSizeCheck">
         </ImageButton>
-        <ImageView
-            android:id="@+id/iconIv"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/logo">
-        </ImageView>
-
         <TextView
+            android:id="@+id/loginTittle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/iconIv"
             android:layout_centerHorizontal="true"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Create New Account"
-            android:textColor="@color/white"
-            android:textSize="30dp">
-
+            android:hint="Hey, Welcome to "
+            android:textSize="25dp"
+            android:textFontWeight="900"
+            android:textColor="@color/black"
+            android:layout_marginTop="35dp"
+            android:fontFamily="sans-serif-condensed">
         </TextView>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/loginTittle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-30dp"
+            android:src="@drawable/tittlemain"></ImageView>
     </RelativeLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -58,104 +53,81 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <!--      NAME      -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/registerName_act"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:hintEnabled="false"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/shape_edittext"
-                android:textColorHint="@color/gray">
-                <EditText
-                    android:id="@+id/editTextName"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:drawableStart="@drawable/ic_personal"
-                    android:drawablePadding="10dp"
-                    android:hint="Name"
-                    android:inputType="textEmailAddress">
-                </EditText>
-            </com.google.android.material.textfield.TextInputLayout>
-            <!--      EMAIL      -->
+            <!--     Email       -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/registerEmail_act"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/registerName_act"
                 app:hintEnabled="false"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/shape_edittext"
-                android:textColorHint="@color/gray">
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/shape_login_input">
                 <EditText
                     android:id="@+id/editTextEmail"
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_email"
                     android:drawablePadding="10dp"
                     android:hint="Email"
-                    android:inputType="textEmailAddress">
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="@color/text_login_input">
                 </EditText>
-
             </com.google.android.material.textfield.TextInputLayout>
             <!--      Password      -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/registerPassword"
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_below="@+id/registerEmail_act"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
                 app:passwordToggleEnabled="true"
-                android:background="@drawable/shape_edittext"
-                android:layout_marginBottom="10dp"
+                android:background="@drawable/shape_login_input"
                 android:textColorHint="@color/gray">
-
                 <EditText
                     android:id="@+id/editTextPassword"
                     android:layout_height="wrap_content"
-
                     android:layout_width="match_parent"
                     android:drawableStart="@drawable/password_icon"
                     android:drawablePadding="10dp"
                     android:hint="Password"
+                    android:textColorHint="@color/text_login_input"
                     android:inputType="textPassword">
                 </EditText>
-
             </com.google.android.material.textfield.TextInputLayout>
             <!--      Confirm Password      -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/registerCfPassword"
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_below="@+id/registerPassword"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
                 app:passwordToggleEnabled="true"
-                android:background="@drawable/shape_edittext"
+                android:background="@drawable/shape_login_input"
                 android:textColorHint="@color/gray">
                 <EditText
                     android:id="@+id/editTextCfPassword"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:drawableStart="@drawable/password_icon"
+                    android:textColorHint="@color/text_login_input"
                     android:drawablePadding="10dp"
                     android:hint="Confirm Passowrd"
                     android:inputType="textPassword">
                 </EditText>
 
             </com.google.android.material.textfield.TextInputLayout>
-            <!--     Button Login       -->
+            <!--     Button Register       -->
             <Button
                 android:id="@+id/registerBtn_act"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_below="@+id/registerCfPassword"
-                android:text="Register"
+                android:layout_height="55dp"
                 android:textColor="@color/white"
-                android:background="@color/main_color_form"
-                >
+                android:backgroundTint="@color/btn_login"
+                android:layout_below="@+id/registerCfPassword"
+                android:text="Create"
+                android:textSize="16dp">
             </Button>
-
         </RelativeLayout>
     </ScrollView>
     <!-- Question For have a account-->
@@ -166,9 +138,9 @@
         android:text="@string/questionHaveAccount"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:textSize="16dp"
         android:padding="10dp"
+        android:layout_marginBottom="50dp"
         android:textColor="@color/black">
     </TextView>
-
-
 </RelativeLayout>
