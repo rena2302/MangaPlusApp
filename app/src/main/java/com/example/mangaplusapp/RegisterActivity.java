@@ -50,7 +50,6 @@ public class RegisterActivity extends AppCompatActivity {
         db= new CreateDatabase(this);
         db.open();
         //BEGIN LOGIC REGISTER
-        name=(EditText) findViewById(R.id.editTextName);
         email= (EditText) findViewById(R.id.editTextEmail);
         password = (EditText) findViewById(R.id.editTextPassword);
         repassword = (EditText) findViewById(R.id.editTextCfPassword);
