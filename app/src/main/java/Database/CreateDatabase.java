@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.util.Patterns;
+
+import java.util.regex.Pattern;
 
 public class CreateDatabase extends SQLiteOpenHelper{
     SQLiteDatabase myDb= this.getWritableDatabase();
@@ -71,10 +74,9 @@ public class CreateDatabase extends SQLiteOpenHelper{
         return result != -1; // Kiểm tra nếu giá trị trả về khác -1
 
     }
-
     public Boolean CheckEmail (String email){
         Cursor cursor = myDb.rawQuery("Select * from " + TB_USER + " where " + TB_USER_EMAIL + " = ?", new String[]{email});
-        if(cursor.getCount() > 0){
+        if(cursor.getCount() > 0) {
             return true; /// that bai
         }
         else{
