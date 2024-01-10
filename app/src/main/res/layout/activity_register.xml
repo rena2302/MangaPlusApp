@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backround_register"
     tools:context=".LoginActivity">
+    <!---->
     <RelativeLayout
         android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
@@ -28,12 +29,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:hint="Hey, Welcome to "
+            android:text="Hey, Welcome to "
             android:textSize="25dp"
             android:textFontWeight="900"
             android:textColor="@color/white"
             android:layout_marginTop="35dp"
-            android:fontFamily="sans-serif-condensed">
+            android:fontFamily="@font/josefinsans_bold">
         </TextView>
         <ImageView
             android:layout_width="wrap_content"
@@ -41,7 +42,7 @@
             android:layout_below="@+id/loginTittle"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-30dp"
-            android:src="@drawable/tittlemain"></ImageView>
+            android:src="@drawable/tittlemain"/>
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -58,8 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/shape_login_input">
+                android:layout_marginBottom="20dp">
                 <EditText
                     android:id="@+id/editTextEmail"
                     android:layout_width="match_parent"
@@ -67,6 +67,8 @@
                     android:drawableStart="@drawable/ic_email"
                     android:drawablePadding="10dp"
                     android:hint="Email"
+                    android:fontFamily="@font/josefinsans_bold"
+                    android:background="@drawable/shape_login_input"
                     android:inputType="textEmailAddress"
                     android:textColorHint="@color/text_login_input">
                 </EditText>
@@ -79,8 +81,7 @@
                 android:layout_below="@+id/registerEmail_act"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
-                app:passwordToggleEnabled="true"
-                android:background="@drawable/shape_login_input"
+                app:endIconMode="password_toggle"
                 android:textColorHint="@color/gray">
                 <EditText
                     android:id="@+id/editTextPassword"
@@ -89,6 +90,8 @@
                     android:drawableStart="@drawable/password_icon"
                     android:drawablePadding="10dp"
                     android:hint="Password"
+                    android:fontFamily="@font/josefinsans_bold"
+                    android:background="@drawable/shape_login_input"
                     android:textColorHint="@color/text_login_input"
                     android:inputType="textPassword">
                 </EditText>
@@ -101,8 +104,7 @@
                 android:layout_below="@+id/registerPassword"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
-                app:passwordToggleEnabled="true"
-                android:background="@drawable/shape_login_input"
+                app:endIconMode="password_toggle"
                 android:textColorHint="@color/gray">
                 <EditText
                     android:id="@+id/editTextCfPassword"
@@ -112,6 +114,8 @@
                     android:textColorHint="@color/text_login_input"
                     android:drawablePadding="10dp"
                     android:hint="Confirm Passowrd"
+                    android:fontFamily="@font/josefinsans_bold"
+                    android:background="@drawable/shape_login_input"
                     android:inputType="textPassword">
                 </EditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -123,6 +127,7 @@
                 android:textColor="@color/white"
                 android:backgroundTint="@color/btn_login"
                 android:layout_below="@+id/registerCfPassword"
+                android:fontFamily="@font/josefinsans_bold"
                 android:text="Create"
                 android:textSize="16dp">
             </Button>
@@ -134,6 +139,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/questionHaveAccount"
+        android:fontFamily="@font/josefinsans_bold"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:textSize="16dp"
