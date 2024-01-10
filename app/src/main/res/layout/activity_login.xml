@@ -28,12 +28,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:hint="Hey, Welcome to "
+            android:text="Hey, Welcome to "
             android:textSize="25dp"
             android:textFontWeight="900"
             android:textColor="@color/black"
             android:layout_marginTop="35dp"
-            android:fontFamily="sans-serif-condensed">
+            android:fontFamily="@font/josefinsans_bold">
         </TextView>
 
         <ImageView
@@ -59,8 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
+                app:endIconMode="clear_text"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/shape_login_input"
                 android:textColorHint="@color/gray">
                 <EditText
                     android:id="@+id/editTextEmail"
@@ -69,6 +69,8 @@
                     android:drawableStart="@drawable/ic_email"
                     android:drawablePadding="10dp"
                     android:hint="Email"
+                    android:fontFamily="@font/josefinsans_bold"
+                    android:background="@drawable/shape_login_input"
                     android:inputType="textEmailAddress">
                 </EditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -80,8 +82,7 @@
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
                 android:layout_marginBottom="20dp"
-                app:passwordToggleEnabled="true"
-                android:background="@drawable/shape_login_input"
+                app:endIconMode="password_toggle"
                 android:textColorHint="@color/gray">
                 <EditText
                     android:id="@+id/editTextPassword"
@@ -90,6 +91,8 @@
                     android:drawableStart="@drawable/password_icon"
                     android:drawablePadding="10dp"
                     android:hint="Password"
+                    android:fontFamily="@font/josefinsans_bold"
+                    android:background="@drawable/shape_login_input"
                     android:inputType="textPassword">
                 </EditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -101,7 +104,7 @@
                 android:layout_below="@+id/loginPassword"
                 android:layout_alignParentEnd="true"
                 android:padding="5dp"
-
+                android:fontFamily="@font/josefinsans_bold"
                 android:text="Forgot Password ?"
                 android:textColor="@color/black"
                 android:textSize="18dp"
@@ -117,7 +120,8 @@
                 android:textColor="@color/white"
                 android:textSize="16dp"
                 android:backgroundTint="@color/btn_login"
-                android:text="Login">
+                android:text="Login"
+                android:fontFamily="@font/josefinsans_bold">
             </Button>
         </RelativeLayout>
     </ScrollView>
@@ -131,6 +135,7 @@
         android:layout_centerHorizontal="true"
         android:padding="10dp"
         android:textSize="20dp"
+        android:fontFamily="@font/josefinsans_bold"
         android:layout_marginBottom="50dp"
         android:textColor="@color/black">
     </TextView>
