@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Hey, Welcome to "
+            android:text="@string/welcome"
             android:textSize="25dp"
             android:textFontWeight="900"
             android:textColor="@color/white"
@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:drawableStart="@drawable/password_icon"
                     android:drawablePadding="10dp"
-                    android:hint="Password"
+                    android:hint="@string/passWord"
                     android:fontFamily="@font/josefinsans_bold"
                     android:background="@drawable/shape_login_input"
                     android:textColorHint="@color/text_login_input"
@@ -113,7 +113,7 @@
                     android:drawableStart="@drawable/password_icon"
                     android:textColorHint="@color/text_login_input"
                     android:drawablePadding="10dp"
-                    android:hint="Confirm Passowrd"
+                    android:hint="@string/confirmPassword"
                     android:fontFamily="@font/josefinsans_bold"
                     android:background="@drawable/shape_login_input"
                     android:inputType="textPassword">
@@ -128,7 +128,7 @@
                 android:backgroundTint="@color/btn_login"
                 android:layout_below="@+id/registerCfPassword"
                 android:fontFamily="@font/josefinsans_bold"
-                android:text="Create"
+                android:text="@string/create"
                 android:textSize="16dp">
             </Button>
         </RelativeLayout>
