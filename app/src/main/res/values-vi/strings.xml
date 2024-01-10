@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MangaPlusApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Home">Trang Chủ</string>
+    <string name="Hot">Nổi Bật</string>
+    <string name="Search">Tìm Kiếm</string>
+    <string name="Creator">Nhà Phát Triển</string>
+    <string name="Library">Thư Viện</string>
+    <string name="newMemberSignUp"><b>Tạo Tài Khoản</b> </string>
+    <string name="questionHaveAccount">Bạn đã có <b>Tài Khoản ?</b> </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">cc</string>
+    <!-- Begin Form    -->
+    <string name="forgotPassword">Quên mật khẩu ?</string>
+    <string name="welcome">Hey, Welcome to</string>
+    <string name="passWord">Mật khẩu</string>
+    <string name="confirmPassword">Xác nhận mật khẩu</string>
+    <string name="login">Đăng nhập</string>
+    <string name="create">Tạo</string>
+    <string name="createAccount">Tạo tài khoản</string>
+    <!-- End Form   -->
+    <!-- Begin DashBoard -->
+    <string name="dashBoardAdmin">Bảng điều khiển quản trị</string>
+    <string name="addCategory">+ Thêm danh mục</string>
+    <!-- End DashBoard -->
+
+</resources>

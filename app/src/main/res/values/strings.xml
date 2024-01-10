@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="Home">Home</string>
@@ -8,12 +8,21 @@
     <string name="Library">Library</string>
     <string name="newMemberSignUp"><b>Create Account</b> </string>
     <string name="questionHaveAccount">Have a <b>Account ?</b> </string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-
-
-
+    <!-- Begin  Form  -->
+    <string name="welcome">Hey, Welcome to </string>
+    <string name="forgotPassword">Forgot password ?</string>
+    <string name="passWord">Password</string>
+    <string name="confirmPassword">Confirm password</string>
+    <string name="login">Login</string>
+    <string name="create">Create</string>
+    <string name="createAccount">Create Account</string>
+    <!-- End  Form  -->
+    <!-- Begin DashBoard -->
+    <string name="dashBoardAdmin">Dashboard Admin</string>
+    <string name="addCategory">+ Add Category</string>
+    <!-- End DashBoard -->
 
 </resources>
