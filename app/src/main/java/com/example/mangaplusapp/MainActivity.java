@@ -45,11 +45,12 @@ public class MainActivity extends AppCompatActivity{
     EditText edtTimKiem;
     NavigationView navigationView;
     Toolbar toolbar;
+    ActionBarDrawerToggle toggle;
     private ActivityMainBinding binding;
     private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
     private FormLayout formLayout;
-    public DrawerLayout drawerLayout;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,11 +117,25 @@ public class MainActivity extends AppCompatActivity{
                 toolbar = (Toolbar) findViewById(R.id.toolbar_main);
                 setSupportActionBar(toolbar);
                 navigationView.bringToFront();
-                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
                 drawerLayout.addDrawerListener(toggle);
                 toggle.syncState();
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+    }
+    //Function bắt drawerLayout ở Class khác
+    public DrawerLayout getDrawerLayout(){
+        return drawerLayout;
+    }
+    public BottomNavigationView getBottomNavigationView(){
+        return bottomNavigationView;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

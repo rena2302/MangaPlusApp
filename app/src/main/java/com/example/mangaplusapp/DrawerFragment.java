@@ -22,10 +22,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mangaplusapp.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class DrawerFragment extends Fragment {
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,17 +46,22 @@ public class DrawerFragment extends Fragment {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
+                BottomNavigationView bottomNavigationView = ((MainActivity)requireActivity()).getBottomNavigationView() ;// Gán id của BottomNavigation từ MainActivity vào.
                 if(itemId == R.id.menu_drawer_favorite){
                     loadFragment(new HotFragment(),false);
+                    bottomNavigationView.getMenu().findItem(R.id.navHot).setChecked(true);
                 } else if (itemId == R.id.menu_drawer_store_download) {
                     loadFragment(new LibraryFragment(),false);
+                    bottomNavigationView.getMenu().findItem(R.id.navLibrary).setChecked(true);
                 }
+                DrawerLayout drawerLayout = ((MainActivity)requireActivity()).getDrawerLayout();// Gán id của DrawerLayout từ MainActivity vào
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
         //Do chưa design xong nên chỉ demo 2 item ở 2 group khác nhau để xem bắt được không.
-        //Còn lỗi đã đổi fragment nhưng trên bottom navigation không thay đổi theo
-        //Còn lỗi chưa tắt được drawer khi chọn item
+        //Còn lỗi đã đổi fragment nhưng trên bottom navigation không thay đổi theo (fixed tạm)| Tao thấy kiểu như vẫn là fix cứng nên chưa ưng lắm
+        //Còn lỗi chưa tắt được drawer khi chọn item (fixed)
     }
 
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
