@@ -1,5 +1,6 @@
 package com.example.mangaplusapp;
 
+import android.app.Application;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;

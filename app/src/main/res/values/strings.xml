@@ -10,7 +10,9 @@
     <string name="questionHaveAccount">Have a <b>Account ?</b> </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="manga_plus_home">Manga Plus!</string>
+    <string name="navigation_drawer_open">Open Navigation drawer</string>
+    <string name="navigation_drawer_close">Close Navigation drawer</string>
     <!-- Begin  Form  -->
     <string name="welcome">Hey, Welcome to </string>
     <string name="forgotPassword">Forgot password ?</string>
@@ -24,5 +26,4 @@
     <string name="dashBoardAdmin">Dashboard Admin</string>
     <string name="addCategory">+ Add Category</string>
     <!-- End DashBoard -->
-
 </resources>

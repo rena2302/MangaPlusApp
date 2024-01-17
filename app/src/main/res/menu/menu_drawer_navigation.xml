@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Profile">
+        <menu>
+            <group android:checkableBehavior="single" >
+                <item
+                    android:id="@+id/menu_drawer_favorite"
+                    android:icon="@mipmap/ic_search"
+                    android:title="Favorite"/>
+                <item
+                    android:id="@+id/menu_drawer_payment"
+                    android:icon="@mipmap/ic_search"
+                    android:title="Payment"/>
+                <item
+                    android:id="@+id/menu_drawer_on_reading"
+                    android:icon="@mipmap/ic_search"
+                    android:title="On Reading"/>
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Setting">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_drawer_store_download"
+                    android:icon="@mipmap/ic_search"
+                    android:title="Store and Download"/>
+                <item
+                    android:id="@+id/menu_drawer_change_language"
+                    android:icon="@mipmap/ic_search"
+                    android:title="Change Language"/>
+                <item
+                    android:id="@+id/menu_drawer_change_theme"
+                    android:icon="@mipmap/ic_search"
+                    android:title="Change Theme"/>
+            </group>
+        </menu>
+    </item>
+</menu>
