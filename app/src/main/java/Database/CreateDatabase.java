@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.regex.Pattern;
 
@@ -70,30 +72,49 @@ public class CreateDatabase extends SQLiteOpenHelper{
 
         long result = db.insert(TB_USER, null, contentValues);
 
-        db.close(); // Đóng kết nối sau khi thêm dữ liệu
+        db.close();
         return result != -1; // Kiểm tra nếu giá trị trả về khác -1
 
     }
     public Boolean CheckEmail (String email){
         Cursor cursor = myDb.rawQuery("Select * from " + TB_USER + " where " + TB_USER_EMAIL + " = ?", new String[]{email});
         if(cursor.getCount() > 0) {
-            return true; /// that bai
+            return true; // Email đã tồn tại, trả về true
         }
         else{
-            return false; // thanh cong
+            return false;  // Email không tồn tại, trả về false
+        }
+    }
+    public Boolean CheckPassword (String password){
+        Cursor cursor = myDb.rawQuery("Select * from " + TB_USER + " where " + TB_USER_PASSWORD + " = ?", new String[]{password});
+        if(cursor.getCount() > 0) {
+            return true; // Password đã tồn tại, trả về true
+        }
+        else{
+            return false;  // Password không tồn tại, trả về false
         }
     }
     public Boolean CheckEmailPassword (String email,String password){
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TB_USER + " WHERE " + TB_USER_EMAIL + " = ? AND " + TB_USER_PASSWORD + " = ?", new String[]{email, password});
-
         boolean isValid = cursor.getCount() > 0;
-
         cursor.close();
         db.close();
-
         return isValid;
+    }
+    public boolean resetPassword(String newPassword) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TB_USER_PASSWORD, newPassword);
+
+        // use function update to reset new password
+        int affectedRows = db.update(TB_USER, contentValues,null,null);
+        // if haven't data updated, process wil return 0
+        db.close();
+
+        // check have data updated, did it check sure data had update
+        return affectedRows > 0;
     }
 
 }

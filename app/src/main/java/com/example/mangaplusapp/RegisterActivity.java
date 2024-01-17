@@ -28,10 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
     private boolean validPassword(String password){
         password = password.trim();
-        if(password.length()<8){
-            return false;
-        }
-        return true;
+        return password.length() >= 8;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +60,10 @@ public class RegisterActivity extends AppCompatActivity {
         db= new CreateDatabase(this);
         db.open();
         //BEGIN LOGIC REGISTER
-        email= (EditText) findViewById(R.id.editTextEmail);
-        password = (EditText) findViewById(R.id.editTextPassword);
-        repassword = (EditText) findViewById(R.id.editTextCfPassword);
-        signUp = (Button) findViewById(R.id.registerBtn_act);
+        email= findViewById(R.id.editTextEmail);
+        password = findViewById(R.id.editTextPassword);
+        repassword = findViewById(R.id.editTextCfPassword);
+        signUp = findViewById(R.id.registerBtn_act);
         db= new CreateDatabase(this);
         // su kien dang ky
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else{
                     //neu pass < 8 ki tu
-                    if(validPassword(userPassword)==false){
+                    if(!validPassword(userPassword)){
                         Toast.makeText(RegisterActivity.this, "Please enter greater than 8 characters", Toast.LENGTH_SHORT).show();
                     }
                     else{
@@ -93,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "Please enter a valid filed", Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                if(checkEmail==false){ // neu email khong ton tai trong he thong
+                                if(!checkEmail){ // neu email khong ton tai trong he thong
                                     Boolean insert = db.insertData(userEmail,userPassword);
                                     if(insert) {
                                         // thong bao thanh cong
