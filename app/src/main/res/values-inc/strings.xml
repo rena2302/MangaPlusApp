@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MangaPlusApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Home">घर</string>
+    <string name="Hot">लोकप्रिय</string>
+    <string name="Search">ढूँढ</string>
+    <string name="Creator">रचयिता</string>
+    <string name="Library">पुस्तकालय</string>
+    <string name="newMemberSignUp"><b>खाता बनाएँ</b> </string>
+    <string name="questionHaveAccount">एक <b>खाता है</b></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Begin  Form  -->
+    <string name="welcome">अरे, आपका स्वागत है</string>
+    <string name="forgotPassword">पासवर्ड भूल गए ?</string>
+    <string name="passWord">पासवर्ड</string>
+    <string name="confirmPassword">पासवर्ड की पुष्टि करें</string>
+    <string name="login">लॉगिन</string>
+    <string name="create">बनाना </string>
+    <string name="createAccount">खाता बनाएँ</string>
+    <!-- End  Form  -->
+    <!-- Begin DashBoard -->
+    <string name="dashBoardAdmin">डैशबोर्ड व्यवस्थापक</string>
+    <string name="addCategory">+ श्रेणी जोड़ें</string>
+    <!-- End DashBoard -->
+</resources>

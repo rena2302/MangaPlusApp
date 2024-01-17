@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Hey, Welcome to "
+            android:text="@string/welcome"
             android:textSize="25dp"
             android:textFontWeight="900"
             android:textColor="@color/black"
@@ -90,7 +90,7 @@
                     android:layout_width="match_parent"
                     android:drawableStart="@drawable/password_icon"
                     android:drawablePadding="10dp"
-                    android:hint="Password"
+                    android:hint="@string/passWord"
                     android:fontFamily="@font/josefinsans_bold"
                     android:background="@drawable/shape_login_input"
                     android:inputType="textPassword">
@@ -105,7 +105,7 @@
                 android:layout_alignParentEnd="true"
                 android:padding="5dp"
                 android:fontFamily="@font/josefinsans_bold"
-                android:text="Forgot Password ?"
+                android:text="@string/forgotPassword"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 tools:ignore="TextSizeCheck">
@@ -120,7 +120,7 @@
                 android:textColor="@color/white"
                 android:textSize="16dp"
                 android:backgroundTint="@color/btn_login"
-                android:text="Login"
+                android:text="@string/login"
                 android:fontFamily="@font/josefinsans_bold">
             </Button>
         </RelativeLayout>
@@ -130,7 +130,7 @@
         android:id="@+id/toSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/newMemberSignUp"
+        android:text="@string/createAccount"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:padding="10dp"

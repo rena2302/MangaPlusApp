@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="Home">Home</string>
@@ -13,6 +13,17 @@
     <string name="manga_plus_home">Manga Plus!</string>
     <string name="navigation_drawer_open">Open Navigation drawer</string>
     <string name="navigation_drawer_close">Close Navigation drawer</string>
-
-
+    <!-- Begin  Form  -->
+    <string name="welcome">Hey, Welcome to </string>
+    <string name="forgotPassword">Forgot password ?</string>
+    <string name="passWord">Password</string>
+    <string name="confirmPassword">Confirm password</string>
+    <string name="login">Login</string>
+    <string name="create">Create</string>
+    <string name="createAccount">Create Account</string>
+    <!-- End  Form  -->
+    <!-- Begin DashBoard -->
+    <string name="dashBoardAdmin">Dashboard Admin</string>
+    <string name="addCategory">+ Add Category</string>
+    <!-- End DashBoard -->
 </resources>
