@@ -42,11 +42,13 @@
             android:layout_below="@+id/loginTittle"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-30dp"
-            android:src="@drawable/tittlemain"></ImageView>
+            android:src="@drawable/tittlemain">
+        </ImageView>
     </RelativeLayout>
     <ScrollView
+        android:id="@+id/loginScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="225dp">
@@ -126,6 +128,38 @@
         </RelativeLayout>
     </ScrollView>
             <!--  No Account, to Register  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:layout_below="@+id/loginScrollView"
+        >
+        <ImageButton
+            android:id="@+id/facebookBtn_login"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:src="@drawable/facebook">
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/googleBtn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:padding="15dp"
+            android:src="@drawable/google">
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/telegramBtn_login"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:src="@drawable/telegram">
+        </ImageButton>
+    </LinearLayout>
     <TextView
         android:id="@+id/toSignUp"
         android:layout_width="wrap_content"
