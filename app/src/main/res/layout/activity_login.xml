@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="@string/welcome"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textFontWeight="900"
             android:textColor="@color/black"
             android:layout_marginTop="35dp"
@@ -109,7 +109,7 @@
                 android:fontFamily="@font/josefinsans_bold"
                 android:text="@string/forgotPassword"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 tools:ignore="TextSizeCheck">
             </TextView>
             <!--     Button Login       -->
@@ -120,7 +120,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/forgotPassword_act"
                 android:textColor="@color/white"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:backgroundTint="@color/btn_login"
                 android:text="@string/login"
                 android:fontFamily="@font/josefinsans_bold">
@@ -129,6 +129,7 @@
     </ScrollView>
             <!--  No Account, to Register  -->
     <LinearLayout
+        android:id="@+id/loginSocialLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -165,10 +166,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/createAccount"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/loginSocialLayout"
         android:layout_centerHorizontal="true"
         android:padding="10dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:fontFamily="@font/josefinsans_bold"
         android:layout_marginBottom="50dp"
         android:textColor="@color/black">

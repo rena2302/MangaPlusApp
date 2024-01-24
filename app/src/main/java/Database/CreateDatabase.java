@@ -1,5 +1,6 @@
 package Database;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.mangaplusapp.DrawerFragment;
 
 import java.util.regex.Pattern;
 
@@ -116,5 +119,30 @@ public class CreateDatabase extends SQLiteOpenHelper{
         // check have data updated, did it check sure data had update
         return affectedRows > 0;
     }
+    @SuppressLint("Range")
+    public String getUserEmail() {
+        String email = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + TB_USER_EMAIL + " FROM " + TB_USER, null);
 
+        if (cursor.moveToFirst()) {
+            email = cursor.getString(cursor.getColumnIndex(TB_USER_EMAIL));
+        }
+        cursor.close();
+        db.close();
+        return email;
+    }
+    @SuppressLint("Range")
+    public String getUserName() {
+        String name = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + TB_USER_NAME + " FROM " + TB_USER, null);
+
+        if (cursor.moveToFirst()) {
+            name = cursor.getString(cursor.getColumnIndex(TB_USER_NAME));
+        }
+        cursor.close();
+        db.close();
+        return name;
+    }
 }

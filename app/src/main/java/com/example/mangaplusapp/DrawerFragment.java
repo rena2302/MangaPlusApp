@@ -2,6 +2,8 @@ package com.example.mangaplusapp;
 
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,15 +27,24 @@ import com.example.mangaplusapp.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Locale;
+
+import Database.CreateDatabase;
+
 public class DrawerFragment extends Fragment {
+    CreateDatabase db;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState){
+        db = new CreateDatabase(requireContext()); // Use requireContext() to get the context
+        String userName = db.getUserName();
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_drawer,container,false);
         //Đã include ở fragment_drawer nên có thể bắt được từ rootView mà không cần bắt thêm View của menu_drawer_header
-        TextView textView = rootView.findViewById(R.id.menu_drawer_header_username);
-        textView.setText("HOANG UYEN");
+        TextView userNameTxt = rootView.findViewById(R.id.menu_drawer_header_username);
+        // Set the name to the TextView
+        userNameTxt.setText(userName);
         ImageView imageView = rootView.findViewById(R.id.menu_drawer_header_image_user);
         imageView.setImageResource(R.drawable.ic_personal);
         /*------------------------------------------------*/
