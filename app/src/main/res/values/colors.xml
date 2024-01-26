@@ -11,4 +11,5 @@
     <color name="color_input">#E6FBEEDD</color>
     <color name="btn_login">#C3662D</color>
     <color name="text_login_input">#455A64</color>
+    <color name="pinkPastel_background">#FFE1E9</color>
 </resources>
