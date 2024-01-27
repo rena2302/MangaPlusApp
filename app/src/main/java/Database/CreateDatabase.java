@@ -26,6 +26,8 @@ public class CreateDatabase extends SQLiteOpenHelper{
     private static final String USER_SESSION_PREF = "user_session";
     // This object is used to read stored values
     private static final String KEY_USER_EMAIL = "user_email"; // Adjust the key as needed
+    private static final String KEY_USER_ID = "user_id"; // Adjust the key as needed
+
     // CREATE ACT
     public static String TB_USER = "USER";
     public static String TB_ADMIN = "ADMIN";
@@ -87,14 +89,13 @@ public class CreateDatabase extends SQLiteOpenHelper{
         return this.getWritableDatabase();
 
     }
-    public Boolean insertData (String email, String password){
+    public Boolean insertData (String email, String password,String name){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(TB_USER_EMAIL, email);
         contentValues.put(TB_USER_PASSWORD, password);
-
+        contentValues.put(TB_USER_NAME, name);
         long result = db.insert(TB_USER, null, contentValues);
-
         db.close();
         return result != -1; // Kiểm tra nếu giá trị trả về khác -1
 
@@ -108,6 +109,7 @@ public class CreateDatabase extends SQLiteOpenHelper{
             return false;  // Email không tồn tại, trả về false
         }
     }
+
     public Boolean CheckPassword (String password){
         Cursor cursor = myDb.rawQuery("Select * from " + TB_USER + " where " + TB_USER_PASSWORD + " = ?", new String[]{password});
         if(cursor.getCount() > 0) {
@@ -130,17 +132,39 @@ public class CreateDatabase extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(TB_USER_PASSWORD, newPassword);
-
         // use function update to reset new password
         int affectedRows = db.update(TB_USER, contentValues,null,null);
         // if haven't data updated, process wil return 0
         db.close();
-
         // check have data updated, did it check sure data had update
         return affectedRows > 0;
     }
     @SuppressLint("Range")
-    public String getUserEmail() {
+    public String getUserEmailById(int userId) {
+        String userEmail = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + TB_USER_EMAIL + " FROM " + TB_USER + " WHERE " + TB_USER_ID_USER + " = ?", new String[]{String.valueOf(userId)});
+        if (cursor.moveToFirst()) {
+            userEmail = cursor.getString(cursor.getColumnIndex(TB_USER_EMAIL));
+        }
+        cursor.close();
+        db.close();
+        return userEmail;
+    }
+    @SuppressLint("Range")
+    public int getUserIDByEmail(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int userID = -1; // Giá trị mặc định, có thể là một giá trị không hợp lệ để kiểm tra sau này
+        Cursor cursor = db.rawQuery("SELECT " + TB_USER_ID_USER + " FROM " + TB_USER + " WHERE " + TB_USER_EMAIL + " = ?", new String[]{email});
+        if (cursor.moveToFirst()) {
+            userID = cursor.getInt(cursor.getColumnIndex(TB_USER_ID_USER));
+        }
+        cursor.close();
+        db.close();
+        return userID;
+    }
+    @SuppressLint("Range")
+    public String getUserEmail(){
         String email = "";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT " + TB_USER_EMAIL + " FROM " + TB_USER, null);
@@ -152,6 +176,7 @@ public class CreateDatabase extends SQLiteOpenHelper{
         db.close();
         return email;
     }
+
     @SuppressLint("Range")
     public String getUserName() {
         String name = "";
@@ -165,6 +190,27 @@ public class CreateDatabase extends SQLiteOpenHelper{
         db.close();
         return name;
     }
+    @SuppressLint("Range")
+    public String getUserPassword() {
+        String password = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + TB_USER_PASSWORD + " FROM " + TB_USER, null);
 
+        if (cursor.moveToFirst()) {
+            password = cursor.getString(cursor.getColumnIndex(TB_USER_PASSWORD));
+        }
+        cursor.close();
+        db.close();
+        return password;
+    }
+    @SuppressLint("Range")
+    public boolean validEmail(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
+    }
+    public boolean validPassword(String password){
+        password = password.trim();
+        return password.length() >= 8;
+    }
 
 }

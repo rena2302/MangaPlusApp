@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MangaPlusApp"
         tools:targetApi="34">
         <activity
+            android:name=".UserEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoadingActivity"
             android:exported="true">
             <intent-filter>
@@ -34,9 +37,6 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FormLayout"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgotPasswordTxt,toSignUpTxt;
     Button btnLoginTxt;
     CreateDatabase db;
+    int idUser;
 
     //Create sign in Google
     GoogleSignInOptions gso;
@@ -47,7 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         //================================End get id for login basic==============================//
         //****************************************************************************************//
         //================================Begin get data for login basic==========================//
-                                            // Process IS EMPTY //
+        SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("user_id", idUser);// userEmail is email's user in this process. user_email is email in session
         //================================END get data for login basic============================//
         //****************************************************************************************//
         //===============================Begin get id for login with social=======================//
@@ -85,9 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                     // if email and password valid -> nav to home activity
                     if(checkEmailPass){
         ////////===========================Begin Login Successful=========================//////////
-                        SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("user_email", userEmail); // userEmail is email's user in this process. user_email is email in session
+                        editor.putString("user_email", userEmail);
                         editor.apply();
                         Toast.makeText(LoginActivity.this,"Sign Ip Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
