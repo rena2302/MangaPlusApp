@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity{
     private ActivityMainBinding binding;
     private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
-    private FormLayout formLayout;
     private DrawerLayout drawerLayout;
 
     @Override

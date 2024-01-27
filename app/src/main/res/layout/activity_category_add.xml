@@ -22,7 +22,7 @@
             android:id="@+id/addCategoryImg"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:src="@drawable/logo"
+            android:src="@drawable/logo_test"
             android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true">
         </ImageView>

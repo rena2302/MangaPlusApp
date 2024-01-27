@@ -1,8 +1,11 @@
 package Database;
 
+import static java.security.AccessController.getContext;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -15,10 +18,14 @@ import android.widget.Toast;
 import com.example.mangaplusapp.DrawerFragment;
 
 import java.util.regex.Pattern;
-
+import android.content.Context;
+import android.content.SharedPreferences;
 public class CreateDatabase extends SQLiteOpenHelper{
     SQLiteDatabase myDb= this.getWritableDatabase();
-
+    private Context context;
+    private static final String USER_SESSION_PREF = "user_session";
+    // This object is used to read stored values
+    private static final String KEY_USER_EMAIL = "user_email"; // Adjust the key as needed
     // CREATE ACT
     public static String TB_USER = "USER";
     public static String TB_ADMIN = "ADMIN";
@@ -43,8 +50,21 @@ public class CreateDatabase extends SQLiteOpenHelper{
 
     public CreateDatabase(Context context){
         super (context,"MangaPlus",null,1);
+        this.context = context;
     }
-
+    public boolean isUserLoggedIn() {
+        SharedPreferences preferences = context.getSharedPreferences(USER_SESSION_PREF, Context.MODE_PRIVATE);
+        // Check if user email or any other session data exists
+        return preferences.contains(KEY_USER_EMAIL);
+    }
+    // Clear user session data
+    public void clearUserSession() {
+        SharedPreferences preferences = context.getSharedPreferences(USER_SESSION_PREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(KEY_USER_EMAIL);
+        // Remove other session data if needed
+        editor.apply();
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
             String tbUser = " CREATE TABLE " + TB_USER + " ( " + TB_USER_ID_USER + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -145,4 +165,6 @@ public class CreateDatabase extends SQLiteOpenHelper{
         db.close();
         return name;
     }
+
+
 }
