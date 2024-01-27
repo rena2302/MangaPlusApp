@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity{
             fragmentTransaction.add(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
         } else {
             fragmentTransaction.replace(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
+            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
+            // sau nay sua lai theo vi tri va rut gon
         }
         fragmentTransaction.commit();
     }
@@ -106,6 +108,8 @@ public class MainActivity extends AppCompatActivity{
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.navigation_drawer_container,fragment);
+        fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
+        // sau nay sua lai theo vi tri va rut gon
         fragmentTransaction.commit();
     }
     private void openMenuDrawer(){
