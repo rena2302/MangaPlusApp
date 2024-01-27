@@ -9,24 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
-            android:id="@+id/headerPersonal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp">
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_back_black"
-                android:background="@color/transparent">
-            </ImageButton>
-        </RelativeLayout>
-        <RelativeLayout
             android:id="@+id/infoUserTest"
-            android:layout_below="@+id/headerPersonal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -44,7 +27,6 @@
                     android:id="@+id/userName_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="test"
                     android:layout_marginTop="5dp"
                     android:textSize="20sp"
                     >
@@ -53,7 +35,6 @@
                     android:id="@+id/userEmail_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="test description"
                     android:layout_marginTop="5dp"
                     android:textSize="20sp"
                     android:textColor="@color/gray">
@@ -143,13 +124,11 @@
         </LinearLayout>
     </RelativeLayout>
     <Button
-        android:id="@+id/logOut"
+        android:id="@+id/userLogOut_info"
         android:layout_below="@+id/navForPerson"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80dp"
-        android:hint="log out"
+        android:padding="20dp"
         android:backgroundTint="@color/pinkPastel_background">
     </Button>
 

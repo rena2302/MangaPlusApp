@@ -19,95 +19,75 @@ import java.util.regex.Pattern;
 import Database.CreateDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText name,email,password,repassword;
-    Button signUp;
+    EditText nameTxt,emailTxt,passwordTxt,repasswordTxt;
+    Button signUpTxt;
+    TextView haveAccount;
+    ImageButton btnToLogin;
     CreateDatabase db;
-    private boolean validEmail(String email) {
-        Pattern pattern = Patterns.EMAIL_ADDRESS;
-        return pattern.matcher(email).matches();
-    }
-    private boolean validPassword(String password){
-        password = password.trim();
-        return password.length() >= 8;
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // LAY ID
-        ////////////////////        Su kien chuyen layout        //////////////////
         setContentView(R.layout.activity_register);
-        TextView toLogin=findViewById(R.id.toLogin);
-        ImageButton btnToLogin = findViewById(R.id.backRegisterBtn);
-        // LAY ID
-        toLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnToLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // CHUYEN LAYOUT
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-        ////////////////////        Su kien chuyen layout        //////////////////
-        // CONNECT DATABASE
+        //===============================Begin GET ID=============================================//
+        haveAccount=findViewById(R.id.toLogin);
+        btnToLogin = findViewById(R.id.backRegisterBtn);
+        emailTxt= findViewById(R.id.editTextEmail);
+        passwordTxt = findViewById(R.id.editTextPassword);
+        repasswordTxt = findViewById(R.id.editTextCfPassword);
+        signUpTxt = findViewById(R.id.registerBtn_act);
+        //=================================END GET ID=============================================//
+        //****************************************************************************************//
+        //===================================Event Navigate layout================================//
+        navigateLayout();
+        //===================================Event Navigate layout================================//
+        //****************************************************************************************//
+        //===================================DATABASE=============================================//
         db= new CreateDatabase(this);
         db.open();
-        //BEGIN LOGIC REGISTER
-        email= findViewById(R.id.editTextEmail);
-        password = findViewById(R.id.editTextPassword);
-        repassword = findViewById(R.id.editTextCfPassword);
-        signUp = findViewById(R.id.registerBtn_act);
-        db= new CreateDatabase(this);
-        // su kien dang ky
-        signUp.setOnClickListener(new View.OnClickListener() {
+        //===================================DATABASE=============================================//
+        //****************************************************************************************//
+        //===================================BEGIN LOGIC REGISTER=================================//
+        signUpTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userEmail = email.getText().toString();
-                String userPassword = password.getText().toString();
-                String userCfPassword = repassword.getText().toString();
-                // neu may thg input == null
+                String userEmail = emailTxt.getText().toString();
+                String userPassword = passwordTxt.getText().toString();
+                String userCfPassword = repasswordTxt.getText().toString();
+                // if user input email,pass.....  null
                 if(userEmail.equals("")|| userPassword.equals("")|| userCfPassword.equals("")){
                     Toast.makeText(RegisterActivity.this,"Please enter all the fields",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    //neu pass < 8 ki tu
+                    //if pass < 8 length
                     if(!validPassword(userPassword)){
                         Toast.makeText(RegisterActivity.this, "Please enter greater than 8 characters", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        // neu pass match voi cf pass
+                        // if pass match cf pass
                         if(userPassword.equals(userCfPassword)){
                             Boolean checkEmail = db.CheckEmail(userEmail);
-                            // neu regex email hop le
+                            // if regex email valid
                             if(!validEmail(userEmail)){
                                 Toast.makeText(RegisterActivity.this, "Please enter a valid filed", Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                if(!checkEmail){ // neu email khong ton tai trong he thong
+                                if(!checkEmail){ // if email not existed in database
                                     Boolean insert = db.insertData(userEmail,userPassword);
                                     if(insert) {
-                                        // thong bao thanh cong
+                                        // show message success full
                                         Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                                        // chuyen sang home layout
+                                        // nav to home layout
                                         Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                                         startActivity(intent);
                                     }
-                                    // neu insert thanh cong
                                     else{
-                                        // thong bao that bai
+                                        // show message not success full
                                         Toast.makeText(RegisterActivity.this, "Registered Failed", Toast.LENGTH_SHORT).show();
                                         // do nothing
                                     }
                                 }
                                 else{
-                                    // thong bao da co email trong he thong, vui long dang nhap
+                                    // message email existed in database,please sign in
                                     Toast.makeText(RegisterActivity.this, "User already exists ! Please sign in", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -120,5 +100,31 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+    }
+    //======================================END LOGIC REGISTER====================================//
+    void navigateLayout(){
+        haveAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    private boolean validEmail(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
+    }
+    private boolean validPassword(String password){
+        password = password.trim();
+        return password.length() >= 8;
     }
 }

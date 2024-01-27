@@ -2,7 +2,9 @@ package com.example.mangaplusapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,9 +23,9 @@ import com.google.android.gms.tasks.Task;
 import Database.CreateDatabase;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText email, password;
-    TextView forgotPassword;
-    Button btnLogin;
+    EditText emailTxt, passwordTxt;
+    TextView forgotPasswordTxt,toSignUpTxt;
+    Button btnLoginTxt;
     CreateDatabase db;
 
     //Create sign in Google
@@ -35,75 +37,81 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //lay id
         setContentView(R.layout.activity_login);
-        // Begin get id for login basic
-        TextView toSignUp = findViewById(R.id.toSignUp);
-
-        // End get id for login basic
-        //////////////////////////////////
-        //////////////////////////////////
-        //Begin get id for login with social
+        //===============================Begin get id for login basic=============================//
+        toSignUpTxt = findViewById(R.id.toSignUp);
+        emailTxt = (EditText) findViewById(R.id.editTextEmail);
+        passwordTxt = (EditText) findViewById(R.id.editTextPassword);
+        btnLoginTxt = (Button) findViewById(R.id.loginBtn_act);
+        forgotPasswordTxt = (TextView) findViewById(R.id.forgotPassword_act);
+        //================================End get id for login basic==============================//
+        //****************************************************************************************//
+        //================================Begin get data for login basic==========================//
+                                            // Process IS EMPTY //
+        //================================END get data for login basic============================//
+        //****************************************************************************************//
+        //===============================Begin get id for login with social=======================//
         googleBtn = findViewById(R.id.googleBtn_login);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso); // activity va options
-        //End get id for login with social
-        //lay id
-        toSignUp.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class); // bat su kien
-            startActivity(intent); // chay su kien
-        });
-        // Begin Connect Login With Social
-
-        // End Connect Login With Social
-
-        //database
-        // CONNECT DATABASE
+        //===============================End get id for login with social=========================//
+        //****************************************************************************************//
+        //===============================CONNECT DATABASE=========================================//
         db = new CreateDatabase(this);
         db.open();
-        // End Connect DataBase
-        //BEGIN LOGIC LOGIN Basic
-
-        email = (EditText) findViewById(R.id.editTextEmail);
-        password = (EditText) findViewById(R.id.editTextPassword);
-        btnLogin = (Button) findViewById(R.id.loginBtn_act);
-        forgotPassword = (TextView) findViewById(R.id.forgotPassword_act);
-
-        //su kien login
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        //=============================== End Connect DataBase====================================//
+        //****************************************************************************************//
+        //=============================== BEGIN NAVIGATE LAYOUT===================================//
+        navigateLayout();
+        //=============================== END NAVIGATE LAYOUT===================================//
+        //****************************************************************************************//
+        //===============================Begin Connect Login With Social==========================//
+                                        // Process IS EMPTY //
+        //===============================End Connect Login With Social============================//
+        //****************************************************************************************//
+        //===============================BEGIN LOGIC LOGIN BASIC==================================//
+        btnLoginTxt.setOnClickListener(new View.OnClickListener() {
             @Override
+            // this event final
             public void onClick(View v) {
-                String userEmail = email.getText().toString();
-                String userPassword = password.getText().toString();
+                String userEmail = emailTxt.getText().toString();
+                String userPassword = passwordTxt.getText().toString();
                 // if user do nothing or Missing input
                 if(userEmail.equals("")||userPassword.equals("")){
                     Toast.makeText(LoginActivity.this,"Please enter all fields", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Boolean checkEmailPass= db.CheckEmailPassword(userEmail,userPassword);
-                    // neu email va password hop le -> ra home activity
+                    // if email and password valid -> nav to home activity
                     if(checkEmailPass){
-
+        ////////===========================Begin Login Successful=========================//////////
+                        SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("user_email", userEmail); // userEmail is email's user in this process. user_email is email in session
+                        editor.apply();
                         Toast.makeText(LoginActivity.this,"Sign Ip Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
+        ////////===========================END Login Successful=========================////////////
                     }
-                    // thong bao cac truong khong hop le
+                    // show message input error
                     else{
                         Toast.makeText(LoginActivity.this,"Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
-        // su kien forgot password
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
+        //===============================END LOGIC LOGIN BASIC====================================//
+        //****************************************************************************************//
+        //===============================BEGIN FORGOT PASSWORD====================================//
+        forgotPasswordTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userEmail = email.getText().toString();
+                String userEmail = emailTxt.getText().toString();
 
-                String oldPassword = password.getText().toString();
-                String newPassword = password.getText().toString();
-                String confirmNewPassword=password.getText().toString();
+                String oldPassword = passwordTxt.getText().toString();
+                String newPassword = passwordTxt.getText().toString();
+                String confirmNewPassword=passwordTxt.getText().toString();
 
                 Boolean checkEmail = db.CheckEmail(userEmail);
                 Boolean checkPassword = db.CheckPassword(oldPassword);
@@ -138,12 +146,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        // END forgot password
-
-        //END LOGIC LOGIN Basic
-
-        //Begin login with social
-
+        //===============================END FORGOT PASSWORD======================================//
+        //****************************************************************************************//
+        //===============================Begin login with social==================================//
         GoogleSignInAccount accountGoogle = GoogleSignIn.getLastSignedInAccount(this);
         if(accountGoogle!=null){
             navToSuccess();
@@ -156,7 +161,14 @@ public class LoginActivity extends AppCompatActivity {
                 signInWithSocial();
             }
         });
-        //End login with social
+    }
+    void navigateLayout(){
+        //==================================BEGIN NAV TO SIGN UP==================================//
+        toSignUpTxt.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class); // bat su kien
+            startActivity(intent); // chay su kien
+        });
+        //==================================END NAV TO SIGN UP==================================//
     }
     void navToSuccess(){
         finish();
