@@ -100,34 +100,6 @@ public class CreateDatabase extends SQLiteOpenHelper{
         return result != -1; // Kiểm tra nếu giá trị trả về khác -1
 
     }
-    public Boolean CheckEmail (String email){
-        Cursor cursor = myDb.rawQuery("Select * from " + TB_USER + " where " + TB_USER_EMAIL + " = ?", new String[]{email});
-        if(cursor.getCount() > 0) {
-            return true; // Email đã tồn tại, trả về true
-        }
-        else{
-            return false;  // Email không tồn tại, trả về false
-        }
-    }
-
-    public Boolean CheckPassword (String password){
-        Cursor cursor = myDb.rawQuery("Select * from " + TB_USER + " where " + TB_USER_PASSWORD + " = ?", new String[]{password});
-        if(cursor.getCount() > 0) {
-            return true; // Password đã tồn tại, trả về true
-        }
-        else{
-            return false;  // Password không tồn tại, trả về false
-        }
-    }
-    public Boolean CheckEmailPassword (String email,String password){
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TB_USER + " WHERE " + TB_USER_EMAIL + " = ? AND " + TB_USER_PASSWORD + " = ?", new String[]{email, password});
-        boolean isValid = cursor.getCount() > 0;
-        cursor.close();
-        db.close();
-        return isValid;
-    }
     public boolean resetPassword(String newPassword) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -140,35 +112,33 @@ public class CreateDatabase extends SQLiteOpenHelper{
         return affectedRows > 0;
     }
     @SuppressLint("Range")
-    public String getUserEmailById(int userId) {
-        String userEmail = "";
+    public int loginUser(String userEmail, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + TB_USER_EMAIL + " FROM " + TB_USER + " WHERE " + TB_USER_ID_USER + " = ?", new String[]{String.valueOf(userId)});
+        int userId = -1; // value basic if login failed
+        // check login from user with user email and user password
+        Cursor cursor = db.rawQuery("SELECT " + TB_USER_ID_USER + " FROM " + TB_USER +
+                        " WHERE " + TB_USER_EMAIL + " = ? AND " + TB_USER_PASSWORD + " = ?",
+                new String[]{userEmail, password});
+
+        // check exists data
         if (cursor.moveToFirst()) {
-            userEmail = cursor.getString(cursor.getColumnIndex(TB_USER_EMAIL));
+            userId = cursor.getInt(cursor.getColumnIndex(TB_USER_ID_USER));
         }
+
+        // Close cursor and database
         cursor.close();
         db.close();
-        return userEmail;
+
+        // return id user
+        return userId;
     }
     @SuppressLint("Range")
-    public int getUserIDByEmail(String email) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        int userID = -1; // Giá trị mặc định, có thể là một giá trị không hợp lệ để kiểm tra sau này
-        Cursor cursor = db.rawQuery("SELECT " + TB_USER_ID_USER + " FROM " + TB_USER + " WHERE " + TB_USER_EMAIL + " = ?", new String[]{email});
-        if (cursor.moveToFirst()) {
-            userID = cursor.getInt(cursor.getColumnIndex(TB_USER_ID_USER));
-        }
-        cursor.close();
-        db.close();
-        return userID;
-    }
-    @SuppressLint("Range")
-    public String getUserEmail(){
+    public String getUserEmail(int userId) {
         String email = "";
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + TB_USER_EMAIL + " FROM " + TB_USER, null);
 
+        Cursor cursor = db.rawQuery("SELECT " + TB_USER_EMAIL + " FROM " + TB_USER +
+                " WHERE " + TB_USER_ID_USER + " = ?", new String[]{String.valueOf(userId)});
         if (cursor.moveToFirst()) {
             email = cursor.getString(cursor.getColumnIndex(TB_USER_EMAIL));
         }
@@ -176,25 +146,11 @@ public class CreateDatabase extends SQLiteOpenHelper{
         db.close();
         return email;
     }
-
     @SuppressLint("Range")
-    public String getUserName() {
-        String name = "";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + TB_USER_NAME + " FROM " + TB_USER, null);
-
-        if (cursor.moveToFirst()) {
-            name = cursor.getString(cursor.getColumnIndex(TB_USER_NAME));
-        }
-        cursor.close();
-        db.close();
-        return name;
-    }
-    @SuppressLint("Range")
-    public String getUserPassword() {
+    public String getUserPassword(int userId) {
         String password = "";
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + TB_USER_PASSWORD + " FROM " + TB_USER, null);
+        Cursor cursor = db.rawQuery("SELECT " + TB_USER_PASSWORD + " FROM " + TB_USER + " Where " + TB_USER_ID_USER + " = ?",new String[]{String.valueOf(userId)});
 
         if (cursor.moveToFirst()) {
             password = cursor.getString(cursor.getColumnIndex(TB_USER_PASSWORD));
@@ -204,6 +160,20 @@ public class CreateDatabase extends SQLiteOpenHelper{
         return password;
     }
     @SuppressLint("Range")
+    public String getUserName(int userId) {
+        String name = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + TB_USER_NAME + " FROM " + TB_USER + " Where " + TB_USER_ID_USER + " = ?",new String[]{String.valueOf(userId)});
+
+        if (cursor.moveToFirst()) {
+            name = cursor.getString(cursor.getColumnIndex(TB_USER_NAME));
+        }
+        cursor.close();
+        db.close();
+        return name;
+    }
+    //==========================================VALIDATION========================================//
+    @SuppressLint("Range")
     public boolean validEmail(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
@@ -212,5 +182,30 @@ public class CreateDatabase extends SQLiteOpenHelper{
         password = password.trim();
         return password.length() >= 8;
     }
-
+    public Boolean CheckEmail (String email){
+        Cursor cursor = myDb.rawQuery("Select * from " + TB_USER + " where " + TB_USER_EMAIL + " = ?", new String[]{email});
+        if(cursor.getCount() > 0) {
+            return true; // Email đã tồn tại, trả về true
+        }
+        else{
+            return false;  // Email không tồn tại, trả về false
+        }
+    }
+    public Boolean CheckPassword (String password){
+        Cursor cursor = myDb.rawQuery("Select * from " + TB_USER + " where " + TB_USER_PASSWORD + " = ?", new String[]{password});
+        if(cursor.getCount() > 0) {
+            return true; // Password đã tồn tại, trả về true
+        }
+        else{
+            return false;  // Password không tồn tại, trả về false
+        }
+    }
+    public Boolean CheckEmailPassword (String email,String password){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TB_USER + " WHERE " + TB_USER_EMAIL + " = ? AND " + TB_USER_PASSWORD + " = ?", new String[]{email, password});
+        boolean isValid = cursor.getCount() > 0;
+        cursor.close();
+        db.close();
+        return isValid;
+    }
 }

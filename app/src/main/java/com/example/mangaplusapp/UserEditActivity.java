@@ -20,6 +20,7 @@ public class UserEditActivity extends AppCompatActivity {
     CreateDatabase db;
     Button btnSubmit;
     String userEmail,userName,userPassword;
+    int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,8 @@ public class UserEditActivity extends AppCompatActivity {
         db =new CreateDatabase(this);
         db.open();
         SharedPreferences preferences = this.getSharedPreferences("user_session", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = preferences.edit();
+        userID= preferences.getInt("user_id",-1);
         //****************************************************************************************//
         //===================================GET ID===============================================//
         getUserNameTxt=findViewById(R.id.editNameTxt_info);
@@ -39,10 +42,10 @@ public class UserEditActivity extends AppCompatActivity {
         btnSubmit=findViewById(R.id.btnCfEdit_info);
         //****************************************************************************************//
         //===================================GET DATA===============================================//
-        userEmail = db.getUserEmail();
+        userEmail = db.getUserEmail(userID);
 //        int userId = db.getUserIDByEmail(userEmail);
-        userName= db.getUserName();
-        userPassword = db.getUserPassword();
+        userName= db.getUserName(userID);
+        userPassword = db.getUserPassword(userID);
         //****************************************************************************************//
         if(isLogged()){
             handleLoggedIn();

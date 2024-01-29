@@ -45,8 +45,10 @@ public class LibraryFragment extends Fragment {
         ///////===========================Get data=========================/////////////////////////
         db = new CreateDatabase(requireContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
-        String userEmail = db.getUserEmail();
-        String userName = db.getUserName();
+        SharedPreferences.Editor edit = preferences.edit();
+        userId=preferences.getInt("user_id",-1);
+        String userEmail = db.getUserEmail(userId);
+        String userName = db.getUserName(userId);
         ////////===========================Begin Status Logged=========================/////////////
         if(isLoggedIn()){
             navigateLayout();

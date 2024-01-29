@@ -50,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         //================================Begin get data for login basic==========================//
         SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("user_id", idUser);// userEmail is email's user in this process. user_email is email in session
         //================================END get data for login basic============================//
         //****************************************************************************************//
         //===============================Begin get id for login with social=======================//
@@ -88,6 +87,8 @@ public class LoginActivity extends AppCompatActivity {
                     // if email and password valid -> nav to home activity
                     if(checkEmailPass){
         ////////===========================Begin Login Successful=========================//////////
+                        idUser=db.loginUser(userEmail,userPassword);
+                        editor.putInt("user_id",idUser);
                         editor.putString("user_email", userEmail);
                         editor.apply();
                         Toast.makeText(LoginActivity.this,"Sign Ip Successfully", Toast.LENGTH_SHORT).show();
