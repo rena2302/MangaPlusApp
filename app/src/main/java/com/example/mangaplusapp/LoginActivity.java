@@ -1,7 +1,5 @@
 package com.example.mangaplusapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                 String newPassword = passwordTxt.getText().toString();
                 String confirmNewPassword=passwordTxt.getText().toString();
 
-                Boolean checkEmail = db.CheckEmail(userEmail);
+                Boolean checkEmail = db.CheckEmailExists(userEmail);
                 Boolean checkPassword = db.CheckPassword(oldPassword);
 
                 if(oldPassword.equals("")||newPassword.equals("")||confirmNewPassword.equals("")||userEmail.equals("")){
