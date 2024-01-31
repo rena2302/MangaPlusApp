@@ -1,28 +1,22 @@
 package Database;
 
-import static java.security.AccessController.getContext;
-
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
-import android.widget.Toast;
 
-import com.example.mangaplusapp.DrawerFragment;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.regex.Pattern;
-import android.content.Context;
-import android.content.SharedPreferences;
+
 public class CreateDatabase extends SQLiteOpenHelper{
     SQLiteDatabase myDb= this.getWritableDatabase();
-    private Context context;
+    private final Context context;
     private static final String USER_SESSION_PREF = "user_session";
     // This object is used to read stored values
     private static final String KEY_USER_EMAIL = "user_email"; // Adjust the key as needed
@@ -89,17 +83,25 @@ public class CreateDatabase extends SQLiteOpenHelper{
         return this.getWritableDatabase();
 
     }
+    public String hashPassword(String pass){
+        return BCrypt.hashpw(pass,BCrypt.gensalt());
+    }
+    public boolean CheckHashPassword(String password,String hashPassword){
+        return BCrypt.checkpw(password,hashPassword);
+    }
     public Boolean insertData (String email, String password,String name){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        String hash = hashPassword(password);
         contentValues.put(TB_USER_EMAIL, email);
-        contentValues.put(TB_USER_PASSWORD, password);
+        contentValues.put(TB_USER_PASSWORD, hash);
         contentValues.put(TB_USER_NAME, name);
         long result = db.insert(TB_USER, null, contentValues);
         db.close();
         return result != -1; // Kiểm tra nếu giá trị trả về khác -1
 
     }
+    //=====================================USER MANAGER===========================================//
     public boolean resetPassword(String newPassword) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -111,26 +113,45 @@ public class CreateDatabase extends SQLiteOpenHelper{
         // check have data updated, did it check sure data had update
         return affectedRows > 0;
     }
-    @SuppressLint("Range")
+    @SuppressLint({"Range", "Recycle"})
     public int loginUser(String userEmail, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         int userId = -1; // value basic if login failed
         // check login from user with user email and user password
-        Cursor cursor = db.rawQuery("SELECT " + TB_USER_ID_USER + " FROM " + TB_USER +
-                        " WHERE " + TB_USER_EMAIL + " = ? AND " + TB_USER_PASSWORD + " = ?",
-                new String[]{userEmail, password});
+        String hash;
+        Cursor cursorHash,cursor = null;
+        try{
+            // get hasPassword from cursorHash
+            cursorHash = db.rawQuery(" SELECT "+ TB_USER_PASSWORD + " FROM " + TB_USER + " WHERE " + TB_USER_EMAIL + " = ?",new String[]{userEmail});
+            if(cursorHash!=null&&cursorHash.moveToFirst()){
+                hash = cursorHash.getString(cursorHash.getColumnIndex(TB_USER_PASSWORD));
+                boolean checkHash = CheckHashPassword(password,hash);
+                if (!checkHash) return -1;
+            }
+            else{
+                Log.d("loginUser", "Email or password were error ");
+                return -1;
+            }
 
-        // check exists data
-        if (cursor.moveToFirst()) {
-            userId = cursor.getInt(cursor.getColumnIndex(TB_USER_ID_USER));
+            cursor = db.rawQuery("SELECT " + TB_USER_ID_USER + " FROM " + TB_USER +
+                            " WHERE " + TB_USER_EMAIL + " = ? AND " + TB_USER_PASSWORD + " = ?",
+                    new String[]{userEmail, hash});
+            // check exists data
+            if (cursor!=null&&cursor.moveToFirst()) {
+                userId = cursor.getInt(cursor.getColumnIndex(TB_USER_ID_USER));
+            }
+            else{
+                Log.d("loginUser", "Can not get id by Email :  " + userEmail);
+                return -1;
+            }
+        }finally {
+            if(cursor!=null){
+                cursor.close();
+            }
+            db.close();
         }
-
-        // Close cursor and database
-        cursor.close();
-        db.close();
-
-        // return id user
         return userId;
+
     }
     @SuppressLint("Range")
     public String getUserEmail(int userId) {
@@ -151,7 +172,6 @@ public class CreateDatabase extends SQLiteOpenHelper{
         String password = "";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT " + TB_USER_PASSWORD + " FROM " + TB_USER + " Where " + TB_USER_ID_USER + " = ?",new String[]{String.valueOf(userId)});
-
         if (cursor.moveToFirst()) {
             password = cursor.getString(cursor.getColumnIndex(TB_USER_PASSWORD));
         }
@@ -164,7 +184,6 @@ public class CreateDatabase extends SQLiteOpenHelper{
         String name = "";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT " + TB_USER_NAME + " FROM " + TB_USER + " Where " + TB_USER_ID_USER + " = ?",new String[]{String.valueOf(userId)});
-
         if (cursor.moveToFirst()) {
             name = cursor.getString(cursor.getColumnIndex(TB_USER_NAME));
         }
@@ -182,30 +201,66 @@ public class CreateDatabase extends SQLiteOpenHelper{
         password = password.trim();
         return password.length() >= 8;
     }
-    public Boolean CheckEmail (String email){
-        Cursor cursor = myDb.rawQuery("Select * from " + TB_USER + " where " + TB_USER_EMAIL + " = ?", new String[]{email});
-        if(cursor.getCount() > 0) {
-            return true; // Email đã tồn tại, trả về true
-        }
-        else{
-            return false;  // Email không tồn tại, trả về false
-        }
-    }
-    public Boolean CheckPassword (String password){
-        Cursor cursor = myDb.rawQuery("Select * from " + TB_USER + " where " + TB_USER_PASSWORD + " = ?", new String[]{password});
-        if(cursor.getCount() > 0) {
-            return true; // Password đã tồn tại, trả về true
-        }
-        else{
-            return false;  // Password không tồn tại, trả về false
-        }
-    }
-    public Boolean CheckEmailPassword (String email,String password){
+    @SuppressLint("Recycle")
+    public Boolean CheckEmailExists(String email){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TB_USER + " WHERE " + TB_USER_EMAIL + " = ? AND " + TB_USER_PASSWORD + " = ?", new String[]{email, password});
-        boolean isValid = cursor.getCount() > 0;
-        cursor.close();
-        db.close();
-        return isValid;
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT 1 FROM " + TB_USER + " WHERE " + TB_USER_EMAIL + " = ?", new String[]{email});
+            return cursor.getCount() > 0;
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
     }
+    @SuppressLint({"Range","Recycle"})
+    public Boolean CheckPassword(String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT " + TB_USER_PASSWORD + " FROM " + TB_USER + " WHERE " + TB_USER_PASSWORD + " = ?", new String[]{password});
+            if (cursor.moveToFirst()) {
+                String hashedPasswordInDB = cursor.getString(cursor.getColumnIndex(TB_USER_PASSWORD));
+                return CheckHashPassword(password, hashedPasswordInDB);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+        return false;
+    }
+
+    @SuppressLint("Range")
+    public Boolean CheckEmailPassword(String email, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        try{
+            // get hash
+            cursor = db.rawQuery(" SELECT "+ TB_USER_PASSWORD + " FROM " + TB_USER + " WHERE " + TB_USER_EMAIL + " = ?",new String[]{email});
+            if(cursor!=null&&cursor.moveToFirst()){
+                String storedHash = cursor.getString(cursor.getColumnIndex(TB_USER_PASSWORD));
+                boolean isValid = CheckHashPassword(password,storedHash);
+                if (isValid) {
+                    Log.d("CheckEmailPassword", "Login successful for email: " + email);
+                } else {
+                    Log.d("CheckEmailPassword", "Login failed for email: " + email);
+                }
+                return isValid;
+            }
+            else{
+                Log.d("CheckEmailPassword", "No matching email in the database or cursor is null");
+                return false;
+            }
+        }finally {
+            if(cursor!=null){
+                cursor.close();
+            }
+            db.close();
+        }
+    }
+
 }
