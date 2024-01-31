@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="testDemo"></string>
     <string name="Home">집</string>
     <string name="Hot">인기 있는</string>
     <string name="Search">검색</string>
@@ -20,9 +21,18 @@
     <string name="login">로그인</string>
     <string name="create">창조하다</string>
     <string name="createAccount">계정 만들기</string>
+    <!-- Begin Forgot -->
+    <string name="forgotTittle"></string>
+    <string name="forgotDescripstion"></string>
+    <string name="forgotEnterEmail">Enter Your Email Address</string>
+    <string name="sendOtp"></string>
+    <string name="VerificationTittle"></string>
+    <string name="VerificationNotify"></string>
+    <!-- End Forgot   -->
     <!-- End  Form  -->
     <!-- Begin DashBoard -->
     <string name="dashBoardAdmin">대시보드 관리자</string>
     <string name="addCategory">+ 카테고리 추가</string>
     <!-- End DashBoard -->
+
 </resources>

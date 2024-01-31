@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="testDemo"></string>
     <string name="Home">Trang Chủ</string>
     <string name="Hot">Nổi Bật</string>
     <string name="Search">Tìm Kiếm</string>
@@ -19,6 +20,14 @@
     <string name="login">Đăng nhập</string>
     <string name="create">Tạo</string>
     <string name="createAccount">Tạo tài khoản</string>
+    <!-- Begin Forgot -->
+    <string name="forgotTittle"></string>
+    <string name="forgotDescripstion"></string>
+    <string name="forgotEnterEmail">Nhập Tài Khoản Email Của Bạn</string>
+    <string name="sendOtp"></string>
+    <string name="VerificationTittle"></string>
+    <string name="VerificationNotify"></string>
+    <!-- End Forgot   -->
     <!-- End Form   -->
     <!-- Begin DashBoard -->
     <string name="dashBoardAdmin">Bảng điều khiển quản trị</string>

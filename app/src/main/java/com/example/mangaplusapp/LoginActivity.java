@@ -106,48 +106,48 @@ public class LoginActivity extends AppCompatActivity {
         //===============================END LOGIC LOGIN BASIC====================================//
         //****************************************************************************************//
         //===============================BEGIN FORGOT PASSWORD====================================//
-        forgotPasswordTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userEmail = emailTxt.getText().toString();
-
-                String oldPassword = passwordTxt.getText().toString();
-                String newPassword = passwordTxt.getText().toString();
-                String confirmNewPassword=passwordTxt.getText().toString();
-
-                Boolean checkEmail = db.CheckEmailExists(userEmail);
-                Boolean checkPassword = db.CheckPassword(oldPassword);
-
-                if(oldPassword.equals("")||newPassword.equals("")||confirmNewPassword.equals("")||userEmail.equals("")){
-                    Toast.makeText(LoginActivity.this,"Please enter all fields", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    if(checkEmail){
-                        if(checkPassword){
-                            if(newPassword.equals(confirmNewPassword)){
-                                boolean resetPass = db.resetPassword(newPassword);
-                                if(resetPass){
-                                    Toast.makeText(LoginActivity.this,"Password updated", Toast.LENGTH_SHORT).show();
-                                    // nav to login
-                                }
-                               else{
-                                    Toast.makeText(LoginActivity.this,"Error some thing in database", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                            else{
-                                Toast.makeText(LoginActivity.this,"New Password and Confirm Password not match", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        else{
-                            Toast.makeText(LoginActivity.this,"Password not match in database", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else{
-                        Toast.makeText(LoginActivity.this,"Can not find your email account, try again", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
+//        forgotPasswordTxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String userEmail = emailTxt.getText().toString();
+//
+//                String oldPassword = passwordTxt.getText().toString();
+//                String newPassword = passwordTxt.getText().toString();
+//                String confirmNewPassword=passwordTxt.getText().toString();
+//
+//                Boolean checkEmail = db.CheckEmailExists(userEmail);
+//                Boolean checkPassword = db.CheckPassword(oldPassword);
+//
+//                if(oldPassword.equals("")||newPassword.equals("")||confirmNewPassword.equals("")||userEmail.equals("")){
+//                    Toast.makeText(LoginActivity.this,"Please enter all fields", Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                    if(checkEmail){
+//                        if(checkPassword){
+//                            if(newPassword.equals(confirmNewPassword)){
+//                                boolean resetPass = db.resetPassword(newPassword);
+//                                if(resetPass){
+//                                    Toast.makeText(LoginActivity.this,"Password updated", Toast.LENGTH_SHORT).show();
+//                                    // nav to login
+//                                }
+//                               else{
+//                                    Toast.makeText(LoginActivity.this,"Error some thing in database", Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+//                            else{
+//                                Toast.makeText(LoginActivity.this,"New Password and Confirm Password not match", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                        else{
+//                            Toast.makeText(LoginActivity.this,"Password not match in database", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                    else{
+//                        Toast.makeText(LoginActivity.this,"Can not find your email account, try again", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//        });
         //===============================END FORGOT PASSWORD======================================//
         //****************************************************************************************//
         //===============================Begin login with social==================================//
@@ -172,6 +172,7 @@ public class LoginActivity extends AppCompatActivity {
         });
         //==================================END NAV TO SIGN UP==================================//
     }
+
     void navToSuccess(){
         finish();
         Intent intent = new Intent(LoginActivity.this,MainActivity.class);

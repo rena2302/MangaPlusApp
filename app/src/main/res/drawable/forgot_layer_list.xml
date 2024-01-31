@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/forgot_retangle01"
+        android:width="407dp"
+        android:height="407dp"
+        android:left="87dp"
+
+        />
+    <item android:drawable="@drawable/forgot_retangle02"
+        android:right="-200dp"
+        android:width="407dp"
+        android:height="407dp"
+        />
+</layer-list>
