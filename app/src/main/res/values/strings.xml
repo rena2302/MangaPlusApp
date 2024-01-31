@@ -37,4 +37,7 @@
     <string name="dashBoardAdmin">Dashboard Admin</string>
     <string name="addCategory">+ Add Category</string>
     <!-- End DashBoard -->
+    <!--Form profile-->
+    <string name="username">Name</string>
+
 </resources>

@@ -34,4 +34,7 @@
     <string name="dashBoardAdmin">डैशबोर्ड व्यवस्थापक</string>
     <string name="addCategory">+ श्रेणी जोड़ें</string>
     <!-- End DashBoard -->
+    <!--Form profile-->
+    <string name="username">उपयोगकर्ता नाम</string>
+
 </resources>

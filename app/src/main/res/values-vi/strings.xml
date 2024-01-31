@@ -33,5 +33,7 @@
     <string name="dashBoardAdmin">Bảng điều khiển quản trị</string>
     <string name="addCategory">+ Thêm danh mục</string>
     <!-- End DashBoard -->
+    <!--Form profile-->
+    <string name="username">tên</string>
 
 </resources>
