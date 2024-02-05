@@ -11,17 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@drawable/shape_toolbar01">
+
         <TextView
             android:id="@+id/toolBarUserTittle"
-            android:text="Dashboard User"
-            android:textSize="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"
-            android:textColor="@color/black">
-        </TextView>
+            android:text="@string/dashBoardUser"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"></TextView>
         <TextView
             android:id="@+id/subToolBarUserTittle"
             android:layout_below="@+id/toolBarUserTittle"

@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="testDemo"></string>
     <string name="Home">Trang Chủ</string>
     <string name="Hot">Nổi Bật</string>
     <string name="Search">Tìm Kiếm</string>
@@ -19,10 +20,29 @@
     <string name="login">Đăng nhập</string>
     <string name="create">Tạo</string>
     <string name="createAccount">Tạo tài khoản</string>
+    <!-- Begin Forgot -->
+    <string name="forgotTittle">Quên mật khẩu</string>
+    <string name="forgotDescripstion">Quên mật khẩu? Dễ dàng khôi phục với các tính năng thân thiện với người dùng của ứng dụng của chúng tôi để có trải nghiệm an toàn</string>
+    <string name="forgotEnterEmail">Nhập Tài Khoản Email Của Bạn</string>
+    <string name="sendOtp">Gửi OTP</string>
+    <string name="VerificationTittle">Xác minh</string>
+    <string name="VerificationNotify">Chúng tôi sẽ gửi cho bạn mật khẩu một lần vào địa chỉ email này.</string>
+    <!-- End Forgot   -->
     <!-- End Form   -->
     <!-- Begin DashBoard -->
     <string name="dashBoardAdmin">Bảng điều khiển quản trị</string>
     <string name="addCategory">+ Thêm danh mục</string>
     <!-- End DashBoard -->
-
+    <!--Form profile-->
+    <string name="username">tên</string>
+    <!--Add A New Category-->
+    <string name="addANewCategory">Thêm danh mục mới</string>
+    <!--DashBoard User-->
+    <string name="dashBoardUser">Người dùng bảng điều khiển</string>
+    <!--User edit-->
+    <string name="changeImage">thay đổi hình ảnh</string>
+    <!--User profile-->
+    <string name="userName">tên tài khoản</string>
+    <string name="email">E-mail</string>
+    <string name="passWordProfileUser">Mật khẩu</string>
 </resources>

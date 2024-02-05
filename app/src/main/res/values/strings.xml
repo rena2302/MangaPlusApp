@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="testDemo">Test Demo</string>
     <string name="Home">Home</string>
     <string name="Hot">Hot</string>
     <string name="Search">Search</string>
@@ -10,9 +11,9 @@
     <string name="questionHaveAccount">Have a <b>Account ?</b> </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="manga_plus_home">Manga Plus!</string>
-    <string name="navigation_drawer_open">Open Navigation drawer</string>
-    <string name="navigation_drawer_close">Close Navigation drawer</string>
+<!--    <string name="manga_plus_home">Manga Plus!</string>-->
+<!--    <string name="navigation_drawer_open">Open Navigation drawer</string>-->
+<!--    <string name="navigation_drawer_close">Close Navigation drawer</string>-->
     <!-- Begin  Form  -->
     <string name="welcome">Hey, Welcome to </string>
     <string name="forgotPassword">Forgot password ?</string>
@@ -21,9 +22,31 @@
     <string name="login">Login</string>
     <string name="create">Create</string>
     <string name="createAccount">Create Account</string>
+    <!-- Begin Forgot -->
+    <string name="forgotTittle">Forgot Password</string>
+    <string name="forgotDescripstion">Forgot password? Easily recover with our apps user-friendly feature for a secure experience</string>
+    <string name="forgotEnterEmail">Enter Your Email Address</string>
+    <string name="sendOtp">Send OTP</string>
+    <string name="VerificationTittle">Verification</string>
+    <string name="VerificationNotify">We will send you one time password this email address.</string>
+    <!-- End Forgot   -->
     <!-- End  Form  -->
     <!-- Begin DashBoard -->
     <string name="dashBoardAdmin">Dashboard Admin</string>
     <string name="addCategory">+ Add Category</string>
     <!-- End DashBoard -->
+    <!--Form profile-->
+    <string name="username">Name</string>
+    <!--Add a new category-->
+    <string name="addANewCategory">Add A New Category</string>
+    <!--DashBoard User-->
+    <string name="dashBoardUser">DashBoard User</string>
+    <!--User edit-->
+    <string name="changeImage">Change Image</string>
+    <!--User profile-->
+    <string name="userName">User Name</string>
+    <string name="email">Email</string>
+    <string name="passWordProfileUser">PassWord</string>
+
+
 </resources>

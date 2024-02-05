@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="testDemo"></string>
     <string name="Home">घर</string>
     <string name="Hot">लोकप्रिय</string>
     <string name="Search">ढूँढ</string>
@@ -20,9 +21,29 @@
     <string name="login">लॉगिन</string>
     <string name="create">बनाना </string>
     <string name="createAccount">खाता बनाएँ</string>
+    <!-- Begin Forgot -->
+    <string name="forgotTittle">अपना कूट शब्द भूल गए?</string>
+    <string name="forgotDescripstion">पासवर्ड भूल गए? सुरक्षित अनुभव के लिए हमारे ऐप्स की उपयोगकर्ता-अनुकूल सुविधा के साथ आसानी से पुनर्प्राप्त करें</string>
+    <string name="forgotEnterEmail">कृपया अपना ईमेल एड्रेस इंटर करें</string>
+    <string name="sendOtp">OTP भेजें</string>
+    <string name="VerificationTittle">सत्यापन</string>
+    <string name="VerificationNotify">हम आपको इस ईमेल पते पर वन टाइम पासवर्ड भेजेंगे।</string>
+    <!-- End Forgot   -->
     <!-- End  Form  -->
     <!-- Begin DashBoard -->
     <string name="dashBoardAdmin">डैशबोर्ड व्यवस्थापक</string>
     <string name="addCategory">+ श्रेणी जोड़ें</string>
     <!-- End DashBoard -->
+    <!--Form profile-->
+    <string name="username">उपयोगकर्ता नाम</string>
+    <!--Add A New Category-->
+    <string name="addANewCategory">एक नई श्रेणी जोड़ें</string>
+    <!--DashBoard User-->
+    <string name="dashBoardUser">डैशबोर्ड उपयोगकर्ता</string>
+    <!--User edit-->
+    <string name="changeImage">चित्र को बदलें</string>
+    <!--User profile-->
+    <string name="userName">उपयोगकर्ता नाम</string>
+    <string name="email">ईमेल</string>
+    <string name="passWordProfileUser">पासवर्ड</string>
 </resources>

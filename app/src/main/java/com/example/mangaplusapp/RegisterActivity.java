@@ -1,10 +1,7 @@
 package com.example.mangaplusapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,9 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.regex.Pattern;
+import androidx.appcompat.app.AppCompatActivity;
 
 import Database.CreateDatabase;
 
@@ -50,35 +45,37 @@ public class RegisterActivity extends AppCompatActivity {
         signUpTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userEmail = emailTxt.getText().toString();
-                String userPassword = passwordTxt.getText().toString();
-                String userCfPassword = repasswordTxt.getText().toString();
+                String userInputEmail = emailTxt.getText().toString();
+                String userInputPassword = passwordTxt.getText().toString();
+                String userInputCfPassword = repasswordTxt.getText().toString();
                 // if user input email,pass.....  null
-                if(userEmail.equals("")|| userPassword.equals("")|| userCfPassword.equals("")){
+                if(userInputEmail.equals("")|| userInputPassword.equals("")|| userInputCfPassword.equals("")){
                     Toast.makeText(RegisterActivity.this,"Please enter all the fields",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     //if pass < 8 length
-                    if(!validPassword(userPassword)){
+                    if(!db.validPassword(userInputPassword)){
                         Toast.makeText(RegisterActivity.this, "Please enter greater than 8 characters", Toast.LENGTH_SHORT).show();
                     }
                     else{
                         // if pass match cf pass
-                        if(userPassword.equals(userCfPassword)){
-                            Boolean checkEmail = db.CheckEmail(userEmail);
+                        if(userInputPassword.equals(userInputCfPassword)){
+                            Boolean checkEmail = db.CheckEmailExists(userInputEmail);
                             // if regex email valid
-                            if(!validEmail(userEmail)){
-                                Toast.makeText(RegisterActivity.this, "Please enter a valid filed", Toast.LENGTH_SHORT).show();
+                            if(!db.validEmail(userInputEmail)){
+                                Toast.makeText(RegisterActivity.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
                             }
                             else{
                                 if(!checkEmail){ // if email not existed in database
-                                    Boolean insert = db.insertData(userEmail,userPassword);
+                                    Boolean insert = db.insertData(userInputEmail,userInputPassword,null);
                                     if(insert) {
+                                        //======================SUCCESS===========================//
                                         // show message success full
                                         Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                         // nav to home layout
                                         Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                                         startActivity(intent);
+                                        //======================SUCCESS===========================//
                                     }
                                     else{
                                         // show message not success full
@@ -97,7 +94,6 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 }
-
             }
         });
     }
@@ -119,12 +115,5 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-    private boolean validEmail(String email) {
-        Pattern pattern = Patterns.EMAIL_ADDRESS;
-        return pattern.matcher(email).matches();
-    }
-    private boolean validPassword(String password){
-        password = password.trim();
-        return password.length() >= 8;
-    }
+
 }

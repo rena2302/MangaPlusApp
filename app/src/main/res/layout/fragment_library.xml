@@ -5,14 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".LibraryFragment">
     <RelativeLayout
-        android:id="@+id/test1"
+        android:id="@+id/InfoUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <RelativeLayout
-            android:id="@+id/infoUserTest"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -28,8 +24,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:textSize="20sp"
-                    >
+                    android:textSize="20sp">
                 </TextView>
                 <TextView
                     android:id="@+id/userEmail_info"
@@ -39,15 +34,14 @@
                     android:textSize="20sp"
                     android:textColor="@color/gray">
                 </TextView>
-            </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
 <!--   Profile-->
     <RelativeLayout
         android:id="@+id/navForPerson"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/test1"
+        android:layout_below="@+id/InfoUser"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="29dp"
         android:layout_marginRight="30dp"
@@ -65,7 +59,7 @@
                 android:background="@drawable/radius_backround">
             </ImageView>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
                 android:gravity="center"
@@ -74,6 +68,12 @@
                 android:textSize="20dp"
                 android:textStyle="bold">
             </TextView>
+           <ImageButton
+               android:id="@+id/btnNavToProfile"
+               android:layout_width="wrap_content"
+               android:src="@drawable/google"
+               android:layout_height="wrap_content">
+           </ImageButton>
         </LinearLayout>
         <LinearLayout
             android:id="@id/test2"
