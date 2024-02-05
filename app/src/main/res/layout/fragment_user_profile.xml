@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
        android:background="@drawable/shape_profile">
-
           <ImageView
               android:layout_width="130dp"
               android:layout_height="130dp"
@@ -19,7 +18,7 @@
               android:layout_marginTop="15dp">
           </ImageView>
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/userName_Tittle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
            android:text="@string/username"
@@ -142,15 +141,15 @@
                           android:layout_width="match_parent"
                           android:layout_height="match_parent"
                           android:layout_weight="1"
-                          android:text="@string/userName"
+                          android:text="Username"
                           android:textSize="23dp"
                           android:textStyle="bold"/>
                       <TextView
+                          android:id="@+id/userName_info"
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_weight="1"
-                          android:textSize="23dp"
-                          android:text="@string/username"
+                          android:textSize="23sp"
                           android:textAlignment="viewEnd"/>
                   </LinearLayout>
                   <androidx.appcompat.widget.AppCompatImageView
@@ -170,14 +169,15 @@
                       android:layout_weight="1"
                       android:textStyle="bold"
                       android:textSize="23dp"
-                      android:text="@string/email"/>
+                      android:text="Email"/>
+
                   <TextView
+                      android:id="@+id/userEmail_info"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:textSize="23dp"
-                      android:text="email"
-                      android:textAlignment="viewEnd"/>
+                      android:textAlignment="viewEnd"
+                      android:textSize="23dp" />
               </LinearLayout>
               <androidx.appcompat.widget.AppCompatImageView
                   android:layout_width="match_parent"
@@ -197,13 +197,13 @@
                       android:layout_weight="1"
                       android:textStyle="bold"
                       android:textSize="23dp"
-                      android:text="@string/passWordProfileUser"/>
+                      android:text="Pasword"/>
                   <TextView
+                      android:id="@+id/userPassword_info"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
                       android:textSize="23dp"
-                      android:text="@string/passWord"
                       android:textAlignment="viewEnd"/>
               </LinearLayout>
               </LinearLayout>
@@ -218,10 +218,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ScrollProfile"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="35dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="35dp"
         android:backgroundTint="@color/pinkPastel_background"
         android:hint="navToEdit"
-        android:textSize="20dp"></Button>
+        android:textSize="20dp">
+    </Button>
 </RelativeLayout>
