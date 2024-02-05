@@ -3,6 +3,7 @@ package com.example.mangaplusapp;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -33,12 +34,17 @@ import Database.CreateDatabase;
 
 public class DrawerFragment extends Fragment {
     CreateDatabase db;
+    int userId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
+        //==========================================Get Data======================================//
         db = new CreateDatabase(requireContext()); // Use requireContext() to get the context
-        String userName = db.getUserName();
-
+        SharedPreferences preferences = this.getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        userId=preferences.getInt("user_key",-1);
+        String userName = db.getUserName(userId);
+        //****************************************************************************************//
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_drawer,container,false);
         //Đã include ở fragment_drawer nên có thể bắt được từ rootView mà không cần bắt thêm View của menu_drawer_header

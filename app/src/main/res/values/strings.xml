@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="testDemo">Test Demo</string>
     <string name="Home">Home</string>
     <string name="Hot">Hot</string>
     <string name="Search">Search</string>
@@ -21,9 +22,22 @@
     <string name="login">Login</string>
     <string name="create">Create</string>
     <string name="createAccount">Create Account</string>
+    <!-- Begin Forgot -->
+    <string name="forgotTittle">Forgot Password</string>
+    <string name="forgotDescripstion">Forgot password? Easily recover with our apps user-friendly feature for a secure experience</string>
+    <string name="forgotEnterEmail">Enter Your Email Address</string>
+    <string name="sendOtp">Send OTP</string>
+    <string name="VerificationTittle">Verification</string>
+    <string name="VerificationNotify">We will send you one time password this email address.</string>
+
+
+    <!-- End Forgot   -->
     <!-- End  Form  -->
     <!-- Begin DashBoard -->
     <string name="dashBoardAdmin">Dashboard Admin</string>
     <string name="addCategory">+ Add Category</string>
     <!-- End DashBoard -->
+    <!--Form profile-->
+    <string name="username">Name</string>
+
 </resources>

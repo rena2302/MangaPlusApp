@@ -1,7 +1,5 @@
 package com.example.mangaplusapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgotPasswordTxt,toSignUpTxt;
     Button btnLoginTxt;
     CreateDatabase db;
+    int idUser;
 
     //Create sign in Google
     GoogleSignInOptions gso;
@@ -47,7 +48,8 @@ public class LoginActivity extends AppCompatActivity {
         //================================End get id for login basic==============================//
         //****************************************************************************************//
         //================================Begin get data for login basic==========================//
-                                            // Process IS EMPTY //
+        SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         //================================END get data for login basic============================//
         //****************************************************************************************//
         //===============================Begin get id for login with social=======================//
@@ -85,9 +87,9 @@ public class LoginActivity extends AppCompatActivity {
                     // if email and password valid -> nav to home activity
                     if(checkEmailPass){
         ////////===========================Begin Login Successful=========================//////////
-                        SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("user_email", userEmail); // userEmail is email's user in this process. user_email is email in session
+                        idUser=db.loginUser(userEmail,userPassword);
+                        editor.putInt("user_id",idUser);
+                        editor.putString("user_email", userEmail);
                         editor.apply();
                         Toast.makeText(LoginActivity.this,"Sign Ip Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
@@ -104,48 +106,48 @@ public class LoginActivity extends AppCompatActivity {
         //===============================END LOGIC LOGIN BASIC====================================//
         //****************************************************************************************//
         //===============================BEGIN FORGOT PASSWORD====================================//
-        forgotPasswordTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userEmail = emailTxt.getText().toString();
-
-                String oldPassword = passwordTxt.getText().toString();
-                String newPassword = passwordTxt.getText().toString();
-                String confirmNewPassword=passwordTxt.getText().toString();
-
-                Boolean checkEmail = db.CheckEmail(userEmail);
-                Boolean checkPassword = db.CheckPassword(oldPassword);
-
-                if(oldPassword.equals("")||newPassword.equals("")||confirmNewPassword.equals("")||userEmail.equals("")){
-                    Toast.makeText(LoginActivity.this,"Please enter all fields", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    if(checkEmail){
-                        if(checkPassword){
-                            if(newPassword.equals(confirmNewPassword)){
-                                boolean resetPass = db.resetPassword(newPassword);
-                                if(resetPass){
-                                    Toast.makeText(LoginActivity.this,"Password updated", Toast.LENGTH_SHORT).show();
-                                    // nav to login
-                                }
-                               else{
-                                    Toast.makeText(LoginActivity.this,"Error some thing in database", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                            else{
-                                Toast.makeText(LoginActivity.this,"New Password and Confirm Password not match", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        else{
-                            Toast.makeText(LoginActivity.this,"Password not match in database", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else{
-                        Toast.makeText(LoginActivity.this,"Can not find your email account, try again", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
+//        forgotPasswordTxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String userEmail = emailTxt.getText().toString();
+//
+//                String oldPassword = passwordTxt.getText().toString();
+//                String newPassword = passwordTxt.getText().toString();
+//                String confirmNewPassword=passwordTxt.getText().toString();
+//
+//                Boolean checkEmail = db.CheckEmailExists(userEmail);
+//                Boolean checkPassword = db.CheckPassword(oldPassword);
+//
+//                if(oldPassword.equals("")||newPassword.equals("")||confirmNewPassword.equals("")||userEmail.equals("")){
+//                    Toast.makeText(LoginActivity.this,"Please enter all fields", Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                    if(checkEmail){
+//                        if(checkPassword){
+//                            if(newPassword.equals(confirmNewPassword)){
+//                                boolean resetPass = db.resetPassword(newPassword);
+//                                if(resetPass){
+//                                    Toast.makeText(LoginActivity.this,"Password updated", Toast.LENGTH_SHORT).show();
+//                                    // nav to login
+//                                }
+//                               else{
+//                                    Toast.makeText(LoginActivity.this,"Error some thing in database", Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+//                            else{
+//                                Toast.makeText(LoginActivity.this,"New Password and Confirm Password not match", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                        else{
+//                            Toast.makeText(LoginActivity.this,"Password not match in database", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                    else{
+//                        Toast.makeText(LoginActivity.this,"Can not find your email account, try again", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//        });
         //===============================END FORGOT PASSWORD======================================//
         //****************************************************************************************//
         //===============================Begin login with social==================================//
@@ -170,6 +172,7 @@ public class LoginActivity extends AppCompatActivity {
         });
         //==================================END NAV TO SIGN UP==================================//
     }
+
     void navToSuccess(){
         finish();
         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
