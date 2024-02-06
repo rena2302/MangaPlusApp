@@ -11,6 +11,9 @@
     <string name="newMemberSignUp"><b>Tạo Tài Khoản</b> </string>
     <string name="questionHaveAccount">Bạn đã có <b>Tài Khoản ?</b> </string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="manga_plus_home">Manga Plus!</string>
+    <string name="navigation_drawer_open">Open Navigation drawer</string>
+    <string name="navigation_drawer_close">Close Navigation drawer</string>
     <string name="hello_blank_fragment">cc</string>
     <!-- Begin Form    -->
     <string name="forgotPassword">Quên mật khẩu ?</string>

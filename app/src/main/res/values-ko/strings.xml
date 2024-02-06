@@ -12,7 +12,9 @@
     <string name="questionHaveAccount">계정이 있습니다</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">안녕하세요 빈 조각입니다</string>
-
+    <string name="manga_plus_home">Manga Plus!</string>
+    <string name="navigation_drawer_open">Open Navigation drawer</string>
+    <string name="navigation_drawer_close">Close Navigation drawer</string>
     <!-- Begin  Form  -->
     <string name="welcome">안녕하세요, 환영합니다</string>
     <string name="forgotPassword">비밀번호를 잊으셨나요 ?</string>
