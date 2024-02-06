@@ -27,6 +27,9 @@ public class ForgotFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_forgot, container, false);
         SendOtpBtn = root.findViewById(R.id.btnForgotSendOtp);
+        //==================================NAVIGATE LAYOUT=======================================//
+        navigateLayout();
+        //****************************************************************************************//
         return root;
     }
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
@@ -34,11 +37,10 @@ public class ForgotFragment extends Fragment {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         if (isAppInitialized) {
-            fragmentTransaction.add(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
+            fragmentTransaction.add(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
         } else {
-            fragmentTransaction.replace(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
+            fragmentTransaction.replace(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
             fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
-            // sau nay sua lai theo vi tri va rut gon
         }
         fragmentTransaction.commit();
     }
