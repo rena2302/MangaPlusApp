@@ -12,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -170,7 +173,14 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class); // bat su kien
             startActivity(intent); // chay su kien
         });
-        //==================================END NAV TO SIGN UP==================================//
+        //====================================END NAV TO SIGN UP==================================//
+        //==============================BEGIN NAV TO FORGOT PASSWORD==============================//
+        forgotPasswordTxt.setOnClickListener(v->{
+            Intent intent = new Intent(LoginActivity.this, ForgotControlActivity.class); // bat su kien
+            startActivity(intent); // chay su kien
+        });
+        //****************************************************************************************//
+
     }
 
     void navToSuccess(){
@@ -196,6 +206,18 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Something went wrong", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    private void loadFragment(Fragment fragment, boolean isAppInitialized) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        if (isAppInitialized) {
+            fragmentTransaction.add(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
+        } else {
+            fragmentTransaction.replace(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
+            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
+        }
+        fragmentTransaction.commit();
     }
 
 }

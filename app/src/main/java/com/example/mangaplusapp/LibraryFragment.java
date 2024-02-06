@@ -29,6 +29,7 @@ public class LibraryFragment extends Fragment {
     int userId;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
     @Override
@@ -55,9 +56,9 @@ public class LibraryFragment extends Fragment {
             userEmailTxt.setText(userEmail);
             userNameTxt.setText(userName);
             userLogOutBtn.setHint("Log Out");
-        ///////===========================Begin Logout=========================/////////////////////
+            ///////===========================Begin Logout=========================/////////////////////
             userLogOutBtn.setOnClickListener(v -> {
-            // Clear session and navigate to login activity
+                // Clear session and navigate to login activity
                 try {
                     clearSession();
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -74,7 +75,7 @@ public class LibraryFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             });
-        ////////===========================End Logout=========================//////////////////////
+            ////////===========================End Logout=========================//////////////////////
         }
         ////////===========================End Status Logged=========================///////////////
         //****************************************************************************************//

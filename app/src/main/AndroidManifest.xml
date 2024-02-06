@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MangaPlusApp"
         tools:targetApi="34">
         <activity
+            android:name=".ForgotControlActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserEditActivity"
             android:exported="false" />
         <activity
