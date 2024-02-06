@@ -30,6 +30,7 @@
                 android:textSize="20sp">
             </TextView>
             <EditText
+                android:id="@+id/forgotEmailUser_Input"
                 android:layout_below="@id/forgot_emailTittle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
