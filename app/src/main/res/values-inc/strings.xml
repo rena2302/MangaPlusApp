@@ -12,7 +12,9 @@
     <string name="questionHaveAccount">एक <b>खाता है</b></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="manga_plus_home">Manga Plus!</string>
+    <string name="navigation_drawer_open">Open Navigation drawer</string>
+    <string name="navigation_drawer_close">Close Navigation drawer</string>
     <!-- Begin  Form  -->
     <string name="welcome">अरे, आपका स्वागत है</string>
     <string name="forgotPassword">पासवर्ड भूल गए ?</string>
