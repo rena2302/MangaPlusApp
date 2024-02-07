@@ -81,6 +81,7 @@ public class VerificationFragment extends Fragment {
             String otp4 = otp4Input.getText().toString();
             String otp= otp1+otp2+otp3+otp4;
             if(otp.equals(keyOtp)){
+                // khi có figma thì cho chạy vào form edit password
                 Intent intent = new Intent(getActivity(),MainActivity.class);
                 startActivity(intent);
             }
