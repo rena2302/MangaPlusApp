@@ -3,11 +3,13 @@ package com.example.mangaplusapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -44,14 +46,28 @@ public class ForgotFragment extends Fragment {
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
         userID=preferences.getInt("user_id",-1);
-        userEmail=db.getUserEmail(userID);
-        //****************************************************************************************//
-        //==================================NAVIGATE LAYOUT=======================================//
-        navigateLayout();
-        //****************************************************************************************//
-        //=======================================SEND OTP=========================================//
-
-        //****************************************************************************************//
+        //=====================================Send EMAIL=======================================//
+        SendOtpBtn.setOnClickListener(v->{
+            if(getUserEmailTxt.getText().toString().isEmpty()){
+                Toast.makeText(getContext() ,"Please enter your email", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                boolean checkExists = db.CheckEmailExists(getUserEmailTxt.getText().toString());
+                if(checkExists){
+                    userEmail = getUserEmailTxt.getText().toString(); // get user email input
+                    editor.putString("user_email", userEmail); // put to session
+                    editor.apply(); // apply session
+                    //*DEBUG*//
+                    String xx = preferences.getString("user_email","error"); // get data form session
+                    Log.d("FORGOT FRAGMENT SEND EMAIL ERROR", xx); // log cat
+                    //*DEBUG*//
+                    loadFragment(new VerificationFragment(),false);
+                }
+                else{
+                    Toast.makeText(getContext() ,"Email not exists in our app", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         return root;
     }
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
@@ -65,13 +81,5 @@ public class ForgotFragment extends Fragment {
             fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
         }
         fragmentTransaction.commit();
-    }
-    void navigateLayout(){
-        //==================================BEGIN NAV TO VERIFICATION==================================//
-        SendOtpBtn.setOnClickListener(e->{
-            loadFragment(new VerificationFragment(),false);
-        });
-        //==================================END NAV TO VERIFICATION==================================//
-
     }
 }
