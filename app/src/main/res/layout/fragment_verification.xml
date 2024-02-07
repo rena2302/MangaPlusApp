@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/white"
                 android:backgroundTint="@color/forgot_primary"
-                android:hint="@string/sendOtp">
+                android:hint="@string/submit">
             </Button>
         </LinearLayout>
     </RelativeLayout>
