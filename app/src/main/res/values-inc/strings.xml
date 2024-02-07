@@ -3,7 +3,7 @@
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- BASE  -->
-    <string name="submit">Submit</string>
+    <string name="submit">जमा करना</string>
     <string name="testDemo"></string>
     <string name="Home">घर</string>
     <string name="Hot">लोकप्रिय</string>

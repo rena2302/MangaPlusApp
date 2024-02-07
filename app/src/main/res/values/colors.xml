@@ -18,4 +18,6 @@
 
     <color name="forgot_primary">#FFB8B8</color>
 
+    <color name="otp_bg">#E4E4E4</color>
+
 </resources>

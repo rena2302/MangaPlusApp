@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/testDemo"
                 android:textStyle="bold"
-                android:textSize="18sp">
+                android:textSize="20sp">
             </TextView>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,8 +46,8 @@
                 android:orientation="horizontal">
                 <EditText
                     android:id="@+id/otp1"
-                    android:layout_width="40dp"
-                    android:layout_height="45dp"
+                    android:layout_width="50dp"
+                    android:layout_height="55dp"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:inputType="number"
@@ -55,43 +55,50 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:maxLength="1"
-                    >
+                    android:background="@drawable/bg_otp"
+                    android:layout_margin="5dp">
                 </EditText>
                 <EditText
                     android:id="@+id/otp2"
-                    android:layout_width="40dp"
-                    android:layout_height="45dp"
+                    android:layout_width="50dp"
+                    android:layout_height="55dp"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:inputType="number"
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:maxLength="1">
+                    android:maxLength="1"
+                    android:background="@drawable/bg_otp"
+                    android:layout_margin="5dp">
                 </EditText>
                 <EditText
                     android:id="@+id/otp3"
-                    android:layout_width="40dp"
-                    android:layout_height="45dp"
+                    android:layout_width="50dp"
+                    android:layout_height="55dp"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:inputType="number"
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:maxLength="1">
+                    android:maxLength="1"
+                    android:background="@drawable/bg_otp"
+                    android:layout_margin="5dp">
                 </EditText>
                 <EditText
                     android:id="@+id/otp4"
-                    android:layout_width="40dp"
-                    android:layout_height="45dp"
+                    android:layout_width="50dp"
+                    android:layout_height="55dp"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:inputType="number"
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:maxLength="1">
+                    android:maxLength="1"
+                    android:background="@drawable/bg_otp"
+                    android:layout_margin="5dp">
                 </EditText>
             </LinearLayout>
             <TextView
@@ -108,10 +115,11 @@
                 android:id="@+id/sendOtp"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="55dp"
                 android:textColorHint="@color/white"
                 android:backgroundTint="@color/forgot_primary"
-                android:hint="@string/submit">
+                android:hint="@string/submit"
+                android:textSize="20dp">
             </Button>
         </LinearLayout>
     </RelativeLayout>
