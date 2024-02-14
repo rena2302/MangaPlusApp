@@ -2,6 +2,8 @@
 <resources>
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <!-- BASE  -->
+    <string name="submit">제출하다</string>
     <string name="testDemo"></string>
     <string name="Home">집</string>
     <string name="Hot">인기 있는</string>
