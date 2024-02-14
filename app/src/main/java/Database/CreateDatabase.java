@@ -151,7 +151,31 @@ public class CreateDatabase extends SQLiteOpenHelper{
             db.close();
         }
         return userId;
+    }
+    @SuppressLint({"Range", "Recycle"})
+    public int loginUser(String userEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int userId = -1; // value basic if login failed
 
+        Cursor cursor = null;
+        try{
+            cursor = db.rawQuery("SELECT " + TB_USER_ID_USER + " FROM " + TB_USER +
+                            " WHERE " + TB_USER_EMAIL + " = ?" , new String[]{userEmail});
+            // check exists data
+            if (cursor!=null&&cursor.moveToFirst()) {
+                userId = cursor.getInt(cursor.getColumnIndex(TB_USER_ID_USER));
+            }
+            else{
+                Log.d("loginUser", "Can not get id by Email :  " + userEmail);
+                return -1;
+            }
+        }finally {
+            if(cursor!=null){
+                cursor.close();
+            }
+            db.close();
+        }
+        return userId;
     }
     @SuppressLint("Range")
     public String getUserEmail(int userId) {

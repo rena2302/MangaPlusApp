@@ -65,6 +65,8 @@ public class ForgotFragment extends Fragment {
                 }
                 else{
                     Toast.makeText(getContext() ,"Email not exists in our app", Toast.LENGTH_SHORT).show();
+                    // new Feature : new button nav to Register
+
                 }
             }
         });
