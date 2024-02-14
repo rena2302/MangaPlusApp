@@ -15,6 +15,7 @@ import Database.CreateDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText nameTxt,emailTxt,passwordTxt,repasswordTxt;
+    String userInputEmail,userInputPassword,userInputCfPassword;
     Button signUpTxt;
     TextView haveAccount;
     ImageButton btnToLogin;
@@ -45,9 +46,9 @@ public class RegisterActivity extends AppCompatActivity {
         signUpTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userInputEmail = emailTxt.getText().toString();
-                String userInputPassword = passwordTxt.getText().toString();
-                String userInputCfPassword = repasswordTxt.getText().toString();
+                 userInputEmail = emailTxt.getText().toString();
+                 userInputPassword = passwordTxt.getText().toString();
+                 userInputCfPassword = repasswordTxt.getText().toString();
                 // if user input email,pass.....  null
                 if(userInputEmail.equals("")|| userInputPassword.equals("")|| userInputCfPassword.equals("")){
                     Toast.makeText(RegisterActivity.this,"Please enter all the fields",Toast.LENGTH_SHORT).show();
@@ -112,6 +113,22 @@ public class RegisterActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+    private void testOTP(int userId){
+        signUpTxt.setOnClickListener(v->{
+            userInputEmail = emailTxt.getText().toString();
+            if(db.validEmail(userInputEmail)){
+                if(db.CheckEmailExists(userInputEmail)){
+                    // nav to login
+                }
+                else{
+                    // SEND OTP
+                }
+            }
+            else{
+                // not valid email
             }
         });
     }
