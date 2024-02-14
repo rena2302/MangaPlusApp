@@ -7,6 +7,12 @@ Feature
       + Banner AD                          
       + Support center
       + Change country 
+      + Sreach
+      + Hot
+      + Music
+      + Payment
+      + Library
+      + Control info
   {DASHBOARD}
       + CRUD          
       + Control Payment
