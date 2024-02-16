@@ -26,6 +26,10 @@ public LoginModel(MVPLoginPresenter ModelResponseToPresenter)
             // if email and password valid -> nav to home activity
             if(checkEmailPass){
                 ////////===========================Begin Login Successful=========================//////////
+                idUser=db.loginUser(userEmail,userPassword);
+                editor.putInt("user_id",idUser);
+                editor.putString("user_email", userEmail);
+                editor.apply();
                 ModelResponseToPresenter.LoginSuccess();
                 ////////===========================END Login Successful=========================////////////
             }
