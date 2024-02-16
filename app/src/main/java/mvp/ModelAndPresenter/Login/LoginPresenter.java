@@ -1,4 +1,4 @@
-package mvp.UI.Login;
+package mvp.ModelAndPresenter.Login;
 
 import android.content.SharedPreferences;
 import android.widget.EditText;
@@ -17,7 +17,16 @@ public class LoginPresenter implements MVPLoginPresenter {
         loginmodel=new LoginModel(this);
        loginmodel.handleLogin(emailTxt,passwordTxt, db, idUser,editor);//thông báo cho model để sử lí logic
     }
-
+    public void RegisterAction()
+    {
+        loginmodel=new LoginModel(this);
+        loginmodel.ResAction();
+    }
+    public void ForAction()
+    {
+        loginmodel=new LoginModel(this);
+        loginmodel.ForgotAction();
+    }
     @Override
     public void LoginSuccess() {
         PresenterResponseToViewAct.LoginSuccess();
@@ -31,5 +40,15 @@ public class LoginPresenter implements MVPLoginPresenter {
     @Override
     public void LoginDefalt() {
         PresenterResponseToViewAct.LoginDefalt();
+    }
+
+    @Override
+    public void ResActionPage() {
+        PresenterResponseToViewAct.ResActionPage();
+    }
+
+    @Override
+    public void ForgotAction() {
+        PresenterResponseToViewAct.ForgotAction();
     }
 }

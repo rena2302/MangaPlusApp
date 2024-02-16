@@ -1,4 +1,4 @@
-package mvp.UI.Login;
+package mvp.ModelAndPresenter.Login;
 
 import android.content.SharedPreferences;
 import android.widget.EditText;
@@ -38,5 +38,13 @@ public LoginModel(MVPLoginPresenter ModelResponseToPresenter)
                 ModelResponseToPresenter.LoginFailed();
             }
         }
+    }
+    public void ResAction()
+    {
+       ModelResponseToPresenter.ResActionPage();
+    }
+    public void ForgotAction()
+    {
+        ModelResponseToPresenter.ForgotAction();
     }
 }

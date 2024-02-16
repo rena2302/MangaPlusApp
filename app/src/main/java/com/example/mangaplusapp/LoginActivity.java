@@ -19,15 +19,15 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import Database.CreateDatabase;
-import mvp.UI.Login.LoginPresenter;
-import mvp.UI.Login.MVPLoginView;
+import mvp.ModelAndPresenter.Login.LoginPresenter;
+import mvp.ModelAndPresenter.Login.MVPLoginView;
 
 public class LoginActivity extends AppCompatActivity implements MVPLoginView {
-    EditText emailTxt, passwordTxt;
-    TextView forgotPasswordTxt,toSignUpTxt;
-    Button btnLoginTxt;
-    CreateDatabase db;
-    int idUser;
+        EditText emailTxt, passwordTxt;
+        TextView forgotPasswordTxt,toSignUpTxt;
+        Button btnLoginTxt;
+        CreateDatabase db;
+        int idUser;
 
     //Create sign in Google
     GoogleSignInOptions gso;
@@ -36,6 +36,8 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
     //End sign in Google
      private LoginPresenter loginPresenter;
     //Call PresenterLogin
+    private LoginPresenter ResAction;
+    private LoginPresenter ForAction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,14 +93,14 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
     void navigateLayout(){
         //==================================BEGIN NAV TO SIGN UP==================================//
         toSignUpTxt.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class); // bat su kien
-            startActivity(intent); // chay su kien
+           ResAction =new LoginPresenter(this);
+           ResAction.RegisterAction();
         });
         //====================================END NAV TO SIGN UP==================================//
         //==============================BEGIN NAV TO FORGOT PASSWORD==============================//
         forgotPasswordTxt.setOnClickListener(v->{
-            Intent intent = new Intent(LoginActivity.this, ForgotControlActivity.class); // bat su kien
-            startActivity(intent); // chay su kien
+            ForAction=new LoginPresenter(this);
+            ForAction.ForAction();
         });
         //****************************************************************************************//
     }
@@ -144,5 +146,17 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
     @Override
     public void LoginDefalt() {
         Toast.makeText(LoginActivity.this,"Please enter all fields", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void ResActionPage() {
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class); // bat su kien
+        startActivity(intent); // chay su kien
+    }
+
+    @Override
+    public void ForgotAction() {
+        Intent intent = new Intent(LoginActivity.this, ForgotControlActivity.class); // bat su kien
+        startActivity(intent); // chay su kien
     }
 }
