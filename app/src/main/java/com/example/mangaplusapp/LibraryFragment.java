@@ -4,20 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import Database.CreateDatabase;
 
@@ -25,7 +22,7 @@ public class LibraryFragment extends Fragment {
     CreateDatabase db;
     TextView userEmailTxt,userNameTxt;
     Button userLogOutBtn;
-    ImageButton testlog;
+    ImageButton testlog,testlogmanga;
     int userId;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +40,7 @@ public class LibraryFragment extends Fragment {
         userEmailTxt = rootView.findViewById(R.id.userEmail_info);
         userLogOutBtn=rootView.findViewById(R.id.userLogOut_info);
         testlog = rootView.findViewById(R.id.btnNavToProfile); // sau nay xoa
+        testlogmanga = rootView.findViewById(R.id.btnNavToTestAddManga);// sau nay xoa
         ///////===========================Get data=========================/////////////////////////
         db = new CreateDatabase(requireContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
@@ -95,6 +93,10 @@ public class LibraryFragment extends Fragment {
     void navigateLayout(){
         testlog.setOnClickListener(v->{
             loadFragment(new UserProfileFragment(),false);
+        });
+        testlogmanga.setOnClickListener(v->{
+            Intent intent = new Intent(getActivity(),TestAddMangaActivity.class);
+            startActivity(intent);
         });
     }
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {

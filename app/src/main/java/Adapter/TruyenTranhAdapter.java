@@ -1,4 +1,6 @@
 package Adapter;
+
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +42,9 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
         if (truyenTranh == null){
             return;
         }
-        holder.imageTruyen.setImageResource(truyenTranh.getLinkAnh());
+//        holder.imageTruyen.setImageResource(truyenTranh.getLinkAnh()); // test case
+        Uri convertToUri = Uri.parse(truyenTranh.getLinkAnh());
+        holder.imageTruyen.setImageURI(convertToUri);
         holder.txtTruyen.setText(truyenTranh.getTenTruyen());
     }
 

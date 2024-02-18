@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TestAddMangaActivity">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/nameMangaTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="input name"
+            android:minHeight="48dp"></EditText>
+        <Button
+            android:id="@+id/chooseIMGbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Choose Img"
+            android:backgroundTint="@color/color_input">
+        </Button>
+        <Button
+            android:id="@+id/mangaAddBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/login_color"
+            android:hint="@string/testDemo"></Button>
+        <ImageView
+            android:id="@+id/pictureMangaSelect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Add Link"
+            android:minHeight="48dp"></ImageView>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

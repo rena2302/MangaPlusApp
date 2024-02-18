@@ -1,5 +1,6 @@
 package Adapter;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,9 @@ public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter
             viewPager2.post(runnable);
         }
         holder.textSlider.setText(imageSlider.getTenTruyen());
-        holder.imageSlider.setImageResource(imageSlider.getLinkAnh());
+        String imgLink = imageSlider.getLinkAnh();
+        Uri convertToUri = Uri.parse(imgLink);
+        holder.imageSlider.setImageURI(convertToUri);
     }
 
     @Override

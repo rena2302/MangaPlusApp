@@ -45,7 +45,7 @@ public class CreateDatabase extends SQLiteOpenHelper{
     public static String TB_ADMIN_ROLE = "ROLE";
 
     public CreateDatabase(Context context){
-        super (context,"MangaPlus",null,1);
+        super (context,"MangaPlus",null,2);
         this.context = context;
     }
     public boolean isUserLoggedIn() {
@@ -70,7 +70,6 @@ public class CreateDatabase extends SQLiteOpenHelper{
             String tbAdmin = " CREATE TABLE " + TB_ADMIN + " ( " + TB_ADMIN_ID_ADMIN + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + TB_ADMIN_NAME + " TEXT, " + TB_ADMIN_EMAIL + " TEXT, " + TB_ADMIN_PASSWORD + " TEXT, "
                     + TB_ADMIN_ADDRESS + " TEXT, " + TB_ADMIN_ROLE + " INTEGER ) ";
-
             db.execSQL(tbUser);
             db.execSQL(tbAdmin);
     }
