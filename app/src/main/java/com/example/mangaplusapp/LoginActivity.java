@@ -19,20 +19,25 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import Database.CreateDatabase;
+import mvp.ModelAndPresenter.Login.LoginPresenter;
+import mvp.ModelAndPresenter.Login.MVPLoginView;
 
-public class LoginActivity extends AppCompatActivity {
-    EditText emailTxt, passwordTxt;
-    TextView forgotPasswordTxt,toSignUpTxt;
-    Button btnLoginTxt;
-    CreateDatabase db;
-    int idUser;
+public class LoginActivity extends AppCompatActivity implements MVPLoginView {
+        EditText emailTxt, passwordTxt;
+        TextView forgotPasswordTxt,toSignUpTxt;
+        Button btnLoginTxt;
+        CreateDatabase db;
+        int idUser;
 
     //Create sign in Google
     GoogleSignInOptions gso;
 //    GoogleSignInClient gsc;
     ImageView googleBtn;
     //End sign in Google
-
+     private LoginPresenter loginPresenter;
+    //Call PresenterLogin
+    private LoginPresenter ResAction;
+    private LoginPresenter ForAction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,35 +74,15 @@ public class LoginActivity extends AppCompatActivity {
         //===============================End Connect Login With Social============================//
         //****************************************************************************************//
         //===============================BEGIN LOGIC LOGIN BASIC==================================//
+        //===============================CREATE CALL PRESENTER====================================//
+        loginPresenter=new LoginPresenter(this);
+        //===============================END CALL PRESENTER====================================//
         btnLoginTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             // this event final
             public void onClick(View v) {
-                String userEmail = emailTxt.getText().toString();
-                String userPassword = passwordTxt.getText().toString();
-                // if user do nothing or Missing input
-                if(userEmail.equals("")||userPassword.equals("")){
-                    Toast.makeText(LoginActivity.this,"Please enter all fields", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Boolean checkEmailPass= db.CheckEmailPassword(userEmail,userPassword);
-                    // if email and password valid -> nav to home activity
-                    if(checkEmailPass){
-        ////////===========================Begin Login Successful=========================//////////
-                        idUser=db.loginUser(userEmail,userPassword);
-                        editor.putInt("user_id",idUser);
-                        editor.putString("user_email", userEmail);
-                        editor.apply();
-                        Toast.makeText(LoginActivity.this,"Sign Ip Successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                        startActivity(intent);
-        ////////===========================END Login Successful=========================////////////
-                    }
-                    // show message input error
-                    else{
-                        Toast.makeText(LoginActivity.this,"Invalid Credentials", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                  loginPresenter.receivedHandleLogin(emailTxt,passwordTxt,db,idUser,editor);
+                  //đang ở ActView thông báo cho presenter khi đươc click sự kiện
             }
         });
         //===============================END LOGIC LOGIN BASIC====================================//
@@ -108,14 +93,14 @@ public class LoginActivity extends AppCompatActivity {
     void navigateLayout(){
         //==================================BEGIN NAV TO SIGN UP==================================//
         toSignUpTxt.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class); // bat su kien
-            startActivity(intent); // chay su kien
+           ResAction =new LoginPresenter(this);
+           ResAction.RegisterAction();
         });
         //====================================END NAV TO SIGN UP==================================//
         //==============================BEGIN NAV TO FORGOT PASSWORD==============================//
         forgotPasswordTxt.setOnClickListener(v->{
-            Intent intent = new Intent(LoginActivity.this, ForgotControlActivity.class); // bat su kien
-            startActivity(intent); // chay su kien
+            ForAction=new LoginPresenter(this);
+            ForAction.ForAction();
         });
         //****************************************************************************************//
     }
@@ -145,5 +130,33 @@ public class LoginActivity extends AppCompatActivity {
         }
         fragmentTransaction.commit();
     }
+ //Callback by Presenter
+    @Override
+    public void LoginSuccess() {
+        Toast.makeText(LoginActivity.this,"Sign Ip Successfully", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent);
+    }
 
+    @Override
+    public void LoginFailed() {
+        Toast.makeText(LoginActivity.this,"Invalid Credentials", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void LoginDefalt() {
+        Toast.makeText(LoginActivity.this,"Please enter all fields", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void ResActionPage() {
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class); // bat su kien
+        startActivity(intent); // chay su kien
+    }
+
+    @Override
+    public void ForgotAction() {
+        Intent intent = new Intent(LoginActivity.this, ForgotControlActivity.class); // bat su kien
+        startActivity(intent); // chay su kien
+    }
 }
