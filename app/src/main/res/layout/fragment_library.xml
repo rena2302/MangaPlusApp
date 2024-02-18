@@ -89,7 +89,7 @@
                 android:background="@drawable/radius_backround">
             </ImageView>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
                 android:gravity="center"
@@ -98,6 +98,12 @@
                 android:textSize="20dp"
                 android:textStyle="bold">
             </TextView>
+            <ImageButton
+                android:id="@+id/btnNavToTestAddManga"
+                android:layout_width="wrap_content"
+                android:src="@drawable/google"
+                android:layout_height="wrap_content">
+            </ImageButton>
         </LinearLayout>
         <LinearLayout
             android:layout_below="@+id/test2"
