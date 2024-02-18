@@ -17,6 +17,12 @@
             android:layout_height="wrap_content"
             android:hint="input name"
             android:minHeight="48dp"></EditText>
+        <EditText
+            android:id="@+id/LinkOnlineMangaTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="input Link"
+            android:minHeight="48dp"></EditText>
         <Button
             android:id="@+id/chooseIMGbtn"
             android:layout_width="wrap_content"

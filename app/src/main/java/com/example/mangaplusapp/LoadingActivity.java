@@ -1,10 +1,12 @@
 package com.example.mangaplusapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import object.TestDBTruyen;
 
 public class LoadingActivity extends AppCompatActivity {
 
@@ -14,6 +16,9 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         handler = new Handler();
+        TestDBTruyen dbManga = new TestDBTruyen(this);
+        dbManga.open();
+//        dbManga.deleteAllMangaData();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

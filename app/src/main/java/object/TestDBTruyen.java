@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.util.Log;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class TestDBTruyen extends SQLiteOpenHelper {
     public static final String TB_MANGA_PICTURE = "PICTURE_MANGA";
 
     public TestDBTruyen(Context context) {
-        super(context, "MangaPlus", null, 2);
+        super(context, "MangaPlus", null, 4);
         this.context = context;
     }
     public SQLiteDatabase open() {
@@ -46,14 +45,13 @@ public class TestDBTruyen extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(TB_MANGA_NAME, Name);
-        File imgFile = new File(imgPath);
-        Uri imgUri = Uri.fromFile(imgFile);
-        contentValues.put(TB_MANGA_PICTURE, imgUri.toString());
+        contentValues.put(TB_MANGA_PICTURE, imgPath); // Lưu đường dẫn tệp hình ảnh
 
         long result = db.insert(TB_MANGA, null, contentValues);
         db.close();
         return result != -1;
     }
+
     public boolean insertData(String Name, Uri imgUri) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -79,5 +77,11 @@ public class TestDBTruyen extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return mangaItems;
+    }
+    public boolean deleteAllMangaData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(TB_MANGA, null, null);
+        db.close();
+        return result != 0;
     }
 }

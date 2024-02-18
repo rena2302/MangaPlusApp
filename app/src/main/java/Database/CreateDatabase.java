@@ -45,7 +45,7 @@ public class CreateDatabase extends SQLiteOpenHelper{
     public static String TB_ADMIN_ROLE = "ROLE";
 
     public CreateDatabase(Context context){
-        super (context,"MangaPlus",null,2);
+        super (context,"MangaPlus",null,4);
         this.context = context;
     }
     public boolean isUserLoggedIn() {

@@ -21,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import Database.CreateDatabase;
 import mvp.ModelAndPresenter.Login.LoginPresenter;
 import mvp.ModelAndPresenter.Login.MVPLoginView;
+import object.TestDBTruyen;
 
 public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         EditText emailTxt, passwordTxt;
@@ -63,6 +64,8 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         //===============================CONNECT DATABASE=========================================//
         db = new CreateDatabase(this);
         db.open();
+        TestDBTruyen dbManga = new TestDBTruyen(this);
+        dbManga.open();
         //=============================== End Connect DataBase====================================//
         //****************************************************************************************//
         //=============================== BEGIN NAVIGATE LAYOUT===================================//

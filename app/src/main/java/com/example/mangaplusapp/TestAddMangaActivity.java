@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import object.TestDBTruyen;
 
 public class TestAddMangaActivity extends AppCompatActivity {
-    EditText userAddNameTxt;
+    EditText userAddNameTxt,LinkOnlineMangaTxt;
     ImageView getUserAddPictureTxt;
     TestDBTruyen db;
     Button userSubmitBtn,btnSelectImg;
@@ -29,6 +29,13 @@ public class TestAddMangaActivity extends AppCompatActivity {
         getUserAddPictureTxt = findViewById(R.id.pictureMangaSelect);
         userSubmitBtn = findViewById(R.id.mangaAddBtn);
         btnSelectImg = findViewById(R.id.chooseIMGbtn);
+        LinkOnlineMangaTxt= findViewById(R.id.LinkOnlineMangaTxt);
+        String name = userAddNameTxt.getText().toString();
+        userSubmitBtn.setOnClickListener(v->{
+            String Link = LinkOnlineMangaTxt.getText().toString();
+            db.insertData(name,Link);
+            Log.d("ADD LINK ", "TRUE" + Link);
+        });
             btnSelectImg.setOnClickListener(v->{
                 Intent intent = new Intent (Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
@@ -41,14 +48,22 @@ public class TestAddMangaActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==SELECT_IMAGE && null != data){
+        if(requestCode == SELECT_IMAGE && resultCode == RESULT_OK && data != null){
             String name = userAddNameTxt.getText().toString();
             Uri uri = data.getData();
-            getUserAddPictureTxt.setImageURI(uri);
-                userSubmitBtn.setOnClickListener(v->{
-                    db.insertData(name,uri);
-                    Log.d("ADD URI ", "TRUE");
+            String imagePath = uri.toString(); // Chuyển đổi URI thành đường dẫn tệp
+            if(imagePath != null){
+                // Hiển thị hình ảnh được chọn
+                getUserAddPictureTxt.setImageURI(uri);
+                // Thêm dữ liệu vào cơ sở dữ liệu
+                userSubmitBtn.setOnClickListener(v -> {
+                    db.insertData(name, imagePath);
+                    Log.d("ADD URI ", "TRUE" + imagePath);
                 });
+            }
+            else{
+
+            }
         }
     }
 }

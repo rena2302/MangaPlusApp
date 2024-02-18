@@ -1,6 +1,5 @@
 package Adapter;
 
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.R;
 
 import java.util.List;
@@ -42,9 +42,11 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
         if (truyenTranh == null){
             return;
         }
-//        holder.imageTruyen.setImageResource(truyenTranh.getLinkAnh()); // test case
-        Uri convertToUri = Uri.parse(truyenTranh.getLinkAnh());
-        holder.imageTruyen.setImageURI(convertToUri);
+        Glide.with(holder.itemView.getContext())
+                .load(truyenTranh.getLinkAnh())
+                .into(holder.imageTruyen);
+
+        // Hiển thị tên truyện lên TextView
         holder.txtTruyen.setText(truyenTranh.getTenTruyen());
     }
 
