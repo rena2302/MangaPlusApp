@@ -13,6 +13,7 @@ Feature
       + Payment
       + Library
       + Control info
+      + accpect permission 
   {DASHBOARD}
       + CRUD          
       + Control Payment
