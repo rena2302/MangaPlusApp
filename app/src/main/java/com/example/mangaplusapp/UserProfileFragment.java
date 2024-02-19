@@ -16,11 +16,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import Database.CreateDatabase;
+import Database.UserDatabase;
 
 public class UserProfileFragment extends Fragment {
 Button btnTest;
-CreateDatabase db;
+UserDatabase db;
 TextView getUserNameInfoTxt,getUserNameTittleTxt,getUserEmailTxt,getUserPasswordTxt;
 int userId;
 String userEmail,userPassword,userName;
@@ -45,7 +45,7 @@ String userEmail,userPassword,userName;
         getUserPasswordTxt = root.findViewById(R.id.userPassword_info);
         //****************************************************************************************//
         //=========================================Get data=======================================//
-        db = new CreateDatabase(requireContext());
+        db = new UserDatabase(requireContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         userId= preferences.getInt("user_id",-1);

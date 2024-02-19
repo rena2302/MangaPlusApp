@@ -11,12 +11,12 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import object.TestDBTruyen;
+import Helper.DBHelper.MangaDBHelper;
 
 public class TestAddMangaActivity extends AppCompatActivity {
     EditText userAddNameTxt,LinkOnlineMangaTxt;
     ImageView getUserAddPictureTxt;
-    TestDBTruyen db;
+    MangaDBHelper db;
     Button userSubmitBtn,btnSelectImg;
     private static final int SELECT_IMAGE = 100;
 
@@ -24,7 +24,7 @@ public class TestAddMangaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_add_manga);
-        db = new TestDBTruyen(this);
+        db = new MangaDBHelper(this);
         userAddNameTxt = findViewById(R.id.nameMangaTxt);
         getUserAddPictureTxt = findViewById(R.id.pictureMangaSelect);
         userSubmitBtn = findViewById(R.id.mangaAddBtn);

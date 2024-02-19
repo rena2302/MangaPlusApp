@@ -14,7 +14,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.regex.Pattern;
 
-public class CreateDatabase extends SQLiteOpenHelper{
+public class UserDatabase extends SQLiteOpenHelper{
     SQLiteDatabase myDb= this.getWritableDatabase();
     private final Context context;
     private static final String USER_SESSION_PREF = "user_session";
@@ -44,23 +44,11 @@ public class CreateDatabase extends SQLiteOpenHelper{
     public static String TB_ADMIN_ADDRESS = "ADDRESS";
     public static String TB_ADMIN_ROLE = "ROLE";
 
-    public CreateDatabase(Context context){
+    public UserDatabase(Context context){
         super (context,"MangaPlus",null,4);
         this.context = context;
     }
-    public boolean isUserLoggedIn() {
-        SharedPreferences preferences = context.getSharedPreferences(USER_SESSION_PREF, Context.MODE_PRIVATE);
-        // Check if user email or any other session data exists
-        return preferences.contains(KEY_USER_EMAIL);
-    }
-    // Clear user session data
-    public void clearUserSession() {
-        SharedPreferences preferences = context.getSharedPreferences(USER_SESSION_PREF, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.remove(KEY_USER_EMAIL);
-        // Remove other session data if needed
-        editor.apply();
-    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
             String tbUser = " CREATE TABLE " + TB_USER + " ( " + TB_USER_ID_USER + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -87,6 +75,19 @@ public class CreateDatabase extends SQLiteOpenHelper{
     }
     public boolean CheckHashPassword(String password,String hashPassword){
         return BCrypt.checkpw(password,hashPassword);
+    }
+    public boolean isUserLoggedIn() {
+        SharedPreferences preferences = context.getSharedPreferences(USER_SESSION_PREF, Context.MODE_PRIVATE);
+        // Check if user email or any other session data exists
+        return preferences.contains(KEY_USER_EMAIL);
+    }
+    // Clear user session data
+    public void clearUserSession() {
+        SharedPreferences preferences = context.getSharedPreferences(USER_SESSION_PREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(KEY_USER_EMAIL);
+        // Remove other session data if needed
+        editor.apply();
     }
     public Boolean insertData (String email, String password,String name){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -159,7 +160,7 @@ public class CreateDatabase extends SQLiteOpenHelper{
         Cursor cursor = null;
         try{
             cursor = db.rawQuery("SELECT " + TB_USER_ID_USER + " FROM " + TB_USER +
-                            " WHERE " + TB_USER_EMAIL + " = ?" , new String[]{userEmail});
+                    " WHERE " + TB_USER_EMAIL + " = ?" , new String[]{userEmail});
             // check exists data
             if (cursor!=null&&cursor.moveToFirst()) {
                 userId = cursor.getInt(cursor.getColumnIndex(TB_USER_ID_USER));
@@ -285,5 +286,6 @@ public class CreateDatabase extends SQLiteOpenHelper{
             db.close();
         }
     }
+
 
 }

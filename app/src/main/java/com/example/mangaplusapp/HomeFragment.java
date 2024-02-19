@@ -27,8 +27,8 @@ import java.util.List;
 import Adapter.CategoryAdapter;
 import Adapter.ImageSliderAdapter;
 import Adapter.TruyenTranhAdapter;
+import Helper.DBHelper.MangaDBHelper;
 import object.Category;
-import object.TestDBTruyen;
 import object.TruyenTranh;
 public class HomeFragment extends Fragment {
     View view;
@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment {
 
     }
     private void AddListCnT(){
-        TestDBTruyen db = new TestDBTruyen(getContext());
+        MangaDBHelper db = new MangaDBHelper(getContext());
         List<TruyenTranh> truyenTranhList = db.getAllMangaItems();
         if (truyenTranhList != null) {
             for (TruyenTranh truyenTranh : truyenTranhList) {

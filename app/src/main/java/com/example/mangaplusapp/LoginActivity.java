@@ -16,23 +16,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-
-import Database.CreateDatabase;
+import Database.MangaDatabase;
+import Database.UserDatabase;
 import mvp.ModelAndPresenter.Login.LoginPresenter;
 import mvp.ModelAndPresenter.Login.MVPLoginView;
-import object.TestDBTruyen;
 
 public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         EditText emailTxt, passwordTxt;
         TextView forgotPasswordTxt,toSignUpTxt;
         Button btnLoginTxt;
-        CreateDatabase db;
+        UserDatabase db;
         int idUser;
 
     //Create sign in Google
-    GoogleSignInOptions gso;
-//    GoogleSignInClient gsc;
+
     ImageView googleBtn;
     //End sign in Google
      private LoginPresenter loginPresenter;
@@ -58,13 +55,13 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         //****************************************************************************************//
         //===============================Begin get id for login with social=======================//
         googleBtn = findViewById(R.id.googleBtn_login);
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+
         //===============================End get id for login with social=========================//
         //****************************************************************************************//
         //===============================CONNECT DATABASE=========================================//
-        db = new CreateDatabase(this);
+        db = new UserDatabase(this);
         db.open();
-        TestDBTruyen dbManga = new TestDBTruyen(this);
+        MangaDatabase dbManga = new MangaDatabase(this);
         dbManga.open();
         //=============================== End Connect DataBase====================================//
         //****************************************************************************************//

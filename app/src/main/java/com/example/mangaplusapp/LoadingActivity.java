@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import object.TestDBTruyen;
+import Database.MangaDatabase;
 
 public class LoadingActivity extends AppCompatActivity {
 
@@ -16,8 +16,9 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         handler = new Handler();
-        TestDBTruyen dbManga = new TestDBTruyen(this);
+        MangaDatabase dbManga = new MangaDatabase(this);
         dbManga.open();
+
 //        dbManga.deleteAllMangaData();
         handler.postDelayed(new Runnable() {
             @Override

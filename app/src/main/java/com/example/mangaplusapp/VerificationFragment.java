@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import Database.CreateDatabase;
+import Database.UserDatabase;
 import Helper.ServiceHelper.OTP;
 
 public class VerificationFragment extends Fragment {
@@ -26,7 +26,7 @@ public class VerificationFragment extends Fragment {
     String emailUser,pasword;
     ScriptGroup.Binding binding;
     TextView getEmailUserTxt;
-    CreateDatabase db;
+    UserDatabase db;
     Button submitOtp;
     int userID;
 
@@ -55,7 +55,7 @@ public class VerificationFragment extends Fragment {
         submitOtp=root.findViewById(R.id.sendOtp);
         //****************************************************************************************//
         //=========================================GET DATA=======================================//
-        db=new CreateDatabase(getContext());
+        db=new UserDatabase(getContext());
         auth=FirebaseAuth.getInstance();
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= preferences.edit();
