@@ -4,16 +4,16 @@ Feature
   {UI}
       + Send OTP when Sign in/up            done
       + Send OTP with forgot password       done
-      + Banner AD                          
+      + Banner AD                           ( slider ) 
       + Support center
-      + Change country 
+      + Change country                      ( set up language )
       + Sreach
       + Hot
       + Music
       + Payment
       + Library
       + Control info
-      + accpect permission 
+      + accpect permission                 done 
   {DASHBOARD}
       + CRUD          
       + Control Payment
