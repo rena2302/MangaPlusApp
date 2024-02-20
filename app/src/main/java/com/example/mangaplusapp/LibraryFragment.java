@@ -16,10 +16,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import Database.UserDatabase;
+import Helper.DBHelper.UserDBHelper;
 
 public class LibraryFragment extends Fragment {
-    UserDatabase db;
+    UserDBHelper db;
     TextView userEmailTxt,userNameTxt;
     Button userLogOutBtn;
     ImageButton testlog,testlogmanga;
@@ -42,7 +42,7 @@ public class LibraryFragment extends Fragment {
         testlog = rootView.findViewById(R.id.btnNavToProfile); // sau nay xoa
         testlogmanga = rootView.findViewById(R.id.btnNavToTestAddManga);// sau nay xoa
         ///////===========================Get data=========================/////////////////////////
-        db = new UserDatabase(requireContext());
+        db = new UserDBHelper(requireContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = preferences.edit();
         userId=preferences.getInt("user_id",-1);

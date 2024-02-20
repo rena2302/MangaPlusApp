@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import Database.UserDatabase;
+import Helper.DBHelper.UserDBHelper;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText nameTxt,emailTxt,passwordTxt,repasswordTxt;
@@ -19,7 +19,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button signUpTxt;
     TextView haveAccount;
     ImageButton btnToLogin;
-    UserDatabase db;
+    UserDBHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         //===================================Event Navigate layout================================//
         //****************************************************************************************//
         //===================================DATABASE=============================================//
-        db= new UserDatabase(this);
+        db= new UserDBHelper(this);
         db.open();
         //===================================DATABASE=============================================//
         //****************************************************************************************//

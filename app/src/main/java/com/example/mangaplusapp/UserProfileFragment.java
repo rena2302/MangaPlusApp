@@ -5,22 +5,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import Database.UserDatabase;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import Helper.DBHelper.UserDBHelper;
 
 public class UserProfileFragment extends Fragment {
 Button btnTest;
-UserDatabase db;
+    UserDBHelper db;
 TextView getUserNameInfoTxt,getUserNameTittleTxt,getUserEmailTxt,getUserPasswordTxt;
 int userId;
 String userEmail,userPassword,userName;
@@ -45,7 +44,7 @@ String userEmail,userPassword,userName;
         getUserPasswordTxt = root.findViewById(R.id.userPassword_info);
         //****************************************************************************************//
         //=========================================Get data=======================================//
-        db = new UserDatabase(requireContext());
+        db = new UserDBHelper(requireContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         userId= preferences.getInt("user_id",-1);

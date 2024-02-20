@@ -3,7 +3,7 @@ package mvp.ModelAndPresenter.Login;
 import android.content.SharedPreferences;
 import android.widget.EditText;
 
-import Database.UserDatabase;
+import Helper.DBHelper.UserDBHelper;
 
 public class LoginModel {
     //tao element để khi xử lí logic xong sẽ trả về thông báo cho presenter thông qua interface MVPLoginPresenter
@@ -14,7 +14,7 @@ public LoginModel(MVPLoginPresenter ModelResponseToPresenter)
 }
 //END CREATE
     //Xử lí logic cho presenter
-    public void handleLogin(EditText emailTxt, EditText passwordTxt, UserDatabase db, int idUser, SharedPreferences.Editor editor){
+    public void handleLogin(EditText emailTxt, EditText passwordTxt, UserDBHelper db, int idUser, SharedPreferences.Editor editor){
         String userEmail = emailTxt.getText().toString();
         String userPassword = passwordTxt.getText().toString();
         // if user do nothing or Missing input

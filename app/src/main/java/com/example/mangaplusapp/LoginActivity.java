@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import Database.MangaDatabase;
-import Database.UserDatabase;
+import Helper.DBHelper.UserDBHelper;
 import mvp.ModelAndPresenter.Login.LoginPresenter;
 import mvp.ModelAndPresenter.Login.MVPLoginView;
 
@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         EditText emailTxt, passwordTxt;
         TextView forgotPasswordTxt,toSignUpTxt;
         Button btnLoginTxt;
-        UserDatabase db;
+    UserDBHelper db;
         int idUser;
 
     //Create sign in Google
@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         //===============================End get id for login with social=========================//
         //****************************************************************************************//
         //===============================CONNECT DATABASE=========================================//
-        db = new UserDatabase(this);
+        db = new UserDBHelper(this);
         db.open();
         MangaDatabase dbManga = new MangaDatabase(this);
         dbManga.open();

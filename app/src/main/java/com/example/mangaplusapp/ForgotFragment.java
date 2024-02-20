@@ -15,12 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import Database.UserDatabase;
+import Helper.DBHelper.UserDBHelper;
 
 public class ForgotFragment extends Fragment {
     Button SendOtpBtn;
     String userEmail;
-    UserDatabase db;
+    UserDBHelper db;
     int userID;
     EditText getUserEmailTxt;
     public ForgotFragment() {
@@ -42,7 +42,7 @@ public class ForgotFragment extends Fragment {
         getUserEmailTxt=root.findViewById(R.id.forgotEmailUser_Input);
         //****************************************************************************************//
         //=====================================GET DATABASE=======================================//
-        db=new UserDatabase(getContext());
+        db=new UserDBHelper(getContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
         userID=preferences.getInt("user_id",-1);
