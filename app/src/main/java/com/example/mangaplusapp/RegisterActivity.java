@@ -2,7 +2,6 @@ package com.example.mangaplusapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import Helper.DBHelper.UserDBHelper;
-import Helper.LoadHelper.LoadFragment;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText userInputEmail;
@@ -22,7 +20,6 @@ public class RegisterActivity extends AppCompatActivity {
     TextView haveAccount;
     ImageButton btnToLogin;
     UserDBHelper db;
-    LoadFragment fragmentHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else {
                     //==================================SUCCESS===================================//
-                    Log.d("ee", userEmail);
                     if(db.validEmail(userEmail)){
-                        Toast.makeText(RegisterActivity.this,"Send OTP successfully",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegisterActivity.this,ForgotControlActivity.class);
                         intent.putExtra("EMAIL",userEmail);
                         startActivity(intent);

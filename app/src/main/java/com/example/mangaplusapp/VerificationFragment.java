@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import Database.UserDatabase;
+import Helper.DBHelper.UserDBHelper;
 import Helper.ServiceHelper.OTP;
 
 public class VerificationFragment extends Fragment {
@@ -26,7 +26,7 @@ public class VerificationFragment extends Fragment {
     String emailUser;
     ScriptGroup.Binding binding;
     TextView getEmailUserTxt;
-    UserDatabase db;
+    UserDBHelper dbHelper;
     Button submitOtp;
     OTP otpHelper;
     int userID;
@@ -56,22 +56,27 @@ public class VerificationFragment extends Fragment {
         submitOtp=root.findViewById(R.id.sendOtp);
         //****************************************************************************************//
         //=========================================GET DATA=======================================//
-        db=new UserDatabase(getContext());
-        auth=FirebaseAuth.getInstance();
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor= preferences.edit();
-
+        SharedPreferences.Editor editor = preferences.edit();
+        otpHelper = new OTP();
+        dbHelper=new UserDBHelper(getContext());
+        auth=FirebaseAuth.getInstance();
         //****************************************************************************************//
         //=========================================GET HELPER=======================================//
         //****************************************************************************************//
         //=========================================SET DATA=======================================//
-        emailUser=preferences.getString("user_email","default@gmail.com");
-        getEmailUserTxt.setText(emailUser); // set text for View
-        Log.d("email's user", emailUser);
+        emailUser = preferences.getString("user_email",null);
+        if(emailUser==null){
+            Log.d("email user","has null, maybe erro in sharedPre get and in data" );
+        }
+        else{
+            Log.d("email user",emailUser);
+        }
         //****************************************************************************************//
         //=========================================SEND OTP=======================================//
         String keyOtp = otpHelper.generateOTP();
         Log.d("asd", keyOtp);
+        Toast.makeText(getContext(),"Send OTP successfully",Toast.LENGTH_SHORT).show();
         otpHelper.sendOTPByEmail(keyOtp,emailUser);
         //****************************************************************************************//
         //****************************************************************************************//
@@ -82,13 +87,21 @@ public class VerificationFragment extends Fragment {
             String otp4 = otp4Input.getText().toString();
             String otp= otp1+otp2+otp3+otp4;
             if(otp.equals(keyOtp)){
-                // khi có figma thì cho chạy vào form edit password
-                userID =db.loginUser(emailUser);
-                editor.putString("user_email", emailUser);
-                editor.putInt("user_id",userID); // put user id
-                editor.apply();
-                Intent intent = new Intent(getActivity(),MainActivity.class);
-                startActivity(intent);
+                //===============================Case forgot password=============================//
+                if(dbHelper.CheckEmailExists(emailUser)){
+                    // khi có figma thì cho chạy vào form edit password
+                    userID =dbHelper.loginUser(emailUser);
+                    editor.putString("user_email", emailUser);
+                    editor.putInt("user_id",userID); // put user id
+                    editor.apply();
+                    Intent intent = new Intent(getActivity(),MainActivity.class);
+                    startActivity(intent);
+                }
+                //===============================Case Register ===================================//
+                else{
+                    // nav to new password and confirm password and insert data into database -> nav to login
+                }
+
             }
             else{
                 Toast.makeText(getContext(),"Wrong OTP code", Toast.LENGTH_SHORT).show();
