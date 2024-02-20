@@ -12,9 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import Database.MangaDatabase;
 import Helper.DBHelper.UserDBHelper;
@@ -104,31 +101,9 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         });
         //****************************************************************************************//
     }
-
-    void navToSuccess(){
-        finish();
-        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-        startActivity(intent);
-    }
-//    void signInWithSocial(){
-//        Intent signInIntent = gsc.getSignInIntent();
-//        startActivityForResult(signInIntent,1000);
-//    }
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-    }
-    private void loadFragment(Fragment fragment, boolean isAppInitialized) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        if (isAppInitialized) {
-            fragmentTransaction.add(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
-        } else {
-            fragmentTransaction.replace(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
-            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
-        }
-        fragmentTransaction.commit();
     }
  //Callback by Presenter
     @Override

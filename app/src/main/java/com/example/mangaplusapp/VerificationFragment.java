@@ -23,11 +23,12 @@ import Helper.ServiceHelper.OTP;
 
 public class VerificationFragment extends Fragment {
     FirebaseAuth auth;
-    String emailUser,pasword;
+    String emailUser;
     ScriptGroup.Binding binding;
     TextView getEmailUserTxt;
     UserDatabase db;
     Button submitOtp;
+    OTP otpHelper;
     int userID;
 
     public VerificationFragment() {
@@ -62,7 +63,6 @@ public class VerificationFragment extends Fragment {
 
         //****************************************************************************************//
         //=========================================GET HELPER=======================================//
-        OTP otpHelper = new OTP();
         //****************************************************************************************//
         //=========================================SET DATA=======================================//
         emailUser=preferences.getString("user_email","default@gmail.com");

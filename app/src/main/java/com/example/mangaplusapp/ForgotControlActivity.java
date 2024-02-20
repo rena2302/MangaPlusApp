@@ -1,21 +1,30 @@
 package com.example.mangaplusapp;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
+import Helper.DBHelper.UserDBHelper;
 
 public class ForgotControlActivity extends AppCompatActivity {
-
+    UserDBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_control);
-        //======================================Nav to ForgotFragment=============================//
-        loadFragment(new ForgotFragment(),false);
-        //****************************************************************************************//
+        String email = getIntent().getStringExtra("EMAIL");
+        if(dbHelper.CheckEmailExists(email)){
+            //======================================Nav to ForgotFragment=========================//
+            loadFragment(new ForgotFragment(),false);
+            //************************************************************************************//
+        }
+        else{
+            loadFragment(new VerificationFragment(),false);
+        }
+
 
 
     }

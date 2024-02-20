@@ -22,21 +22,32 @@ public LoginModel(MVPLoginPresenter ModelResponseToPresenter)
             ModelResponseToPresenter.LoginDefalt();
         }
         else{
-            Boolean checkEmailPass= db.CheckEmailPassword(userEmail,userPassword);
-            // if email and password valid -> nav to home activity
-            if(checkEmailPass){
-                ////////===========================Begin Login Successful=========================//////////
-                idUser=db.loginUser(userEmail,userPassword);
-                editor.putInt("user_id",idUser);
-                editor.putString("user_email", userEmail);
-                editor.apply();
-                ModelResponseToPresenter.LoginSuccess();
-                ////////===========================END Login Successful=========================////////////
+            if(db.validEmail(userEmail)){
+                if(db.validPassword(userPassword)){
+                    Boolean checkEmailPass= db.CheckEmailPassword(userEmail,userPassword);
+                    // if email and password valid -> nav to home activity
+                    if(checkEmailPass){
+                        ////////===========================Begin Login Successful=========================//////////
+                        idUser=db.loginUser(userEmail,userPassword);
+                        editor.putInt("user_id",idUser);
+                        editor.putString("user_email", userEmail);
+                        editor.apply();
+                        ModelResponseToPresenter.LoginSuccess();
+                        ////////===========================END Login Successful=========================////////////
+                    }
+                    // show message input error
+                    else{
+                        ModelResponseToPresenter.LoginFailed();
+                    }
+                }
+                else {
+                    // toast password ->= 8
+                }
             }
-            // show message input error
             else{
-                ModelResponseToPresenter.LoginFailed();
+                    // email not valid
             }
+
         }
     }
     public void ResAction()
