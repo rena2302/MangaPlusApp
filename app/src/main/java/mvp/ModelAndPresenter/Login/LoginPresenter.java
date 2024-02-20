@@ -51,4 +51,14 @@ public class LoginPresenter implements MVPLoginPresenter {
     public void ForgotAction() {
         PresenterResponseToViewAct.ForgotAction();
     }
+
+    @Override
+    public void Emailnoitvalid() {
+        PresenterResponseToViewAct.Emailnoitvalid();
+    }
+
+    @Override
+    public void Passwordnotvalid() {
+     PresenterResponseToViewAct.Passwordnotvalid();
+    }
 }

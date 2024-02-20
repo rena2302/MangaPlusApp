@@ -6,4 +6,6 @@ public interface MVPLoginView {
     void LoginDefalt();
     void ResActionPage();
     void ForgotAction();
+    void Emailnoitvalid();
+    void Passwordnotvalid();
 }
