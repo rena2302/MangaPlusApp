@@ -73,52 +73,7 @@
                     android:textColorHint="@color/text_login_input">
                 </EditText>
             </com.google.android.material.textfield.TextInputLayout>
-            <!--      Password      -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/registerPassword"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_below="@+id/registerEmail_act"
-                android:layout_height="wrap_content"
-                app:hintEnabled="false"
-                app:endIconMode="password_toggle"
-                android:textColorHint="@color/gray">
-                <EditText
-                    android:id="@+id/editTextPassword"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:drawableStart="@drawable/password_icon"
-                    android:drawablePadding="10dp"
-                    android:hint="@string/passWord"
-                    android:fontFamily="@font/josefinsans_bold"
-                    android:background="@drawable/shape_login_input"
-                    android:textColorHint="@color/text_login_input"
-                    android:inputType="textPassword">
-                </EditText>
-            </com.google.android.material.textfield.TextInputLayout>
-            <!--      Confirm Password      -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/registerCfPassword"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_below="@+id/registerPassword"
-                android:layout_height="wrap_content"
-                app:hintEnabled="false"
-                app:endIconMode="password_toggle"
-                android:textColorHint="@color/gray">
-                <EditText
-                    android:id="@+id/editTextCfPassword"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:drawableStart="@drawable/password_icon"
-                    android:textColorHint="@color/text_login_input"
-                    android:drawablePadding="10dp"
-                    android:hint="@string/confirmPassword"
-                    android:fontFamily="@font/josefinsans_bold"
-                    android:background="@drawable/shape_login_input"
-                    android:inputType="textPassword">
-                </EditText>
-            </com.google.android.material.textfield.TextInputLayout>
+
             <!--     Button Register       -->
             <Button
                 android:id="@+id/registerBtn_act"
@@ -126,7 +81,7 @@
                 android:layout_height="55dp"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/btn_login"
-                android:layout_below="@+id/registerCfPassword"
+                android:layout_below="@+id/registerEmail_act"
                 android:fontFamily="@font/josefinsans_bold"
                 android:text="@string/create"
                 android:textSize="16dp">

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.R;
 
 import java.util.List;
@@ -40,7 +41,10 @@ public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter
             viewPager2.post(runnable);
         }
         holder.textSlider.setText(imageSlider.getTenTruyen());
-        holder.imageSlider.setImageResource(imageSlider.getLinkAnh());
+        String imgLink = imageSlider.getLinkAnh();
+        Glide.with(holder.itemView.getContext())
+                .load(imgLink)
+                .into(holder.imageSlider);
     }
 
     @Override

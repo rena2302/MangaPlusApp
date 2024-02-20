@@ -1,10 +1,5 @@
 package com.example.mangaplusapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,11 +8,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import Database.CreateDatabase;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import Helper.DBHelper.UserDBHelper;
 
 public class UserEditActivity extends AppCompatActivity {
     EditText getUserNameTxt,getUserNewPasswordTxt,getUserEmailTxt,getUserCfPasswordTxt,getUserOldPasswordTxt;
-    CreateDatabase db;
+    UserDBHelper db;
     Button btnSubmit;
     String userEmail,userName,userPassword;
     int userID;
@@ -27,7 +27,7 @@ public class UserEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_edit);
         //===================================DATABASE=============================================//
-        db =new CreateDatabase(this);
+        db =new UserDBHelper(this);
         db.open();
         SharedPreferences preferences = this.getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = preferences.edit();

@@ -12,13 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-
-import Database.CreateDatabase;
+import Database.MangaDatabase;
+import Helper.DBHelper.UserDBHelper;
 import mvp.ModelAndPresenter.Login.LoginPresenter;
 import mvp.ModelAndPresenter.Login.MVPLoginView;
 
@@ -26,12 +22,11 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         EditText emailTxt, passwordTxt;
         TextView forgotPasswordTxt,toSignUpTxt;
         Button btnLoginTxt;
-        CreateDatabase db;
+    UserDBHelper db;
         int idUser;
 
     //Create sign in Google
-    GoogleSignInOptions gso;
-//    GoogleSignInClient gsc;
+
     ImageView googleBtn;
     //End sign in Google
      private LoginPresenter loginPresenter;
@@ -57,12 +52,14 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         //****************************************************************************************//
         //===============================Begin get id for login with social=======================//
         googleBtn = findViewById(R.id.googleBtn_login);
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+
         //===============================End get id for login with social=========================//
         //****************************************************************************************//
         //===============================CONNECT DATABASE=========================================//
-        db = new CreateDatabase(this);
+        db = new UserDBHelper(this);
         db.open();
+        MangaDatabase dbManga = new MangaDatabase(this);
+        dbManga.open();
         //=============================== End Connect DataBase====================================//
         //****************************************************************************************//
         //=============================== BEGIN NAVIGATE LAYOUT===================================//
@@ -104,31 +101,9 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         });
         //****************************************************************************************//
     }
-
-    void navToSuccess(){
-        finish();
-        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-        startActivity(intent);
-    }
-//    void signInWithSocial(){
-//        Intent signInIntent = gsc.getSignInIntent();
-//        startActivityForResult(signInIntent,1000);
-//    }
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-    }
-    private void loadFragment(Fragment fragment, boolean isAppInitialized) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        if (isAppInitialized) {
-            fragmentTransaction.add(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
-        } else {
-            fragmentTransaction.replace(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
-            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
-        }
-        fragmentTransaction.commit();
     }
  //Callback by Presenter
     @Override

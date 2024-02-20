@@ -27,6 +27,7 @@ import java.util.List;
 import Adapter.CategoryAdapter;
 import Adapter.ImageSliderAdapter;
 import Adapter.TruyenTranhAdapter;
+import Helper.DBHelper.MangaDBHelper;
 import object.Category;
 import object.TruyenTranh;
 public class HomeFragment extends Fragment {
@@ -86,22 +87,15 @@ public class HomeFragment extends Fragment {
 
     }
     private void AddListCnT(){
-
-        truyenTranhList.add(new TruyenTranh("Hinh 1",R.drawable.backround_register));
-        truyenTranhList.add(new TruyenTranh("Hinh 2",R.drawable.backround_register));
-        truyenTranhList.add(new TruyenTranh("Hinh 3",R.drawable.backround_register));
-        truyenTranhList.add(new TruyenTranh("Hinh 4",R.drawable.backround_register));
-
-        truyenTranhList.add(new TruyenTranh("Hinh 1",R.drawable.backround_register));
-        truyenTranhList.add(new TruyenTranh("Hinh 2",R.drawable.backround_register));
-        truyenTranhList.add(new TruyenTranh("Hinh 3",R.drawable.backround_register));
-        truyenTranhList.add(new TruyenTranh("Hinh 4",R.drawable.backround_register));
-
-        categoryList.add(new Category("Cate1", truyenTranhList));
-        categoryList.add(new Category("Cate2", truyenTranhList));
-        categoryList.add(new Category("Cate3", truyenTranhList));
-        categoryList.add(new Category("Cate4", truyenTranhList));
+        MangaDBHelper db = new MangaDBHelper(getContext());
+        List<TruyenTranh> truyenTranhList = db.getAllMangaItems();
+        if (truyenTranhList != null) {
+            for (TruyenTranh truyenTranh : truyenTranhList) {
+                categoryList.add(new Category("Cate 1", truyenTranhList)); // test case
+            }
+        }
     }
+
     // Set content for recycleView
     private void SetContentRecycleView(){
         recyclerViewCategory = view.findViewById(R.id.rcv_category);

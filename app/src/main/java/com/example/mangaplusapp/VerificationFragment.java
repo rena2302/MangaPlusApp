@@ -18,16 +18,17 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import Database.CreateDatabase;
+import Database.UserDatabase;
 import Helper.ServiceHelper.OTP;
 
 public class VerificationFragment extends Fragment {
     FirebaseAuth auth;
-    String emailUser,pasword;
+    String emailUser;
     ScriptGroup.Binding binding;
     TextView getEmailUserTxt;
-    CreateDatabase db;
+    UserDatabase db;
     Button submitOtp;
+    OTP otpHelper;
     int userID;
 
     public VerificationFragment() {
@@ -55,14 +56,13 @@ public class VerificationFragment extends Fragment {
         submitOtp=root.findViewById(R.id.sendOtp);
         //****************************************************************************************//
         //=========================================GET DATA=======================================//
-        db=new CreateDatabase(getContext());
+        db=new UserDatabase(getContext());
         auth=FirebaseAuth.getInstance();
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= preferences.edit();
 
         //****************************************************************************************//
         //=========================================GET HELPER=======================================//
-        OTP otpHelper = new OTP();
         //****************************************************************************************//
         //=========================================SET DATA=======================================//
         emailUser=preferences.getString("user_email","default@gmail.com");

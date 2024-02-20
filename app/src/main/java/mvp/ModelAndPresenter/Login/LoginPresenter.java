@@ -3,7 +3,7 @@ package mvp.ModelAndPresenter.Login;
 import android.content.SharedPreferences;
 import android.widget.EditText;
 
-import Database.CreateDatabase;
+import Helper.DBHelper.UserDBHelper;
 
 public class LoginPresenter implements MVPLoginPresenter {
     private  LoginModel loginmodel;
@@ -12,7 +12,7 @@ public class LoginPresenter implements MVPLoginPresenter {
     {
         this.PresenterResponseToViewAct=PresenterResponseToViewAct;
     }
-    public void receivedHandleLogin(EditText emailTxt, EditText passwordTxt, CreateDatabase db, int idUser, SharedPreferences.Editor editor)
+    public void receivedHandleLogin(EditText emailTxt, EditText passwordTxt, UserDBHelper db, int idUser, SharedPreferences.Editor editor)
     {
         loginmodel=new LoginModel(this);
        loginmodel.handleLogin(emailTxt,passwordTxt, db, idUser,editor);//thông báo cho model để sử lí logic

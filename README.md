@@ -4,15 +4,16 @@ Feature
   {UI}
       + Send OTP when Sign in/up            done
       + Send OTP with forgot password       done
-      + Banner AD                          
+      + Banner AD                           ( slider ) 
       + Support center
-      + Change country 
+      + Change country                      ( set up language )
       + Sreach
       + Hot
       + Music
       + Payment
       + Library
       + Control info
+      + accpect permission                 done 
   {DASHBOARD}
       + CRUD          
       + Control Payment
@@ -30,5 +31,10 @@ API / RESFULAPI
       + MOMO API
       + ZALO SDK API
       + GOOGLE API
-      
+
+ // use bundle when put and get data from activity into fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("email", email);
+put get extra when activity to acitivity
+  
   
