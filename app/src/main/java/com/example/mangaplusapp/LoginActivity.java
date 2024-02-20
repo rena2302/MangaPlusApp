@@ -134,4 +134,14 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         Intent intent = new Intent(LoginActivity.this, ForgotControlActivity.class); // bat su kien
         startActivity(intent); // chay su kien
     }
+
+    @Override
+    public void Emailnoitvalid() {
+        Toast.makeText(LoginActivity.this,"        Email not valid \nEx:YourEmail@gmail.com", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void Passwordnotvalid() {
+        Toast.makeText(LoginActivity.this,"          Password not valid \nMust be more than 8 characters", Toast.LENGTH_SHORT).show();
+    }
 }

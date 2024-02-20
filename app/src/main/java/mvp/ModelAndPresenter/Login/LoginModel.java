@@ -40,14 +40,13 @@ public LoginModel(MVPLoginPresenter ModelResponseToPresenter)
                         ModelResponseToPresenter.LoginFailed();
                     }
                 }
-                else {
-                    // toast password ->= 8
+                else{
+                    ModelResponseToPresenter.Passwordnotvalid();
                 }
             }
             else{
-                    // email not valid
+                ModelResponseToPresenter.Emailnoitvalid();
             }
-
         }
     }
     public void ResAction()
