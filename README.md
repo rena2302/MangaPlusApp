@@ -31,5 +31,10 @@ API / RESFULAPI
       + MOMO API
       + ZALO SDK API
       + GOOGLE API
-      
+
+ // use bundle when put and get data from activity into fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("email", email);
+put get extra when activity to acitivity
+  
   
