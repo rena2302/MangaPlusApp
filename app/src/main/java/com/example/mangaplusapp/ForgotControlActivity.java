@@ -22,16 +22,17 @@ public class ForgotControlActivity extends AppCompatActivity {
         SharedPreferences.Editor editor=preferences.edit();
         dbHelper = new UserDBHelper(this);
         String email = getIntent().getStringExtra("EMAIL");
-        // use bundle when put and get data from activity into fragment
-        editor.putString("user_email",email);
-        editor.apply();
-        Log.d("email", email);;
-        if(dbHelper.CheckEmailExists(email)){
+
+
+        if(email==null){
             //======================================Nav to ForgotFragment=========================//
             loadFragment(new ForgotFragment(),false);
             //************************************************************************************//
         }
         else{
+            editor.putString("user_email",email);
+            editor.apply();
+            Log.d("email", email);;
             loadFragment(new VerificationFragment(),false);
         }
 

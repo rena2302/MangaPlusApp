@@ -1,6 +1,7 @@
 package com.example.mangaplusapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,6 +64,8 @@ public class CreatePasswordFragment extends Fragment {
 
                         dbHelper.UpdatePassword(userId,userPassword.trim());
                         Toast.makeText(getContext(),"RePassword Successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(),LoginActivity.class);
+                        startActivity(intent);
                         //=================================SUCCESSFUL=============================//
                     }
                     else if(userPassword.length() <8){
@@ -76,30 +79,34 @@ public class CreatePasswordFragment extends Fragment {
         }
         //===================================New Account Case=====================================//
         else{
-           userName_register = getUserNameTxt.getText().toString();
-            userPassword=getUserPasswordTxt.getText().toString();
-            userRePassword = getUserRePasswordTxt.getText().toString();
-            if(userPassword.equals(" ")|| userRePassword.equals(" ")){
-                Toast.makeText(getContext(),"Password and Confirm Password not matches", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                if(dbHelper.validPassword(userPassword)){
-                    //=================================SUCCESSFUL=============================//
-                    dbHelper.insertData(userEmail,userPassword,userName_register);
-                    Log.d("user_email", userEmail);
-                    Log.d("user_password", userPassword);
-                    Log.d("user_rePassword", userRePassword);
-                    Log.d("user_name", userName_register);
-                    Toast.makeText(getContext(),"Register Successful", Toast.LENGTH_SHORT).show();
-                    //=================================SUCCESSFUL=============================//
-                }
-                else if(userPassword.length() <8){
-                    Toast.makeText(getContext(),"Please enter password length >= 8", Toast.LENGTH_SHORT).show();
+            btnSubmit.setOnClickListener(v->{
+                userName_register = getUserNameTxt.getText().toString();
+                userPassword=getUserPasswordTxt.getText().toString();
+                userRePassword = getUserRePasswordTxt.getText().toString();
+                if(userPassword.equals(" ")|| userRePassword.equals(" ")){
+                    Toast.makeText(getContext(),"Password and Confirm Password not matches", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(getContext(),"Please enter password valid", Toast.LENGTH_SHORT).show();
+                    if(dbHelper.validPassword(userPassword)){
+                        //=================================SUCCESSFUL=============================//
+                        dbHelper.insertData(userEmail,userPassword,userName_register);
+                        Log.d("user_email", userEmail);
+                        Log.d("user_password", userPassword);
+                        Log.d("user_rePassword", userRePassword);
+                        Log.d("user_name", userName_register);
+                        Toast.makeText(getContext(),"Register Successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(),LoginActivity.class);
+                        startActivity(intent);
+                        //=================================SUCCESSFUL=============================//
+                    }
+                    else if(userPassword.length() <8){
+                        Toast.makeText(getContext(),"Please enter password length >= 8", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getContext(),"Please enter password valid", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
+            });
         }
         return root;
     }

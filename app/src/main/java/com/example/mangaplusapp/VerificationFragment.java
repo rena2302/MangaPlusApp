@@ -96,15 +96,16 @@ public class VerificationFragment extends Fragment {
                     editor.putInt("user_id",userID); // put user id
                     editor.apply();
                     fragmentHelper = new LoadFragment();
-                    fragmentHelper.loadFragment(new CreatePasswordFragment(),false,R.id.forgotContainer);
+                    fragmentHelper.loadFragment(getParentFragmentManager(),new CreatePasswordFragment(),false,R.id.forgotContainer);
                 }
                 //===============================Case Register ===================================//
                 else{
                     userID =dbHelper.loginUser(emailUser);
                     editor.putString("user_email", emailUser);
+                    editor.apply();
                     // nav to new password and confirm password and insert data into database -> nav to login
                     fragmentHelper = new LoadFragment();
-                    fragmentHelper.loadFragment(new CreatePasswordFragment(),false,R.id.forgotContainer);
+                    fragmentHelper.loadFragment(getParentFragmentManager(),new CreatePasswordFragment(),false,R.id.forgotContainer);
                 }
 
             }
