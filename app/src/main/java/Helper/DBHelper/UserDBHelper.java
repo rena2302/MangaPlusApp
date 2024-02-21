@@ -1,6 +1,7 @@
 package Helper.DBHelper;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -123,6 +124,13 @@ public class UserDBHelper  extends UserDatabase {
         cursor.close();
         db.close();
         return name;
+    }
+    public void UpdatePassword(int userId, String newPass){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TB_USER_PASSWORD, newPass);
+        db.update(TB_USER, values, TB_USER_ID_USER + " = ?", new String[]{String.valueOf(userId)});
+        db.close();
     }
 
 }

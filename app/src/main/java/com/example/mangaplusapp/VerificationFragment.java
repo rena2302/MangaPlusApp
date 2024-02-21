@@ -1,7 +1,6 @@
 package com.example.mangaplusapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
@@ -19,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import Helper.DBHelper.UserDBHelper;
+import Helper.LoadHelper.LoadFragment;
 import Helper.ServiceHelper.OTP;
 
 public class VerificationFragment extends Fragment {
@@ -29,6 +29,7 @@ public class VerificationFragment extends Fragment {
     UserDBHelper dbHelper;
     Button submitOtp;
     OTP otpHelper;
+    LoadFragment fragmentHelper;
     int userID;
 
     public VerificationFragment() {
@@ -94,12 +95,16 @@ public class VerificationFragment extends Fragment {
                     editor.putString("user_email", emailUser);
                     editor.putInt("user_id",userID); // put user id
                     editor.apply();
-                    Intent intent = new Intent(getActivity(),MainActivity.class);
-                    startActivity(intent);
+                    fragmentHelper = new LoadFragment();
+                    fragmentHelper.loadFragment(new CreatePasswordFragment(),false,R.id.forgotContainer);
                 }
                 //===============================Case Register ===================================//
                 else{
+                    userID =dbHelper.loginUser(emailUser);
+                    editor.putString("user_email", emailUser);
                     // nav to new password and confirm password and insert data into database -> nav to login
+                    fragmentHelper = new LoadFragment();
+                    fragmentHelper.loadFragment(new CreatePasswordFragment(),false,R.id.forgotContainer);
                 }
 
             }
