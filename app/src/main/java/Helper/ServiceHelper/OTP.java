@@ -1,5 +1,6 @@
 package Helper.ServiceHelper;
 
+import java.sql.Time;
 import java.util.Random;
 
 import papaya.in.sendmail.SendMail;
@@ -21,5 +22,8 @@ public class OTP {
             otp.append(numbers.charAt(index));
         }
         return otp.toString();
+    }
+    public void reSendOtp(Time time){
+        
     }
 }

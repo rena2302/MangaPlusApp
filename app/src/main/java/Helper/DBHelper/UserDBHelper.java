@@ -128,9 +128,17 @@ public class UserDBHelper  extends UserDatabase {
     public void UpdatePassword(int userId, String newPass){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(TB_USER_PASSWORD, newPass);
+        String hash = hashPassword(newPass);
+        values.put(TB_USER_PASSWORD, hash);
         db.update(TB_USER, values, TB_USER_ID_USER + " = ?", new String[]{String.valueOf(userId)});
         db.close();
     }
+    public boolean clearALlUser() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(TB_USER, null, null);
+        db.close();
+        return result != 0;
+    }
+
 
 }

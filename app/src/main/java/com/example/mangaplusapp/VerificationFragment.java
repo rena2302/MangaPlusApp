@@ -3,6 +3,7 @@ package com.example.mangaplusapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.renderscript.ScriptGroup;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +26,7 @@ public class VerificationFragment extends Fragment {
     FirebaseAuth auth;
     String emailUser;
     ScriptGroup.Binding binding;
-    TextView getEmailUserTxt;
+    TextView getEmailUserTxt,reSendOtp;
     UserDBHelper dbHelper;
     Button submitOtp;
     OTP otpHelper;
@@ -55,6 +56,7 @@ public class VerificationFragment extends Fragment {
         otp3Input=root.findViewById(R.id.otp3);
         otp4Input=root.findViewById(R.id.otp4);
         submitOtp=root.findViewById(R.id.sendOtp);
+        reSendOtp=root.findViewById(R.id.reSendOtpTxt);
         //****************************************************************************************//
         //=========================================GET DATA=======================================//
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
@@ -79,6 +81,9 @@ public class VerificationFragment extends Fragment {
         Log.d("asd", keyOtp);
         Toast.makeText(getContext(),"Send OTP successfully",Toast.LENGTH_SHORT).show();
         otpHelper.sendOTPByEmail(keyOtp,emailUser);
+        reSendOtp.setOnClickListener(v->{
+            ReSendOTPByTime(emailUser,30000);
+        });
         //****************************************************************************************//
         //****************************************************************************************//
         submitOtp.setOnClickListener(v->{
@@ -107,13 +112,25 @@ public class VerificationFragment extends Fragment {
                     fragmentHelper = new LoadFragment();
                     fragmentHelper.loadFragment(getParentFragmentManager(),new CreatePasswordFragment(),false,R.id.forgotContainer);
                 }
-
             }
             else{
                 Toast.makeText(getContext(),"Wrong OTP code", Toast.LENGTH_SHORT).show();
             }
         });
         return root;
+    }
+    public void ReSendOTPByTime(String userEmail,int Time){
+        new CountDownTimer(Time, 1000) {
+            public void onTick(long millisUntilFinished) {
+                reSendOtp.setText("Resend OTP success full ! seconds remaining: " + millisUntilFinished / 1000);
+                //here you can have your logic to set text to edittext
+            }
+            public void onFinish() {
+                reSendOtp.setText("Didn't receive the OTP? Resend OTP");
+                String otp =  otpHelper.generateOTP();
+                otpHelper.sendOTPByEmail(otp,userEmail);
+            }
+        }.start();
     }
 
 }

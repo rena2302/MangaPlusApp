@@ -7,6 +7,8 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import Database.MangaDatabase;
+import Database.UserDatabase;
+import Helper.DBHelper.UserDBHelper;
 
 public class LoadingActivity extends AppCompatActivity {
 
@@ -17,6 +19,9 @@ public class LoadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loading);
         handler = new Handler();
         MangaDatabase dbManga = new MangaDatabase(this);
+        UserDatabase dbUser = new UserDatabase(this);
+        UserDBHelper helper = new UserDBHelper(this);
+        dbUser.open();
         dbManga.open();
 
 //        dbManga.deleteAllMangaData();
