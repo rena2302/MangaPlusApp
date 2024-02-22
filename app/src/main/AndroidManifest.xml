@@ -30,7 +30,8 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <category android:name="android.intent.category.LAUNCHER" />
-                <data android:scheme="geo"/>
+                <data android:scheme="http" />
+                <data android:host="http://www.mangaplusapp.somee.com" />
             </intent-filter>
         </activity>
         <activity
