@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment {
     }
     private void AddListCnT(){
         MangaDBHelper db = new MangaDBHelper(getContext());
-        List<TruyenTranh> truyenTranhList = db.getAllMangaItems();
+        truyenTranhList = db.getAllMangaItems();
         if (truyenTranhList != null) {
             for (TruyenTranh truyenTranh : truyenTranhList) {
                 categoryList.add(new Category("Cate 1", truyenTranhList)); // test case
