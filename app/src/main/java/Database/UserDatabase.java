@@ -42,7 +42,7 @@ public class UserDatabase extends SQLiteOpenHelper{
     public static String TB_ADMIN_ROLE = "ROLE";
 
     public UserDatabase(Context context){
-        super (context,"MangaPlus",null,4);
+        super (context,"MangaPlus",null,6);
         this.context = context;
     }
 

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import Database.CategoryDatabase;
 import Database.MangaDatabase;
 import Helper.DBHelper.UserDBHelper;
 import mvp.ModelAndPresenter.Login.LoginPresenter;
@@ -58,8 +59,6 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         //===============================CONNECT DATABASE=========================================//
         db = new UserDBHelper(this);
         db.open();
-        MangaDatabase dbManga = new MangaDatabase(this);
-        dbManga.open();
         //=============================== End Connect DataBase====================================//
         //****************************************************************************************//
         //=============================== BEGIN NAVIGATE LAYOUT===================================//
