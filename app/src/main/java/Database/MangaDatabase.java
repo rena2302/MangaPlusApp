@@ -13,7 +13,7 @@ public class MangaDatabase extends SQLiteOpenHelper {
     public static final String TB_MANGA_PICTURE = "PICTURE_MANGA";
 
     public MangaDatabase(Context context) {
-        super(context, "MangaPlus", null, 4);
+        super(context, "MangaPlus", null, 6);
         this.context = context;
     }
     public SQLiteDatabase open() {
