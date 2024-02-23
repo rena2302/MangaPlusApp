@@ -22,8 +22,7 @@ public class MangaDBHelper extends MangaDatabase {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(TB_MANGA_NAME, Name);
-        contentValues.put(TB_MANGA_PICTURE, imgPath); // Lưu đường dẫn tệp hình ảnh
-
+        contentValues.put(TB_MANGA_PICTURE, String.valueOf(Uri.parse(imgPath))); // Lưu đường dẫn tệp hình ảnh
         long result = db.insert(TB_MANGA, null, contentValues);
         db.close();
         return result != -1;
@@ -34,7 +33,6 @@ public class MangaDBHelper extends MangaDatabase {
         ContentValues contentValues = new ContentValues();
         contentValues.put(TB_MANGA_NAME, Name);
         contentValues.put(TB_MANGA_PICTURE, imgUri.toString());
-
         long result = db.insert(TB_MANGA, null, contentValues);
         db.close();
         return result != -1;

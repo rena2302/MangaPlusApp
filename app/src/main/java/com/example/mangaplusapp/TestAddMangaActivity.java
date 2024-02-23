@@ -30,8 +30,8 @@ public class TestAddMangaActivity extends AppCompatActivity {
         userSubmitBtn = findViewById(R.id.mangaAddBtn);
         btnSelectImg = findViewById(R.id.chooseIMGbtn);
         LinkOnlineMangaTxt= findViewById(R.id.LinkOnlineMangaTxt);
-        String name = userAddNameTxt.getText().toString();
         userSubmitBtn.setOnClickListener(v->{
+            String name = userAddNameTxt.getText().toString();
             String Link = LinkOnlineMangaTxt.getText().toString();
             db.insertData(name,Link);
             Log.d("ADD LINK ", "TRUE" + Link);
@@ -49,21 +49,15 @@ public class TestAddMangaActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == SELECT_IMAGE && resultCode == RESULT_OK && data != null){
-            String name = userAddNameTxt.getText().toString();
-            Uri uri = data.getData();
-            String imagePath = uri.toString(); // Chuyển đổi URI thành đường dẫn tệp
-            if(imagePath != null){
+                String name = userAddNameTxt.getText().toString();
+                Uri uri = data.getData();
                 // Hiển thị hình ảnh được chọn
                 getUserAddPictureTxt.setImageURI(uri);
                 // Thêm dữ liệu vào cơ sở dữ liệu
-                userSubmitBtn.setOnClickListener(v -> {
-                    db.insertData(name, imagePath);
-                    Log.d("ADD URI ", "TRUE" + imagePath);
+                userSubmitBtn.setOnClickListener(view -> {
+                    db.insertData(name, uri);
+                    Log.d("ADD URI ", "TRUE" + uri.toString());
                 });
-            }
-            else{
-
-            }
         }
     }
 }
