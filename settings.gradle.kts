@@ -10,7 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         maven {
-            url = uri("https://www.jitpack.io" ) // send email otp pack
+            url = uri("https://jitpack.io") // send email otp pack
         }
         mavenCentral()
     }
