@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import Helper.ActionHelper.KeyBoardHelper;
 import Helper.DBHelper.UserDBHelper;
@@ -36,22 +38,22 @@ public class CreatePasswordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //Bắt sự kiện tắt bàn phím
-        View mainLayout=getView().findViewById(R.id.OverplayCreatePass);
-        mainLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                KeyBoardHelper.hideKeyboard(requireContext(),getView());
-                return false;
-            }
-        });
-        //Kết thúc sự kiện tắt bàn phím
+        //Ẩn keyboard
+        KeyBoardHelper.ActionRemoveKeyBoardForFragment(requireContext(),container,inflater,R.layout.fragment_forgot);
         // Inflate the layout for this fragment
         View root =inflater.inflate(R.layout.fragment_create_password, container, false);
         dbHelper= new UserDBHelper(getContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         userId=preferences.getInt("user_id",-1);
+        if(userId==-1)
+        {
+            Log.d("sss", "null-1 ");
+        }
+        else
+        {
+            Log.d("aaa", String.valueOf(userId));
+        }
         btnSubmit = root.findViewById(R.id.btnSubmitInfo);
         getUserNameTxt = root.findViewById(R.id.userNewNameTxt);
         getUserPasswordTxt = root.findViewById(R.id.userNewPasswordTxt);
@@ -122,5 +124,6 @@ public class CreatePasswordFragment extends Fragment {
             });
         }
         return root;
+
     }
 }

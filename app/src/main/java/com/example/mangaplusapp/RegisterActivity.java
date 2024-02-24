@@ -2,6 +2,7 @@ package com.example.mangaplusapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,20 +11,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
+import Helper.ActionHelper.KeyBoardHelper;
 import Helper.DBHelper.UserDBHelper;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText userInputEmail;
     String userEmail;
-    Button signUpBtn;
-    TextView haveAccount;
+    AppCompatButton signUpBtn;
+    AppCompatButton haveAccount;
     ImageButton btnToLogin;
     UserDBHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        //Ẩn KeyBoard
+        View mainLayout = findViewById(R.id.ResEmailOverlay);
+        KeyBoardHelper.ActionRemoveKeyBoardForActivity(mainLayout,RegisterActivity.this);
         //===============================Begin GET ID=============================================//
         haveAccount=findViewById(R.id.toLogin);
         btnToLogin = findViewById(R.id.backRegisterBtn);

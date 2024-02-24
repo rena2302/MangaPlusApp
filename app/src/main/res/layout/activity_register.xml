@@ -4,13 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backround_register"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:id="@+id/ResEmailOverlay">
     <!---->
     <RelativeLayout
-        android:id="@+id/toolbarRl"
+        android:layout_marginTop="40dp"
+        android:id="@+id/CreateEmailBackground"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="350dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:src="@drawable/register_background">
+        </ImageView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbarRl">
         <ImageButton
             android:id="@+id/backRegisterBtn"
             android:layout_width="wrap_content"
@@ -18,88 +30,106 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
             android:background="@color/transparent"
             android:padding="5dp"
             android:src="@drawable/ic_back_black"
             tools:ignore="TouchTargetSizeCheck">
         </ImageButton>
         <TextView
-            android:id="@+id/loginTittle"
+            android:id="@+id/HeadlineResEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/backRegisterBtn"
+            android:layout_centerHorizontal="true"
+            android:text="@string/headlineRegister"
+            android:textAppearance="@style/let_s_get_s"
+            android:fontFamily="@font/stylishregular">
+        </TextView>
+        <TextView
+            android:id="@+id/HeadTiltleRes"
+            android:layout_below="@+id/HeadlineResEmail"
+            android:layout_marginTop="250dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/headlineTitleRes"
+            android:fontFamily="@font/stylishregular"
+            android:textAppearance="@style/registration"
+            android:layout_centerHorizontal="true">
+        </TextView>
+        <TextView
+            android:id="@+id/requestResEmail"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/HeadTiltleRes"
+            android:layout_width="285dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:text="@string/RecommendRes"
+            android:textAppearance="@style/RecommendRes"
+            android:fontFamily="@font/ubuntubold"
+            android:lineSpacingExtra="4dp"
+            android:gravity="center_horizontal|center_vertical">
+        </TextView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_below="@id/toolbarRl">
+        <!--     Email       -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/registerEmail_act"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            android:layout_marginBottom="20dp">
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="10dp"
+                android:hint="@string/email"
+                android:fontFamily="@font/inter"
+                android:background="@drawable/input_grayblur"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/text_login_input">
+            </EditText>
+        </com.google.android.material.textfield.TextInputLayout>
+    </RelativeLayout>
+    <!-- Question For have a account-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp">
+        <!--     Button Register       -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registerBtn_act"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="@string/welcome"
-            android:textSize="25dp"
-            android:textFontWeight="900"
+            android:background="@drawable/btn_accept"
+            android:fontFamily="@font/interextrabold"
+            android:text="@string/create"
+            android:textAllCaps="false"
             android:textColor="@color/white"
-            android:layout_marginTop="35dp"
-            android:fontFamily="@font/josefinsans_bold">
-        </TextView>
-        <ImageView
+            android:textSize="20sp">
+        </androidx.appcompat.widget.AppCompatButton>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/toLogin"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/registerBtn_act"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/loginTittle"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="-30dp"
-            android:src="@drawable/tittlemain"/>
+            android:background="@drawable/btn_tologin"
+            android:fontFamily="@font/interextrabold"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_login"
+            android:textSize="20sp">
+        </androidx.appcompat.widget.AppCompatButton>>
     </RelativeLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="225dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <!--     Email       -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/registerEmail_act"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:hintEnabled="false"
-                android:layout_marginBottom="20dp">
-                <EditText
-                    android:id="@+id/editTextEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_email"
-                    android:drawablePadding="10dp"
-                    android:hint="Email"
-                    android:fontFamily="@font/josefinsans_bold"
-                    android:background="@drawable/shape_login_input"
-                    android:inputType="textEmailAddress"
-                    android:textColorHint="@color/text_login_input">
-                </EditText>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--     Button Register       -->
-            <Button
-                android:id="@+id/registerBtn_act"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/btn_login"
-                android:layout_below="@+id/registerEmail_act"
-                android:fontFamily="@font/josefinsans_bold"
-                android:text="@string/create"
-                android:textSize="16dp">
-            </Button>
-        </RelativeLayout>
-    </ScrollView>
-    <!-- Question For have a account-->
-    <TextView
-        android:id="@+id/toLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/questionHaveAccount"
-        android:fontFamily="@font/josefinsans_bold"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="16dp"
-        android:padding="10dp"
-        android:layout_marginBottom="50dp"
-        android:textColor="@color/white">
-    </TextView>
 </RelativeLayout>
