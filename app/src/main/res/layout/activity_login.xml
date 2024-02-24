@@ -7,14 +7,19 @@
     android:background="@color/Login_background"
     tools:context=".LoginActivity"
     android:id="@+id/LoginOverlay">
-    <ImageView
-        android:id="@+id/LoginImage"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_height="310dp"
         android:layout_marginTop="80dp"
-        android:background="@drawable/background_login">
-    </ImageView>
+        android:id="@+id/LoginImage">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/background_login">
+        </ImageView>
+    </RelativeLayout>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

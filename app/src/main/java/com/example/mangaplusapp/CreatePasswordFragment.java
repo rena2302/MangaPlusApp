@@ -6,15 +6,19 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
+import Helper.ActionHelper.KeyBoardHelper;
 import Helper.DBHelper.UserDBHelper;
 
 public class CreatePasswordFragment extends Fragment {
@@ -22,17 +26,26 @@ public class CreatePasswordFragment extends Fragment {
     EditText getUserNameTxt,getUserPasswordTxt,getUserRePasswordTxt;
     String userName_register,userEmail,userPassword,userRePassword;
     UserDBHelper dbHelper;
-    Button btnSubmit;
-    LinearLayout layoutInput;
+    AppCompatButton btnSubmit;
+    RelativeLayout layoutInput;
     int userId;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Bắt sự kiện tắt bàn phím
+        View mainLayout=getView().findViewById(R.id.OverplayCreatePass);
+        mainLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                KeyBoardHelper.hideKeyboard(requireContext(),getView());
+                return false;
+            }
+        });
+        //Kết thúc sự kiện tắt bàn phím
         // Inflate the layout for this fragment
         View root =inflater.inflate(R.layout.fragment_create_password, container, false);
         dbHelper= new UserDBHelper(getContext());
