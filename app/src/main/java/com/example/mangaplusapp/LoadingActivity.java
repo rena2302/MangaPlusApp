@@ -6,11 +6,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import Database.CategoryDatabase;
-import Database.MangaDatabase;
-import Database.UserDatabase;
-import Helper.DBHelper.MangaDBHelper;
-import Helper.DBHelper.UserDBHelper;
+import Database.MangaPlusDatabase;
 
 public class LoadingActivity extends AppCompatActivity {
 
@@ -20,19 +16,8 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         handler = new Handler();
-        MangaDatabase dbManga = new MangaDatabase(this);
-        MangaDBHelper dbMangaHelper = new MangaDBHelper(this);
-        UserDatabase dbUser = new UserDatabase(this);
-        UserDBHelper helper = new UserDBHelper(this);
-        CategoryDatabase dbCate = new CategoryDatabase(this);
-        dbCate.open();
-        dbUser.open();
-        dbManga.open();
-//        dbMangaHelper.deleteAllMangaData();
-        dbUser.close();
-        dbManga.close();
-        helper.close();
-        dbMangaHelper.close();
+        MangaPlusDatabase mangaPlusDatabase = new MangaPlusDatabase(this);
+        mangaPlusDatabase.open();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
