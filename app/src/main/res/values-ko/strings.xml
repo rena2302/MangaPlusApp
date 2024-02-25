@@ -3,6 +3,7 @@
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- BASE  -->
+    <string name="Finish">마치다</string>
     <string name="submit">제출하다</string>
     <string name="testDemo"></string>
     <string name="Home">집</string>
@@ -25,6 +26,13 @@
     <string name="login">로그인</string>
     <string name="create">창조하다</string>
     <string name="createAccount">계정 만들기</string>
+    <string name="headlineRegister">시작하자!</string>
+    <string name="headlineTitleRes">등록</string>
+    <string name="RecommendRes">이메일을 입력하세요. 나중에 확인하기 위해 OTP를 보내드립니다</string>
+    <string name="Vertification">확인.</string>
+    <string name="RecommendForgot">등록된 이메일 주소를 입력하세요. 비밀번호 재설정 링크와 확인 OTP를 알려드리겠습니다. 감사합니다.</string>
+    <string name="RecommnedOTP">보낸번호 4자리를 입력하세요.</string>
+    <string name="Continue">계속하다</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">비밀번호를 잊으 셨나요</string>
     <string name="forgotDescripstion">비밀번호를 잊으 셨나요? 안전한 경험을 위해 당사 앱의 사용자 친화적인 기능으로 쉽게 복구하세요</string>

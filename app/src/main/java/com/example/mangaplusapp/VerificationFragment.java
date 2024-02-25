@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.renderscript.ScriptGroup;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,10 +15,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import Helper.ActionHelper.KeyBoardHelper;
 import Helper.DBHelper.UserDBHelper;
 import Helper.LoadHelper.LoadFragment;
 import Helper.ServiceHelper.OTP;
@@ -28,10 +31,12 @@ public class VerificationFragment extends Fragment {
     ScriptGroup.Binding binding;
     TextView getEmailUserTxt,reSendOtp;
     UserDBHelper dbHelper;
-    Button submitOtp;
+    AppCompatButton submitOtp;
     OTP otpHelper;
     LoadFragment fragmentHelper;
     int userID;
+    //Biến theo dõi sự kiện Ontouch
+    private View.OnTouchListener touchListener;
 
     public VerificationFragment() {
         // Required empty public constructor
@@ -47,6 +52,8 @@ public class VerificationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Ẩn keyboard
+        KeyBoardHelper.ActionRemoveKeyBoardForFragment(requireContext(),container,inflater,R.layout.fragment_verification,touchListener);
         View root = inflater.inflate(R.layout.fragment_verification, container, false);
         //=========================================GET ID=========================================//
         getEmailUserTxt=root.findViewById(R.id.forgot_EmailUserTxt);
@@ -69,12 +76,6 @@ public class VerificationFragment extends Fragment {
         //****************************************************************************************//
         //=========================================SET DATA=======================================//
         emailUser = preferences.getString("user_email",null);
-        if(emailUser==null){
-            Log.d("email user","has null, maybe erro in sharedPre get and in data" );
-        }
-        else{
-            Log.d("email user",emailUser);
-        }
         //****************************************************************************************//
         //=========================================SEND OTP=======================================//
         String keyOtp = otpHelper.generateOTP();

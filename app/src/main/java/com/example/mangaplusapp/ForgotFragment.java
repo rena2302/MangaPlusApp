@@ -1,28 +1,38 @@
 package com.example.mangaplusapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.util.Objects;
+
+import Helper.ActionHelper.KeyBoardHelper;
 import Helper.DBHelper.UserDBHelper;
 
 public class ForgotFragment extends Fragment {
-    Button SendOtpBtn;
+    AppCompatButton SendOtpBtn;
     String userEmail;
     UserDBHelper db;
     int userID;
+    RelativeLayout test;
     EditText getUserEmailTxt;
+    //Biến theo dõi sự kiện Ontouch
+    private View.OnTouchListener touchListener;
     public ForgotFragment() {
         // Required empty public constructor
     }
@@ -35,6 +45,8 @@ public class ForgotFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Ẩn keyboard
+        KeyBoardHelper.ActionRemoveKeyBoardForFragment(requireContext(),container,inflater,R.layout.fragment_forgot,touchListener);
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_forgot, container, false);
         SendOtpBtn = root.findViewById(R.id.btnForgotSendOtp);
