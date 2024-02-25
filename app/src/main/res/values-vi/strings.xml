@@ -3,6 +3,7 @@
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- BASE  -->
+    <string name="Finish">Hoàn tất</string>
     <string name="submit">Gửi</string>
     <string name="testDemo"></string>
     <string name="Home">Trang Chủ</string>
@@ -25,6 +26,9 @@
     <string name="login">Đăng nhập</string>
     <string name="create">Tạo</string>
     <string name="createAccount">Tạo tài khoản</string>
+    <string name="headlineRegister">Bắt đầu nào!</string>
+    <string name="headlineTitleRes">Đăng ký</string>
+    <string name="RecommendRes">Nhập email của bạn, chúng tôi sẽ gửi OTP để xác minh sau</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">Quên mật khẩu</string>
     <string name="forgotDescripstion">Quên mật khẩu? Dễ dàng khôi phục với các tính năng thân thiện với người dùng của ứng dụng của chúng tôi để có trải nghiệm an toàn</string>

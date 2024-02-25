@@ -14,4 +14,36 @@
     <style name="navigation_drawer" parent="Base.Theme.MangaPlusApp">
         <item name="android:statusBarColor">#00000000</item>
     </style>
+    <style name="textview_createaccount">
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="android:textColor">#C3662D</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+    <style name="let_s_get_s">
+        <item name="android:textSize">38sp</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="android:textColor">#E97F0A</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+    <style name="registration">
+        <item name="android:textSize">32sp</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="android:textColor">#3C91CC</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+    <style name="RecommendRes">
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:textColor">#5C000000</item>
+    </style>
 </resources>

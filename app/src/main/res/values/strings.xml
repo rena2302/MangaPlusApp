@@ -2,6 +2,7 @@
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- BASE  -->
+    <string name="Finish">Finish</string>
     <string name="submit">Submit</string>
     <string name="testDemo">Test Demo</string>
     <string name="Home">Home</string>
@@ -24,6 +25,9 @@
     <string name="login">Login</string>
     <string name="create">Create</string>
     <string name="createAccount">Create Account</string>
+    <string name="headlineRegister">Let\'s get started!</string>
+    <string name="headlineTitleRes">Registration</string>
+    <string name="RecommendRes">Enter your email, we will send OTP to vertify later</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">Forgot Password</string>
     <string name="forgotDescripstion">Forgot password? Easily recover with our apps user-friendly feature for a secure experience</string>

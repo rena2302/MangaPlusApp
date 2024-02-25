@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import Database.CategoryDatabase;
 import Database.MangaDatabase;
+import Helper.ActionHelper.KeyBoardHelper;
 import Helper.DBHelper.UserDBHelper;
 import mvp.ModelAndPresenter.Login.LoginPresenter;
 import mvp.ModelAndPresenter.Login.MVPLoginView;
@@ -22,8 +25,8 @@ import mvp.ModelAndPresenter.Login.MVPLoginView;
 public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         EditText emailTxt, passwordTxt;
         TextView forgotPasswordTxt,toSignUpTxt;
-        Button btnLoginTxt;
-    UserDBHelper db;
+        AppCompatButton btnLoginTxt;
+        UserDBHelper db;
         int idUser;
 
     //Create sign in Google
@@ -34,15 +37,25 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
     //Call PresenterLogin
     private LoginPresenter ResAction;
     private LoginPresenter ForAction;
+    private KeyBoardHelper ActionKeyBoard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        View mainLayout = findViewById(R.id.LoginOverlay); // Thay thế 'yourMainLayout' bằng id của layout gốc của bạn
+
+        mainLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                ActionKeyBoard.hideKeyboard(LoginActivity.this,v);
+                return false;
+            }
+        });
         //===============================Begin get id for login basic=============================//
         toSignUpTxt = findViewById(R.id.toSignUp);
         emailTxt = (EditText) findViewById(R.id.editTextEmail);
         passwordTxt = (EditText) findViewById(R.id.editTextPassword);
-        btnLoginTxt = (Button) findViewById(R.id.loginBtn_act);
+        btnLoginTxt = (AppCompatButton) findViewById(R.id.loginBtn_act);
         forgotPasswordTxt = (TextView) findViewById(R.id.forgotPassword_act);
         //================================End get id for login basic==============================//
         //****************************************************************************************//

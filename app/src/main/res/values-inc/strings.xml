@@ -3,6 +3,7 @@
     <string name="app_name">MangaPlusApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- BASE  -->
+    <string name="Finish">खत्म करना</string>
     <string name="submit">जमा करना</string>
     <string name="testDemo"></string>
     <string name="Home">घर</string>
@@ -25,6 +26,9 @@
     <string name="login">लॉगिन</string>
     <string name="create">बनाना </string>
     <string name="createAccount">खाता बनाएँ</string>
+    <string name="headlineRegister">आएँ शुरू करें</string>
+    <string name="headlineTitleRes">पंजीकरण</string>
+    <string name="RecommendRes">अपना ईमेल दर्ज करें, हम बाद में सत्यापन के लिए ओटीपी भेजेंगे</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">अपना कूट शब्द भूल गए?</string>
     <string name="forgotDescripstion">पासवर्ड भूल गए? सुरक्षित अनुभव के लिए हमारे ऐप्स की उपयोगकर्ता-अनुकूल सुविधा के साथ आसानी से पुनर्प्राप्त करें</string>

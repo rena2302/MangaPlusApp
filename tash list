@@ -1,0 +1,686 @@
+[33mcommit 2c8c01b81771d6a083a23d0f0e2642e32da90776[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Thu Feb 22 07:36:31 2024 +0700
+
+     finished feature resend OTP
+
+[33mcommit 27814f64e700c535b85bbb395ee4055a1adcac20[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Feb 21 13:57:14 2024 +0700
+
+     Backend Verification : finished logic data and nav in Register and forgotPassword
+
+[33mcommit 1693ff1469f54889a24986761e9232427eeb2dc2[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Feb 21 13:29:49 2024 +0700
+
+    new layout bla la
+
+[33mcommit 467a2384d898465ff3a48155a75a013e2bfc6ab9[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 20 21:58:39 2024 +0700
+
+     send otp for register : hasn't nav to repass or new account
+
+[33mcommit 630a868b8b04e149886255f4b0b0a1cc07c47b1c[m
+Merge: f3a4ca0 1844697
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 20 21:57:30 2024 +0700
+
+    Merge pull request #32 from YunneeToiChoi/MVP_Login_Test_Demo
+    
+    Toast Email and pass
+
+[33mcommit 18446970bf1c80908866a93afa68bd7c3b1ecfc4[m
+Merge: 55f334a f3a4ca0
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 20 21:57:21 2024 +0700
+
+    Merge branch 'master' into MVP_Login_Test_Demo
+
+[33mcommit f3a4ca05cc38a0f7c56940dd56813c2e5ac12310[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 20 21:55:01 2024 +0700
+
+    Update README.md
+
+[33mcommit 55f334a491a46f816ee16e6c659a6c4c26cbc36c[m[33m ([m[1;32mMVP_Login_Test_Demo[m[33m)[m
+Author: Nguyễn Hoàng Phong <22dh112737@st.huflit.edu.vn>
+Date:   Tue Feb 20 21:38:30 2024 +0700
+
+    Toast Email and pass
+
+[33mcommit 2c6a1de35f08815790be8a7ae342ae91f292f950[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 20 21:16:37 2024 +0700
+
+    replace register and bla bla bla
+
+[33mcommit 2ad1fc7736edf4fae38846f9a40025436e441c01[m
+Merge: 9a8afa5 6e08ad9
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 20 16:14:22 2024 +0700
+
+    Merge branch 'master' of https://github.com/YunneeToiChoi/MangaPlusApp
+
+[33mcommit 9a8afa5180a4b8aca251ede3e68aaad22994a693[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 20 16:14:10 2024 +0700
+
+     DB helper new : User DB helper
+
+[33mcommit 6e08ad9c9c4b317838d179bf57cc1fca89226d3d[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 20 06:50:27 2024 +0700
+
+    Update README.md
+
+[33mcommit fee9a79718959c234a8a350b12efc76af9a88244[m
+Merge: 82b864f 40f020c
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Mon Feb 19 16:47:04 2024 +0700
+
+    Merge branch 'master' of https://github.com/YunneeToiChoi/MangaPlusApp
+
+[33mcommit 82b864f7b5ce53c11720638d3e06483d8a7223c4[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Mon Feb 19 16:46:41 2024 +0700
+
+     new DB Helper : new Manga Helper
+
+[33mcommit 40f020c6918c530d61e14a932e8ff495b908a6f2[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Sun Feb 18 18:58:35 2024 +0700
+
+    Update README.md
+
+[33mcommit 6d6414edcade1100c816a24b584e55a55b2e7255[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Sun Feb 18 18:57:46 2024 +0700
+
+    Convert Database : fix convert Uri
+
+[33mcommit ace88ebc59bc4708ae48cd054fe19296027ca2b6[m
+Merge: 5d49b7d 626d088
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Sun Feb 18 14:42:52 2024 +0700
+
+    Merge pull request #31 from YunneeToiChoi/Verification
+    
+    Convert Database : convert manga inline to SQL Lite
+
+[33mcommit 626d0889b0995f33ddcf0ba6152afe0b509c0878[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Sun Feb 18 14:39:50 2024 +0700
+
+    Convert Database : convert manga inline to SQL Lite
+
+[33mcommit 5d49b7d75a5e75e516869aef59a0816c31600acf[m
+Merge: 6e32096 c29a37e
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Sun Feb 18 14:37:01 2024 +0700
+
+    Merge pull request #30 from YunneeToiChoi/MVP_Login_Test_Demo
+    
+    Use MVP into App
+
+[33mcommit c29a37e2fe23c8eaa00f3589b1e354eb1987e9c2[m
+Author: Nguyễn Hoàng Phong <22dh112737@st.huflit.edu.vn>
+Date:   Fri Feb 16 23:10:37 2024 +0700
+
+    updatemvpLogin and fix
+
+[33mcommit bd2f07e6c7bb511b510f8acb57ef277c066a285f[m
+Author: Nguyễn Hoàng Phong <22dh112737@st.huflit.edu.vn>
+Date:   Fri Feb 16 16:36:17 2024 +0700
+
+    fixlayoutprofile and ditmemay tu bik
+
+[33mcommit 2962d1ad70b7dc593450d58fbd4f29a836eea64f[m
+Author: Nguyễn Hoàng Phong <22dh112737@st.huflit.edu.vn>
+Date:   Fri Feb 16 15:45:28 2024 +0700
+
+    MVPlOGIN
+
+[33mcommit 6e32096e307b7740acdca770a4ac64d6efa31bf9[m
+Merge: b79364e dcd0b47
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Feb 14 15:32:16 2024 +0700
+
+    Merge pull request #29 from YunneeToiChoi/Verification
+    
+    Help new packed : bla bla bla
+
+[33mcommit dcd0b47883f9c8b7a0cd0913ee4dbb5862cf6280[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Feb 14 15:31:49 2024 +0700
+
+    Help new packed : bla bla bla
+
+[33mcommit b79364ef50ca4efbe7365615dc72bfe0d696f2b2[m
+Merge: 7762a91 6844411
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Feb 14 15:26:00 2024 +0700
+
+    Merge pull request #28 from YunneeToiChoi/Verification
+    
+     Helper : new DB helper, OTP helper
+
+[33mcommit 68444111bab6e265e6c677bae82cb8584124817e[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Feb 14 15:25:28 2024 +0700
+
+     Helper : new DB helper, OTP helper
+
+[33mcommit 7762a91fb43e2b6216ac69382c748a28a469b96b[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Feb 14 14:54:15 2024 +0700
+
+    Update README.md
+
+[33mcommit 3e01643c0f498d638315250a56e526dfb4fb31b5[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Feb 14 14:42:14 2024 +0700
+
+    Create README.md
+
+[33mcommit dc3c287edfe3822c74bed46b317e1e37e5213f0b[m
+Author: Nguyễn Hoàng Phong <22dh112737@st.huflit.edu.vn>
+Date:   Wed Feb 14 12:47:36 2024 +0700
+
+    fix log and res
+
+[33mcommit 6ab1412c0c30a46d15a0ec53baf59c11decad6da[m
+Merge: d02ae36 6e58baa
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Feb 14 12:24:30 2024 +0700
+
+    Merge pull request #27 from YunneeToiChoi/Verification
+    
+    verification new furture : verification otp for forgot password
+
+[33mcommit 6e58baa265c82bf55fa788c4b7187a83958274b9[m
+Author: ngnhan17 <145483309+ngnhan17@users.noreply.github.com>
+Date:   Wed Feb 7 22:22:24 2024 +0700
+
+    verification otp: update background, font size tittle, button
+
+[33mcommit 3eedc326365fdef91d0db4dd684b1fdbc127cf50[m
+Author: ngnhan17 <145483309+ngnhan17@users.noreply.github.com>
+Date:   Wed Feb 7 20:51:40 2024 +0700
+
+    verification new messasge : update string submit
+
+[33mcommit a7cc58f7a2b09b8ad4e9f54673c1e9da900a0465[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Feb 7 20:14:41 2024 +0700
+
+     verification messages new : update note for designer backend
+
+[33mcommit 3aec24704d280bdca8fec2d485f7ecc027a55d08[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Feb 7 20:08:41 2024 +0700
+
+    verification new furture : verification otp for forgot password
+
+[33mcommit d02ae367d8e9012658f0335cc335901c51c88491[m
+Merge: 7126806 e088914
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 6 23:37:03 2024 +0700
+
+    Merge pull request #26 from YunneeToiChoi/BaseTemp
+    
+     forgot base layout
+
+[33mcommit e0889141375a73f6b7980e2ec4519bb3679dab8c[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 6 20:19:00 2024 +0700
+
+     forgot base layout
+
+[33mcommit 7126806689e07edd1d3e5986659f0872ad671be7[m
+Merge: 1718237 da57697
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 6 20:13:02 2024 +0700
+
+    Merge pull request #25 from YunneeToiChoi/BaseTemp
+    
+    fix text cho thang nghiep
+
+[33mcommit da576973e0ff30bffaaf8d2bc2d64fb78699c392[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 6 20:12:40 2024 +0700
+
+    fix text cho thang nghiep
+
+[33mcommit 1718237d24cb613949ac33ee60046e131eec77bb[m
+Merge: 74cb9ba ebfc7e7
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 6 18:50:55 2024 +0700
+
+    Merge pull request #24 from YunneeToiChoi/BaseTemp
+    
+    sửa chữa lỗi lầm của mấy con báo
+
+[33mcommit ebfc7e7afa46afecafa5a294e685f2f3b625691f[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Feb 6 18:49:37 2024 +0700
+
+    forgot password new future : new controller for forgot password layout
+
+[33mcommit d92e8f4978b6dd8f28ceeab0008ab64d0b2c51e6[m
+Author: rena2302 <khoivu2302@gmail.com>
+Date:   Mon Feb 5 18:47:21 2024 +0700
+
+    Em xin loi anh Nang
+
+[33mcommit 74cb9ba54f56ea8520c80b8e2e005037ccfcf27f[m
+Merge: e12d220 7e21143
+Author: ThanhNghiep <doanthanhnghiep27012004@gmail.com>
+Date:   Mon Feb 5 18:25:21 2024 +0700
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       app/src/main/res/layout/fragment_user_profile.xml
+
+[33mcommit e12d22062e80750edc8914172f1c26fea79302b7[m
+Merge: b46c1de f3061fb
+Author: Phan Văn Năng <109004626+yunneetoichoi@users.noreply.github.com>
+Date:   Mon Feb 5 15:40:45 2024 +0700
+
+    Merge pull request #22 from YunneeToiChoi/BaseTemp
+    
+    Base temp Sub region: add sub string for any layout
+
+[33mcommit 7e211434953cb1d6f317d0fe83d247b271b6d2c9[m
+Merge: 749f401 11a76eb
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Mon Feb 5 17:09:03 2024 +0700
+
+    Merge pull request #23 from YunneeToiChoi/BaseTemp
+    
+    layout user Profile upgrade : set text for user
+
+[33mcommit 11a76ebada848a342756305769fde823a89b9707[m
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Mon Feb 5 17:08:35 2024 +0700
+
+    layout user Profile upgrade : set text for user
+
+[33mcommit 749f401128901ab011a3c7a575615ac620801ea5[m
+Merge: b46c1de f3061fb
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Mon Feb 5 15:40:45 2024 +0700
+
+    Merge pull request #22 from YunneeToiChoi/BaseTemp
+    
+    Base temp
+
+[33mcommit f3061fb6170b2f79333ecae44740aca5473030e5[m
+Merge: ef81169 21f9f7c
+Author: ngnhan17 <145483309+ngnhan17@users.noreply.github.com>
+Date:   Wed Jan 31 23:28:16 2024 +0700
+
+    Merge remote-tracking branch 'origin/Profile' into Profile
+
+[33mcommit ef8116920aee506f117a107cb549dd6a7330721e[m
+Merge: c7cd1de 2af43ea
+Author: Phan Văn Năng <109004626+yunneetoichoi@users.noreply.github.com>
+Date:   Wed Jan 31 18:38:23 2024 +0700
+
+    Merge pull request #18 from YunneeToiChoi/Profile
+    
+    New profile : new layout user profile
+
+[33mcommit 21f9f7c100db35a6dd8b271b552996d0af5dca29[m
+Merge: c7cd1de 2af43ea
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Jan 31 18:38:23 2024 +0700
+
+    Merge pull request #18 from YunneeToiChoi/Profile
+    
+    New profile : new layout user profile
+
+[33mcommit 2af43eac6d28a2d1acf67bae41f435e2980282ed[m
+Merge: eecdf00 c7cd1de
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Jan 31 18:37:11 2024 +0700
+
+    Merge branch 'HomePage' into Profile
+
+[33mcommit eecdf00c378a475b15423b88e3eb17ccec9c3231[m
+Author: ngnhan17 <145483309+ngnhan17@users.noreply.github.com>
+Date:   Wed Jan 31 12:49:22 2024 +0700
+
+    profile
+
+[33mcommit c7cd1de05e3fdb615198d50d922f37d3b810fab4[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Wed Jan 31 10:01:19 2024 +0700
+
+    new layout : new forgot password and verification OTP
+
+[33mcommit 2763648be754b2bebd20a9e81e7e4c30f556199e[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Tue Jan 30 21:21:36 2024 +0700
+
+    upgrade logic database
+    hash password
+
+[33mcommit 342783c4a31458678aee3004c63124aa81b9322a[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Mon Jan 29 18:32:46 2024 +0700
+
+    fix database
+
+[33mcommit 3d5a7511907540d30bcc181a166909f0f71d12e8[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Sat Jan 27 20:34:07 2024 +0700
+
+    Loi database
+
+[33mcommit 9101f306080eb38ef923143d3fa65bb21081d166[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Sat Jan 27 20:33:56 2024 +0700
+
+    Loi database
+
+[33mcommit b46c1de82449c36455dc6cec95666b20baa2ff44[m
+Merge: 8d0173b 0ec2e61
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Sat Jan 27 14:59:00 2024 +0700
+
+    Merge pull request #16 from YunneeToiChoi/HomePage
+    
+    format and create session data user to stored
+
+[33mcommit 0ec2e615433eab1889a9e996e8637f24aeb35ba3[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Sat Jan 27 14:55:50 2024 +0700
+
+    format and create session data user to stored
+
+[33mcommit 8d0173ba974b9895a09838e1df4c1179f6b5966d[m
+Merge: 0779976 d3988ec
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Sat Jan 27 14:53:22 2024 +0700
+
+    Merge pull request #15 from YunneeToiChoi/Person
+    
+    Person
+
+[33mcommit d3988ec6abf4720b1bf8d36fd748f61dad16f43e[m
+Merge: 0779976 aa51e87
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Fri Jan 26 18:32:13 2024 +0700
+
+    Merge pull request #14 from YunneeToiChoi/HomePage
+    
+    test FE person
+
+[33mcommit aa51e876cd5037da17059372b095021109084906[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Fri Jan 26 18:27:43 2024 +0700
+
+    test FE person
+
+[33mcommit 07799764ded0beaa32f0d294697c24789af7eb37[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Wed Jan 24 13:06:46 2024 +0700
+
+    test
+
+[33mcommit 99cf55c68238b5c9b84e463b174ff31a564ee7fa[m
+Merge: d7f77dc 42683a2
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Jan 17 12:37:56 2024 +0700
+
+    Merge pull request #12 from YunneeToiChoi/Form
+    
+    Form
+
+[33mcommit d7f77dc46213e78829d4593471eeb2696ebd8f81[m
+Merge: 164c32d 61b35b6
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Jan 17 12:24:20 2024 +0700
+
+    Merge pull request #13 from YunneeToiChoi/Region
+    
+    create forgot password
+
+[33mcommit 61b35b6f9c4619fa426ee314cee06a5d92498a8a[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Wed Jan 17 12:23:25 2024 +0700
+
+    create forgot password
+
+[33mcommit 42683a266223719bae48bb755bffd261ec4eb302[m
+Merge: 0c9d371 164c32d
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Jan 17 10:39:47 2024 +0700
+
+    Merge branch 'master' into Form
+
+[33mcommit 0c9d37154e06a9f96acdb854e899214449444fc9[m
+Author: rena2302 <khoivu2302@gmail.com>
+Date:   Sun Jan 14 19:46:08 2024 +0700
+
+    fixed Close DrawerLayout &
+     fixed sync NavigationView
+     and BottomNavigationView
+
+[33mcommit 27869e3c33d669a3237dd236f558455886bc9ce0[m
+Author: rena2302 <khoivu2302@gmail.com>
+Date:   Sun Jan 14 17:58:42 2024 +0700
+
+    fragment-drawer
+
+[33mcommit 164c32df7546ad36f70a2187ec75ed3a41eda67c[m
+Merge: 7ae39c5 549630f
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Jan 10 14:51:24 2024 +0700
+
+    Merge pull request #11 from YunneeToiChoi/Region
+    
+    create language VN,US,India,Korea
+
+[33mcommit 549630fb04fcb49cd13157cc7b502b627b396d90[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Wed Jan 10 14:50:26 2024 +0700
+
+    create language VN,US,India,Korea
+
+[33mcommit 7ae39c51893e9023d90ca26e82fee8262dcb217e[m
+Merge: 1009a3b f30b494
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Jan 10 13:15:00 2024 +0700
+
+    Merge pull request #10 from YunneeToiChoi/Form
+    
+    dropshadow
+
+[33mcommit f30b494413087a60588c07d021938adedb728433[m
+Author: rena2302 <khoivu2302@gmail.com>
+Date:   Wed Jan 10 13:12:59 2024 +0700
+
+    dropshadow
+
+[33mcommit 1009a3ba17ddffc12ad696def41ab084605bc684[m
+Merge: f211a69 e1fe665
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Wed Jan 10 13:08:04 2024 +0700
+
+    Merge pull request #9 from YunneeToiChoi/Form
+    
+    dropshadow
+
+[33mcommit e1fe665044d1900eb716203cfffdd96569348dd7[m
+Author: rena2302 <khoivu2302@gmail.com>
+Date:   Wed Jan 10 12:51:10 2024 +0700
+
+    dropshadow
+
+[33mcommit f211a69fccacd73836f648127f5bbaa3b1deb136[m
+Merge: 7bf3992 7757632
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Jan 9 12:07:36 2024 +0700
+
+    Merge pull request #8 from YunneeToiChoi/Database
+    
+    update color
+
+[33mcommit 775763256f66df9d6a891b3691c120dd2c76984d[m
+Merge: f4b19da 7bf3992
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Jan 9 12:07:28 2024 +0700
+
+    Merge branch 'master' into Database
+
+[33mcommit f4b19da1adf5a70001f2b46694990a12a5e46e9f[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Tue Jan 9 12:04:06 2024 +0700
+
+    update color
+
+[33mcommit 7bf39920b9699320e43a0d88c12c9ac2c2ea3002[m
+Merge: a714061 ef0d6b6
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Jan 9 11:23:44 2024 +0700
+
+    Merge pull request #7 from YunneeToiChoi/Form
+    
+    Form
+
+[33mcommit ef0d6b6bb2bda25da9b7baa020c4db897a483128[m
+Merge: 922358e 6617fea
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Jan 9 11:22:20 2024 +0700
+
+    Merge pull request #6 from YunneeToiChoi/Database
+    
+    fix validation form login and register
+
+[33mcommit 6617fea0bfc2d74dc01b188215124391c877c5f8[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Tue Jan 9 11:19:53 2024 +0700
+
+    fix validation form login and register
+
+[33mcommit a714061319dba1dd02b4750dcaec7fdce9d9986e[m
+Merge: 0822185 922358e
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Mon Jan 8 14:20:48 2024 +0700
+
+    Merge pull request #5 from YunneeToiChoi/Form
+    
+    Form
+
+[33mcommit 922358ecab0833aee286f20b8de0bfa642d482b2[m
+Merge: 229f995 0822185
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Mon Jan 8 14:20:38 2024 +0700
+
+    Merge branch 'master' into Form
+
+[33mcommit 229f995eda9ce30b9342ecaa3dd6b623f999595d[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Mon Jan 8 14:19:19 2024 +0700
+
+    Update FrontEnd Login and Register
+
+[33mcommit 185d6ca3f7a309fd274f33b6274f0e46863e3bdc[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Mon Jan 8 14:15:04 2024 +0700
+
+    Update FrontEnd Login and Register
+
+[33mcommit fcdbd4093cfc8d8f6152c399de2516b164591874[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Mon Jan 8 14:14:57 2024 +0700
+
+    Update FrontEnd Login and Register
+
+[33mcommit 08221856fe4f28bbd048f9e1c669d666ed53fe51[m
+Merge: e04b5d0 69654b9
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Sat Jan 6 18:00:48 2024 +0700
+
+    Merge pull request #4 from YunneeToiChoi/Form
+    
+    Form
+
+[33mcommit 69654b932f35c3b9f4f5c75452423935433937b9[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Sat Jan 6 18:00:04 2024 +0700
+
+    Finished BACK END FRONT END LOGIN AND REGISTER
+
+[33mcommit a834e2801c83bab8af0518f87af1b2ed3eff9f0e[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Sat Jan 6 15:49:56 2024 +0700
+
+    create database for user and admin
+
+[33mcommit e04b5d0dc648d55ddd3a62dbce84e58f3f896e10[m
+Merge: c39d9b8 8cb86df
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Jan 2 15:05:32 2024 +0700
+
+    Merge pull request #3 from YunneeToiChoi/AddCategory
+    
+    add category front end 1/2
+
+[33mcommit 8cb86df9c995bc247c689fa40db4380cd3519907[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Tue Jan 2 15:03:10 2024 +0700
+
+    add category front end 1/2
+
+[33mcommit c39d9b8172e51aa6edf3309c717cb631a8ef4bdb[m
+Merge: 96edb5b 3707f4f
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Jan 2 13:38:41 2024 +0700
+
+    Merge pull request #2 from YunneeToiChoi/Form
+    
+    Form
+
+[33mcommit 3707f4f762341651182e41a3382422abba81258a[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Tue Jan 2 13:25:52 2024 +0700
+
+    1/2 event for login back and register back
+
+[33mcommit 2c8525d0ba731da463c0ad885a51e2c8f4e250c6[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Tue Jan 2 12:38:53 2024 +0700
+
+    finished fragment
+
+[33mcommit 96edb5bfd0d7c5fef3d348f8da59309f07ef0a14[m
+Merge: d6a9f07 8fcd86f
+Author: Phan Văn Năng <109004626+YunneeToiChoi@users.noreply.github.com>
+Date:   Tue Jan 2 12:13:35 2024 +0700
+
+    Merge pull request #1 from YunneeToiChoi/loading
+    
+    finished loading
+
+[33mcommit 8fcd86fc6b64fe8c0e5d7196360644a1bb5bdca5[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Tue Jan 2 12:11:19 2024 +0700
+
+    finished loading
+
+[33mcommit d6a9f07f6eccefa1453cb77fb9361a3d8fd60394[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Tue Jan 2 11:04:05 2024 +0700
+
+    finished bug nav home
+
+[33mcommit 8be7580ffbe485643ae1d6822cdf1a4d98e5d9a4[m
+Author: YunneToiChoi <phanvannang004@gmail.com>
+Date:   Mon Jan 1 18:04:43 2024 +0700
+
+    Initial commit
