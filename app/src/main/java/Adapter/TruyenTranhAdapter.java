@@ -45,8 +45,6 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
         Glide.with(holder.itemView.getContext())
                 .load(truyenTranh.getLinkAnh())
                 .into(holder.imageTruyen);
-
-        // Hiển thị tên truyện lên TextView
         holder.txtTruyen.setText(truyenTranh.getTenTruyen());
     }
 

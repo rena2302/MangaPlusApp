@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.mangaplusapp"
-        minSdk = 32
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -58,4 +58,8 @@ dependencies {
     implementation ("de.svenkubiak:jBCrypt:0.4.1"); // hash password
 
     implementation ("com.github.1902shubh:SendMail:1.0.0"); // send email otp
+
+    implementation("com.github.momo-wallet:mobile-sdk:1.0.7")// momo SDK
+
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")// request HTTPs
 }

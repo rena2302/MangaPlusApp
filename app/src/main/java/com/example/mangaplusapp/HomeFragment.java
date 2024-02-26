@@ -1,7 +1,11 @@
 package com.example.mangaplusapp;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -10,6 +14,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +42,7 @@ public class HomeFragment extends Fragment {
     TruyenTranhAdapter truyenTranhAdapter;
     ImageSliderAdapter imageSliderAdapter;
     RecyclerView recyclerViewCategory;
+    private static final int PERMISSION_REQUEST_READ_MEDIA_IMAGES = 1001;
     ViewPager2 viewPager2;
     Handler handler = new Handler();
     List<Category> categoryList = new ArrayList<Category>();
@@ -53,6 +60,18 @@ public class HomeFragment extends Fragment {
         SetContentImageSlider();
         SetContentRecycleView();
         setRecyclerViewAnimation();
+        if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.READ_MEDIA_IMAGES)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Nếu quyền chưa được cấp, yêu cầu quyền từ người dùng
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.READ_MEDIA_IMAGES},
+                        PERMISSION_REQUEST_READ_MEDIA_IMAGES);
+            }
+        } else {
+            // Quyền đã được cấp, tiến hành thực hiện các hoạt động liên quan đến hình ảnh
+            // Ví dụ: hiển thị danh sách hình ảnh từ thư viện phương tiện
+        }
         return view;
     }
 
@@ -88,7 +107,7 @@ public class HomeFragment extends Fragment {
     }
     private void AddListCnT(){
         MangaDBHelper db = new MangaDBHelper(getContext());
-        List<TruyenTranh> truyenTranhList = db.getAllMangaItems();
+        truyenTranhList = db.getAllMangaItems();
         if (truyenTranhList != null) {
             for (TruyenTranh truyenTranh : truyenTranhList) {
                 categoryList.add(new Category("Cate 1", truyenTranhList)); // test case
@@ -118,7 +137,12 @@ public class HomeFragment extends Fragment {
 
         imageSliderAdapter = new ImageSliderAdapter(truyenTranhList, viewPager2);
         viewPager2.setAdapter(imageSliderAdapter);
-
+        if(truyenTranhList==null){
+            Log.d("Truyen tranh list ","==null " );
+        }
+        else{
+            Log.d("Truyen tranh list ","== exists ");
+        }
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
         viewPager2.setOffscreenPageLimit(3);
@@ -150,4 +174,16 @@ public class HomeFragment extends Fragment {
             viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
         }
     };
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_READ_MEDIA_IMAGES) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Quyền đã được cấp, tiến hành thực hiện các hoạt động liên quan đến hình ảnh
+                // Ví dụ: hiển thị danh sách hình ảnh từ thư viện phương tiện
+            } else {
+                // Người dùng từ chối cấp quyền, thông báo cho họ về việc không thể thực hiện các hoạt động liên quan đến hình ảnh
+            }
+        }
+    }
 }
