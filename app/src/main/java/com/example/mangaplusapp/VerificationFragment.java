@@ -1,6 +1,10 @@
 package com.example.mangaplusapp;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -23,6 +27,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,28 +49,25 @@ public class VerificationFragment extends Fragment{
     int userID;
     String keyOtp;
 
-     EditText otp1Input,otp2Input,otp3Input,otp4Input;
+    EditText otp1Input,otp2Input,otp3Input,otp4Input;
 
     //Resend OTP time
     private int resendTime=60;
-    //Lính canh sự kiện resend code
+    //Event guards resend code
     private  boolean resendEnable= false;
-    //Lính canh sự kiện đổi màu submit khi nhập đủ code
+
+    //Event guards change color submit when entering enough code
     private int selectedPosition=0;
 
 
     public VerificationFragment() {
         // Required empty public constructor
     }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,7 +81,6 @@ public class VerificationFragment extends Fragment{
         otp2Input=root.findViewById(R.id.otp2);
         otp3Input=root.findViewById(R.id.otp3);
         otp4Input=root.findViewById(R.id.otp4);
-
 
         submitOtp=root.findViewById(R.id.sendOtp);
         reSendOtp=root.findViewById(R.id.reSendOtpTxt);
@@ -97,7 +98,8 @@ public class VerificationFragment extends Fragment{
         //****************************************************************************************//
         //=========================================SET DATA=======================================//
         emailUser = preferences.getString("user_email",null);
-        //Hiện email đang đăng kí hoặc forgot
+
+        // Show registered or forgot emails
         emailaddress.setText(emailUser);
         //****************************************************************************************//
         //=========================================SEND OTP=======================================//
@@ -105,146 +107,34 @@ public class VerificationFragment extends Fragment{
         otpHelper.sendOTPByEmail(keyOtp,emailUser);
         Log.d("asd", keyOtp);
         Toast.makeText(getContext(),"Send OTP successfully",Toast.LENGTH_SHORT).show();
-        //Sự kiện bắt đầu chạy timer resend OTP
-        //Chạy lần đầu
+
+
+        //Event start running timer resend OTP
+        //        First run
         startCountDownTimer();
         //****************************************************************************************//
         //****************************************************************************************//
 
-        //Hiện bàn phím sau khi khởi tạo cùng với fragment sẽ mặc định focus vào otp1Input
-        showkeyboard(otp1Input);
+        //Listen for changes in each edittext
+        TextWatcherListener(otp1Input,selectedPosition,otp1Input,otp2Input,otp3Input,otp4Input);
+        TextWatcherListener(otp2Input,selectedPosition,otp1Input,otp2Input,otp3Input,otp4Input);
+        TextWatcherListener(otp3Input,selectedPosition,otp1Input,otp2Input,otp3Input,otp4Input);
+        TextWatcherListener(otp4Input,selectedPosition,otp1Input,otp2Input,otp3Input,otp4Input);
 
-        //Sự kiện lắng nghe thay đổi trong Edittext
-        TextWatcher textWatcher=new TextWatcher( ) {
-            String otp1 = otp1Input.getText().toString();
-            String otp2 = otp2Input.getText().toString();
-            String otp3 = otp3Input.getText().toString();
-            String otp4 = otp4Input.getText().toString();
-            String otp= otp1+otp2+otp3+otp4;
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Xử lý trước khi văn bản thay đổi
-                Log.d("Beforeactive", String.valueOf(selectedPosition));
-            }
+        //Event listening paste
+        setPasteListener(otp1Input);
+        setPasteListener(otp2Input);
+        setPasteListener(otp3Input);
+        setPasteListener(otp4Input);
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Xử lý trong quá trình văn bản đang thay đổi
-                Log.d("Onactive", String.valueOf(selectedPosition));
-            }
+        // Event listening delete
+        DeleteMoveUp(otp1Input,otp1Input);
+        DeleteMoveUp(otp2Input,otp1Input);
+        DeleteMoveUp(otp3Input,otp2Input);
+        DeleteMoveUp(otp4Input,otp3Input);
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Xử lý sau khi văn bản đã thay đổi
-                if(s.length()>0)
-                {
-                    if(selectedPosition==0||otp1Input.isFocused())
-                    {
-                        selectedPosition=0;
-                        ListenNullText(selectedPosition,otp1Input,otp2Input,otp3Input,otp4Input);
-                    }
-                    else if (selectedPosition==1||otp2Input.isFocused())
-                    {
-                        selectedPosition=1;
-                        ListenNullText(selectedPosition,otp1Input,otp2Input,otp3Input,otp4Input);
-                    }
-                    else if (selectedPosition==2||otp3Input.isFocused())
-                    {
-                        selectedPosition=2;
-                        ListenNullText(selectedPosition,otp1Input,otp2Input,otp3Input,otp4Input);
-                    }
-                    else if (selectedPosition==3||otp4Input.isFocused())
-                    {
-                        selectedPosition=3;
-                        ListenNullText(selectedPosition,otp1Input,otp2Input,otp3Input,otp4Input);
-                    }
-                }
-            }
-        };
-        //Lắng nghe thay đổi trong từng edittext
-        otp1Input.addTextChangedListener(textWatcher);
-        otp2Input.addTextChangedListener(textWatcher);
-        otp3Input.addTextChangedListener(textWatcher);
-        otp4Input.addTextChangedListener(textWatcher);
 
-        //Sự kiện lắng nghe delete
-        otp1Input.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_DEL)
-                {
-                    submitOtp.setBackgroundResource(R.drawable.btn_defalt);
-                    selectedPosition=0;
-                    showkeyboard(otp1Input);
-                }
-                return false;
-            }
-        });
-        otp2Input.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Editable editable2=otp2Input.getText();
-                if (keyCode == KeyEvent.KEYCODE_DEL)
-                {
-                    submitOtp.setBackgroundResource(R.drawable.btn_defalt);
-                    if(editable2.length()<=0)
-                    {
-                        selectedPosition=0;
-                        showkeyboard(otp1Input);
-                    }
-                    else
-                    {
-                        selectedPosition=1;
-                        showkeyboard(otp2Input);
-                    }
-                }
-                return false;
-            }
-        });
-        otp3Input.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Editable editable3=otp3Input.getText();
-                if (keyCode == KeyEvent.KEYCODE_DEL)
-                {
-                    submitOtp.setBackgroundResource(R.drawable.btn_defalt);
-                    if(editable3.length()<=0)
-                    {
-                        selectedPosition=1;
-                        showkeyboard(otp2Input);
-                    }
-                    else
-                    {
-                        selectedPosition=2;
-                        showkeyboard(otp3Input);
-                    }
-                }
-                return false;
-            }
-        });
-        otp4Input.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Editable editable4=otp4Input.getText();
-                if (keyCode == KeyEvent.KEYCODE_DEL)
-                {
-                    submitOtp.setBackgroundResource(R.drawable.btn_defalt);
-                    if(editable4.length()<=0)
-                    {
-                        selectedPosition=2;
-                        showkeyboard(otp3Input);
-                    }
-                    else
-                    {
-                        selectedPosition=3;
-                        showkeyboard(otp4Input);
-                    }
-                }
-                return false;
-            }
-        });
 
-//        otpHelper.sendOTPByEmail(keyOtp,emailUser);
         reSendOtp.setOnClickListener(v->{
             if(resendEnable)
             {
@@ -253,7 +143,6 @@ public class VerificationFragment extends Fragment{
                 Log.d("asd", keyOtp);
                 startCountDownTimer();
             }
-//            ReSendOTPByTime(emailUser,30000);
         });
 
         submitOtp.setOnClickListener(v->{
@@ -298,7 +187,14 @@ public class VerificationFragment extends Fragment{
         return root;
     }
 
-    public int ListenNullText(int SelectedPosition,EditText input1,EditText input2, EditText input3, EditText input4)
+
+
+
+
+
+
+    //Check Editext has data or not
+    private int ListenNullText(int SelectedPosition,EditText input1,EditText input2, EditText input3, EditText input4)
     {
         Editable editable1=input1.getText();
         Editable editable2=input2.getText();
@@ -331,42 +227,103 @@ public class VerificationFragment extends Fragment{
         return  SelectedPosition;
     }
 
-//    public void ReSendOTPByTime(String userEmail,int Time){
-//        new CountDownTimer(Time, 1000) {
-//            public void onTick(long millisUntilFinished) {
-//                reSendOtp.setText("Resend OTP success full ! seconds remaining: " + millisUntilFinished / 1000);
-//                //here you can have your logic to set text to edittext
-//            }
-//            public void onFinish() {
-//                reSendOtp.setText("Didn't receive the OTP? Resend OTP");
-//                String otp =  otpHelper.generateOTP();
-//                otpHelper.sendOTPByEmail(otp,userEmail);
-//            }
-//        }.start();
-//    }
 
-    //hiển thị bàn phím và focus cho từng edittext
+    //Delete move on editext
+    private void DeleteMoveUp(EditText InputAction,EditText InputMoveOn)
+    {
+        InputAction.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Editable editable=InputAction.getText();
+                if (keyCode == KeyEvent.KEYCODE_DEL)
+                {
+                    submitOtp.setBackgroundResource(R.drawable.btn_defalt);
+                    if(editable.length()<=0)
+                    {
+                        showkeyboard(InputMoveOn);
+                    }
+                    else
+                    {
+                        showkeyboard(InputAction);
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
+
+
+    // Listening event changes in Edittext
+    private void TextWatcherListener(EditText Action,int SelectedPosition,EditText otp1Input,EditText otp2Input, EditText otp3Input, EditText otp4Input)
+    {
+        TextWatcher textWatcher=new TextWatcher( ) {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Xử lý trước khi văn bản thay đổi
+                Log.d("Beforeactive", String.valueOf(selectedPosition));
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Xử lý trong quá trình văn bản đang thay đổi
+                Log.d("Onactive", String.valueOf(selectedPosition));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Xử lý sau khi văn bản đã thay đổi
+                if(s.length()>0)
+                {
+                    if(SelectedPosition==0||otp1Input.isFocused())
+                    {
+                        selectedPosition=0;
+                        ListenNullText(selectedPosition,otp1Input,otp2Input,otp3Input,otp4Input);
+                    }
+                    else if (selectedPosition==1||otp2Input.isFocused())
+                    {
+                        selectedPosition=1;
+                        ListenNullText(selectedPosition,otp1Input,otp2Input,otp3Input,otp4Input);
+                    }
+                    else if (selectedPosition==2||otp3Input.isFocused())
+                    {
+                        selectedPosition=2;
+                        ListenNullText(selectedPosition,otp1Input,otp2Input,otp3Input,otp4Input);
+                    }
+                    else if (selectedPosition==3||otp4Input.isFocused())
+                    {
+                        selectedPosition=3;
+                        ListenNullText(selectedPosition,otp1Input,otp2Input,otp3Input,otp4Input);
+                    }
+                }
+            }
+        };
+        Action.addTextChangedListener(textWatcher);
+    }
+
+
+    //Display keyboard and focus for each edittext
     private  void showkeyboard(EditText otpET)
     {
         otpET.requestFocus();
         InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        //Hiện bàn phím không cần tương tác vào edittext
+        //Show the keyboard doesn't need to interact with edittext
         inputMethodManager.showSoftInput(otpET,InputMethodManager.SHOW_IMPLICIT);
     }
     private void startCountDownTimer()
     {
-        //nếu resendEnable=false thì bắt dầu đém ngược
+        //if resendEnable=false then start the countdown
         resendEnable=false;
         reSendOtp.setTextColor(Color.parseColor("#99000000"));
-        //thời gian đếm ngược 60x1000 và mõi lần đếm ngược là 1s
+        //The countdown time is 60x1000 and each countdown is 1s
         new CountDownTimer(resendTime *1000,1000)
         {
-            //cập nhật thời gian đếm ngược sau mỗi lần đơn vị thời gian giảm
+            //Update the countdown time after each time the time unit decreases
             @Override
             public void onTick(long millisUntilFinished) {
                 reSendOtp.setText((String.valueOf(millisUntilFinished/1000))+"s");
             }
-            //Khi kết thúc đổi giá trị thành true và dổi màu text
+            //When finished, change the value to true and recolor the text and reset OTP
             @Override
             public void onFinish() {
                 resendEnable=true;
@@ -375,5 +332,47 @@ public class VerificationFragment extends Fragment{
                 reSendOtp.setTextColor(getContext().getResources().getColor(android.R.color.holo_blue_dark));
             }
         }.start();
+    }
+
+    //Event listen paste
+    private void setPasteListener(final EditText editText) {
+        editText.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                // Paste event handler
+                pasteFromClipboard(editText);
+                return true;
+            }
+        });
+    }
+
+    //Method Paste event handler
+    private void pasteFromClipboard(EditText editText) {
+        ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        // Check if the clipboard (used to receive paste data) is null or has data
+        if (clipboard != null && clipboard.hasPrimaryClip()) {
+            //Get data from clipboard because only get the data item at item 0 position to test
+            ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+            if (item != null) {
+                //Hash data into string arrays
+                String clipboardText = item.getText().toString();
+                if (clipboardText.length() == 4) {
+                    // Put index data into each EditText
+                    setEditTextValues(clipboardText);
+                }
+            }
+        }
+    }
+
+    //Handle the cursor of editext and place each index data of the text in the correct editext
+    private  void setEditTextValues(String text) {
+        otp1Input.setText(String.valueOf(text.charAt(0)));
+        otp2Input.setText(String.valueOf(text.charAt(1)));
+        otp3Input.setText(String.valueOf(text.charAt(2)));
+        otp4Input.setText(String.valueOf(text.charAt(3)));
+        otp1Input.setSelection(otp2Input.getText().length());
+        otp2Input.setSelection(otp2Input.getText().length());
+        otp3Input.setSelection(otp3Input.getText().length());
+        otp4Input.setSelection(otp4Input.getText().length());
     }
 }
