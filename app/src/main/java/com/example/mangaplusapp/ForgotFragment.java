@@ -31,8 +31,6 @@ public class ForgotFragment extends Fragment {
     int userID;
     RelativeLayout test;
     EditText getUserEmailTxt;
-    //Biến theo dõi sự kiện Ontouch
-    private View.OnTouchListener touchListener;
     public ForgotFragment() {
         // Required empty public constructor
     }
@@ -46,7 +44,7 @@ public class ForgotFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Ẩn keyboard
-        KeyBoardHelper.ActionRemoveKeyBoardForFragment(requireContext(),container,inflater,R.layout.fragment_forgot,touchListener);
+        KeyBoardHelper.ActionRemoveKeyBoardForFragment(requireContext(),container,inflater,R.layout.fragment_forgot);
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_forgot, container, false);
         SendOtpBtn = root.findViewById(R.id.btnForgotSendOtp);

@@ -18,7 +18,7 @@ import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.RegisterActivity;
 
 public class KeyBoardHelper {
-    public static void ActionRemoveKeyBoardForFragment(Context context, ViewGroup container, LayoutInflater inflater, int ID, View.OnTouchListener touchListener) {
+    public static void ActionRemoveKeyBoardForFragment(Context context, ViewGroup container, LayoutInflater inflater, int ID) {
         View mainLayout =inflater.inflate(ID, container, false);
         mainLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override

@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".VerificationFragment">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -85,8 +86,9 @@
                 android:orientation="horizontal">
                 <EditText
                     android:id="@+id/otp1"
-                    android:layout_width="50dp"
-                    android:layout_height="55dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="10dp"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:inputType="number"
@@ -94,50 +96,66 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:maxLength="1"
-                    android:background="@drawable/bg_otp"
-                    android:layout_margin="5dp">
+                    android:fontFamily="@font/inter"
+                    android:textSize="30sp"
+                    android:background="@drawable/bg_otp">
                 </EditText>
+
                 <EditText
                     android:id="@+id/otp2"
-                    android:layout_width="50dp"
-                    android:layout_height="55dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_otp"
+                    android:gravity="center"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:inputType="number"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:textStyle="bold"
                     android:maxLength="1"
-                    android:background="@drawable/bg_otp"
-                    android:layout_margin="5dp">
+                    android:fontFamily="@font/inter"
+                    android:textSize="30sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold">
+
                 </EditText>
+
                 <EditText
                     android:id="@+id/otp3"
-                    android:layout_width="50dp"
-                    android:layout_height="55dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_otp"
+                    android:gravity="center"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:inputType="number"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:textStyle="bold"
                     android:maxLength="1"
-                    android:background="@drawable/bg_otp"
-                    android:layout_margin="5dp">
+                    android:fontFamily="@font/inter"
+                    android:textSize="30sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold">
+
                 </EditText>
+
                 <EditText
                     android:id="@+id/otp4"
-                    android:layout_width="50dp"
-                    android:layout_height="55dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_otp"
+                    android:gravity="center"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:inputType="number"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:textStyle="bold"
                     android:maxLength="1"
-                    android:background="@drawable/bg_otp"
-                    android:layout_margin="5dp">
+                    android:fontFamily="@font/inter"
+                    android:textSize="30sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold">
+
                 </EditText>
             </LinearLayout>
         <RelativeLayout
@@ -150,7 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/btn_accept"
+                android:background="@drawable/btn_defalt"
                 android:fontFamily="@font/interextrabold"
                 android:text="@string/Continue"
                 android:textAllCaps="false"
@@ -169,7 +187,7 @@
                     android:text="Re-send code in"
                     android:fontFamily="@font/ubuntubold"
                     android:letterSpacing="0.0015"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginRight="5dp">
                 </TextView>
                 <TextView
                     android:id="@+id/reSendOtpTxt"

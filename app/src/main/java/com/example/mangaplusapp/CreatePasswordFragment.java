@@ -30,9 +30,9 @@ public class CreatePasswordFragment extends Fragment {
     UserDBHelper dbHelper;
     AppCompatButton btnSubmit;
     RelativeLayout layoutInput;
+    RelativeLayout layoutInputUserName;
     int userId;
-    //Biến theo dõi sự kiện Ontouch
-    private View.OnTouchListener touchListener;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,7 @@ public class CreatePasswordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Ẩn keyboard
-        KeyBoardHelper.ActionRemoveKeyBoardForFragment(requireContext(),container,inflater,R.layout.fragment_create_password,touchListener);
+        KeyBoardHelper.ActionRemoveKeyBoardForFragment(requireContext(),container,inflater,R.layout.fragment_create_password);
         // Inflate the layout for this fragment
         View root =inflater.inflate(R.layout.fragment_create_password, container, false);
         dbHelper= new UserDBHelper(getContext());
@@ -56,6 +56,7 @@ public class CreatePasswordFragment extends Fragment {
         {
             Log.d("aaa", String.valueOf(userId));
         }
+        layoutInputUserName=root.findViewById(R.id.InputUNCP);
         btnSubmit = root.findViewById(R.id.btnSubmitInfo);
         getUserNameTxt = root.findViewById(R.id.userNewNameTxt);
         getUserPasswordTxt = root.findViewById(R.id.userNewPasswordTxt);
@@ -65,7 +66,7 @@ public class CreatePasswordFragment extends Fragment {
 
         //===================================ForgotPassword Case==================================//
         if(dbHelper.CheckEmailExists(userEmail)){
-            layoutInput.removeView(getUserNameTxt);
+            layoutInput.removeView(layoutInputUserName);
             btnSubmit.setOnClickListener(v->{
                 userPassword=getUserPasswordTxt.getText().toString();
                 userRePassword = getUserRePasswordTxt.getText().toString();
