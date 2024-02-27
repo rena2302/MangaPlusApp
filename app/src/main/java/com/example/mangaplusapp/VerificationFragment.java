@@ -122,6 +122,7 @@ public class VerificationFragment extends Fragment{
         reSendOtp.setOnClickListener(v->{
             if(resendEnable)
             {
+                keyOtp="";
                 keyOtp = otpHelper.generateOTP();
                 otpHelper.sendOTPByEmail(keyOtp,emailUser);
                 Log.d("asd", keyOtp);
