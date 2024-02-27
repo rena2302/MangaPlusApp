@@ -122,7 +122,6 @@ public class VerificationFragment extends Fragment{
         reSendOtp.setOnClickListener(v->{
             if(resendEnable)
             {
-                keyOtp="";
                 keyOtp = otpHelper.generateOTP();
                 otpHelper.sendOTPByEmail(keyOtp,emailUser);
                 Log.d("asd", keyOtp);
@@ -302,7 +301,7 @@ public class VerificationFragment extends Fragment{
             @Override
             public void onFinish() {
                 resendEnable=true;
-                keyOtp = otpHelper.generateOTP();
+                keyOtp="";
                 reSendOtp.setText("Resend Code");
                 reSendOtp.setTextColor(getContext().getResources().getColor(android.R.color.holo_blue_dark));
             }
