@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
     //Call PresenterLogin
     private LoginPresenter ResAction;
     private LoginPresenter ForAction;
+    private KeyBoardHelper ActionKeyBoard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,15 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         View mainLayout = findViewById(R.id.LoginOverlay);
         KeyBoardHelper.ActionRemoveKeyBoardForActivity(mainLayout,LoginActivity.this);
         //Kết thúc sự kiện tắt bàn phím
+        View mainLayout = findViewById(R.id.LoginOverlay); // Thay thế 'yourMainLayout' bằng id của layout gốc của bạn
+
+        mainLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                ActionKeyBoard.hideKeyboard(LoginActivity.this,v);
+                return false;
+            }
+        });
         //===============================Begin get id for login basic=============================//
         toSignUpTxt = findViewById(R.id.toSignUp);
         emailTxt = (EditText) findViewById(R.id.editTextEmail);
