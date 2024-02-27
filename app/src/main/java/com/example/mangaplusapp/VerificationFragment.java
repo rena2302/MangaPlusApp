@@ -212,15 +212,17 @@ public class VerificationFragment extends Fragment{
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Editable editable=InputAction.getText();
-                if (keyCode == KeyEvent.KEYCODE_DEL)
+                if (keyCode == KeyEvent.KEYCODE_DEL&& event.getAction() == KeyEvent.ACTION_DOWN)
                 {
                     submitOtp.setBackgroundResource(R.drawable.btn_defalt);
                     if(editable.length()<=0)
                     {
+                        Log.d("move", "onKey: moveon");
                         showKeyBoard(InputMoveOn);
                     }
                     else
                     {
+                        Log.d("stay", "onKey: Stayin");
                         showKeyBoard(InputAction);
                     }
                 }
