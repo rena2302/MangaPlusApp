@@ -1,8 +1,5 @@
 package com.example.mangaplusapp;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
-import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -10,24 +7,19 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.renderscript.ScriptGroup;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,7 +32,6 @@ import Helper.ServiceHelper.OTP;
 public class VerificationFragment extends Fragment{
     FirebaseAuth auth;
     String emailUser;
-    ScriptGroup.Binding binding;
     TextView getEmailUserTxt,reSendOtp;
     UserDBHelper dbHelper;
     AppCompatButton submitOtp;
@@ -48,18 +39,15 @@ public class VerificationFragment extends Fragment{
     LoadFragment fragmentHelper;
     int userID;
     String keyOtp;
-
     EditText otp1Input,otp2Input,otp3Input,otp4Input;
 
     //Resend OTP time
-    private int resendTime=60;
+    private final int resendTime=60;
     //Event guards resend code
     private  boolean resendEnable= false;
 
     //Event guards change color submit when entering enough code
     private int selectedPosition=0;
-
-
     public VerificationFragment() {
         // Required empty public constructor
     }
@@ -84,8 +72,6 @@ public class VerificationFragment extends Fragment{
 
         submitOtp=root.findViewById(R.id.sendOtp);
         reSendOtp=root.findViewById(R.id.reSendOtpTxt);
-        final TextView emailaddress=root.findViewById(R.id.forgot_EmailUserTxt);
-
         //****************************************************************************************//
         //=========================================GET DATA=======================================//
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
@@ -100,15 +86,13 @@ public class VerificationFragment extends Fragment{
         emailUser = preferences.getString("user_email",null);
 
         // Show registered or forgot emails
-        emailaddress.setText(emailUser);
+        getEmailUserTxt.setText(emailUser);
         //****************************************************************************************//
         //=========================================SEND OTP=======================================//
         keyOtp = otpHelper.generateOTP();
         otpHelper.sendOTPByEmail(keyOtp,emailUser);
         Log.d("asd", keyOtp);
         Toast.makeText(getContext(),"Send OTP successfully",Toast.LENGTH_SHORT).show();
-
-
         //Event start running timer resend OTP
         //        First run
         startCountDownTimer();
@@ -186,13 +170,6 @@ public class VerificationFragment extends Fragment{
         });
         return root;
     }
-
-
-
-
-
-
-
     //Check Editext has data or not
     private int ListenNullText(int SelectedPosition,EditText input1,EditText input2, EditText input3, EditText input4)
     {
@@ -203,22 +180,22 @@ public class VerificationFragment extends Fragment{
         if (editable1.length()<=0)
         {
            SelectedPosition=0;
-           showkeyboard(input1);
+            showKeyBoard(input1);
         }
         else if(editable2.length()<=0)
         {
             SelectedPosition =1;
-            showkeyboard(input2);
+            showKeyBoard(input2);
         }
         else if (editable3.length()<=0)
         {
             SelectedPosition=2;
-            showkeyboard(input3);
+            showKeyBoard(input3);
         }
         else if (editable4.length()<=0)
         {
             SelectedPosition=3;
-            showkeyboard(input4);
+            showKeyBoard(input4);
         }
         else
         {
@@ -240,19 +217,17 @@ public class VerificationFragment extends Fragment{
                     submitOtp.setBackgroundResource(R.drawable.btn_defalt);
                     if(editable.length()<=0)
                     {
-                        showkeyboard(InputMoveOn);
+                        showKeyBoard(InputMoveOn);
                     }
                     else
                     {
-                        showkeyboard(InputAction);
+                        showKeyBoard(InputAction);
                     }
                 }
                 return false;
             }
         });
     }
-
-
 
     // Listening event changes in Edittext
     private void TextWatcherListener(EditText Action,int SelectedPosition,EditText otp1Input,EditText otp2Input, EditText otp3Input, EditText otp4Input)
@@ -261,15 +236,14 @@ public class VerificationFragment extends Fragment{
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // Xử lý trước khi văn bản thay đổi
-                Log.d("Beforeactive", String.valueOf(selectedPosition));
+                Log.d("Before Active", String.valueOf(selectedPosition));
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // Xử lý trong quá trình văn bản đang thay đổi
-                Log.d("Onactive", String.valueOf(selectedPosition));
+                Log.d("On Active", String.valueOf(selectedPosition));
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 // Xử lý sau khi văn bản đã thay đổi
@@ -300,10 +274,8 @@ public class VerificationFragment extends Fragment{
         };
         Action.addTextChangedListener(textWatcher);
     }
-
-
     //Display keyboard and focus for each edittext
-    private  void showkeyboard(EditText otpET)
+    private  void showKeyBoard(EditText otpET)
     {
         otpET.requestFocus();
         InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
