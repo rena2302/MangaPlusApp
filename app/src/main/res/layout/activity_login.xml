@@ -21,14 +21,6 @@
         </ImageView>
     </RelativeLayout>
     <ImageView
-        android:id="@+id/LoginImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/background_login">
-    </ImageView>
-    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-70dp"
@@ -155,7 +147,7 @@
                 android:layout_centerHorizontal="true"/>
         </RelativeLayout>
     </ScrollView>
-            <!--  No Account, to Register  -->
+    <!--  No Account, to Register  -->
     <LinearLayout
         android:id="@+id/loginSocialLayout"
         android:layout_width="match_parent"

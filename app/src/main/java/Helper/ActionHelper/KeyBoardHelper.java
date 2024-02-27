@@ -1,22 +1,12 @@
 package Helper.ActionHelper;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.app.Activity;
-import android.widget.RelativeLayout;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import com.example.mangaplusapp.R;
-import com.example.mangaplusapp.RegisterActivity;
 
 public class KeyBoardHelper {
     public static void ActionRemoveKeyBoardForFragment(Context context, ViewGroup container, LayoutInflater inflater, int ID) {
@@ -61,15 +51,6 @@ public class KeyBoardHelper {
         }
     }
     public static void hideKeyboardFromFragment(Context context, View view) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-}
-import android.content.Context;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-public class KeyBoardHelper {
-    public static void hideKeyboard(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
