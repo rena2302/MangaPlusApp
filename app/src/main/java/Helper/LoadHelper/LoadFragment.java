@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentTransaction;
 public class LoadFragment {
     public void loadFragment(FragmentManager fragmentManager, Fragment fragment, boolean isAppInitialized, int containerId) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
         if (isAppInitialized) {
             // Add the fragment
             fragmentTransaction.add(containerId, fragment, fragment.getClass().getSimpleName());

@@ -6,15 +6,21 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import Helper.ActionHelper.KeyBoardHelper;
 import Helper.DBHelper.UserDBHelper;
 
 public class CreatePasswordFragment extends Fragment {
@@ -22,23 +28,35 @@ public class CreatePasswordFragment extends Fragment {
     EditText getUserNameTxt,getUserPasswordTxt,getUserRePasswordTxt;
     String userName_register,userEmail,userPassword,userRePassword;
     UserDBHelper dbHelper;
-    Button btnSubmit;
-    LinearLayout layoutInput;
+    AppCompatButton btnSubmit;
+    RelativeLayout layoutInput;
+    RelativeLayout layoutInputUserName;
     int userId;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Ẩn keyboard
+        KeyBoardHelper.ActionRemoveKeyBoardForFragment(requireContext(),container,inflater,R.layout.fragment_create_password);
         // Inflate the layout for this fragment
         View root =inflater.inflate(R.layout.fragment_create_password, container, false);
         dbHelper= new UserDBHelper(getContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         userId=preferences.getInt("user_id",-1);
+        if(userId==-1)
+        {
+            Log.d("sss", "null-1 ");
+        }
+        else
+        {
+            Log.d("aaa", String.valueOf(userId));
+        }
+        layoutInputUserName=root.findViewById(R.id.InputUNCP);
         btnSubmit = root.findViewById(R.id.btnSubmitInfo);
         getUserNameTxt = root.findViewById(R.id.userNewNameTxt);
         getUserPasswordTxt = root.findViewById(R.id.userNewPasswordTxt);
@@ -48,7 +66,7 @@ public class CreatePasswordFragment extends Fragment {
 
         //===================================ForgotPassword Case==================================//
         if(dbHelper.CheckEmailExists(userEmail)){
-            layoutInput.removeView(getUserNameTxt);
+            layoutInput.removeView(layoutInputUserName);
             btnSubmit.setOnClickListener(v->{
                 userPassword=getUserPasswordTxt.getText().toString();
                 userRePassword = getUserRePasswordTxt.getText().toString();
@@ -109,5 +127,6 @@ public class CreatePasswordFragment extends Fragment {
             });
         }
         return root;
+
     }
 }

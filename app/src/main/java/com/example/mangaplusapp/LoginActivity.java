@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.MotionEvent;
 import android.widget.Button;
@@ -14,6 +15,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import java.util.List;
 
 import Database.CategoryDatabase;
 import Database.MangaDatabase;
@@ -42,6 +47,11 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //Bắt sự kiện tắt bàn phím
+        //Ẩn KeyBoard
+        View mainLayout = findViewById(R.id.LoginOverlay);
+        KeyBoardHelper.ActionRemoveKeyBoardForActivity(mainLayout,LoginActivity.this);
+        //Kết thúc sự kiện tắt bàn phím
         View mainLayout = findViewById(R.id.LoginOverlay); // Thay thế 'yourMainLayout' bằng id của layout gốc của bạn
 
         mainLayout.setOnTouchListener(new View.OnTouchListener() {
