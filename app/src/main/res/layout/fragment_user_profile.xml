@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserProfileFragment"
+    tools:context=".Fragment.UserProfileFragment"
     android:background="@color/white">
     <ScrollView
         android:id="@+id/ScrollProfile"

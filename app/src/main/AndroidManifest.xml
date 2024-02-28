@@ -25,7 +25,7 @@
         tools:replace="android:theme"
         tools:targetApi="34">
         <activity
-            android:name=".PaymentActivity"
+            android:name=".Activity.PaymentActivity"
             android:exported="true">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.MAIN"/>
@@ -36,16 +36,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TestAddMangaActivity"
+            android:name=".Activity.TestAddMangaActivity"
             android:exported="false" />
         <activity
-            android:name=".ForgotControlActivity"
+            android:name=".Activity.ForgotControlActivity"
             android:exported="false" />
         <activity
-            android:name=".UserEditActivity"
+            android:name=".Activity.UserEditActivity"
             android:exported="false" />
         <activity
-            android:name=".LoadingActivity"
+            android:name=".Activity.LoadingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,21 +54,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DashBoardUserActivity"
+            android:name=".Activity.DashBoardUserActivity"
             android:exported="false" />
         <activity
-            android:name=".DashBoardAdminActivity"
+            android:name=".Activity.DashBoardAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activity.RegisterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
