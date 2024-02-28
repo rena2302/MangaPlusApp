@@ -29,6 +29,10 @@
     <string name="headlineRegister">Bắt đầu nào!</string>
     <string name="headlineTitleRes">Đăng ký</string>
     <string name="RecommendRes">Nhập email của bạn, chúng tôi sẽ gửi OTP để xác minh sau</string>
+    <string name="Vertification">Xác minh.</string>
+    <string name="RecommendForgot">Vui lòng nhập địa chỉ email đã đăng ký của bạn, chúng tôi sẽ liên hệ lại với bạn kèm theo link đặt lại mật khẩu và xác nhận OTP, xin cảm ơn</string>
+    <string name="RecommnedOTP">Nhập số có 4 chữ số được gửi tới</string>
+    <string name="Continue">Tiếp tục</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">Quên mật khẩu</string>
     <string name="forgotDescripstion">Quên mật khẩu? Dễ dàng khôi phục với các tính năng thân thiện với người dùng của ứng dụng của chúng tôi để có trải nghiệm an toàn</string>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+
 import android.view.MotionEvent;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,34 +21,29 @@ import mvp.ModelAndPresenter.Login.LoginPresenter;
 import mvp.ModelAndPresenter.Login.MVPLoginView;
 
 public class LoginActivity extends AppCompatActivity implements MVPLoginView {
-        EditText emailTxt, passwordTxt;
-        TextView forgotPasswordTxt,toSignUpTxt;
-        AppCompatButton btnLoginTxt;
-        UserDBHelper db;
-        int idUser;
+    EditText emailTxt, passwordTxt;
+    TextView forgotPasswordTxt,toSignUpTxt;
+    AppCompatButton btnLoginTxt;
+    UserDBHelper db;
+    int idUser;
 
     //Create sign in Google
 
     ImageView googleBtn;
     //End sign in Google
-     private LoginPresenter loginPresenter;
+    private LoginPresenter loginPresenter;
     //Call PresenterLogin
     private LoginPresenter ResAction;
     private LoginPresenter ForAction;
-    private KeyBoardHelper ActionKeyBoard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        View mainLayout = findViewById(R.id.LoginOverlay); // Thay thế 'yourMainLayout' bằng id của layout gốc của bạn
-
-        mainLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                ActionKeyBoard.hideKeyboard(LoginActivity.this,v);
-                return false;
-            }
-        });
+        //Bắt sự kiện tắt bàn phím
+        //Ẩn KeyBoard
+        View mainLayout = findViewById(R.id.LoginOverlay);
+        KeyBoardHelper.ActionRemoveKeyBoardForActivity(mainLayout,LoginActivity.this);
+        //Kết thúc sự kiện tắt bàn phím
         //===============================Begin get id for login basic=============================//
         toSignUpTxt = findViewById(R.id.toSignUp);
         emailTxt = (EditText) findViewById(R.id.editTextEmail);
@@ -76,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         //=============================== END NAVIGATE LAYOUT===================================//
         //****************************************************************************************//
         //===============================Begin Connect Login With Social==========================//
-                                        // Process IS EMPTY //
+        // Process IS EMPTY //
         //===============================End Connect Login With Social============================//
         //****************************************************************************************//
         //===============================BEGIN LOGIC LOGIN BASIC==================================//
@@ -87,8 +83,8 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
             @Override
             // this event final
             public void onClick(View v) {
-                  loginPresenter.receivedHandleLogin(emailTxt,passwordTxt,db,idUser,editor);
-                  //đang ở ActView thông báo cho presenter khi đươc click sự kiện
+                loginPresenter.receivedHandleLogin(emailTxt,passwordTxt,db,idUser,editor);
+                //đang ở ActView thông báo cho presenter khi đươc click sự kiện
             }
         });
         //===============================END LOGIC LOGIN BASIC====================================//
@@ -99,8 +95,8 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
     void navigateLayout(){
         //==================================BEGIN NAV TO SIGN UP==================================//
         toSignUpTxt.setOnClickListener(v -> {
-           ResAction =new LoginPresenter(this);
-           ResAction.RegisterAction();
+            ResAction =new LoginPresenter(this);
+            ResAction.RegisterAction();
         });
         //====================================END NAV TO SIGN UP==================================//
         //==============================BEGIN NAV TO FORGOT PASSWORD==============================//
@@ -114,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
     protected void onActivityResult (int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
     }
- //Callback by Presenter
+    //Callback by Presenter
     @Override
     public void LoginSuccess() {
         Toast.makeText(LoginActivity.this,"Sign Ip Successfully", Toast.LENGTH_SHORT).show();

@@ -29,6 +29,10 @@
     <string name="headlineRegister">आएँ शुरू करें</string>
     <string name="headlineTitleRes">पंजीकरण</string>
     <string name="RecommendRes">अपना ईमेल दर्ज करें, हम बाद में सत्यापन के लिए ओटीपी भेजेंगे</string>
+    <string name="Vertification">सत्यापन.</string>
+    <string name="RecommendForgot">कृपया अपना पंजीकृत ईमेल पता दर्ज करें हम रीसेट पासवर्ड लिंक और पुष्टिकरण ओटीपी के साथ आपसे संपर्क करेंगे। धन्यवाद</string>
+    <string name="RecommnedOTP">जिस 4 अंकीय नंबर को भेजा गया है उसे दर्ज करें</string>
+    <string name="Continue">जारी रखना</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">अपना कूट शब्द भूल गए?</string>
     <string name="forgotDescripstion">पासवर्ड भूल गए? सुरक्षित अनुभव के लिए हमारे ऐप्स की उपयोगकर्ता-अनुकूल सुविधा के साथ आसानी से पुनर्प्राप्त करें</string>
