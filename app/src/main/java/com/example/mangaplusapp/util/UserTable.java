@@ -18,7 +18,7 @@ public class UserTable implements BaseColumns {
     public static String TB_USER_NAME = "NAME";
     public static String TB_USER_EMAIL = "EMAIL";
     public static String TB_USER_PASSWORD = "PASSWORD";
-    public static String TB_USER_PICTURE = "GENDER";
+    public static String TB_USER_PICTURE = "PICTURE";
     public static String TB_USER_ADDRESS = "ADDRESS";
     public static String TB_USER_LEVEL = "LEVEL";
     public static String TB_USER_GENDER = "GENDER";
