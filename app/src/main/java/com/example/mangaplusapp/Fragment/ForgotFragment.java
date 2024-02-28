@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -16,17 +15,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
+import com.example.mangaplusapp.Activity.LoginActivity;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
+
+import android.content.Intent;
+
+import android.widget.ImageButton;
+
 
 public class ForgotFragment extends Fragment {
     AppCompatButton SendOtpBtn;
     String userEmail;
     UserDBHelper db;
     int userID;
-    RelativeLayout test;
     EditText getUserEmailTxt;
+    ImageButton BackbtnLogin;
     public ForgotFragment() {
         // Required empty public constructor
     }
@@ -40,12 +44,14 @@ public class ForgotFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Ẩn keyboard
-        KeyBoardHelper.ActionRemoveKeyBoardForFragment(requireContext(),container,inflater, R.layout.fragment_forgot);
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_forgot, container, false);
+//        KeyBoardHelper.ActionRemoveKeyBoardForFragment(root,requireContext());
+
         SendOtpBtn = root.findViewById(R.id.btnForgotSendOtp);
         //========================================GET ID==========================================//
         getUserEmailTxt=root.findViewById(R.id.forgotEmailUser_Input);
+        BackbtnLogin=root.findViewById(R.id.backForgotBtn);
         //****************************************************************************************//
         //=====================================GET DATABASE=======================================//
         db=new UserDBHelper(getContext());
@@ -76,6 +82,13 @@ public class ForgotFragment extends Fragment {
                 }
             }
         });
+        BackbtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         return root;
     }
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
@@ -90,4 +103,5 @@ public class ForgotFragment extends Fragment {
         }
         fragmentTransaction.commit();
     }
+
 }
