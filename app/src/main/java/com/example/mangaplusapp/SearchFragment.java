@@ -11,11 +11,11 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import Helper.DBHelper.CategoryHelper;
+import Helper.DBHelper.CategoryDBHelper;
 
 public class SearchFragment extends Fragment {
     View view;
-    CategoryHelper dbHelper;
+    CategoryDBHelper dbHelper;
     EditText userInputNameCateTxt;
     Button btnSubmit;
     @Override
@@ -23,8 +23,7 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_search, container, false);
-        dbHelper = new CategoryHelper(getContext());
-        dbHelper.open();
+        dbHelper = new CategoryDBHelper(getContext());
         userInputNameCateTxt = view.findViewById(R.id.inputCateTxt);
         btnSubmit = view.findViewById(R.id.btnSubmitCateAdd);
         btnSubmit.setOnClickListener(v->{
@@ -33,7 +32,6 @@ public class SearchFragment extends Fragment {
             if(!dbHelper.insertData(nameCate)){
                 Log.d("Error while insert cate","Error");
             }
-            dbHelper.close();
         });
         return view;
     }

@@ -4,17 +4,18 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import Database.CategoryDatabase;
+import Database.CategoryTable;
+import Database.MangaPlusDatabase;
 
-public class CategoryHelper  extends CategoryDatabase {
-    public CategoryHelper(Context context) {
+public class CategoryDBHelper extends MangaPlusDatabase {
+    public CategoryDBHelper(Context context) {
         super(context);
     }
     public boolean insertData(String Name) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TB_CATEGORY_NAME, Name);
-        long result = db.insert(TB_CATEGORY, null, contentValues);
+        contentValues.put(CategoryTable.TB_CATEGORY_NAME, Name);
+        long result = db.insert(CategoryTable.TB_CATEGORY, null, contentValues);
         db.close();
         return result != -1;
     }
