@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.util.Log;
 import android.util.Patterns;
 
@@ -67,9 +68,11 @@ public class UserDBHelper  extends MangaPlusDatabase {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         String hash = hashPassword(password);
+        String IMG = "https://media.discordapp.net/attachments/1062386055258570804/1212303621354561556/logo_test.png?ex=65f158ba&is=65dee3ba&hm=0f1f490837c7544ada46aca5e652a769a8c0f02f7529133bc5c9f981e719b992&=&format=webp&quality=lossless&width=525&height=525";
         contentValues.put(UserTable.TB_USER_EMAIL, email);
         contentValues.put(UserTable.TB_USER_PASSWORD, hash);
         contentValues.put(UserTable.TB_USER_NAME, name);
+        contentValues.put(UserTable.TB_USER_PICTURE,IMG);
         long result = db.insert(UserTable.TB_USER, null, contentValues);
         db.close();
         return result != -1; // Kiểm tra nếu giá trị trả về khác -1
@@ -249,5 +252,32 @@ public class UserDBHelper  extends MangaPlusDatabase {
         int result = db.delete(UserTable.TB_USER, null, null);
         db.close();
         return result != 0;
+    }
+    public void updatePicture(int userId, Uri pictureUri) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UserTable.TB_USER_PICTURE, pictureUri.toString()); // Chuyển Uri thành chuỗi
+        db.update(UserTable.TB_USER, values, UserTable.TB_USER_ID_USER + " = ?", new String[]{String.valueOf(userId)});
+        db.close();
+    }
+    @SuppressLint("Range")
+    public String getPicture(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String pictureUrl = null;
+        Cursor cursor = null;
+        try {
+            cursor = db.query(UserTable.TB_USER, new String[]{UserTable.TB_USER_PICTURE},
+                    UserTable.TB_USER_ID_USER + " = ?", new String[]{String.valueOf(userId)},
+                    null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                pictureUrl = cursor.getString(cursor.getColumnIndex(UserTable.TB_USER_PICTURE));
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+        return pictureUrl;
     }
 }

@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/pinkPastel_background"
-            app:itemTextColor="@color/white"
+            app:itemTextColor="@color/black"
             app:menu="@menu/bottom_nav_menu"
             android:layout_alignParentBottom="true">
         </com.google.android.material.bottomnavigation.BottomNavigationView>

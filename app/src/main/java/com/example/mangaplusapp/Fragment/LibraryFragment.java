@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.LoginActivity;
 import com.example.mangaplusapp.Activity.TestAddMangaActivity;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
@@ -26,6 +28,7 @@ public class LibraryFragment extends Fragment {
     TextView userEmailTxt,userNameTxt;
     Button userLogOutBtn;
     ImageButton testlog,testlogmanga;
+    ImageView userIMG;
     int userId;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class LibraryFragment extends Fragment {
         userEmailTxt = rootView.findViewById(R.id.userEmail_info);
         userLogOutBtn=rootView.findViewById(R.id.userLogOut_info);
         testlog = rootView.findViewById(R.id.btnNavToProfile); // sau nay xoa
+        userIMG = rootView.findViewById(R.id.userIMG);
         testlogmanga = rootView.findViewById(R.id.btnNavToTestAddManga);// sau nay xoa
         ///////===========================Get data=========================/////////////////////////
         db = new UserDBHelper(requireContext());
@@ -51,6 +55,8 @@ public class LibraryFragment extends Fragment {
         userId=preferences.getInt("user_id",-1);
         String userEmail = db.getUserEmail(userId);
         String userName = db.getUserName(userId);
+        String img = db.getPicture(userId);
+        Glide.with(this).load(img).into(userIMG);
         ////////===========================Begin Status Logged=========================/////////////
         if(isLoggedIn()){
             navigateLayout();

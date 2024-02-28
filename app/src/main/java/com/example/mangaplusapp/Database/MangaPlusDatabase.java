@@ -32,7 +32,7 @@ public class MangaPlusDatabase extends SQLiteOpenHelper {
                 CategoryTable.TB_CATEGORY_PICTURE + " TEXT)";
         String CREATE_USER_TABLE_QUERY = " CREATE TABLE " + UserTable.TB_USER + " ( " + UserTable.TB_USER_ID_USER + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + UserTable.TB_USER_NAME + " TEXT, " + UserTable.TB_USER_EMAIL + " TEXT, " + UserTable.TB_USER_PASSWORD + " TEXT, "
-                + UserTable.TB_USER_ADDRESS + " TEXT, " + UserTable.TB_USER_GENDER + " TEXT, " + UserTable.TB_USER_LEVEL + " INTEGER ) ";
+                + UserTable.TB_USER_ADDRESS + " TEXT, " + UserTable.TB_USER_GENDER + " TEXT, " + UserTable.TB_USER_PICTURE + " TEXT, " + UserTable.TB_USER_LEVEL + " INTEGER ) ";
 
         String CREATE_ADMIN_USER_TABLE_QUERY = " CREATE TABLE " + UserTable.TB_ADMIN + " ( " + UserTable.TB_ADMIN_ID_ADMIN + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + UserTable.TB_ADMIN_NAME + " TEXT, " + UserTable.TB_ADMIN_EMAIL + " TEXT, " + UserTable.TB_ADMIN_PASSWORD + " TEXT, "
