@@ -41,9 +41,9 @@ public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter
         if (position == getItemCount() - 2){
             viewPager2.post(runnable);
         }
-        holder.textSlider.setText(imageSlider.getTenTruyen());
+        holder.textSlider.setText(imageSlider.getNAME_MANGA());
         Glide.with(holder.itemView.getContext())
-                .load(Uri.parse(imageSlider.getLinkAnh()))
+                .load(Uri.parse(imageSlider.getPICTURE_MANGA()))
                 .into(holder.imageSlider);
     }
 

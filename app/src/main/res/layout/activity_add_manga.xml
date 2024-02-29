@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:background="@drawable/back01"
     android:layout_height="match_parent"
-    tools:context=".Activity.CategoryAddActivity">
+    tools:context=".Activity.MangaAddActivity">
     <RelativeLayout
-        android:id="@+id/addCategoryLabel"
+        android:id="@+id/addMangaLabel"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/shape_toolbar">
 
         <ImageButton
-            android:id="@+id/addCategoryBack"
+            android:id="@+id/addMangaBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -23,9 +23,11 @@
             android:background="@color/transparent"
             android:contentDescription="Back"
             android:padding="20dp"
-            android:src="@drawable/ic_back_white"></ImageButton>
+            android:src="@drawable/ic_back_white">
+
+        </ImageButton>
         <ImageView
-            android:id="@+id/addCategoryImg"
+            android:id="@+id/addMangaImg"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:src="@drawable/logo_test"
@@ -35,25 +37,50 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/addANewCategory"
+            android:text="@string/addANewManga"
             android:textSize="20dp"
             android:textColor="@color/white"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/addCategoryImg">
+            android:layout_below="@+id/addMangaImg">
         </TextView>
     </RelativeLayout>
-    <EditText
-        android:id="@+id/addCategoryName"
+    <LinearLayout
+        android:id="@+id/addNewMangaEditTxt"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addMangaLabel"
         android:layout_margin="16dp"
-        android:hint="@string/addANewCategory"
-        android:layout_below="@+id/addCategoryLabel"/>
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/addMangaName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/addANewManga"/>
+        <EditText
+            android:id="@+id/addMangaDescription"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/addMangaDescription"/>
+        <EditText
+            android:id="@+id/addMangaPicture"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/addMangaPicture"/>
+        <TextView
+            android:id="@+id/addMangaCategory"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:drawableEnd="@drawable/ic_expand"
+            android:hint="@string/addMangaCategory"
+            android:textSize="18sp" />
+    </LinearLayout>
+
     <Button
-        android:id="@+id/addCategorySubmit"
+        android:id="@+id/addMangaSubmit"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Submit"
-        android:layout_below="@+id/addCategoryName"/>
+        android:layout_below="@+id/addNewMangaEditTxt"/>
 </RelativeLayout>

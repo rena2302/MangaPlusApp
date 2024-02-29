@@ -10,7 +10,7 @@ import android.net.Uri;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.mangaplusapp.util.MangaTable;
+import com.example.mangaplusapp.util.table.MangaTable;
 import com.example.mangaplusapp.Database.MangaPlusDatabase;
 import com.example.mangaplusapp.object.TruyenTranh;
 

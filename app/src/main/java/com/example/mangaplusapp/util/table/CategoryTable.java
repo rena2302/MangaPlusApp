@@ -1,4 +1,4 @@
-package com.example.mangaplusapp.util;
+package com.example.mangaplusapp.util.table;
 
 import android.provider.BaseColumns;
 

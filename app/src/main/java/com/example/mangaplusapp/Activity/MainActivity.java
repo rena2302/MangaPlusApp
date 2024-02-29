@@ -1,14 +1,9 @@
 package com.example.mangaplusapp.Activity;
 
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,14 +15,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Fragment.CreatorFragment;
 import com.example.mangaplusapp.Fragment.HomeFragment;
 import com.example.mangaplusapp.Fragment.HotFragment;
 import com.example.mangaplusapp.Fragment.LibraryFragment;
 import com.example.mangaplusapp.Fragment.SearchFragment;
-import com.example.mangaplusapp.Fragment.UserProfileFragment;
-import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -43,10 +35,6 @@ public class MainActivity extends AppCompatActivity{
     private FrameLayout frameLayout;
     private DrawerLayout drawerLayout;
     private FragmentManager fragmentManager;
-    TextView userNameTxt;
-    String userName;
-    ImageView imgViewUser;
-    int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,28 +44,7 @@ public class MainActivity extends AppCompatActivity{
         loadFragment(new HomeFragment(),false, R.menu.home_fragment_header_menu);
         focusFragment();
         loadMenuDrawer();
-        setInfo();
-
-    }
-    private void setInfo(){
-        navigationView = findViewById(R.id.navigation_drawer_container);
-        userNameTxt = navigationView.getHeaderView(0).findViewById(R.id.menu_drawer_header_username);
-        imgViewUser=  navigationView.getHeaderView(0).findViewById(R.id.menu_drawer_header_image_user);
-        SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        UserDBHelper dbUserHelper = new UserDBHelper(this);
-        userID = preferences.getInt("user_id",-1);
-        if(userID==-1){
-            Log.d("Main ACtivity", "can not get userID");
-        }
-        else{
-            Log.d("Main ACtivity", " get userID success ");
-        }
-        userName = dbUserHelper.getUserName(userID);
-        userNameTxt.setText(userName);
-        String userIMG = dbUserHelper.getPicture(userID);
-        Glide.with(this).load(userIMG).into(imgViewUser);
-
+        // END FORM Validition
     }
     /*Non-override Function*/
     private void updateBottomNavigationView() {
@@ -98,8 +65,8 @@ public class MainActivity extends AppCompatActivity{
                     case "HotFragment":
                         bottomNavigationView.getMenu().findItem(R.id.navHot).setChecked(true);
                         break;
-                    case "UserProfileFragment":
-                        bottomNavigationView.getMenu().findItem(R.id.navProfile).setChecked(true);
+                    case "LibraryFragment":
+                        bottomNavigationView.getMenu().findItem(R.id.navLibrary).setChecked(true);
                         break;
                     case "CreatorFragment":
                         bottomNavigationView.getMenu().findItem(R.id.navCreator).setChecked(true);
@@ -131,8 +98,8 @@ public class MainActivity extends AppCompatActivity{
                     loadFragment(new SearchFragment(), false, R.menu.search_fragment_header_menu);
                 } else if (itemId == R.id.navCreator) {
                     loadFragment(new CreatorFragment(), false, R.menu.creator_fragment_header_menu);
-                } else if (itemId == R.id.navProfile) {
-                    loadFragment(new UserProfileFragment(), false, R.menu.library_fragment_header_menu);
+                } else if (itemId == R.id.navLibrary) {
+                    loadFragment(new LibraryFragment(), false, R.menu.library_fragment_header_menu);
                 }
                 return true;
             }
@@ -166,6 +133,7 @@ public class MainActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         navigationView = (NavigationView) findViewById(R.id.navigation_drawer_container);
         navigationView.bringToFront();
+
         drawerLayout = (DrawerLayout) findViewById(R.id.main_activity_drawer);
         toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);

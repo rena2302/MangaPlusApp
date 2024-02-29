@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.mangaplusapp.util.CategoryTable;
+import com.example.mangaplusapp.util.table.CategoryTable;
 import com.example.mangaplusapp.Database.MangaPlusDatabase;
 
 public class CategoryDBHelper extends MangaPlusDatabase {

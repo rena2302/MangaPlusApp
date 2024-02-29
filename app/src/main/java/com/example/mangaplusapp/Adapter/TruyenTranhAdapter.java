@@ -43,9 +43,9 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
             return;
         }
         Glide.with(holder.itemView.getContext())
-                .load(truyenTranh.getLinkAnh())
+                .load(truyenTranh.getPICTURE_MANGA())
                 .into(holder.imageTruyen);
-        holder.txtTruyen.setText(truyenTranh.getTenTruyen());
+        holder.txtTruyen.setText(truyenTranh.getNAME_MANGA());
     }
 
     @Override

@@ -6,9 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.mangaplusapp.util.CategoryTable;
-import com.example.mangaplusapp.util.MangaTable;
-import com.example.mangaplusapp.util.UserTable;
+import com.example.mangaplusapp.util.table.CategoryTable;
+import com.example.mangaplusapp.util.table.MangaTable;
+import com.example.mangaplusapp.util.table.UserTable;
 
 public class MangaPlusDatabase extends SQLiteOpenHelper {
     private final Context context;

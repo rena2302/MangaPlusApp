@@ -50,11 +50,20 @@
     <!-- Begin DashBoard -->
     <string name="dashBoardAdmin">Dashboard Admin</string>
     <string name="addCategory">+ Add Category</string>
+    <string name="addManga">+ Add Manga</string>
     <!-- End DashBoard -->
     <!--Form profile-->
     <string name="username">Name</string>
     <!--Add a new category-->
     <string name="addANewCategory">Add A New Category</string>
+    <!--Add a new manga-->
+    <string name="addANewManga">Add a new Manga</string>
+    <string name="addMangaDescription">Description of manga</string>
+    <string name="addMangaCategory">Category of manga</string>
+    <string name="addMangaPicture">Picture of manga</string>
+    <!--Add a new chapter-->
+    <string name="addNewChapter">Add a new Chapter</string>
+    <string name="addChapterManga">Manga of this chapter</string>
     <!--DashBoard User-->
     <string name="dashBoardUser">DashBoard User</string>
     <!--User edit-->

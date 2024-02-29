@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.LoginActivity;
-import com.example.mangaplusapp.Activity.TestAddMangaActivity;
+import com.example.mangaplusapp.Activity.MangaAddActivity;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 
@@ -100,7 +100,7 @@ public class LibraryFragment extends Fragment {
             loadFragment(new UserProfileFragment(),false);
         });
         testlogmanga.setOnClickListener(v->{
-            Intent intent = new Intent(getActivity(), TestAddMangaActivity.class);
+            Intent intent = new Intent(getActivity(), MangaAddActivity.class);
             startActivity(intent);
         });
     }
