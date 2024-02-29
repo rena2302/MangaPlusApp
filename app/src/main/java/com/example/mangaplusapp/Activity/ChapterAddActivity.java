@@ -89,6 +89,12 @@ public class ChapterAddActivity extends AppCompatActivity {
                 mangaPickDialog();
             }
         });
+        binding.addChapterBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChapterAddActivity.this,DashBoardAdminActivity.class));
+            }
+        });
     }
     private void pickPdfFile() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);

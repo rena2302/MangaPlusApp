@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -47,10 +48,11 @@ public class CategoryAddActivity extends AppCompatActivity {
         binding.addCategoryBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                startActivity(new Intent(CategoryAddActivity.this,DashBoardAdminActivity.class));
             }
         });
     }
+
     private String category = "";
     private void validateData() {
         /*before adding validate data*/

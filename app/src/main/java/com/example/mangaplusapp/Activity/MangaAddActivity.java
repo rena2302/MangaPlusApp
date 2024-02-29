@@ -92,11 +92,10 @@ public class MangaAddActivity extends AppCompatActivity {
         binding.addMangaBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                startActivity(new Intent(MangaAddActivity.this,DashBoardAdminActivity.class));
             }
         });
     }
-
     private void categoryPickDialog() {
         //get string Array from categoryList
         String[] categoriesString = new String[categoryList.size()];

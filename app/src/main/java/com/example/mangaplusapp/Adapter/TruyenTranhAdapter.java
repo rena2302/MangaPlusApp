@@ -1,5 +1,6 @@
 package com.example.mangaplusapp.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +19,19 @@ import java.util.List;
 import com.example.mangaplusapp.object.TruyenTranh;
 
 public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.TruyenTranhViewHolder>{
+    private Context context;
     private List<TruyenTranh> truyenTranhList;
     private ViewPager2 viewPager2;
     public void SetData(List<TruyenTranh> truyenTranhList){
         this.truyenTranhList = truyenTranhList;
         notifyDataSetChanged();
     }
+
     public TruyenTranhAdapter(){}
+    public TruyenTranhAdapter(List<TruyenTranh> truyenTranhList, Context context){
+        this.truyenTranhList = truyenTranhList;
+        this.context = context;
+    }
     public TruyenTranhAdapter(List<TruyenTranh> truyenTranhList, ViewPager2 viewPager2){
         this.viewPager2 = viewPager2;
         this.truyenTranhList = truyenTranhList;

@@ -13,9 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mangaplusapp.Activity.DashBoardAdminActivity;
+import com.example.mangaplusapp.Activity.MainActivity;
+import com.example.mangaplusapp.Fragment.DashBoardMangaListFragment;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ItemCategoryBinding;
 import com.example.mangaplusapp.databinding.ItemDashboardBinding;
@@ -83,8 +89,17 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
                         .show();
             }
         });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCategoryDialog(category);
+            }
+        });
     }
-
+    private void showCategoryDialog(Category category) {
+         DashBoardMangaListFragment dialogFragment = new DashBoardMangaListFragment(category);
+        dialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), "category_dialog");
+    }
     private void deleteCategory(Category category, DashBoardViewHolder holder) {
         //get id from object
         String idCategory = category.getID_CATEGORY();

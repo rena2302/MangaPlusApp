@@ -65,9 +65,6 @@ public class MainActivity extends AppCompatActivity{
                     case "HotFragment":
                         bottomNavigationView.getMenu().findItem(R.id.navHot).setChecked(true);
                         break;
-                    case "LibraryFragment":
-                        bottomNavigationView.getMenu().findItem(R.id.navLibrary).setChecked(true);
-                        break;
                     case "CreatorFragment":
                         bottomNavigationView.getMenu().findItem(R.id.navCreator).setChecked(true);
                         break;
@@ -98,8 +95,6 @@ public class MainActivity extends AppCompatActivity{
                     loadFragment(new SearchFragment(), false, R.menu.search_fragment_header_menu);
                 } else if (itemId == R.id.navCreator) {
                     loadFragment(new CreatorFragment(), false, R.menu.creator_fragment_header_menu);
-                } else if (itemId == R.id.navLibrary) {
-                    loadFragment(new LibraryFragment(), false, R.menu.library_fragment_header_menu);
                 }
                 return true;
             }
