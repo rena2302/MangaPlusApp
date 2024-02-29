@@ -12,28 +12,44 @@
         android:layout_height="200dp"
         android:background="@drawable/shape_profile">
     </ImageView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/Avatar_Profile_Card"
-        android:layout_below="@id/background_profile"
+    <RelativeLayout
+        android:id="@+id/avatar_edit"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-100dp"
         android:layout_width="140dp"
+        android:layout_marginTop="-100dp"
         android:layout_height="140dp"
-        app:cardCornerRadius="10000dp"
-        android:background="@drawable/shape_circle"
-        android:elevation="10dp"
-        android:translationZ="5dp">
-        <ImageView
-            android:id="@+id/Avatar_Profile_Image"
+        android:layout_below="@id/background_profile">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/Avatar_Profile_Card"
+            android:layout_centerHorizontal="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/avatar"
-            android:scaleType="centerCrop"
-            android:contentDescription="your_description"
-            />
-    </androidx.cardview.widget.CardView>
+            app:cardCornerRadius="10000dp"
+            android:background="@drawable/shape_circle"
+            android:elevation="10dp"
+            android:translationZ="5dp">
+            <ImageView
+                android:id="@+id/Avatar_Profile_Image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/avatar"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:elevation="30dp"
+        android:translationZ="20dp"
+        android:layout_marginStart="-45dp"
+        android:layout_marginTop="-20dp"
+        android:layout_below="@id/background_profile"
+        android:layout_toRightOf="@id/avatar_edit"
+        android:src="@drawable/pen_edit_avt">
+    </ImageView>
+
     <TextView
-        android:layout_below="@+id/Avatar_Profile_Card"
+        android:layout_below="@+id/avatar_edit"
         android:layout_centerHorizontal="true"
         android:id="@+id/userName_Tittle"
         android:fontFamily="@font/interextrabold"
@@ -90,14 +106,118 @@
     <RelativeLayout
         android:layout_below="@id/icon_connect"
         android:layout_width="match_parent"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_height="wrap_content">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="480dp"
             android:background="@drawable/box_info">
         </ImageView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Username"
+                    android:textSize="23dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/userName_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="viewEnd"
+                    android:textSize="23sp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.5"
+                android:background="@color/pinkPastel_background" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Email"
+                    android:textSize="23dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/userEmail_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="viewEnd"
+                    android:textSize="23dp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.5"
+                android:background="@color/pinkPastel_background" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Pasword"
+                    android:textSize="23dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/userPassword_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="viewEnd"
+                    android:textSize="23dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/navToEditProfile"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="35dp"
+                android:layout_marginBottom="50dp"
+                android:backgroundTint="@color/pinkPastel_background"
+                android:hint="navToEdit"
+                android:textSize="20dp">
+            </Button>
+        </LinearLayout>
     </RelativeLayout>
     <ScrollView
         android:id="@+id/ScrollProfile"
@@ -107,118 +227,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="500dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="0dp"
-                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"                            android:layout_weight="1"
-                            android:elevation="5dp"
-                            android:orientation="horizontal">
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            android:orientation="horizontal"
-                            android:padding="20dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="Username"
-                                android:textSize="23dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/userName_info"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textAlignment="viewEnd"
-                                android:textSize="23sp" />
-                        </LinearLayout>
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:alpha="0.5"
-                            android:background="@color/pinkPastel_background" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            android:orientation="horizontal"
-                            android:padding="20dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="Email"
-                                android:textSize="23dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/userEmail_info"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textAlignment="viewEnd"
-                                android:textSize="23dp" />
-                        </LinearLayout>
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:alpha="0.5"
-                            android:background="@color/pinkPastel_background" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            android:orientation="horizontal"
-                            android:padding="20dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="Pasword"
-                                android:textSize="23dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/userPassword_info"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textAlignment="viewEnd"
-                                android:textSize="23dp" />
-                        </LinearLayout>
-
-                        <Button
-                            android:id="@+id/navToEditProfile"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginStart="35dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginEnd="35dp"
-                            android:layout_marginBottom="50dp"
-                            android:backgroundTint="@color/pinkPastel_background"
-                            android:hint="navToEdit"
-                            android:textSize="20dp">
-                        </Button>
-                    </LinearLayout>
                 </RelativeLayout>
     </ScrollView>
     <!-- TODO: Update blank fragment layout -->
