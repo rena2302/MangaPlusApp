@@ -20,9 +20,8 @@ import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 
 public class UserProfileFragment extends Fragment {
-Button btnTest;
     UserDBHelper db;
-TextView getUserNameInfoTxt,getUserNameTittleTxt,getUserEmailTxt,getUserPasswordTxt;
+TextView getUserNameInfoTxt,getUserNameTittleTxt,getUserEmailTxt,getUserPasswordTxt,HeaderEmail;
 int userId;
 String userEmail,userPassword,userName;
 
@@ -37,13 +36,12 @@ String userEmail,userPassword,userName;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_user_profile, container,false);
-        btnTest = root.findViewById(R.id.navToEditProfile);
-        navigateLayout();
         //=========================================Get id=========================================//
         getUserNameInfoTxt = root.findViewById(R.id.userName_info);
         getUserNameTittleTxt = root.findViewById(R.id.userName_Tittle);
         getUserEmailTxt = root.findViewById(R.id.userEmail_info);
         getUserPasswordTxt = root.findViewById(R.id.userPassword_info);
+        HeaderEmail=root.findViewById(R.id.userName_Email);
         //****************************************************************************************//
         //=========================================Get data=======================================//
         db = new UserDBHelper(requireContext());
@@ -79,20 +77,15 @@ String userEmail,userPassword,userName;
     }
     void userExists(){
         getUserEmailTxt.setText(userEmail);
-        getUserPasswordTxt.setText("chac kh de len dau");
+        getUserPasswordTxt.setText("..........");
         getUserNameInfoTxt.setText(userName);
         getUserNameTittleTxt.setText(userName);
+        HeaderEmail.setText(userEmail);
     }
     void userNotExists(){
         getUserEmailTxt.setText("Guest");
         getUserPasswordTxt.setText("Guest");
         getUserNameInfoTxt.setText("Guest");
         // log out if want
-    }
-    void navigateLayout(){
-        btnTest.setOnClickListener(v->{
-          Intent intent = new Intent(getActivity(), UserEditActivity.class);
-          startActivity(intent);
-        });
     }
 }
