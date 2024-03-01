@@ -33,6 +33,10 @@
     <string name="RecommendForgot">Vui lòng nhập địa chỉ email đã đăng ký của bạn, chúng tôi sẽ liên hệ lại với bạn kèm theo link đặt lại mật khẩu và xác nhận OTP, xin cảm ơn</string>
     <string name="RecommnedOTP">Nhập số có 4 chữ số được gửi tới</string>
     <string name="Continue">Tiếp tục</string>
+    <string name="EditProfile">Chỉnh sửa hồ sơ</string>
+    <string name="ChangePassword">Đổi mật khẩu</string>
+    <string name="Connect">Kết nối</string>
+    <string name="Logout">Đăng xuất</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">Quên mật khẩu</string>
     <string name="forgotDescripstion">Quên mật khẩu? Dễ dàng khôi phục với các tính năng thân thiện với người dùng của ứng dụng của chúng tôi để có trải nghiệm an toàn</string>
@@ -47,7 +51,7 @@
     <string name="addCategory">+ Thêm danh mục</string>
     <!-- End DashBoard -->
     <!--Form profile-->
-    <string name="username">tên</string>
+    <string name="username">Tên</string>
     <!--Add A New Category-->
     <string name="addANewCategory">Thêm danh mục mới</string>
     <!--DashBoard User-->

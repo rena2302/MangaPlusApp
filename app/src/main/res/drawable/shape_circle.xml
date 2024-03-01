@@ -2,6 +2,6 @@
     android:shape="oval">
     <solid android:color="#ffffff" /> <!-- Màu nền của hình tròn -->
     <size
-        android:width="200dp"
-    android:height="200dp" />
+        android:width="120dp"
+    android:height="120dp" />
 </shape>
