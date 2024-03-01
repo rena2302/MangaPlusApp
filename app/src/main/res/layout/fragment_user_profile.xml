@@ -27,15 +27,15 @@
             <ImageView
                 android:id="@+id/background_profile"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:background="@drawable/shape_profile">
             </ImageView>
             <RelativeLayout
                 android:id="@+id/avatar_edit"
                 android:layout_centerHorizontal="true"
-                android:layout_width="140dp"
-                android:layout_marginTop="-100dp"
-                android:layout_height="140dp"
+                android:layout_width="120dp"
+                android:layout_marginTop="-80dp"
+                android:layout_height="120dp"
                 android:layout_below="@id/background_profile">
                 <androidx.cardview.widget.CardView
                     android:id="@+id/Avatar_Profile_Card"
@@ -98,26 +98,28 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/userName_Email"
                 android:layout_marginTop="10dp"
-                android:layout_width="300dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center">
                 <ImageView
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     app:tint="@color/login_color"
                     android:src="@drawable/facebooks">
                 </ImageView>
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
                     app:tint="@color/btn_login"
                     android:src="@drawable/googles">
                 </ImageView>
                 <ImageView
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
                     android:layout_weight="1"
                     app:tint="#2D81CA"
                     android:src="@drawable/zalo">
@@ -126,17 +128,29 @@
             <RelativeLayout
                 android:layout_below="@+id/icon_connect"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="400dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
                 android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:background="@drawable/box_info">
+                <ImageView
+                    android:id="@+id/Tab_showdialog"
+                    app:tint="#6F000000"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/editing">
+                </ImageView>
                     <LinearLayout
+                        android:layout_alignParentTop="true"
                         android:id="@+id/UserName_Profile"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_gravity="center"
                         android:padding="20dp">
@@ -145,11 +159,9 @@
                             android:layout_height="wrap_content"
                             android:text="@string/userName"
                             android:fontFamily="@font/interextrabold"
-                            android:textStyle="italic"
                             android:textSize="15sp"
                             android:paddingRight="10dp"
-                            android:textColor="#6D101010"
-                            android:letterSpacing="0.015"/>
+                            android:textColor="#6D101010" />
                         <TextView
                             android:id="@+id/userName_info"
                             android:layout_width="match_parent"
@@ -159,12 +171,11 @@
                             android:layout_height="wrap_content"
                             android:textSize="18sp" />
                     </LinearLayout>
-
                     <LinearLayout
-                        android:layout_below="@+id/UserName_Profile"
+                        android:layout_centerVertical="true"
                         android:id="@+id/Email_Profile"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_gravity="center"
                         android:padding="20dp">
@@ -175,15 +186,13 @@
                             android:fontFamily="@font/interextrabold"
                             android:text="@string/email"
                             android:textColor="#6D101010"
-                            android:textSize="15dp"
-                            android:textStyle="italic"
-                            android:letterSpacing="0.15"/>
+                            android:textSize="15dp" />
                         <TextView
                             android:id="@+id/userEmail_info"
                             android:layout_width="match_parent"
                             android:layout_marginTop="10dp"
                             android:ellipsize="marquee"
-                            android:scrollbars="vertical"
+                            android:scrollbars="horizontal"
                             android:singleLine="true"
                             android:text="Mail"
                             android:fontFamily="@font/interextrabold"
@@ -192,10 +201,10 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_below="@+id/Email_Profile"
+                        android:layout_alignParentBottom="true"
                         android:id="@+id/Password_Profile"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_gravity="center"
                         android:padding="20dp">
@@ -207,10 +216,7 @@
                             android:text="@string/passWord"
                             android:textColor="#6D101010"
                             android:paddingRight="10dp"
-                            android:textSize="15dp"
-                            android:textStyle="italic"
-                            android:letterSpacing="0.15"/>
-
+                            android:textSize="15dp" />
                         <TextView
                             android:layout_marginTop="-30dp"
                             android:id="@+id/userPassword_info"
