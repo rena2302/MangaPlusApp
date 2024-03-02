@@ -1,7 +1,7 @@
 package com.example.mangaplusapp.object;
 
 public class Chapter {
-    String ID_CHAPTER, NAME_CHAPTER, MANGA_CHAPTER, ID_MANGA_CHAPTER;
+    String ID_CHAPTER, NAME_CHAPTER, MANGA_CHAPTER, ID_MANGA_CHAPTER,PDF_CHAPTER;
 
     public Chapter() {
     }
@@ -36,5 +36,13 @@ public class Chapter {
 
     public void setID_MANGA_CHAPTER(String ID_MANGA_CHAPTER) {
         this.ID_MANGA_CHAPTER = ID_MANGA_CHAPTER;
+    }
+
+    public String getPDF_CHAPTER() {
+        return PDF_CHAPTER;
+    }
+
+    public void setPDF_CHAPTER(String PDF_CHAPTER) {
+        this.PDF_CHAPTER = PDF_CHAPTER;
     }
 }

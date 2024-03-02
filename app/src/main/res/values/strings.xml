@@ -32,12 +32,6 @@
     <string name="RecommendForgot">Please enter your registered email address we will get back to you with the reset password link and confirmation OTP thanks</string>
     <string name="RecommnedOTP">Enter 4 digit number that sent to</string>
     <string name="Continue">Continue</string>
-    <string name="EditProfile">Edit Profile</string>
-    <string name="ChangePassword">Change Password</string>
-    <string name="Connect">Connect</string>
-    <string name="Logout">Log out</string>
-    <string name="Language">Language</string>
-    <string name="ChoosePaymentOption">Choose Payment option</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">Forgot Password</string>
     <string name="forgotDescripstion">Forgot password? Easily recover with our apps user-friendly feature for a secure experience</string>
@@ -72,7 +66,6 @@
     <string name="userName">User Name</string>
     <string name="email">Email</string>
     <string name="passWordProfileUser">PassWord</string>
-    <string name="card_s_information">card\'s information</string>
 
 
 </resources>

@@ -26,6 +26,7 @@ import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ItemCategoryBinding;
 import com.example.mangaplusapp.databinding.ItemDashboardBinding;
 import com.example.mangaplusapp.object.Category;
+import com.example.mangaplusapp.object.Chapter;
 import com.example.mangaplusapp.util.filter.FilterCategory;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,6 +38,7 @@ import java.util.List;
 public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.DashBoardViewHolder> implements Filterable {
     private Context context;
     private List<Category> categoryList, filterList;
+    private List<Chapter> chapterList;
     private ItemDashboardBinding binding;
     private FilterCategory filterCategory;
     public void setData(Context context, List<Category> categoryList){
@@ -44,7 +46,13 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
         this.categoryList = categoryList;
         this.filterList = categoryList;
     }
+    public DashBoardAdapter(){
 
+    }
+    public DashBoardAdapter(Context context, List<Chapter> chapterList){
+        this.context = context;
+        this.chapterList = chapterList;
+    }
     public List<Category> getCategoryList() {
         return categoryList;
     }
@@ -62,10 +70,11 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
 
     @Override
     public void onBindViewHolder(@NonNull DashBoardViewHolder holder, int position) {
-        Category category = categoryList.get(position); // Take item in category list at present position
-        if (category == null){
+        Category category = categoryList.get(position);// Take item in category list at present position
+        if (category == null) {
             return;
         }
+
         holder.dashText.setText(category.getNAME_CATEGORY());
         holder.dashButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,8 +85,8 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(context,"Deleting...", Toast.LENGTH_LONG).show();
-                                deleteCategory(category,holder);
+                                Toast.makeText(context, "Deleting...", Toast.LENGTH_LONG).show();
+                                deleteCategory(category);
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -98,9 +107,9 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
     }
     private void showCategoryDialog(Category category) {
          DashBoardMangaListFragment dialogFragment = new DashBoardMangaListFragment(category);
-        dialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), "category_dialog");
+         dialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), "category_dialog");
     }
-    private void deleteCategory(Category category, DashBoardViewHolder holder) {
+    private void deleteCategory(Category category) {
         //get id from object
         String idCategory = category.getID_CATEGORY();
         //Attach to Firebase > Categories > ID_CATEGORY

@@ -26,6 +26,14 @@
         tools:replace="android:theme"
         tools:targetApi="34">
         <activity
+            android:name=".Activity.ChapterPdfActivity"
+            android:exported="false"
+            android:label="@string/title_activity_chapter_pdf"
+            android:theme="@style/Theme.MangaPlusApp" />
+        <activity
+            android:name=".Activity.MangaDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ChapterAddActivity"
             android:exported="false" />
         <activity

@@ -1,6 +1,7 @@
 package com.example.mangaplusapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.example.mangaplusapp.Activity.DashBoardAdminActivity;
+import com.example.mangaplusapp.Activity.MangaDetailActivity;
 import com.example.mangaplusapp.R;
 
 import java.util.List;
 
 import com.example.mangaplusapp.object.TruyenTranh;
+import com.example.mangaplusapp.util.ActivityUtils;
 
 public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.TruyenTranhViewHolder>{
     private Context context;
@@ -53,6 +57,18 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                 .load(truyenTranh.getPICTURE_MANGA())
                 .into(holder.imageTruyen);
         holder.txtTruyen.setText(truyenTranh.getNAME_MANGA());
+
+        /*Code for DashBoardMangaListFragment*/
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityUtils.startNewActivityAndFinishCurrent(context, MangaDetailActivity.class,
+                        "ID_MANGA", truyenTranh.getID_MANGA(),
+                        "NAME_MANGA", truyenTranh.getNAME_MANGA(),
+                        "PICTURE_MANGA", truyenTranh.getPICTURE_MANGA(),
+                        "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA());
+            }
+        });
     }
 
     @Override

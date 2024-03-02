@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.ChapterPdfActivity">
+    <RelativeLayout
+        android:id="@+id/pdfViewLabel"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/shape_toolbar">
+        <TextView
+            android:id="@+id/pdfViewChapterName"
+            android:text="Chapter N"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/pdfViewPage"
+            android:text="N/N"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:layout_below="@+id/pdfViewChapterName"
+            android:layout_centerHorizontal="true"/>
+        <ImageButton
+            android:id="@+id/pdfViewBackBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_back_black"
+            android:background="@color/transparent"/>
+    </RelativeLayout>
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/pdfView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/pdfViewLabel"/>
+</RelativeLayout>

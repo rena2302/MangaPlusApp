@@ -29,9 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DashBoardMangaListFragment extends DialogFragment {
-    private final Category category;
+    private Category category;
     private View view;
-    private final List<TruyenTranh> truyenTranhList = new ArrayList<>();
+    public DashBoardMangaListFragment() {}
     public DashBoardMangaListFragment (Category category){
         this.category = category;
     }
@@ -61,6 +61,7 @@ public class DashBoardMangaListFragment extends DialogFragment {
                                         dialog.dismiss();
                                     }
                                 });
+
         // Load dữ liệu và cập nhật adapter khi dữ liệu đã sẵn sàng
         loadMangas(new OnDataLoadedListener() {
             @Override
