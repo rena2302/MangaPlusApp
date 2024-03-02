@@ -30,6 +30,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.LoginActivity;
+import com.example.mangaplusapp.Activity.RegionFragment;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 
@@ -40,6 +41,7 @@ public class UserProfileFragment extends Fragment {
     TextView getUserNameInfoTxt,getUserNameTittleTxt,getUserEmailTxt,getUserPasswordTxt,HeaderEmail;
     int userId;
     String userEmail,userPassword,userName,userAvt;
+    LinearLayout navToRegion;
     private static final int SELECT_IMAGE = 100;
 
 
@@ -64,7 +66,6 @@ public class UserProfileFragment extends Fragment {
         TabDialog=root.findViewById(R.id.Tab_showdialog);
         getUserAvtIMG = root.findViewById(R.id.Avatar_Profile_Image);
         avtContainer = root.findViewById(R.id.Avatar_Profile_Card);
-
         TabDialog.setOnClickListener(v->{
             showDialog();
         });
@@ -134,12 +135,12 @@ public class UserProfileFragment extends Fragment {
             Uri uri = data.getData();
             // Hiển thị hình ảnh được chọn
             // Thêm dữ liệu vào cơ sở dữ liệu
-                Log.d("ADD URI ", "TRUE" + uri.toString());
-                db.updatePicture(userId,uri);
-                String spoilPicture = db.getPicture(userId);
-                Glide.with(this).load(spoilPicture).into(getUserAvtIMG);
+            Log.d("ADD URI ", "TRUE" + uri.toString());
+            db.updatePicture(userId,uri);
+            String spoilPicture = db.getPicture(userId);
+            Glide.with(this).load(spoilPicture).into(getUserAvtIMG);
 
-                Toast.makeText(getActivity(), "Update Avatar Successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Update Avatar Successful", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -161,8 +162,14 @@ public class UserProfileFragment extends Fragment {
             dialog.dismiss();
             loadFragment(new ChangePasswordFragment(),false);
         });
-//        LinearLayout editconnect=dialog.findViewById(R.id.EditConnect);
-          AppCompatButton logout=dialog.findViewById(R.id.Logout);
+
+        navToRegion=dialog.findViewById(R.id.navToLanguage);
+        navToRegion.setOnClickListener(v->{
+            dialog.dismiss();
+            loadFragment(new RegionFragment(),false);
+        });
+
+        AppCompatButton logout=dialog.findViewById(R.id.Logout);
 
         if(isLoggedIn()){
             logout.setHint("Log Out");
