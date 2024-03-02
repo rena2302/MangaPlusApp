@@ -114,14 +114,14 @@
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/dialog_connect">
+                    android:background="@drawable/background_language">
                 </ImageView>
                 <ImageView
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/dialog_overlay_icon_connect">
+                    android:src="@drawable/icon_laguage">
                 </ImageView>
             </RelativeLayout>
             <TextView
@@ -130,7 +130,7 @@
                 android:fontFamily="@font/interextrabold"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
-                android:text="@string/Connect"/>
+                android:text="@string/Language"/>
             <ImageView
                 android:layout_marginEnd="20dp"
                 android:layout_width="wrap_content"

@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -79,10 +81,12 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         //===============================CREATE CALL PRESENTER====================================//
         loginPresenter=new LoginPresenter(this);
         //===============================END CALL PRESENTER====================================//
+        final Animation scaleAnimation = AnimationUtils.loadAnimation(this, R.anim.scale_btn);
         btnLoginTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             // this event final
             public void onClick(View v) {
+                btnLoginTxt.startAnimation(scaleAnimation);
                 loginPresenter.receivedHandleLogin(emailTxt,passwordTxt,db,idUser,editor);
                 //đang ở ActView thông báo cho presenter khi đươc click sự kiện
             }

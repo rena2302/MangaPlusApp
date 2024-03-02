@@ -37,6 +37,8 @@
     <string name="ChangePassword">पासवर्ड बदलें</string>
     <string name="Connect">जोड़ना</string>
     <string name="Logout">लॉग आउट</string>
+    <string name="Language">भाषा</string>
+    <string name="ChoosePaymentOption">भुगतान विकल्प चुनें</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">अपना कूट शब्द भूल गए?</string>
     <string name="forgotDescripstion">पासवर्ड भूल गए? सुरक्षित अनुभव के लिए हमारे ऐप्स की उपयोगकर्ता-अनुकूल सुविधा के साथ आसानी से पुनर्प्राप्त करें</string>
