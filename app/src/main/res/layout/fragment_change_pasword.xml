@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Fragment.CreatePasswordFragment">
+    tools:context=".Fragment.ChangePasswordFragment">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,7 +21,7 @@
                 android:layout_centerHorizontal="true">
             </ImageView>
             <ImageButton
-                android:id="@+id/backRegisterBtn"
+                android:id="@+id/backChangedPassBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -42,48 +42,13 @@
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_below="@+id/backRegisterBtn">
+                android:layout_below="@+id/backChangedPassBtn">
                 <RelativeLayout
-                    android:id="@+id/InputUNCP"
+                    android:id="@+id/InputOldPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/TextUN"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/userName"
-                        android:fontFamily="@font/stylishregular"
-                        android:textAppearance="@style/textview_createaccount">
-                    </TextView>
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/ResUserName_act"
-                        android:layout_marginTop="10dp"
-                        android:layout_below="@+id/TextUN"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hintEnabled="false"
-                        app:endIconMode="clear_text"
-                        android:layout_marginBottom="20dp"
-                        android:textColorHint="@color/gray">
-                        <EditText
-                            android:id="@+id/userNewNameTxt"
-                            android:drawableStart="@drawable/ic_personal"
-                            android:drawablePadding="10dp"
-                            android:layout_width="match_parent"
-                            android:hint="@string/userName"
-                            android:fontFamily="@font/inter"
-                            android:background="@drawable/input_grayblur"
-                            android:layout_height="wrap_content">
-                        </EditText>
-                    </com.google.android.material.textfield.TextInputLayout>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:id="@+id/InputPPCP"
-                    android:layout_below="@+id/InputUNCP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/TextEP"
+                        android:id="@+id/TextOldPass"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/passWord"
@@ -91,9 +56,9 @@
                         android:textAppearance="@style/textview_createaccount">
                     </TextView>
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/ResPass_act"
+                        android:id="@+id/EditOldPass_act"
                         android:layout_marginTop="10dp"
-                        android:layout_below="@+id/TextEP"
+                        android:layout_below="@+id/TextOldPass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:hintEnabled="false"
@@ -101,7 +66,43 @@
                         android:layout_marginBottom="20dp"
                         android:textColorHint="@color/gray">
                         <EditText
-                            android:id="@+id/userNewPasswordTxt"
+                            android:id="@+id/EditOldPassTxt"
+                            android:drawableStart="@drawable/ic_new_password"
+                            android:drawablePadding="10dp"
+                            android:layout_width="match_parent"
+                            android:hint="@string/userName"
+                            android:inputType="textPassword"
+                            android:fontFamily="@font/inter"
+                            android:background="@drawable/input_grayblur"
+                            android:layout_height="wrap_content">
+                        </EditText>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/InputNewPass"
+                    android:layout_below="@+id/InputOldPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/TextnewPass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ChangePassword"
+                        android:fontFamily="@font/stylishregular"
+                        android:textAppearance="@style/textview_createaccount">
+                    </TextView>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/NewPass_act"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/TextnewPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:endIconMode="password_toggle"
+                        android:layout_marginBottom="20dp"
+                        android:textColorHint="@color/gray">
+                        <EditText
+                            android:id="@+id/NewPasswordTxt"
                             android:layout_width="match_parent"
                             android:drawableStart="@drawable/password_icon"
                             android:drawablePadding="10dp"
@@ -114,12 +115,12 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </RelativeLayout>
                 <RelativeLayout
-                    android:id="@+id/InputCPCP"
-                    android:layout_below="@+id/InputPPCP"
+                    android:id="@+id/InputConfirmPass"
+                    android:layout_below="@+id/InputNewPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/TextCP"
+                        android:id="@+id/TextConfirm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/confirmPassword"
@@ -129,7 +130,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/ResCPass_act"
                         android:layout_marginTop="10dp"
-                        android:layout_below="@+id/TextCP"
+                        android:layout_below="@+id/TextConfirm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:hintEnabled="false"
@@ -139,7 +140,7 @@
                         <EditText
                             android:id="@+id/userRePasswordTxt"
                             android:layout_width="match_parent"
-                            android:drawableStart="@drawable/ic_new_password"
+                            android:drawableStart="@drawable/ic_confirm_password"
                             android:drawablePadding="10dp"
                             android:fontFamily="@font/inter"
                             android:background="@drawable/input_grayblur"
@@ -150,8 +151,8 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </RelativeLayout>
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnSubmitInfo"
-                    android:layout_below="@+id/InputCPCP"
+                    android:id="@+id/btnSubmitInfo_Edit"
+                    android:layout_below="@+id/InputConfirmPass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_accept"

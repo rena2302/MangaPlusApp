@@ -33,6 +33,12 @@
     <string name="RecommendForgot">등록된 이메일 주소를 입력하세요. 비밀번호 재설정 링크와 확인 OTP를 알려드리겠습니다. 감사합니다.</string>
     <string name="RecommnedOTP">보낸번호 4자리를 입력하세요.</string>
     <string name="Continue">계속하다</string>
+    <string name="EditProfile">프로필 수정</string>
+    <string name="ChangePassword">비밀번호 변경</string>
+    <string name="Connect">연결하다</string>
+    <string name="Logout">로그 아웃</string>
+    <string name="Language">언어</string>
+    <string name="ChoosePaymentOption">결제 옵션을 선택하세요</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">비밀번호를 잊으 셨나요</string>
     <string name="forgotDescripstion">비밀번호를 잊으 셨나요? 안전한 경험을 위해 당사 앱의 사용자 친화적인 기능으로 쉽게 복구하세요</string>

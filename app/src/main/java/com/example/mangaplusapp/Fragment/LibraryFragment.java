@@ -44,10 +44,6 @@ public class LibraryFragment extends Fragment {
         ///////===========================Get ID from layout Fragment =========================/////
         userNameTxt = rootView.findViewById(R.id.userName_info);
         userEmailTxt = rootView.findViewById(R.id.userEmail_info);
-        userLogOutBtn=rootView.findViewById(R.id.userLogOut_info);
-        testlog = rootView.findViewById(R.id.btnNavToProfile); // sau nay xoa
-        userIMG = rootView.findViewById(R.id.userIMG);
-        testlogmanga = rootView.findViewById(R.id.btnNavToTestAddManga);// sau nay xoa
         ///////===========================Get data=========================/////////////////////////
         db = new UserDBHelper(requireContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
