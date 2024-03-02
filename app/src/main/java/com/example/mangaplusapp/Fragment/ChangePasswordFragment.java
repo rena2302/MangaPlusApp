@@ -1,20 +1,31 @@
 package com.example.mangaplusapp.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 
 public class ChangePasswordFragment extends Fragment {
-    ImageButton Backbtn;
+    ImageButton backBtn;
+    EditText getOldPass,getNewPass,getCfPass;
+    String oldPass,newPass,cfPass;
+    UserDBHelper dbHelper;
+    AppCompatButton submit;
+    int userID;
     public  ChangePasswordFragment()
     {
 
@@ -28,11 +39,64 @@ public class ChangePasswordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root =inflater.inflate(R.layout.fragment_change_pasword, container, false);
-        Backbtn=root.findViewById(R.id.backChangedPassBtn);
-        Backbtn.setOnClickListener(v->{
+        //========================================GET ID==========================================//
+        backBtn=root.findViewById(R.id.backChangedPassBtn);
+        getOldPass = root.findViewById(R.id.EditOldPassTxt);
+        getNewPass = root.findViewById(R.id.NewPasswordTxt);
+        getCfPass = root.findViewById(R.id.userRePasswordTxt);
+        submit= root.findViewById(R.id.btnSubmitInfo_Edit);
+        //****************************************************************************************//
+        //========================================GET DATA========================================//
+        dbHelper = new UserDBHelper(requireContext());
+        SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = preferences.edit();
+        userID=preferences.getInt("user_id",-1);
+        //****************************************************************************************//
+        if(userID!=-1){
+            navigate();
+        }
+        return  root;
+    }
+    private void navigate(){
+        backBtn.setOnClickListener(v->{
             loadFragment(new UserProfileFragment(),false);
         });
-        return  root;
+        submit.setOnClickListener(v->{
+            userNewPass();
+        });
+
+    }
+    private void userNewPass(){
+        oldPass= getOldPass.getText().toString();
+        newPass = getNewPass.getText().toString();
+        cfPass= getCfPass.getText().toString();
+        if(oldPass.isEmpty()||newPass.isEmpty()||cfPass.isEmpty()){
+            Toast.makeText(getContext(),"Please enter all fields",Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            if(dbHelper.CheckPassword(userID,oldPass)){
+                if(newPass.equals(cfPass)){
+                    if(dbHelper.validPassword(newPass)){
+                        //=================================Success case===============================//
+                        dbHelper.resetPassword(newPass);
+                        Toast.makeText(getContext(),"Update password successful",Toast.LENGTH_SHORT).show();
+                        loadFragment(new UserProfileFragment(),false);
+                        //*****************************************************************************//
+                    }
+                    else{
+                        Toast.makeText(getContext(),"Please enter password length >= 8 or <= 12 ",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(getContext(),"Password and Confirm password not match",Toast.LENGTH_SHORT).show();
+                }
+            }
+            else{
+                Toast.makeText(getContext(),"Password not match",Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

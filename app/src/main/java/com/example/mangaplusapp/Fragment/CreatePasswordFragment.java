@@ -9,16 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.mangaplusapp.Activity.LoginActivity;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
-import android.widget.ImageButton;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 public class CreatePasswordFragment extends Fragment {
 
@@ -111,16 +113,22 @@ public class CreatePasswordFragment extends Fragment {
                 }
                 else{
                     if(dbHelper.validPassword(userPassword)){
-                        //=================================SUCCESSFUL=============================//
-                        dbHelper.insertData(userEmail,userPassword,userName_register);
-                        Log.d("user_email", userEmail);
-                        Log.d("user_password", userPassword);
-                        Log.d("user_rePassword", userRePassword);
-                        Log.d("user_name", userName_register);
-                        Toast.makeText(getContext(),"Register Successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getContext(),LoginActivity.class);
-                        startActivity(intent);
-                        //=================================SUCCESSFUL=============================//
+                        if(dbHelper.validName(userName_register)){
+                            //=================================SUCCESSFUL=============================//
+                            dbHelper.insertData(userEmail,userPassword,userName_register);
+                            Log.d("user_email", userEmail);
+                            Log.d("user_password", userPassword);
+                            Log.d("user_rePassword", userRePassword);
+                            Log.d("user_name", userName_register);
+                            Toast.makeText(getContext(),"Register Successful", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getContext(),LoginActivity.class);
+                            startActivity(intent);
+                            //=================================SUCCESSFUL=============================//
+                        }
+                        else{
+                            Toast.makeText(getContext(),"Please enter user name length >= 5 ", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                     else if(userPassword.length() <8){
                         Toast.makeText(getContext(),"Please enter password length >= 8", Toast.LENGTH_SHORT).show();
