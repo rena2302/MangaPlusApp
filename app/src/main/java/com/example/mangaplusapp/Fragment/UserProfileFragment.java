@@ -136,7 +136,9 @@ public class UserProfileFragment extends Fragment {
             // Thêm dữ liệu vào cơ sở dữ liệu
                 Log.d("ADD URI ", "TRUE" + uri.toString());
                 db.updatePicture(userId,uri);
-                Glide.with(this).load(userAvt).into(getUserAvtIMG);
+                String spoilPicture = db.getPicture(userId);
+                Glide.with(this).load(spoilPicture).into(getUserAvtIMG);
+
                 Toast.makeText(getActivity(), "Update Avatar Successful", Toast.LENGTH_SHORT).show();
 
         }
