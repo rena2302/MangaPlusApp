@@ -37,6 +37,8 @@
     <string name="ChangePassword">비밀번호 변경</string>
     <string name="Connect">연결하다</string>
     <string name="Logout">로그 아웃</string>
+    <string name="Language">언어</string>
+    <string name="ChoosePaymentOption">결제 옵션을 선택하세요</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">비밀번호를 잊으 셨나요</string>
     <string name="forgotDescripstion">비밀번호를 잊으 셨나요? 안전한 경험을 위해 당사 앱의 사용자 친화적인 기능으로 쉽게 복구하세요</string>

@@ -44,6 +44,8 @@
     <string name="sendOtp">Gửi OTP</string>
     <string name="VerificationTittle">Xác minh</string>
     <string name="VerificationNotify">Chúng tôi sẽ gửi cho bạn mật khẩu một lần vào địa chỉ email này.</string>
+    <string name="Language">Ngôn ngữ</string>
+    <string name="ChoosePaymentOption">Tùy chọn thanh toán</string>
     <!-- End Forgot   -->
     <!-- End Form   -->
     <!-- Begin DashBoard -->
