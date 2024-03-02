@@ -239,6 +239,16 @@ public class UserDBHelper  extends MangaPlusDatabase {
         db.close();
         return name;
     }
+    public void UpdateUserName(int userId, String newUserName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UserTable.TB_USER_NAME, newUserName.trim());
+        db.update(UserTable.TB_USER, values, UserTable.TB_USER_ID_USER + " = ?", new String[]{String.valueOf(userId)});
+        db.close();
+    }
+    public boolean validName(String userName){
+        return userName.trim().length() >= 5;
+    }
     public void UpdatePassword(int userId, String newPass){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -247,6 +257,7 @@ public class UserDBHelper  extends MangaPlusDatabase {
         db.update(UserTable.TB_USER, values, UserTable.TB_USER_ID_USER + " = ?", new String[]{String.valueOf(userId)});
         db.close();
     }
+
     public boolean clearALlUser() {
         SQLiteDatabase db = this.getWritableDatabase();
         int result = db.delete(UserTable.TB_USER, null, null);
