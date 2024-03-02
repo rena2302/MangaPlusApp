@@ -151,7 +151,7 @@ public class UserProfileFragment extends Fragment {
 
         editprofile.setOnClickListener(v->{
             dialog.dismiss();
-            loadFragment(new EditProfileFragment(),false);
+            loadFragment(new EditNameFragment(),false);
         });
         LinearLayout editpass=dialog.findViewById(R.id.EditPass);
 
