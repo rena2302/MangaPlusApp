@@ -24,7 +24,6 @@ import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Fragment.CreatorFragment;
 import com.example.mangaplusapp.Fragment.HomeFragment;
 import com.example.mangaplusapp.Fragment.HotFragment;
-import com.example.mangaplusapp.Fragment.LibraryFragment;
 import com.example.mangaplusapp.Fragment.SearchFragment;
 import com.example.mangaplusapp.Fragment.UserProfileFragment;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
@@ -46,6 +45,7 @@ public class MainActivity extends AppCompatActivity{
     TextView userNameTxt;
     String userName;
     ImageView imgViewUser;
+    UserDBHelper dbHelper;
     int userID;
 
     @Override
@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity{
         setContentView(binding.getRoot()); // set content phải trước focus nha
         loadFragment(new HomeFragment(),false, R.menu.home_fragment_header_menu);
         focusFragment();
+
         loadMenuDrawer();
-        setInfo();
 
     }
     private void setInfo(){
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity{
         imgViewUser=  navigationView.getHeaderView(0).findViewById(R.id.menu_drawer_header_image_user);
         SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        UserDBHelper dbUserHelper = new UserDBHelper(this);
+        dbHelper = new UserDBHelper(this);
         userID = preferences.getInt("user_id",-1);
         if(userID==-1){
             Log.d("Main ACtivity", "can not get userID");
@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity{
         else{
             Log.d("Main ACtivity", " get userID success ");
         }
-        userName = dbUserHelper.getUserName(userID);
+        userName = dbHelper.getUserName(userID);
         userNameTxt.setText(userName);
-        String userIMG = dbUserHelper.getPicture(userID);
+        String userIMG = dbHelper.getPicture(userID);
         Glide.with(this).load(userIMG).into(imgViewUser);
 
     }
@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity{
         toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        setInfo();
     }
     /*Override Function*/
     @Override
@@ -220,4 +221,5 @@ public class MainActivity extends AppCompatActivity{
         //If you wanna more feature add more condition
         return super.onOptionsItemSelected(item);
     }
+
 }

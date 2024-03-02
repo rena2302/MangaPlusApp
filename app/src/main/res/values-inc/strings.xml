@@ -64,4 +64,7 @@
     <string name="userName">उपयोगकर्ता नाम</string>
     <string name="email">ईमेल</string>
     <string name="passWordProfileUser">पासवर्ड</string>
+    <string name="oldPasswordProfileUser">पुराना पासवर्ड</string>
+    <string name="newPasswordProfileUser">नया पासवर्ड</string>
+    <string name="confirmNewPasswordProfileUser">पासवर्ड की पुष्टि करें</string>
 </resources>
