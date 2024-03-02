@@ -55,6 +55,15 @@
     <string name="username">Name</string>
     <!--Add a new category-->
     <string name="addANewCategory">Add A New Category</string>
+    <!--Add a new Manga-->
+    <string name="addANewManga">Add a New Manga</string>
+    <string name="addMangaDescription">Add Manga Description</string>
+    <string name="addMangaPicture">Add Manga Picture</string>
+    <string name="addMangaCategory">Add Manga Category</string>
+    <string name="addManga">Add Manga</string>
+    <!--Ađ a new Chapter-->
+    <string name="addNewChapter">Add New Chapter</string>
+    <string name="addChapterManga">Add Chapter Manga</string>
     <!--DashBoard User-->
     <string name="dashBoardUser">DashBoard User</string>
     <!--User edit-->
@@ -63,7 +72,8 @@
     <string name="userName">User Name</string>
     <string name="email">Email</string>
     <string name="passWordProfileUser">PassWord</string>
-    <string name="card_s_information">card\'s information</string>
-
-
+    <string name="oldPasswordProfileUser">Old Password</string>
+    <string name="newPasswordProfileUser">New Password</string>
+    <string name="confirmNewPasswordProfileUser">Confirm password</string>
+    <string name="card_s_information">Card\'s Information</string>
 </resources>
