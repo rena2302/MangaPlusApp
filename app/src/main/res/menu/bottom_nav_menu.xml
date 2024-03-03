@@ -2,33 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:icon="@drawable/ic_home"
-        android:title="HOME" />
-    <item
         android:id="@+id/navHot"
-        android:layout_width="wrap_content"
-        android:icon="@drawable/ic_home"
-        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_bottom_nav_hot"
         android:title="HOT" />
     <item
         android:id="@+id/navSearch"
-        android:layout_width="wrap_content"
-        android:icon="@drawable/ic_home"
-        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_bottom_nav_search"
         android:title="SEARCH" />
     <item
+        android:id="@+id/navHome"
+        android:icon="@drawable/ic_bottom_nav_home"
+        android:enabled="true"
+        android:title="HOME" />
+    <item
         android:id="@+id/navCreator"
-        android:layout_width="wrap_content"
-        android:icon="@drawable/ic_home"
-        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_bottom_nav_creator"
         android:title="CREATOR" />
     <item
         android:id="@+id/navProfile"
-        android:icon="@drawable/ic_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_bottom_nav_user"
         android:title="PROFILE" />
 </menu>
