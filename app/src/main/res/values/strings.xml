@@ -61,11 +61,13 @@
     <string name="addMangaPicture">Add Manga Picture</string>
     <string name="addMangaCategory">Add Manga Category</string>
     <string name="addManga">Add Manga</string>
-    <!--Ađ a new Chapter-->
+    <!--Add a new Chapter-->
     <string name="addNewChapter">Add New Chapter</string>
     <string name="addChapterManga">Add Chapter Manga</string>
     <!--DashBoard User-->
     <string name="dashBoardUser">DashBoard User</string>
+    <!--Search Manga-->
+    <string name="searchManga">Input Manga name</string>
     <!--User edit-->
     <string name="changeImage">Change Image</string>
     <!--User profile-->

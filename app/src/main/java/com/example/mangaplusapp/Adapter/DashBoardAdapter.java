@@ -49,10 +49,6 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
         this.context = context;
         this.chapterList = chapterList;
     }
-    public List<Category> getCategoryList() {
-        return categoryList;
-    }
-
     public void setCategoryList(List<Category> categoryList) {
         this.categoryList = categoryList;
     }

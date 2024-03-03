@@ -5,6 +5,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,12 +25,15 @@ import java.util.List;
 import com.example.mangaplusapp.object.Category;
 import com.example.mangaplusapp.object.TruyenTranh;
 import com.example.mangaplusapp.util.ActivityUtils;
+import com.example.mangaplusapp.util.filter.FilterManga;
 
-public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.TruyenTranhViewHolder>{
+public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.TruyenTranhViewHolder> implements Filterable {
     private Context context;
-    private List<TruyenTranh> truyenTranhList;
+    private List<TruyenTranh> truyenTranhList, filterList;
+    private FilterManga filterManga;
     public void SetData(List<TruyenTranh> truyenTranhList){
         this.truyenTranhList = truyenTranhList;
+        this.filterList = truyenTranhList;
     }
     public TruyenTranhAdapter(){}
     public TruyenTranhAdapter(Context context){
@@ -38,6 +43,7 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
         this.truyenTranhList = truyenTranhList;
         this.context = context;
     }
+    public void setFilterManga(List<TruyenTranh> truyenTranhList) {this.truyenTranhList = truyenTranhList;}
     @NonNull
     @Override
     public TruyenTranhViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -82,6 +88,14 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
             return truyenTranhList.size();
         }
         return 0;
+    }
+
+    @Override
+    public Filter getFilter() {
+        if(filterManga == null){
+            filterManga = new FilterManga(filterList,this);
+        }
+        return filterManga;
     }
 
     public static class TruyenTranhViewHolder extends RecyclerView.ViewHolder{
