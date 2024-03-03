@@ -61,7 +61,10 @@
     <!--User edit-->
     <string name="changeImage">thay đổi hình ảnh</string>
     <!--User profile-->
-    <string name="userName">tên tài khoản</string>
+    <string name="userName">Tên tài khoản</string>
     <string name="email">E-mail</string>
     <string name="passWordProfileUser">Mật khẩu</string>
+    <string name="oldPasswordProfileUser">Mật khẩu cũ</string>
+    <string name="newPasswordProfileUser">Mật khẩu mới</string>
+    <string name="confirmNewPasswordProfileUser">Xác nhận mật khẩu mới</string>
 </resources>

@@ -70,7 +70,7 @@
                             android:drawableStart="@drawable/ic_new_password"
                             android:drawablePadding="10dp"
                             android:layout_width="match_parent"
-                            android:hint="@string/userName"
+                            android:hint="@string/oldPasswordProfileUser"
                             android:inputType="textPassword"
                             android:fontFamily="@font/inter"
                             android:background="@drawable/input_grayblur"
@@ -109,7 +109,7 @@
                             android:fontFamily="@font/inter"
                             android:background="@drawable/input_grayblur"
                             android:inputType="textPassword"
-                            android:hint="@string/passWord"
+                            android:hint="@string/newPasswordProfileUser"
                             android:layout_height="wrap_content">
                         </EditText>
                     </com.google.android.material.textfield.TextInputLayout>

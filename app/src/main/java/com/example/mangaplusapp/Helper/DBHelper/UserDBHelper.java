@@ -82,12 +82,10 @@ public class UserDBHelper  extends MangaPlusDatabase {
     public boolean resetPassword(String newPassword) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(UserTable.TB_USER_PASSWORD, newPassword);
-        // use function update to reset new password
+        String hashPassword= hashPassword(newPassword.trim());
+        contentValues.put(UserTable.TB_USER_PASSWORD, hashPassword);
         int affectedRows = db.update(UserTable.TB_USER, contentValues,null,null);
-        // if haven't data updated, process wil return 0
         db.close();
-        // check have data updated, did it check sure data had update
         return affectedRows > 0;
     }
     @SuppressLint({"Range", "Recycle"})
@@ -155,14 +153,14 @@ public class UserDBHelper  extends MangaPlusDatabase {
         return userId;
     }
     @SuppressLint({"Range","Recycle"})
-    public Boolean CheckPassword(String password) {
+    public boolean CheckPassword(int userID, String password) { // in db
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
         try {
-            cursor = db.rawQuery("SELECT " + UserTable.TB_USER_PASSWORD + " FROM " + UserTable.TB_USER + " WHERE " + UserTable.TB_USER_PASSWORD + " = ?", new String[]{password});
+            cursor = db.rawQuery("SELECT " + UserTable.TB_USER_PASSWORD + " FROM " + UserTable.TB_USER + " WHERE " + UserTable.TB_USER_ID_USER + " = ?", new String[]{String.valueOf(userID)});
             if (cursor.moveToFirst()) {
-                String hashedPasswordInDB = cursor.getString(cursor.getColumnIndex(UserTable.TB_USER_PASSWORD));
-                return CheckHashPassword(password, hashedPasswordInDB);
+                String hashedPassword = cursor.getString(cursor.getColumnIndex(UserTable.TB_USER_PASSWORD));
+                return CheckHashPassword(password, hashedPassword);
             }
         } finally {
             if (cursor != null) {
@@ -172,6 +170,7 @@ public class UserDBHelper  extends MangaPlusDatabase {
         }
         return false;
     }
+
 
     @SuppressLint("Range")
     public Boolean CheckEmailPassword(String email, String password) {
@@ -239,6 +238,18 @@ public class UserDBHelper  extends MangaPlusDatabase {
         db.close();
         return name;
     }
+    public void UpdateUserName(int userId, String newUserName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UserTable.TB_USER_NAME, newUserName.trim());
+        db.update(UserTable.TB_USER, values, UserTable.TB_USER_ID_USER + " = ?", new String[]{String.valueOf(userId)});
+        db.close();
+    }
+    public boolean validName(String userName){
+        if(!(userName.trim().length()>=5 && userName.trim().length()<=12))
+            return false;
+        return true;
+    }
     public void UpdatePassword(int userId, String newPass){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -247,6 +258,7 @@ public class UserDBHelper  extends MangaPlusDatabase {
         db.update(UserTable.TB_USER, values, UserTable.TB_USER_ID_USER + " = ?", new String[]{String.valueOf(userId)});
         db.close();
     }
+
     public boolean clearALlUser() {
         SQLiteDatabase db = this.getWritableDatabase();
         int result = db.delete(UserTable.TB_USER, null, null);
