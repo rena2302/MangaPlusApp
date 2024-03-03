@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.mangaplusapp.Adapter.ChapterAdapter;
 import com.example.mangaplusapp.databinding.ActivityChapterPdfBinding;
 import com.example.mangaplusapp.util.Constans;
 import com.github.barteksc.pdfviewer.listener.OnErrorListener;
+import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -17,7 +19,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 
-public class ChapterPdfActivity extends AppCompatActivity{
+public class ChapterPdfActivity extends BaseActivity{
+    private boolean isPdfLoaded = false;
     ActivityChapterPdfBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,7 @@ public class ChapterPdfActivity extends AppCompatActivity{
                 .addOnSuccessListener(new OnSuccessListener<byte[]>() {
                     @Override
                     public void onSuccess(byte[] bytes) {
-                        binding.pdfViewChapterName.setText(getIntent().getExtras().getString("NAME_CHAPTER"));
+                        isPdfLoaded = true;
                         binding.pdfView.fromBytes(bytes)
                                 .swipeHorizontal(false)// false = vertical , true = horizontal
                                 .onPageChange(new OnPageChangeListener() {
@@ -67,14 +70,24 @@ public class ChapterPdfActivity extends AppCompatActivity{
                                     }
                                 })
                                 .load();
+                        if (isPdfLoaded) {
+                            binding.pdfViewChapterName.setText(getIntent().getExtras().getString("NAME_CHAPTER"));
+                        }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-
                     }
                 });
     }
 
+    @Override
+    public void onBackPressed() {
+        if (isPdfLoaded) {
+            super.onBackPressed(); // Chỉ cho phép back khi PDF đã load xong
+        } else {
+            Toast.makeText(ChapterPdfActivity.this,"Manga on loading please wait...", Toast.LENGTH_LONG).show();
+        }
+    }
 }

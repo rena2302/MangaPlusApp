@@ -27,6 +27,7 @@ import java.util.List;
 
 public class DashBoardAdminActivity extends AppCompatActivity {
     private ActivityDashBoardAdminBinding binding;
+    DashBoardAdapter dashBoardAdapter = new DashBoardAdapter(this, new ArrayList<>());
     public interface OnDataLoadedListener {
         void onDataLoaded(List<Category> categoryList);
     }
@@ -36,7 +37,6 @@ public class DashBoardAdminActivity extends AppCompatActivity {
         binding = ActivityDashBoardAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         onClickEvent();
-        DashBoardAdapter dashBoardAdapter = new DashBoardAdapter(this, new ArrayList<>());
         //setup LayoutManager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(binding.getRoot().getContext(), RecyclerView.VERTICAL,false);
         binding.adminRcvContainer.setLayoutManager(linearLayoutManager);
@@ -46,14 +46,13 @@ public class DashBoardAdminActivity extends AppCompatActivity {
             @Override
             public void onDataLoaded(List<Category> categoryList) {
                 dashBoardAdapter.setData(DashBoardAdminActivity.this, categoryList);
+                searchEvent();
                 dashBoardAdapter.notifyDataSetChanged();
             }
         });
-        searchEvent();
     }
 
     private void searchEvent() {
-        DashBoardAdapter dashBoardAdapter = new DashBoardAdapter();
         binding.adminDashSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

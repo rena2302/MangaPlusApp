@@ -55,18 +55,10 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
         }
         holder.chapterTxt.setText(chapter.getNAME_CHAPTER());
 
-        boolean isChecked = false; // Mặc định không được chọn
-        if (selectedPosition == position) {
-            isChecked = true;
-        }
-
-        // Thiết lập trạng thái của chapterButton
-        holder.chapterButton.setChecked(isChecked);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holder.chapterButton.setChecked(true);
-                selectedPosition = holder.getAdapterPosition();
                 ActivityUtils.startNewActivity(context, ChapterPdfActivity.class,
                         "ID_CHAPTER", chapter.getID_CHAPTER(),
                         "NAME_CHAPTER", chapter.getNAME_CHAPTER(),

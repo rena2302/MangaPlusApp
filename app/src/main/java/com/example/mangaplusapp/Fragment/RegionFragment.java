@@ -1,4 +1,4 @@
-package com.example.mangaplusapp.Activity;
+package com.example.mangaplusapp.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -56,7 +56,7 @@ public class RegionFragment extends Fragment {
                     startAct();
                 }else if (selectedLanguage.equals("Hindi")){
                     setLocal(getActivity(),"inc");
-                   startAct();
+                    startAct();
                 }
                 else if (selectedLanguage.equals("Korean")){
                     setLocal(getActivity(),"ko");
