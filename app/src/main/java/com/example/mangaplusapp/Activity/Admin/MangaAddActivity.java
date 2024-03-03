@@ -1,25 +1,16 @@
-package com.example.mangaplusapp.Activity;
+package com.example.mangaplusapp.Activity.Admin;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mangaplusapp.Helper.DBHelper.MangaDBHelper;
-import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityAddMangaBinding;
 import com.example.mangaplusapp.object.Category;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -138,6 +129,10 @@ public class MangaAddActivity extends AppCompatActivity {
             Toast.makeText(this,"Please set manga picture...!", Toast.LENGTH_LONG).show();
         } else {
             addMangaFireBase();
+            binding.addMangaPicture.getText().clear();
+            binding.addMangaCategory.setText("");
+            binding.addMangaDescription.getText().clear();
+            binding.addMangaName.getText().clear();
         }
     }
 

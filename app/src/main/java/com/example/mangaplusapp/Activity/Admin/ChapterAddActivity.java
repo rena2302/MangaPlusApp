@@ -1,4 +1,4 @@
-package com.example.mangaplusapp.Activity;
+package com.example.mangaplusapp.Activity.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +13,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityChapterAddBinding;
-import com.example.mangaplusapp.object.Category;
 import com.example.mangaplusapp.object.TruyenTranh;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -93,6 +91,7 @@ public class ChapterAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ChapterAddActivity.this,DashBoardAdminActivity.class));
+                finish();
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.example.mangaplusapp.Activity;
+package com.example.mangaplusapp.Activity.User;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.mangaplusapp.Activity.Base.LoginActivity;
 import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
@@ -72,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
         haveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

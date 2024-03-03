@@ -1,4 +1,4 @@
-package com.example.mangaplusapp.Activity;
+package com.example.mangaplusapp.Activity.User;
 
 import android.app.Activity;
 import android.content.Intent;

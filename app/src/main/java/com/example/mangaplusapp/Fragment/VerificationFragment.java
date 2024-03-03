@@ -20,7 +20,7 @@ import android.widget.Toast;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
-import com.example.mangaplusapp.Activity.RegisterActivity;
+import com.example.mangaplusapp.Activity.User.RegisterActivity;
 import com.example.mangaplusapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;

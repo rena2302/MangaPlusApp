@@ -2,10 +2,10 @@ package com.example.mangaplusapp.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,9 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mangaplusapp.Activity.ChapterPdfActivity;
-import com.example.mangaplusapp.Activity.MangaDetailActivity;
+import com.example.mangaplusapp.Activity.Base.ChapterPdfActivity;
 import com.example.mangaplusapp.R;
+import com.example.mangaplusapp.databinding.ItemChapterBinding;
 import com.example.mangaplusapp.databinding.ItemDashboardBinding;
 import com.example.mangaplusapp.object.Chapter;
 import com.example.mangaplusapp.util.ActivityUtils;
@@ -28,9 +28,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterViewHolder>{
-    ItemDashboardBinding binding;
+    ItemChapterBinding itemChapterBinding;
     private Context context;
     private List<Chapter> chapterList;
+    private int selectedPosition = 0;
     public void setData(Context context, List<Chapter> chapterList){
         this.context = context;
         this.chapterList = chapterList;
@@ -42,8 +43,8 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
     @NonNull
     @Override
     public ChapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemDashboardBinding.inflate(LayoutInflater.from(context), parent, false);
-        return new ChapterViewHolder(binding.getRoot());
+        itemChapterBinding = ItemChapterBinding.inflate(LayoutInflater.from(context), parent, false);
+        return new ChapterViewHolder(itemChapterBinding.getRoot());
     }
 
     @Override
@@ -53,31 +54,19 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
             return;
         }
         holder.chapterTxt.setText(chapter.getNAME_CHAPTER());
-        holder.chapterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Delete")
-                        .setMessage("Are you sure delete this chapter")
-                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(context, "Deleting...", Toast.LENGTH_LONG).show();
-                                deleteChapter(chapter);
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-            }
-        });
+
+        boolean isChecked = false; // Mặc định không được chọn
+        if (selectedPosition == position) {
+            isChecked = true;
+        }
+
+        // Thiết lập trạng thái của chapterButton
+        holder.chapterButton.setChecked(isChecked);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.chapterButton.setChecked(true);
+                selectedPosition = holder.getAdapterPosition();
                 ActivityUtils.startNewActivity(context, ChapterPdfActivity.class,
                         "ID_CHAPTER", chapter.getID_CHAPTER(),
                         "NAME_CHAPTER", chapter.getNAME_CHAPTER(),
@@ -87,25 +76,6 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
             }
         });
     }
-    private void deleteChapter(Chapter chapter) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chapters");
-        String chapterId = chapter.getID_CHAPTER();
-        reference.child(chapterId)
-                .removeValue()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(context,"Delete " + chapter.getNAME_CHAPTER() + " successfully", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context," " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-
-    }
     @Override
     public int getItemCount() {
         return chapterList.size();
@@ -113,11 +83,11 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
 
     public static class ChapterViewHolder extends RecyclerView.ViewHolder {
         TextView chapterTxt;
-        ImageButton chapterButton;
+        CheckBox chapterButton;
         public ChapterViewHolder(@NonNull View itemView) {
             super(itemView);
-            chapterTxt = itemView.findViewById(R.id.itemDashText);
-            chapterButton = itemView.findViewById(R.id.itemDashBtn);
+            chapterTxt = itemView.findViewById(R.id.itemChapterText);
+            chapterButton = itemView.findViewById(R.id.itemChapterCheck);
         }
     }
 }

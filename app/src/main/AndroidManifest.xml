@@ -26,17 +26,17 @@
         tools:replace="android:theme"
         tools:targetApi="34">
         <activity
-            android:name=".Activity.ChapterPdfActivity"
+            android:name=".Activity.Base.ChapterPdfActivity"
             android:exported="false"
             android:theme="@style/Theme.MangaPlusApp" />
         <activity
-            android:name=".Activity.MangaDetailActivity"
+            android:name=".Activity.Admin.MangaDetailAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.ChapterAddActivity"
+            android:name=".Activity.Admin.ChapterAddActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.PaymentActivity"
+            android:name=".Activity.User.PaymentActivity"
             android:exported="true">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.MAIN" />
@@ -49,19 +49,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.CategoryAddActivity"
+            android:name=".Activity.User.MangaDetailActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".Activity.Admin.CategoryAddActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.MangaAddActivity"
+            android:name=".Activity.Admin.MangaAddActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.ForgotControlActivity"
+            android:name=".Activity.User.ForgotControlActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.UserEditActivity"
+            android:name=".Activity.User.UserEditActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.LoadingActivity"
+            android:name=".Activity.Base.LoadingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -70,25 +73,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.DashBoardUserActivity"
+            android:name=".Activity.User.DashBoardUserActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DashBoardAdminActivity"
+            android:name=".Activity.Admin.DashBoardAdminActivity"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.RegisterActivity"
+            android:name=".Activity.User.RegisterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".Activity.Base.LoginActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".Activity.User.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,22 +1,22 @@
-package com.example.mangaplusapp.Activity;
+package com.example.mangaplusapp.Activity.User;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.mangaplusapp.Activity.Admin.DashBoardAdminActivity;
+import com.example.mangaplusapp.Activity.Admin.MangaDetailAdminActivity;
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.Adapter.ChapterAdapter;
-import com.example.mangaplusapp.Adapter.DashBoardAdapter;
 import com.example.mangaplusapp.R;
+import com.example.mangaplusapp.databinding.ActivityMangaDetailAdminBinding;
 import com.example.mangaplusapp.databinding.ActivityMangaDetailBinding;
 import com.example.mangaplusapp.object.Chapter;
-import com.example.mangaplusapp.object.TruyenTranh;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MangaDetailActivity extends AppCompatActivity {
+public class MangaDetailActivity extends BaseActivity {
+
     ActivityMangaDetailBinding binding;
     private List<Chapter> chapterList = new ArrayList<>();
     // Khởi tạo adapter trước khi hiển thi
@@ -65,7 +66,6 @@ public class MangaDetailActivity extends AppCompatActivity {
                 Toast.makeText(MangaDetailActivity.this, "The loading mangas was interrupted",Toast.LENGTH_SHORT).show();
             }
         });
-
     }
     private void setTextItem() {
         Intent intent = getIntent();
@@ -77,11 +77,12 @@ public class MangaDetailActivity extends AppCompatActivity {
                 .into(binding.mangaDetailImg);
 
     }
-
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(MangaDetailActivity.this, DashBoardAdminActivity.class));
+        // Xử lý sự kiện khi nút back được nhấn trong activity này
+        // Ví dụ: Trở về màn hình trước đó hoặc thoát ứng dụng
+        startActivity(new Intent(MangaDetailActivity.this, MainActivity.class));
         finish();
+        super.onBackPressed();
     }
 }

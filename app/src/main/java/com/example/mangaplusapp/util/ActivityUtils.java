@@ -26,5 +26,6 @@ public class ActivityUtils {
             ((Activity) context).finish();
         }
     }
+
 }
 

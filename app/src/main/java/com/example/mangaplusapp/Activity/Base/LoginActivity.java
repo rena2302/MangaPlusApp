@@ -1,4 +1,4 @@
-package com.example.mangaplusapp.Activity;
+package com.example.mangaplusapp.Activity.Base;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.mangaplusapp.Activity.User.ForgotControlActivity;
+import com.example.mangaplusapp.Activity.User.MainActivity;
+import com.example.mangaplusapp.Activity.User.RegisterActivity;
 import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.ModelAndPresenter.Login.LoginPresenter;

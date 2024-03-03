@@ -1,4 +1,4 @@
-package com.example.mangaplusapp.Activity;
+package com.example.mangaplusapp.Activity.User;
 
 
 import android.os.Bundle;
@@ -18,7 +18,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.mangaplusapp.Fragment.CreatorFragment;
 import com.example.mangaplusapp.Fragment.HomeFragment;
 import com.example.mangaplusapp.Fragment.HotFragment;
-import com.example.mangaplusapp.Fragment.LibraryFragment;
 import com.example.mangaplusapp.Fragment.SearchFragment;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityMainBinding;

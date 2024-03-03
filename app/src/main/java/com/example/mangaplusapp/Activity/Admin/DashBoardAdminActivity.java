@@ -1,4 +1,4 @@
-package com.example.mangaplusapp.Activity;
+package com.example.mangaplusapp.Activity.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,15 +9,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.mangaplusapp.Adapter.DashBoardAdapter;
-import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityDashBoardAdminBinding;
 import com.example.mangaplusapp.object.Category;
+import com.example.mangaplusapp.object.TruyenTranh;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,19 +27,33 @@ import java.util.List;
 
 public class DashBoardAdminActivity extends AppCompatActivity {
     private ActivityDashBoardAdminBinding binding;
-    private List<Category> categoryList = new ArrayList<>();
-    private DashBoardAdapter dashBoardAdapter;
+    public interface OnDataLoadedListener {
+        void onDataLoaded(List<Category> categoryList);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDashBoardAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         onClickEvent();
-        loadCategories();
+        DashBoardAdapter dashBoardAdapter = new DashBoardAdapter(this, new ArrayList<>());
+        //setup LayoutManager
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(binding.getRoot().getContext(), RecyclerView.VERTICAL,false);
+        binding.adminRcvContainer.setLayoutManager(linearLayoutManager);
+        //set adapter
+        binding.adminRcvContainer.setAdapter(dashBoardAdapter);
+        loadCategories(new OnDataLoadedListener() {
+            @Override
+            public void onDataLoaded(List<Category> categoryList) {
+                dashBoardAdapter.setData(DashBoardAdminActivity.this, categoryList);
+                dashBoardAdapter.notifyDataSetChanged();
+            }
+        });
         searchEvent();
     }
 
     private void searchEvent() {
+        DashBoardAdapter dashBoardAdapter = new DashBoardAdapter();
         binding.adminDashSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -56,7 +68,6 @@ public class DashBoardAdminActivity extends AppCompatActivity {
                 }catch (Exception e){
                     Toast.makeText(binding.getRoot().getContext(), " " + e.getMessage(),Toast.LENGTH_LONG).show();
                 }
-
             }
 
             @Override
@@ -66,9 +77,10 @@ public class DashBoardAdminActivity extends AppCompatActivity {
         });
     }
 
-    private void loadCategories() {
+    private void loadCategories(OnDataLoadedListener listener) {
         //Get all data from firebase > Categories
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Categories");
+        List<Category> categoryList = new ArrayList<>();
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -79,14 +91,7 @@ public class DashBoardAdminActivity extends AppCompatActivity {
                     //add to List
                     categoryList.add(category);
                 }
-                //setup LayoutManager
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(binding.getRoot().getContext(), RecyclerView.VERTICAL,false);
-                binding.adminRcvContainer.setLayoutManager(linearLayoutManager);
-                //setup adapter
-                dashBoardAdapter = new DashBoardAdapter();
-                dashBoardAdapter.setData(DashBoardAdminActivity.this, categoryList);
-                //set adapter
-                binding.adminRcvContainer.setAdapter(dashBoardAdapter);
+                listener.onDataLoaded(categoryList);
             }
 
             @Override
