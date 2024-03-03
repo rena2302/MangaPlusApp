@@ -15,7 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
-import com.example.mangaplusapp.Activity.LoginActivity;
+import com.example.mangaplusapp.Activity.Base.LoginActivity;
 import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
@@ -110,7 +110,7 @@ public class CreatePasswordFragment extends Fragment {
                         Log.d("user_rePassword", userRePassword);
                         Log.d("user_name", userName_register);
                         Toast.makeText(getContext(),"Register Successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getContext(),LoginActivity.class);
+                        Intent intent = new Intent(getContext(), LoginActivity.class);
                         startActivity(intent);
                         //=================================SUCCESSFUL=============================//
                     }
