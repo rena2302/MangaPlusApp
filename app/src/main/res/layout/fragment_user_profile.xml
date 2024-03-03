@@ -26,8 +26,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:cardCornerRadius="10000dp"
-                    android:background="@drawable/shape_circle"
+                    app:cardCornerRadius="200dp"
                     android:elevation="10dp"
                     android:translationZ="5dp">
                     <ImageView
