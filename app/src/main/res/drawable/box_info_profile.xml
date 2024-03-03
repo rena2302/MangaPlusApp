@@ -1,45 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:bottom="1dp"
-        android:right="1dp">
-        <shape android:shape="rectangle">
-            <solid android:color="#1A000000" />
-            <corners android:radius="20dp"> </corners>
-        </shape>
-    </item>
-    <item android:bottom="2dp"
-        android:right="2dp">
-        <shape android:shape="rectangle">
-            <solid android:color="#14000000" />
-            <corners android:radius="20dp"> </corners>
-        </shape>
-    </item>
-    <item android:bottom="4dp"
-        android:right="4dp">
-        <shape android:shape="rectangle">
-            <solid android:color="#0F000000" />
-            <corners android:radius="20dp"> </corners>
-        </shape>
-    </item>
-    <item android:bottom="6dp"
-        android:right="6dp">
-        <shape android:shape="rectangle">
-            <solid android:color="#0A000000" />
-            <corners android:radius="20dp"> </corners>
-        </shape>
-    </item>
-    <item android:bottom="8dp"
-        android:right="8dp">
-        <shape android:shape="rectangle">
-            <solid android:color="#05000000" />
-            <corners android:radius="20dp"> </corners>
-        </shape>
-    </item>
-    <item android:bottom="10dp"
-        android:right="10dp">
-        <shape android:shape="rectangle">
-            <solid android:color="#FFFFFF" />
-            <corners android:radius="20dp"> </corners>
-        </shape>
-    </item>
-</layer-list>
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="300dp"
+    android:height="371dp"
+    android:viewportWidth="300"
+    android:viewportHeight="371"
+    >
+    <group>
+        <clip-path
+            android:pathData="M12 0H288C294.627 0 300 5.37258 300 12V359C300 365.627 294.627 371 288 371H12C5.37258 371 0 365.627 0 359V12C0 5.37258 5.37258 0 12 0Z"
+            />
+        <path
+            android:pathData="M0 0V371H300V0"
+            android:fillColor="#FFFFFF"
+            />
+    </group>
+</vector>

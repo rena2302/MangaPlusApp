@@ -12,6 +12,11 @@
     <string name="Library">Library</string>
     <string name="newMemberSignUp"><b>Create Account</b> </string>
     <string name="questionHaveAccount">Have a <b>Account ?</b> </string>
+    <string name="HOT">HOT</string>
+    <string name="HOME">HOME</string>
+    <string name="CREATOR">CREATOR</string>
+    <string name="PROFILE">PROFILE</string>
+    <string name="SEARCH">SEARCH</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="manga_plus_home">Manga Plus!</string>

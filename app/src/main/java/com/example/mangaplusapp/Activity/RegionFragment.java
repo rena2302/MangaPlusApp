@@ -7,13 +7,17 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 import com.example.mangaplusapp.R;
@@ -23,9 +27,10 @@ import java.util.Locale;
 
 public class RegionFragment extends Fragment {
 
-    Spinner spinner;
-    Context context;
-    String[] languages = {"Select language","English","VietNam","Hindi","Korean"};
+    AutoCompleteTextView spinner;
+    AppCompatButton reset_btn;
+    ArrayAdapter<String> adapter;
+    String[] languages = {"English","VietNam","Hindi","Korean"};
     public RegionFragment() {
     }
 
@@ -42,36 +47,33 @@ public class RegionFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_region, container, false);
         spinner =root.findViewById(R.id.regionSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item,languages);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter = new ArrayAdapter<String>(requireContext(),R.layout.list_item_laguage,languages);
+//        adapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
         spinner.setAdapter(adapter);
         spinner.setSelection(0);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        reset_btn=root.findViewById(R.id.Language_Apply);
+        final String[] GetKey = new String[1];
+        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @SuppressLint("UnsafeIntentLaunch")
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedLanguage = parent.getItemAtPosition(position).toString();
                 if(selectedLanguage.equals("English")){
-                    setLocal(getActivity(),"en");
-                    startAct();
+                    GetKey[0] ="en";
                 }else if (selectedLanguage.equals("Hindi")){
-                    setLocal(getActivity(),"inc");
-                   startAct();
+                    GetKey[0] ="inc";
                 }
                 else if (selectedLanguage.equals("Korean")){
-                    setLocal(getActivity(),"ko");
-                    startAct();
+                    GetKey[0] ="ko";
                 }
                 else if(selectedLanguage.equals("VietNam")){
-                    setLocal(getActivity(),"vi");
-                    startAct();
+                    GetKey[0] ="vi";
                 }
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+        });
+        reset_btn.setOnClickListener(v->{
+            setLocal(requireContext(),GetKey[0]);
+            startAct();
         });
         return root;
     }
@@ -80,9 +82,9 @@ public class RegionFragment extends Fragment {
         Intent intent = getActivity().getIntent(); // Lấy intent hiện tại
         getActivity().startActivity(intent); // Khởi động lại hoạt động
     }
-    private void setLocal(Activity activity, String langCode){
+    private void setLocal(Context context, String langCode){
         Locale locale = new Locale(langCode);
-        Resources resources = activity.getResources();
+        Resources resources = context.getResources();
         Configuration configuration = resources.getConfiguration();
         configuration.setLocale(locale);
         resources.updateConfiguration(configuration,resources.getDisplayMetrics());

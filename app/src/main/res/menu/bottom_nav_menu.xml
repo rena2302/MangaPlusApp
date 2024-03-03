@@ -4,22 +4,22 @@
     <item
         android:id="@+id/navHot"
         android:icon="@drawable/ic_bottom_nav_hot"
-        android:title="HOT" />
+        android:title="@string/HOT" />
     <item
         android:id="@+id/navSearch"
         android:icon="@drawable/ic_bottom_nav_search"
-        android:title="SEARCH" />
+        android:title="@string/SEARCH" />
     <item
         android:id="@+id/navHome"
         android:icon="@drawable/ic_bottom_nav_home"
         android:enabled="true"
-        android:title="HOME" />
+        android:title="@string/HOME" />
     <item
         android:id="@+id/navCreator"
         android:icon="@drawable/ic_bottom_nav_creator"
-        android:title="CREATOR" />
+        android:title="@string/CREATOR" />
     <item
         android:id="@+id/navProfile"
         android:icon="@drawable/ic_bottom_nav_user"
-        android:title="PROFILE" />
+        android:title="@string/PROFILE" />
 </menu>
