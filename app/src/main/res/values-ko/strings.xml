@@ -13,6 +13,11 @@
     <string name="Library">도서관</string>
     <string name="newMemberSignUp"><b>계정 만들기</b> </string>
     <string name="questionHaveAccount">계정이 있습니다</string>
+    <string name="HOT">더운</string>
+    <string name="HOME">집</string>
+    <string name="CREATOR">창조자</string>
+    <string name="PROFILE">프로필</string>
+    <string name="SEARCH">찾다</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">안녕하세요 빈 조각입니다</string>
     <string name="manga_plus_home">Manga Plus!</string>

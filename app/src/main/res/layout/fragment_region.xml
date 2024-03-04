@@ -1,27 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.RegionFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".Activity.RegionFragment">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="match_parent">
-        <Spinner
-            android:id="@+id/regionSpinner"
-            android:layout_width="200dp"
-            android:layout_height="200dp">
-
-        </Spinner>
-        <TextView
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_height="400dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/background_language">
+        </ImageView>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Language_Apply"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_language"
+            android:layout_marginBottom="30dp"
             android:layout_width="wrap_content"
-            android:text="@string/passWord"
-            android:layout_height="wrap_content">
-        </TextView>
+            android:layout_height="wrap_content"
+            android:text="Apply"
+            android:elevation="20dp"
+            android:translationZ="40dp"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/white"
+            android:fontFamily="@font/interextrabold"
+            android:textSize="18sp"
+            />
     </RelativeLayout>
-</RelativeLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="16dp"
+        android:hint="Languages"
+        app:startIconDrawable="@drawable/icon_laguage"
+        app:startIconTint="@color/black"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <AutoCompleteTextView
+            android:id="@+id/regionSpinner"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingStart="60dp"
+            android:fontFamily="@font/interextrabold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            tools:ignore="LabelFor,RtlSymmetry" />
+    </com.google.android.material.textfield.TextInputLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

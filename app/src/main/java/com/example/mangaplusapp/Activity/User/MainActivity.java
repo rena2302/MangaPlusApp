@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity{
         loadFragment(new HomeFragment(),false, R.menu.home_fragment_header_menu);
         focusFragment();
         loadMenuDrawer();
-
+        setInfo();
     }
     private void setInfo(){
         navigationView = findViewById(R.id.navigation_drawer_container);

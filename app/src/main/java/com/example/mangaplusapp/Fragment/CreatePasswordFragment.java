@@ -9,14 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import com.example.mangaplusapp.Activity.Base.LoginActivity;
 import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
+import com.example.mangaplusapp.Activity.LoginActivity;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 
@@ -28,6 +30,7 @@ public class CreatePasswordFragment extends Fragment {
     AppCompatButton btnSubmit;
     RelativeLayout layoutInput;
     RelativeLayout layoutInputUserName;
+    ImageButton backRegisterBtn;
     int userId;
 
     @Override
@@ -38,7 +41,6 @@ public class CreatePasswordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Ẩn keyboard
-        KeyBoardHelper.ActionRemoveKeyBoardForFragment(requireContext(),container,inflater, R.layout.fragment_create_password);
         // Inflate the layout for this fragment
         View root =inflater.inflate(R.layout.fragment_create_password, container, false);
         dbHelper= new UserDBHelper(getContext());
@@ -59,7 +61,15 @@ public class CreatePasswordFragment extends Fragment {
         getUserPasswordTxt = root.findViewById(R.id.userNewPasswordTxt);
         getUserRePasswordTxt = root.findViewById(R.id.userRePasswordTxt);
         layoutInput=root.findViewById(R.id.userInputInfo_layout);
+        backRegisterBtn=root.findViewById(R.id.backRegisterBtn);
         userEmail =preferences.getString("user_email",null);
+
+        backRegisterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new VerificationFragment(),false);
+            }
+        });
 
         //===================================ForgotPassword Case==================================//
         if(dbHelper.CheckEmailExists(userEmail)){
@@ -79,7 +89,7 @@ public class CreatePasswordFragment extends Fragment {
 
                         dbHelper.UpdatePassword(userId,userPassword.trim());
                         Toast.makeText(getContext(),"RePassword Successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getContext(), LoginActivity.class);
+                        Intent intent = new Intent(getContext(),LoginActivity.class);
                         startActivity(intent);
                         //=================================SUCCESSFUL=============================//
                     }
@@ -103,16 +113,22 @@ public class CreatePasswordFragment extends Fragment {
                 }
                 else{
                     if(dbHelper.validPassword(userPassword)){
-                        //=================================SUCCESSFUL=============================//
-                        dbHelper.insertData(userEmail,userPassword,userName_register);
-                        Log.d("user_email", userEmail);
-                        Log.d("user_password", userPassword);
-                        Log.d("user_rePassword", userRePassword);
-                        Log.d("user_name", userName_register);
-                        Toast.makeText(getContext(),"Register Successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getContext(), LoginActivity.class);
-                        startActivity(intent);
-                        //=================================SUCCESSFUL=============================//
+                        if(dbHelper.validName(userName_register)){
+                            //=================================SUCCESSFUL=============================//
+                            dbHelper.insertData(userEmail,userPassword,userName_register);
+                            Log.d("user_email", userEmail);
+                            Log.d("user_password", userPassword);
+                            Log.d("user_rePassword", userRePassword);
+                            Log.d("user_name", userName_register);
+                            Toast.makeText(getContext(),"Register Successful", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getContext(),LoginActivity.class);
+                            startActivity(intent);
+                            //=================================SUCCESSFUL=============================//
+                        }
+                        else{
+                            Toast.makeText(getContext(),"Please enter user name length >= 5 ", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                     else if(userPassword.length() <8){
                         Toast.makeText(getContext(),"Please enter password length >= 8", Toast.LENGTH_SHORT).show();
@@ -125,5 +141,17 @@ public class CreatePasswordFragment extends Fragment {
         }
         return root;
 
+    }
+    private void loadFragment(Fragment fragment, boolean isAppInitialized) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        if (isAppInitialized) {
+            fragmentTransaction.add(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
+        } else {
+            fragmentTransaction.replace(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
+            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
+        }
+        fragmentTransaction.commit();
     }
 }

@@ -49,6 +49,7 @@
             android:backgroundTint="@color/pinkPastel_background"
             app:itemTextColor="@color/black"
             app:menu="@menu/bottom_nav_menu"
+            app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
             android:layout_alignParentBottom="true">
         </com.google.android.material.bottomnavigation.BottomNavigationView>
     </RelativeLayout>

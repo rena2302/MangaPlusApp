@@ -30,6 +30,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.Base.LoginActivity;
+import com.example.mangaplusapp.Activity.LoginActivity;
+import com.example.mangaplusapp.Activity.RegionFragment;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 
