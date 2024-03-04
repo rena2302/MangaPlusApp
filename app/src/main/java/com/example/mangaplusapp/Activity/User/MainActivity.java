@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity{
         setContentView(binding.getRoot()); // set content phải trước focus nha
         loadFragment(new HomeFragment(),false, R.menu.home_fragment_header_menu);
         focusFragment();
-
         loadMenuDrawer();
 
     }

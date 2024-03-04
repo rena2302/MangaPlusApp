@@ -66,8 +66,8 @@
     <string name="addChapterManga">Add Chapter Manga</string>
     <!--DashBoard User-->
     <string name="dashBoardUser">DashBoard User</string>
-    <!--Search Manga-->
-    <string name="searchManga">Input Manga name</string>
+    <!--Search-->
+    <string name="searchKeyWord">Input keyword (Manga or Category)</string>
     <!--User edit-->
     <string name="changeImage">Change Image</string>
     <!--User profile-->

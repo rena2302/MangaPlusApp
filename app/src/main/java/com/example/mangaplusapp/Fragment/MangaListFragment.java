@@ -9,10 +9,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mangaplusapp.Adapter.TruyenTranhAdapter;
@@ -28,11 +26,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashBoardMangaListFragment extends DialogFragment {
+public class MangaListFragment extends DialogFragment {
     private Category category;
     private View view;
-    public DashBoardMangaListFragment() {}
-    public DashBoardMangaListFragment (Category category){
+    public MangaListFragment() {}
+    public MangaListFragment(Category category){
         this.category = category;
     }
     public interface OnDataLoadedListener {

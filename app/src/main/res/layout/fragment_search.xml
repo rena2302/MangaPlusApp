@@ -13,8 +13,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="@string/searchManga">
+            android:hint="@string/searchKeyWord">
         </EditText>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchFmRcvCate"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="8dp" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchFmRcv"
             android:layout_margin="8dp"
