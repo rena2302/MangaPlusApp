@@ -1,6 +1,7 @@
 package com.example.mangaplusapp.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -71,7 +72,8 @@ public class EditNameFragment extends Fragment {
         submit.setOnClickListener(v->{
             if(setName()){
                 Toast.makeText(getActivity(), "Update User Name Successful", Toast.LENGTH_SHORT).show();
-                loadFragment(new UserProfileFragment(),false);
+//                loadFragment(new UserProfileFragment(),false);
+                startAct();
             }
             else{
                 Toast.makeText(getActivity(),"Please enter user name >= 5 ",Toast.LENGTH_SHORT).show();
@@ -89,5 +91,10 @@ public class EditNameFragment extends Fragment {
             fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
         }
         fragmentTransaction.commit();
+    }
+    private void startAct(){
+        getActivity().finish(); // Kết thúc hoạt động hiện tại
+        Intent intent = getActivity().getIntent(); // Lấy intent hiện tại
+        getActivity().startActivity(intent); // Khởi động lại hoạt động
     }
 }

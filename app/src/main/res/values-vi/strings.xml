@@ -50,6 +50,7 @@
     <string name="VerificationTittle">Xác minh</string>
     <string name="VerificationNotify">Chúng tôi sẽ gửi cho bạn mật khẩu một lần vào địa chỉ email này.</string>
     <string name="Language">Ngôn ngữ</string>
+    <string name="changeLanguage">Thay đổi ngôn ngữ</string>
     <string name="ChoosePaymentOption">Tùy chọn thanh toán</string>
     <!-- End Forgot   -->
     <!-- End Form   -->
@@ -72,4 +73,10 @@
     <string name="oldPasswordProfileUser">Mật khẩu cũ</string>
     <string name="newPasswordProfileUser">Mật khẩu mới</string>
     <string name="confirmNewPasswordProfileUser">Xác nhận mật khẩu mới</string>
+    <string name="placeForAdmin">Khu vực dành cho quản trị viên</string>
+    <string name="bought">Đã mua</string>
+    <string name="payment">Thanh toán</string>
+    <string name="favorite">Yêu thích</string>
+    <string name="changeTheme">Đổi giao diện</string>
+
 </resources>

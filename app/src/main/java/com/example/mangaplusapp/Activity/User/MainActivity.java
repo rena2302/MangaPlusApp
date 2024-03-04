@@ -2,6 +2,7 @@ package com.example.mangaplusapp.Activity.User;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.example.mangaplusapp.Activity.Admin.DashBoardAdminActivity;
+import com.example.mangaplusapp.Activity.RegionFragment;
 import com.example.mangaplusapp.Fragment.CreatorFragment;
 import com.example.mangaplusapp.Fragment.HomeFragment;
 import com.example.mangaplusapp.Fragment.HotFragment;
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity{
         loadFragment(new HomeFragment(),false, R.menu.home_fragment_header_menu);
         focusFragment();
         loadMenuDrawer();
+        navToDrawerMenuBottom();
         setInfo();
     }
     private void setInfo(){
@@ -77,6 +81,37 @@ public class MainActivity extends AppCompatActivity{
         String userIMG = dbHelper.getPicture(userID);
         Glide.with(this).load(userIMG).into(imgViewUser);
 
+    }
+    private void navToDrawerMenuBottom(){
+        navigationView=findViewById(R.id.navigation_drawer_container);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int itemId = menuItem.getItemId();
+                if (itemId == R.id.adminPlace) {
+                    Intent intent = new Intent(MainActivity.this, DashBoardAdminActivity.class);
+                    startActivity(intent);
+                } else if (itemId==R.id.menu_drawer_change_language) {
+                    loadFragmentBasic(new RegionFragment(),false);
+                } else if (itemId==R.id.menu_drawer_payment) {
+                    Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
+                    startActivity(intent);
+                }
+                return true;
+            }
+        });
+    }
+    private void loadFragmentBasic(Fragment fragment, boolean isAppInitialized) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        if (isAppInitialized) {
+            fragmentTransaction.add(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
+        } else {
+            fragmentTransaction.replace(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
+            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
+        }
+        fragmentTransaction.commit();
     }
     /*Non-override Function*/
     private void updateBottomNavigationView() {

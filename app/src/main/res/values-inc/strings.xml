@@ -43,6 +43,7 @@
     <string name="Connect">जोड़ना</string>
     <string name="Logout">लॉग आउट</string>
     <string name="Language">भाषा</string>
+    <string name="changeLanguage">भाषा बदलें</string>
     <string name="ChoosePaymentOption">भुगतान विकल्प चुनें</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">अपना कूट शब्द भूल गए?</string>
@@ -72,4 +73,10 @@
     <string name="oldPasswordProfileUser">पुराना पासवर्ड</string>
     <string name="newPasswordProfileUser">नया पासवर्ड</string>
     <string name="confirmNewPasswordProfileUser">पासवर्ड की पुष्टि करें</string>
+    <string name="placeForAdmin">व्यवस्थापक के लिए स्थान</string>
+    <string name="bought">खरीदा</string>
+    <string name="payment">भुगतान</string>
+    <string name="favorite">प्रिय</string>
+    <string name="changeTheme">विषयवस्तु परिवर्तित करें</string>
+
 </resources>

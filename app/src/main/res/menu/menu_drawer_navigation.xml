@@ -6,15 +6,15 @@
                 <item
                     android:id="@+id/menu_drawer_favorite"
                     android:icon="@mipmap/ic_search"
-                    android:title="Favorite"/>
+                    android:title="@string/favorite"/>
                 <item
                     android:id="@+id/menu_drawer_payment"
                     android:icon="@mipmap/ic_search"
-                    android:title="Payment"/>
+                    android:title="@string/payment"/>
                 <item
-                    android:id="@+id/menu_drawer_on_reading"
+                    android:id="@+id/menu_drawer_bought"
                     android:icon="@mipmap/ic_search"
-                    android:title="On Reading"/>
+                    android:title="@string/bought"/>
             </group>
         </menu>
     </item>
@@ -23,17 +23,17 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/menu_drawer_store_download"
+                    android:id="@+id/adminPlace"
                     android:icon="@mipmap/ic_search"
-                    android:title="Store and Download"/>
+                    android:title="@string/placeForAdmin"/>
                 <item
                     android:id="@+id/menu_drawer_change_language"
                     android:icon="@mipmap/ic_search"
-                    android:title="Change Language"/>
+                    android:title="@string/changeLanguage"/>
                 <item
                     android:id="@+id/menu_drawer_change_theme"
                     android:icon="@mipmap/ic_search"
-                    android:title="Change Theme"/>
+                    android:title="@string/changeTheme"/>
             </group>
         </menu>
     </item>

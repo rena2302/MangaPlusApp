@@ -89,6 +89,11 @@ public class UserProfileFragment extends Fragment {
         //****************************************************************************************//
         return root;
     }
+    private void startAct(){
+        getActivity().finish(); // Kết thúc hoạt động hiện tại
+        Intent intent = getActivity().getIntent(); // Lấy intent hiện tại
+        getActivity().startActivity(intent); // Khởi động lại hoạt động
+    }
     private boolean isLoggedIn(){
         return db.isUserLoggedIn();
     }
@@ -139,8 +144,8 @@ public class UserProfileFragment extends Fragment {
             db.updatePicture(userId,uri);
             String spoilPicture = db.getPicture(userId);
             Glide.with(this).load(spoilPicture).into(getUserAvtIMG);
-
             Toast.makeText(getActivity(), "Update Avatar Successful", Toast.LENGTH_SHORT).show();
+            startAct();
 
         }
     }

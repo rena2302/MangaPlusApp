@@ -43,6 +43,7 @@
     <string name="Connect">연결하다</string>
     <string name="Logout">로그 아웃</string>
     <string name="Language">언어</string>
+    <string name="changeLanguage">잔돈 언어</string>
     <string name="ChoosePaymentOption">결제 옵션을 선택하세요</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">비밀번호를 잊으 셨나요</string>
@@ -72,4 +73,10 @@
     <string name="oldPasswordProfileUser">이전 비밀번호</string>
     <string name="newPasswordProfileUser">새 비밀번호</string>
     <string name="confirmNewPasswordProfileUser">비밀번호 확인</string>
+    <string name="placeForAdmin">관리자를 위한 장소</string>
+    <string name="bought">구입</string>
+    <string name="payment">지불</string>
+    <string name="favorite">좋아하는</string>
+    <string name="changeTheme">테마 변경</string>
+
 </resources>

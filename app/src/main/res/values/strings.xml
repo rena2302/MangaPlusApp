@@ -42,6 +42,7 @@
     <string name="Connect">Connect</string>
     <string name="Logout">Log out</string>
     <string name="Language">Language</string>
+    <string name="changeLanguage">Change Language</string>
     <string name="ChoosePaymentOption">Choose Payment option</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">Forgot Password</string>
@@ -83,4 +84,9 @@
     <string name="newPasswordProfileUser">New password</string>
     <string name="confirmNewPasswordProfileUser">Confirm password</string>
     <string name="card_s_information">card\'s information</string>
+    <string name="placeForAdmin">Place for admin</string>
+    <string name="bought">Bought</string>
+    <string name="payment">Payment</string>
+    <string name="favorite">Favorite</string>
+    <string name="changeTheme">Change theme</string>
 </resources>
