@@ -54,14 +54,25 @@
     <!-- End  Form  -->
     <!-- Begin DashBoard -->
     <string name="dashBoardAdmin">Dashboard Admin</string>
-    <string name="addCategory">+ Add Category</string>
+    <string name="addCategory">Add Category</string>
     <!-- End DashBoard -->
     <!--Form profile-->
     <string name="username">Name</string>
     <!--Add a new category-->
     <string name="addANewCategory">Add A New Category</string>
+    <!--Add a new Manga-->
+    <string name="addANewManga">Add a New Manga</string>
+    <string name="addMangaDescription">Add Manga Description</string>
+    <string name="addMangaPicture">Add Manga Picture</string>
+    <string name="addMangaCategory">Add Manga Category</string>
+    <string name="addManga">Add Manga</string>
+    <!--Add a new Chapter-->
+    <string name="addNewChapter">Add New Chapter</string>
+    <string name="addChapterManga">Add Chapter Manga</string>
     <!--DashBoard User-->
     <string name="dashBoardUser">DashBoard User</string>
+    <!--Search-->
+    <string name="searchKeyWord">Input keyword (Manga or Category)</string>
     <!--User edit-->
     <string name="changeImage">Change Image</string>
     <!--User profile-->
@@ -72,6 +83,4 @@
     <string name="newPasswordProfileUser">New password</string>
     <string name="confirmNewPasswordProfileUser">Confirm password</string>
     <string name="card_s_information">card\'s information</string>
-
-
 </resources>

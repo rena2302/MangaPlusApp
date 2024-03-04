@@ -1,5 +1,6 @@
 package com.example.mangaplusapp.Adapter;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,18 +13,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.example.mangaplusapp.Activity.User.MangaDetailActivity;
 import com.example.mangaplusapp.R;
 
 import java.util.List;
 
 import com.example.mangaplusapp.object.TruyenTranh;
+import com.example.mangaplusapp.util.ActivityUtils;
 
 public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter.ImageSliderViewHolder>{
+    private Context context;
     private final List<TruyenTranh> imageSlidersList;
     private ViewPager2 viewPager2;
-    public ImageSliderAdapter(List<TruyenTranh> list, ViewPager2 viewPager2){
+    public ImageSliderAdapter(Context context,List<TruyenTranh> list, ViewPager2 viewPager2){
         this.imageSlidersList = list;
         this.viewPager2 = viewPager2;
+        this.context = context;
     }
     @NonNull
     @Override
@@ -41,10 +46,20 @@ public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter
         if (position == getItemCount() - 2){
             viewPager2.post(runnable);
         }
-        holder.textSlider.setText(imageSlider.getTenTruyen());
+        holder.textSlider.setText(imageSlider.getNAME_MANGA());
         Glide.with(holder.itemView.getContext())
-                .load(Uri.parse(imageSlider.getLinkAnh()))
+                .load(Uri.parse(imageSlider.getPICTURE_MANGA()))
                 .into(holder.imageSlider);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityUtils.startNewActivityAndFinishCurrent(context, MangaDetailActivity.class,
+                        "ID_MANGA", imageSlider.getID_MANGA(),
+                        "NAME_MANGA", imageSlider.getNAME_MANGA(),
+                        "PICTURE_MANGA", imageSlider.getPICTURE_MANGA(),
+                        "DESCRIPTION_MANGA", imageSlider.getDESCRIPTION_MANGA());
+            }
+        });
     }
 
     @Override

@@ -5,7 +5,7 @@
     android:id="@+id/main_activity_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity"
+    tools:context=".Activity.User.MainActivity"
     android:fitsSystemWindows="true"
     tools:openDrawer="end">
     <!--    android:orientation="vertical">-->

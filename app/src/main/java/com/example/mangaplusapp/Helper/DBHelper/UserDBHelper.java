@@ -11,7 +11,7 @@ import android.util.Log;
 import android.util.Patterns;
 
 import com.example.mangaplusapp.Database.MangaPlusDatabase;
-import com.example.mangaplusapp.util.UserTable;
+import com.example.mangaplusapp.util.table.UserTable;
 
 import org.mindrot.jbcrypt.BCrypt;
 

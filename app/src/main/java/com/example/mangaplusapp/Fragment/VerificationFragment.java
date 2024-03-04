@@ -25,7 +25,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
+import com.example.mangaplusapp.Activity.User.RegisterActivity;
 import com.example.mangaplusapp.Activity.RegisterActivity;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.Helper.LoadHelper.LoadFragment;

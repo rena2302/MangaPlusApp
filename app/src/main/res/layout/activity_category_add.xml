@@ -5,19 +5,25 @@
     android:layout_width="match_parent"
     android:background="@drawable/back01"
     android:layout_height="match_parent"
-    tools:context=".Activity.CategoryAddActivity">
+    tools:context=".Activity.Admin.CategoryAddActivity">
     <RelativeLayout
+        android:id="@+id/addCategoryLabel"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/shape_toolbar">
+
         <ImageButton
+            android:id="@+id/addCategoryBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/transparent"
+            android:contentDescription="Back"
             android:padding="20dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_back_white">
-        </ImageButton>
+            android:src="@drawable/ic_back_white"></ImageButton>
         <ImageView
             android:id="@+id/addCategoryImg"
             android:layout_width="110dp"
@@ -36,4 +42,18 @@
             android:layout_below="@+id/addCategoryImg">
         </TextView>
     </RelativeLayout>
+    <EditText
+        android:id="@+id/addCategoryName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        android:hint="@string/addANewCategory"
+        android:layout_below="@+id/addCategoryLabel"/>
+    <Button
+        android:id="@+id/addCategorySubmit"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Submit"
+        android:layout_below="@+id/addCategoryName"/>
 </RelativeLayout>

@@ -43,13 +43,17 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("com.google.firebase:firebase-auth:22.3.1")
+    implementation("com.google.firebase:firebase-database:20.3.0")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("androidx.navigation:navigation-fragment:2.6.0")
+    implementation("androidx.navigation:navigation-ui:2.6.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
 
     implementation("com.github.bumptech.glide:glide:4.12.0")
-   implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.23") //gif
+    implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.23") //gif
     annotationProcessor("com.github.bumptech.glide:compiler:4.13.2")
     implementation ("androidx.cardview:cardview:1.0.0") // box shadow
     implementation ("io.github.chaosleung:pinview:1.4.4") // input Pin
@@ -62,4 +66,6 @@ dependencies {
     implementation("com.github.momo-wallet:mobile-sdk:1.0.7")// momo SDK
 
     implementation("com.squareup.okhttp3:okhttp:4.12.0")// request HTTPs
+
+    implementation("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
 }

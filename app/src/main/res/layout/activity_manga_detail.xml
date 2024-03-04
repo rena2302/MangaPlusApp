@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.User.MangaDetailActivity">
+    <RelativeLayout
+        android:id="@+id/mangaDetailLabel"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <ImageView
+            android:id="@+id/mangaDetailImg"
+            android:layout_margin="8dp"
+            android:layout_width="150dp"
+            android:layout_height="200dp"/>
+
+        <TextView
+            android:id="@+id/mangaDetailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@+id/mangaDetailImg"
+            android:textSize="26sp"
+            android:text="Title"/>
+
+        <ScrollView
+            android:id="@+id/mangaDetailDescriptionScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mangaDetailTitle"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@+id/mangaDetailImg">
+
+            <TextView
+                android:id="@+id/mangaDetailDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textSize="14sp" />
+
+        </ScrollView>
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mangaDetailRcv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/mangaDetailLabel"/>
+</RelativeLayout>

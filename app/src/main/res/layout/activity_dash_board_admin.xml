@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back01"
-    tools:context=".Activity.DashBoardAdminActivity">
+    tools:context=".Activity.Admin.DashBoardAdminActivity">
+    <!--Label DashBoard-->
     <RelativeLayout
         android:id="@+id/toolbarAdmin"
         android:layout_width="match_parent"
@@ -44,6 +45,28 @@
             android:layout_centerVertical="true">
         </ImageButton>
     </RelativeLayout>
+    <!--Search Categories-->
+    <EditText
+        android:id="@+id/adminDashSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_below="@+id/toolbarAdmin"
+        android:hint="@string/Search"
+        android:drawableEnd="@drawable/ic_search_foreground"
+        android:drawableTint="@color/black"/>
+    <!--Show Categories-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/adminRcvContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomDashBoardUser"
+        android:layout_below="@+id/adminDashSearch"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp" />
+    <!--Add Category & Manga-->
     <LinearLayout
         android:id="@+id/bottomDashBoardUser"
         android:layout_width="match_parent"
@@ -55,6 +78,7 @@
         android:orientation="horizontal">
         <!--  ADD CATEGORY  -->
         <Button
+            android:id="@+id/adminAddCate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_button02"
@@ -64,11 +88,23 @@
             android:minHeight="50dp"
             android:textAllCaps="false">
         </Button>
+        <!-- ADD MANGA -->
+        <Button
+            android:id="@+id/adminAddManga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_button02"
+            android:text="@string/addManga"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:minHeight="50dp"
+            android:textAllCaps="false">
+        </Button>
         <!--    Add PDF    -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/addPdf"
+            android:id="@+id/addChapter"
             android:tint="@color/white"
             app:fabCustomSize="50dp"
             android:src="@drawable/pdf_24px">

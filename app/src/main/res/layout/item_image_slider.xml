@@ -24,6 +24,7 @@
             android:text="truyen tranh"
             android:layout_alignParentBottom="true"
             android:textSize="30sp"
+            android:singleLine="true"
             android:fontFamily="@font/stylescript"
             tools:ignore="TextSizeCheck"/>
     </RelativeLayout>

@@ -5,9 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,52 +14,50 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.mangaplusapp.Activity.MainActivity;
+import com.example.mangaplusapp.Activity.User.MainActivity;
 import com.example.mangaplusapp.R;
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.mangaplusapp.Adapter.CategoryAdapter;
 import com.example.mangaplusapp.Adapter.ImageSliderAdapter;
-import com.example.mangaplusapp.Adapter.TruyenTranhAdapter;
-import com.example.mangaplusapp.Helper.DBHelper.MangaDBHelper;
 import com.example.mangaplusapp.object.Category;
 import com.example.mangaplusapp.object.TruyenTranh;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class HomeFragment extends Fragment {
     View view;
     CategoryAdapter categoryAdapter;
-    TruyenTranhAdapter truyenTranhAdapter;
     ImageSliderAdapter imageSliderAdapter;
     RecyclerView recyclerViewCategory;
     private static final int PERMISSION_REQUEST_READ_MEDIA_IMAGES = 1001;
     ViewPager2 viewPager2;
     Handler handler = new Handler();
-    List<Category> categoryList = new ArrayList<Category>();
-    List<TruyenTranh> truyenTranhList = new ArrayList<TruyenTranh>();
-    private Menu menu;
-
+    List<Category> categoryList = new ArrayList<>();
+    public interface OnDataLoadedListener {
+        void onDataLoaded(List<TruyenTranh> truyenTranhList);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_home, container, false);
         Toolbar toolbar  = view.findViewById(R.id.main_header);
         ((MainActivity)requireActivity()).setSupportActionBar(toolbar);
         AddListCnT();
-        SetContentImageSlider();
-        SetContentRecycleView();
-        setRecyclerViewAnimation();
         if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.READ_MEDIA_IMAGES)
                 != PackageManager.PERMISSION_GRANTED) {
             // Nếu quyền chưa được cấp, yêu cầu quyền từ người dùng
@@ -84,46 +80,84 @@ public class HomeFragment extends Fragment {
     }
 
     private void setRecyclerViewAnimation(){
-        final CollapsingToolbarLayout collapsingToolbarLayout = view.findViewById(R.id.imgslider_container_collapsing);
         AppBarLayout appBarLayout = view.findViewById(R.id.imgslider_container);
-        Toolbar toolbar = view.findViewById(R.id.imgslider_toolbar);
-        ((MainActivity) requireActivity()).setSupportActionBar(toolbar);
+        NestedScrollView nestedScrollView = view.findViewById(R.id.home_fm_content);
+        RecyclerView recyclerView = view.findViewById(R.id.rcv_category);
+
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean isToolbarExpanded = true;
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                int scrollRange = appBarLayout.getTotalScrollRange();
-                float percentage = (float) Math.abs(verticalOffset) / (float) scrollRange;
-                if (percentage < 0.5) {
-                    if (!isToolbarExpanded) {
-                        isToolbarExpanded = true;
+                recyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                    @Override
+                    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                        boolean appBarExpanded = appBarLayout.getHeight() + verticalOffset == 0;
+                        nestedScrollView.setNestedScrollingEnabled(appBarExpanded);
                     }
-                } else {
-                    if (isToolbarExpanded) {
-                        isToolbarExpanded = false;
-                    }
-                }
+                });
             }
         });
-
     }
     private void AddListCnT(){
-        MangaDBHelper db = new MangaDBHelper(getContext());
-        truyenTranhList = db.getAllMangaItems();
-        if (truyenTranhList != null) {
-            for (TruyenTranh truyenTranh : truyenTranhList) {
-                categoryList.add(new Category("Cate 1", truyenTranhList)); // test case
-            }
-        }
+        loadCategories();
     }
-
+    private void loadMangas(Category category, OnDataLoadedListener listener) {
+        //Get all data from firebase > Categories
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
+        reference.orderByChild("ID_CATEGORY_MANGA").equalTo(category.getID_CATEGORY()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<TruyenTranh> mangaForCategory = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    //get data
+                    TruyenTranh truyenTranh = ds.getValue(TruyenTranh.class);
+                    //add to List
+                    mangaForCategory.add(truyenTranh);
+                }
+                listener.onDataLoaded(mangaForCategory);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+    private void loadCategories() {
+        //Get all data from firebase > Categories
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Categories");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                categoryList.clear();
+                int categoryCount = (int) snapshot.getChildrenCount();
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    //get data
+                    Category category = ds.getValue(Category.class);
+                    //add to List
+                    loadMangas(category, new OnDataLoadedListener() {
+                        @Override
+                        public void onDataLoaded(List<TruyenTranh> truyenTranhList) {
+                            category.setTruyenTranhList(truyenTranhList);
+                            categoryList.add(category);
+                            if (categoryList.size() == categoryCount) {
+                                SetContentImageSlider();
+                                SetContentRecycleView();
+                                setRecyclerViewAnimation();
+                            }
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
     // Set content for recycleView
     private void SetContentRecycleView(){
         recyclerViewCategory = view.findViewById(R.id.rcv_category);
 
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 1);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(),RecyclerView.VERTICAL,false);
+        //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(),RecyclerView.VERTICAL,false);
         recyclerViewCategory.setLayoutManager(layoutManager);// Set form for recycleView category
 
         categoryAdapter = new CategoryAdapter(view.getContext());
@@ -135,38 +169,48 @@ public class HomeFragment extends Fragment {
 
     }
     private void SetContentImageSlider(){
-        viewPager2 = view.findViewById(R.id.vp2_image_slider);
-
-        imageSliderAdapter = new ImageSliderAdapter(truyenTranhList, viewPager2);
-        viewPager2.setAdapter(imageSliderAdapter);
-        if(truyenTranhList==null){
-            Log.d("Truyen tranh list ","==null " );
-        }
-        else{
-            Log.d("Truyen tranh list ","== exists ");
-        }
-        viewPager2.setClipToPadding(false);
-        viewPager2.setClipChildren(false);
-        viewPager2.setOffscreenPageLimit(3);
-        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
-
-        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
-        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
-        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
+        List<TruyenTranh> truyenTranhList = new ArrayList<>();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void transformPage(@NonNull View page, float position) {
-                float r = 1 - Math.abs(position);
-                page.setScaleY(0.85f + r * 0.15f);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()){
+                    TruyenTranh truyenTranh = ds.getValue(TruyenTranh.class);
+                    truyenTranhList.add(truyenTranh);
+                }
+                viewPager2 = view.findViewById(R.id.vp2_image_slider);
+
+                imageSliderAdapter = new ImageSliderAdapter(getContext(),truyenTranhList, viewPager2);
+                viewPager2.setAdapter(imageSliderAdapter);
+
+                viewPager2.setClipToPadding(false);
+                viewPager2.setClipChildren(false);
+                viewPager2.setOffscreenPageLimit(3);
+                viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+
+                CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+                compositePageTransformer.addTransformer(new MarginPageTransformer(40));
+                compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
+                    @Override
+                    public void transformPage(@NonNull View page, float position) {
+                        float r = 1 - Math.abs(position);
+                        page.setScaleY(0.85f + r * 0.15f);
+                    }
+                });
+                viewPager2.setPageTransformer(compositePageTransformer);
+
+                viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                    @Override
+                    public void onPageSelected(int position) {
+                        super.onPageSelected(position);
+                        handler.removeCallbacks(sliderRunnable);
+                        handler.postDelayed(sliderRunnable, 5000);
+                    }
+                });
             }
-        });
-        viewPager2.setPageTransformer(compositePageTransformer);
-
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                handler.removeCallbacks(sliderRunnable);
-                handler.postDelayed(sliderRunnable, 5000);
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

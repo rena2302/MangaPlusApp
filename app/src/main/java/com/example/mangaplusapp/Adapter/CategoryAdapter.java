@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.object.Category;
+import com.example.mangaplusapp.object.TruyenTranh;
 
 import java.util.List;
 
@@ -37,12 +38,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         if (category == null){
             return;
         }
-        holder.categoryName.setText(category.getCategoryName());
+        holder.categoryName.setText(category.getNAME_CATEGORY());
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,RecyclerView.HORIZONTAL, false);
         holder.rcvTruyenTranh.setLayoutManager(linearLayoutManager);// set form for recycleView truyentranh
 
-        TruyenTranhAdapter truyenTranhAdapter = new TruyenTranhAdapter();
+        TruyenTranhAdapter truyenTranhAdapter = new TruyenTranhAdapter(context);
         truyenTranhAdapter.SetData(category.getTruyenTranhList());// set truyentranhList for adapter
 
         holder.rcvTruyenTranh.setAdapter(truyenTranhAdapter);

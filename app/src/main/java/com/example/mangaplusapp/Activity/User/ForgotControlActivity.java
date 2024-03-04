@@ -1,4 +1,4 @@
-package com.example.mangaplusapp.Activity;
+package com.example.mangaplusapp.Activity.User;
 
 import android.content.Context;
 import android.content.SharedPreferences;
