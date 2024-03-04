@@ -13,6 +13,11 @@
     <string name="Library">Thư Viện</string>
     <string name="newMemberSignUp"><b>Tạo Tài Khoản</b> </string>
     <string name="questionHaveAccount">Bạn đã có <b>Tài Khoản ?</b> </string>
+    <string name="HOT">HOT</string>
+    <string name="HOME">HOME</string>
+    <string name="CREATOR">CREATOR</string>
+    <string name="PROFILE">PROFILE</string>
+    <string name="SEARCH">SEARCH</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="manga_plus_home">Manga Plus!</string>
     <string name="navigation_drawer_open">Open Navigation drawer</string>

@@ -13,6 +13,11 @@
     <string name="Library">पुस्तकालय</string>
     <string name="newMemberSignUp"><b>खाता बनाएँ</b> </string>
     <string name="questionHaveAccount">एक <b>खाता है</b></string>
+    <string name="HOT">गर्म</string>
+    <string name="HOME">घर</string>
+    <string name="CREATOR">निर्माता</string>
+    <string name="PROFILE">प्रोफ़ाइल</string>
+    <string name="SEARCH">खोज</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="manga_plus_home">Manga Plus!</string>

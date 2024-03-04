@@ -2,33 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:icon="@drawable/ic_home"
-        android:title="HOME" />
-    <item
         android:id="@+id/navHot"
-        android:layout_width="wrap_content"
-        android:icon="@drawable/ic_home"
-        android:layout_height="wrap_content"
-        android:title="HOT" />
+        android:icon="@drawable/ic_bottom_nav_hot"
+        android:title="@string/HOT" />
     <item
         android:id="@+id/navSearch"
-        android:layout_width="wrap_content"
-        android:icon="@drawable/ic_home"
-        android:layout_height="wrap_content"
-        android:title="SEARCH" />
+        android:icon="@drawable/ic_bottom_nav_search"
+        android:title="@string/SEARCH" />
+    <item
+        android:id="@+id/navHome"
+        android:icon="@drawable/ic_bottom_nav_home"
+        android:enabled="true"
+        android:title="@string/HOME" />
     <item
         android:id="@+id/navCreator"
-        android:layout_width="wrap_content"
-        android:icon="@drawable/ic_home"
-        android:layout_height="wrap_content"
-        android:title="CREATOR" />
+        android:icon="@drawable/ic_bottom_nav_creator"
+        android:title="@string/CREATOR" />
     <item
         android:id="@+id/navProfile"
-        android:icon="@drawable/ic_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:title="PROFILE" />
+        android:icon="@drawable/ic_bottom_nav_user"
+        android:title="@string/PROFILE" />
 </menu>
