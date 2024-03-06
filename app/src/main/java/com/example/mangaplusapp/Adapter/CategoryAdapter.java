@@ -11,18 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mangaplusapp.R;
-import com.example.mangaplusapp.object.Category;
-import com.example.mangaplusapp.object.TruyenTranh;
+import com.example.mangaplusapp.object.Categories;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>{
     private Context context;
-    private List<Category> categoryList;
+    private List<Categories> categoryList;
     public CategoryAdapter(Context context){
         this.context = context;
     }
-    public void SetData(List<Category> categoryList){
+    public void SetData(List<Categories> categoryList){
         this.categoryList = categoryList;
     }
     @NonNull
@@ -34,7 +33,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        Category category = categoryList.get(position); // Take item in category list at present position
+        Categories category = categoryList.get(position); // Take item in category list at present position
         if (category == null){
             return;
         }

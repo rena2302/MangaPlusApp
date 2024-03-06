@@ -10,12 +10,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.Fragment.ForgotFragment;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.Fragment.VerificationFragment;
 
-public class ForgotControlActivity extends AppCompatActivity {
+public class ForgotControlActivity extends BaseActivity {
     UserDBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

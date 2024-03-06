@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mangaplusapp.Database.MangaPlusDatabase;
 import com.example.mangaplusapp.R;
 
-public class LoadingActivity extends AppCompatActivity {
+public class LoadingActivity extends BaseActivity {
 
     Handler handler;
     @Override

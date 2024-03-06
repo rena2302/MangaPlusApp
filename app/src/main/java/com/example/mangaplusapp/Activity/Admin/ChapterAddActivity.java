@@ -3,7 +3,6 @@ package com.example.mangaplusapp.Activity.Admin;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,8 +12,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.databinding.ActivityChapterAddBinding;
-import com.example.mangaplusapp.object.TruyenTranh;
+import com.example.mangaplusapp.object.Mangas;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -30,9 +30,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ChapterAddActivity extends AppCompatActivity {
+public class ChapterAddActivity extends BaseActivity {
     ActivityChapterAddBinding binding;
-    List<TruyenTranh> truyenTranhList;
+    List<Mangas> truyenTranhList;
     String selectedMangaId;
     private static final int PICK_PDF_FILE = 1;
     private Uri pdfUri;
@@ -56,7 +56,7 @@ public class ChapterAddActivity extends AppCompatActivity {
                 truyenTranhList.clear();
                 for(DataSnapshot ds : snapshot.getChildren()){
                     //get Data
-                    TruyenTranh truyenTranh = ds.getValue(TruyenTranh.class);
+                    Mangas truyenTranh = ds.getValue(Mangas.class);
                     //add to list
                     truyenTranhList.add(truyenTranh);
                 }

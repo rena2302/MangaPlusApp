@@ -16,26 +16,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mangaplusapp.Fragment.MangaListFragment;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ItemCateSearchBinding;
-import com.example.mangaplusapp.object.Category;
+import com.example.mangaplusapp.object.Categories;
 import com.example.mangaplusapp.util.filter.FilterCategory;
 
 import java.util.List;
 
 public class CateSearchAdapter extends RecyclerView.Adapter<CateSearchAdapter.CateSearchViewHolder> implements Filterable {
     private Context context;
-    private List<Category> categoryList, filterList;
+    private List<Categories> categoryList, filterList;
     private FilterCategory filterCategory;
     ItemCateSearchBinding binding;
-    public void setData(List<Category> categoryList){
+    public void setData(List<Categories> categoryList){
         this.categoryList = categoryList;
         this.filterList =categoryList;
     }
 
-    public CateSearchAdapter(List<Category> categoryList, Context context){
+    public CateSearchAdapter(List<Categories> categoryList, Context context){
         this.categoryList = categoryList;
         this.context = context;
     }
-    public void setCategoryList(List<Category> categoryList){
+    public void setCategoryList(List<Categories> categoryList){
         this.categoryList = categoryList;
     }
     @NonNull
@@ -47,7 +47,7 @@ public class CateSearchAdapter extends RecyclerView.Adapter<CateSearchAdapter.Ca
 
     @Override
     public void onBindViewHolder(@NonNull CateSearchViewHolder holder, int position) {
-        Category category = categoryList.get(position);
+        Categories category = categoryList.get(position);
         if(category == null){
             return;
         }
@@ -67,7 +67,7 @@ public class CateSearchAdapter extends RecyclerView.Adapter<CateSearchAdapter.Ca
         }
         return 0;
     }
-    private void showCategoryDialog(Category category) {
+    private void showCategoryDialog(Categories category) {
         MangaListFragment dialogFragment = new MangaListFragment(category);
         dialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), "category_dialog");
     }

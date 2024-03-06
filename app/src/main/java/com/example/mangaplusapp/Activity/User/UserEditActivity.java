@@ -13,11 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.Fragment.UserProfileFragment;
 
-public class UserEditActivity extends AppCompatActivity {
+public class UserEditActivity extends BaseActivity {
     EditText getUserNameTxt,getUserNewPasswordTxt,getUserEmailTxt,getUserCfPasswordTxt,getUserOldPasswordTxt;
     UserDBHelper db;
     Button btnSubmit;

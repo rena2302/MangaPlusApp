@@ -25,7 +25,7 @@ import com.example.mangaplusapp.ModelAndPresenter.Login.LoginPresenter;
 import com.example.mangaplusapp.ModelAndPresenter.Login.MVPLoginView;
 import com.example.mangaplusapp.R;
 
-public class LoginActivity extends AppCompatActivity implements MVPLoginView {
+public class LoginActivity extends BaseActivity implements MVPLoginView {
     EditText emailTxt, passwordTxt;
     TextView forgotPasswordTxt,toSignUpTxt;
     AppCompatButton btnLoginTxt;

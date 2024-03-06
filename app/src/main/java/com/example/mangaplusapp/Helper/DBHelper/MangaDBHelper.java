@@ -12,7 +12,7 @@ import java.util.List;
 
 import com.example.mangaplusapp.util.table.MangaTable;
 import com.example.mangaplusapp.Database.MangaPlusDatabase;
-import com.example.mangaplusapp.object.TruyenTranh;
+import com.example.mangaplusapp.object.Mangas;
 
 public class MangaDBHelper extends MangaPlusDatabase {
     public MangaDBHelper(Context context) {
@@ -39,15 +39,15 @@ public class MangaDBHelper extends MangaPlusDatabase {
         return result != -1;
     }
     @SuppressLint("Range")
-    public List<TruyenTranh> getAllMangaItems() {
-        List<TruyenTranh> mangaItems = new ArrayList<>();
+    public List<Mangas> getAllMangaItems() {
+        List<Mangas> mangaItems = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + MangaTable.TB_MANGA, null);
         if (cursor.moveToFirst()) {
             do {
                 String mangaName = cursor.getString(cursor.getColumnIndex(MangaTable.TB_MANGA_NAME));
                 String imgPath = cursor.getString(cursor.getColumnIndex(MangaTable.TB_MANGA_PICTURE));
-                mangaItems.add(new TruyenTranh(mangaName, imgPath));
+                mangaItems.add(new Mangas(mangaName, imgPath));
             } while (cursor.moveToNext());
         }
         cursor.close();

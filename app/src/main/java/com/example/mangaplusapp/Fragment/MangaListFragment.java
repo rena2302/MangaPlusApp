@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mangaplusapp.Adapter.TruyenTranhAdapter;
 import com.example.mangaplusapp.R;
-import com.example.mangaplusapp.object.Category;
-import com.example.mangaplusapp.object.TruyenTranh;
+import com.example.mangaplusapp.object.Categories;
+import com.example.mangaplusapp.object.Mangas;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,14 +27,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MangaListFragment extends DialogFragment {
-    private Category category;
+    private Categories category;
     private View view;
     public MangaListFragment() {}
-    public MangaListFragment(Category category){
+    public MangaListFragment(Categories category){
         this.category = category;
     }
     public interface OnDataLoadedListener {
-        void onDataLoaded(List<TruyenTranh> truyenTranhList);
+        void onDataLoaded(List<Mangas> truyenTranhList);
     }
 
     @NonNull
@@ -63,7 +63,7 @@ public class MangaListFragment extends DialogFragment {
         // Load dữ liệu và cập nhật adapter khi dữ liệu đã sẵn sàng
         loadMangas(new OnDataLoadedListener() {
             @Override
-            public void onDataLoaded(List<TruyenTranh> truyenTranhList) {
+            public void onDataLoaded(List<Mangas> truyenTranhList) {
                 adapter.SetData(truyenTranhList);
                 adapter.notifyDataSetChanged();
             }
@@ -74,15 +74,14 @@ public class MangaListFragment extends DialogFragment {
 
     private void loadMangas(OnDataLoadedListener listener) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<TruyenTranh> truyenTranhList = new ArrayList<>();
+                List<Mangas> truyenTranhList = new ArrayList<>();
                 for(DataSnapshot ds : snapshot.getChildren()){
-                    TruyenTranh truyenTranh = ds.getValue(TruyenTranh.class);
-                    if (truyenTranh != null && truyenTranh.getID_CATEGORY_MANGA() != null
-                            && truyenTranh.getID_CATEGORY_MANGA().equals(category.getID_CATEGORY())) {
-                        truyenTranhList.add(truyenTranh);
+                    Mangas mangas = ds.getValue(Mangas.class);
+                    if (mangas != null && mangas.getID_CATEGORY_MANGA().equals(category.getID_CATEGORY())) {
+                        truyenTranhList.add(mangas);
                     }
                 }
                 // Gọi callback khi dữ liệu đã sẵn sàng

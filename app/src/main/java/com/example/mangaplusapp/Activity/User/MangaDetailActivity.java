@@ -1,22 +1,20 @@
 package com.example.mangaplusapp.Activity.User;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.mangaplusapp.Activity.Admin.DashBoardAdminActivity;
-import com.example.mangaplusapp.Activity.Admin.MangaDetailAdminActivity;
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.Adapter.ChapterAdapter;
-import com.example.mangaplusapp.R;
-import com.example.mangaplusapp.databinding.ActivityMangaDetailAdminBinding;
 import com.example.mangaplusapp.databinding.ActivityMangaDetailBinding;
-import com.example.mangaplusapp.object.Chapter;
+import com.example.mangaplusapp.object.Chapters;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +27,7 @@ import java.util.List;
 public class MangaDetailActivity extends BaseActivity {
 
     ActivityMangaDetailBinding binding;
-    private List<Chapter> chapterList = new ArrayList<>();
+    private List<Chapters> chapterList = new ArrayList<>();
     // Khởi tạo adapter trước khi hiển thi
     private ChapterAdapter chapterAdapter ;
     @Override
@@ -48,7 +46,7 @@ public class MangaDetailActivity extends BaseActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 chapterList.clear();
                 for(DataSnapshot ds : snapshot.getChildren()){
-                    Chapter chapter = ds.getValue(Chapter.class);
+                    Chapters chapter = ds.getValue(Chapters.class);
                     if (chapter != null && chapter.getID_MANGA_CHAPTER().equals(getIntent().getExtras().getString("ID_MANGA"))) {
                         chapterList.add(chapter);
                     }
@@ -71,11 +69,31 @@ public class MangaDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         binding.mangaDetailDescription.setText(extras.getString("DESCRIPTION_MANGA"));
+        binding.backDetailProductBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        binding.mangaDetailDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MangaDetailActivity.this);
+                builder.setTitle("Manga Description")
+                        .setMessage(extras.getString("DESCRIPTION_MANGA"))
+                        .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+            }
+        });
         binding.mangaDetailTitle.setText(extras.getString("NAME_MANGA"));
         Glide.with(binding.mangaDetailImg)
                 .load(extras.getString("PICTURE_MANGA"))
                 .into(binding.mangaDetailImg);
-
     }
     @Override
     public void onBackPressed() {

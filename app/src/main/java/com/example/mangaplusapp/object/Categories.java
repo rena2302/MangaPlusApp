@@ -1,20 +1,20 @@
 package com.example.mangaplusapp.object;
 import java.util.List;
 
-public class Category {
+public class Categories {
     private String NAME_CATEGORY, ID_CATEGORY;
-    private List<TruyenTranh> truyenTranhList;
+    private List<Mangas> truyenTranhList;
     //Constructor empty for firebase
-    public Category(){
+    public Categories(){
 
     }
 
-    public Category(String NAME_CATEGORY, String ID_CATEGORY) {
+    public Categories(String NAME_CATEGORY, String ID_CATEGORY) {
         this.NAME_CATEGORY = NAME_CATEGORY;
         this.ID_CATEGORY = ID_CATEGORY;
     }
 
-    public Category(String NAME_CATEGORY, List<TruyenTranh> truyenTranhList) {
+    public Categories(String NAME_CATEGORY, List<Mangas> truyenTranhList) {
         this.NAME_CATEGORY = NAME_CATEGORY;
         this.truyenTranhList = truyenTranhList;
     }
@@ -35,11 +35,11 @@ public class Category {
         this.ID_CATEGORY = ID_CATEGORY;
     }
 
-    public List<TruyenTranh> getTruyenTranhList() {
+    public List<Mangas> getTruyenTranhList() {
         return truyenTranhList;
     }
 
-    public void setTruyenTranhList(List<TruyenTranh> truyenTranhList) {
+    public void setTruyenTranhList(List<Mangas> truyenTranhList) {
         this.truyenTranhList = truyenTranhList;
     }
 }

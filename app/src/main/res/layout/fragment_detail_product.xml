@@ -262,19 +262,20 @@ Set in rural Japan shortly after World War II, this gripping novel tells the sto
 Translated into English for the first time, this novel is about an affair gone wrong between a former university student, Kōji; his would-be mentor, the eminent literary critic Ippei Kusakado; and Ippei’s beautiful, enigmatic wife, Yūko. When brought face-to-face with one of Ippei’s many marital indiscretions, Kōji finds his growing desire for Yūko compels him to action in a way that changes all three of their lives profoundly. Originally published in 1961 and now available in English for the first time, The Frolic of the Beasts is a haunting examination of the various guises we assume throughout our lives.
 
 "/>
+
                 <TextView
-                    android:layout_below="@+id/Demo_content_Book"
-                    android:padding="10dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/interextrabold"
-                    android:layout_centerHorizontal="true"
                     android:id="@+id/Content_showmore"
                     android:layout_width="wrap_content"
-                    android:text="Show more"
-                    android:drawablePadding="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Demo_content_Book"
+                    android:layout_centerHorizontal="true"
                     android:drawableBottom="@drawable/dialog_tab"
-                    android:layout_height="wrap_content"/>
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/interextrabold"
+                    android:padding="10dp"
+                    android:text="Show more"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
             </RelativeLayout>
             <LinearLayout
                 android:layout_marginStart="20dp"

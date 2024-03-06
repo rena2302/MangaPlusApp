@@ -26,6 +26,9 @@
         tools:replace="android:theme"
         tools:targetApi="34">
         <activity
+            android:name=".Activity.Admin.EditorActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Base.ChapterPdfActivity"
             android:exported="false"
             android:theme="@style/Theme.MangaPlusApp" />
@@ -50,7 +53,7 @@
         </activity>
         <activity
             android:name=".Activity.User.MangaDetailActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Activity.Admin.CategoryAddActivity"
             android:exported="false" />
