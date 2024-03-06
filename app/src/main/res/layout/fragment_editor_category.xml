@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="16dp"
-        android:hint="@string/addANewCategory"/>
+        android:hint="Edit name Category"/>
     <Button
         android:id="@+id/editCategorySubmit"
         android:layout_margin="8dp"

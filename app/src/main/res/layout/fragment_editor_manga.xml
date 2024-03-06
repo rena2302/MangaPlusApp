@@ -15,24 +15,24 @@
             android:id="@+id/editMangaName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/addANewManga"/>
+            android:hint="Edit name Manga"/>
         <EditText
             android:id="@+id/editMangaDescription"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:hint="@string/addMangaDescription"/>
+            android:hint="Edit description Manga"/>
         <EditText
             android:id="@+id/editMangaPicture"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:hint="@string/addMangaPicture"/>
+            android:hint="Edit picture Manga"/>
         <TextView
             android:id="@+id/editMangaCategory"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
             android:drawableEnd="@drawable/ic_expand"
-            android:hint="@string/addMangaCategory"
+            android:hint="Choose Category"
             android:textSize="18sp" />
         <LinearLayout
             android:layout_width="match_parent"

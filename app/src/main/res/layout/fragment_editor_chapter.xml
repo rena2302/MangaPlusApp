@@ -12,14 +12,14 @@
             android:id="@+id/editChapterName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/addNewChapter"/>
+            android:hint="Edit name Chapter"/>
         <TextView
             android:id="@+id/editChapterManga"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
             android:drawableEnd="@drawable/ic_expand"
-            android:hint="@string/addChapterManga"
+            android:hint="Choose Manga"
             android:textSize="18sp" />
         <ImageButton
             android:id="@+id/editChapterPdf"
