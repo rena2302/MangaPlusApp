@@ -78,5 +78,14 @@
     <string name="payment">भुगतान</string>
     <string name="favorite">प्रिय</string>
     <string name="changeTheme">विषयवस्तु परिवर्तित करें</string>
+    <string name="addANewManga">एक नया मान्गा जोड़ें</string>
+    <string name="addMangaDescription">मान्गा विवरण जोड़ें</string>
+    <string name="addMangaPicture">मान्गा चित्र जोड़ें</string>
+    <string name="addMangaCategory">मान्गा श्रेणी जोड़ें</string>
+    <string name="addManga">मान्गा जोड़ें</string>
+    <string name="addNewChapter">नया अध्याय जोड़ें</string>
+    <string name="addChapterManga">अध्याय मान्गा जोड़ें</string>
+    <string name="searchKeyWord">कीवर्ड दर्ज करें (मान्गा या श्रेणी)</string>
+
 
 </resources>

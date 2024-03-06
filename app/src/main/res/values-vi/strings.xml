@@ -78,5 +78,13 @@
     <string name="payment">Thanh toán</string>
     <string name="favorite">Yêu thích</string>
     <string name="changeTheme">Đổi giao diện</string>
+    <string name="addANewManga">Thêm Manga Mới</string>
+    <string name="addMangaDescription">Thêm Mô tả Manga</string>
+    <string name="addMangaPicture">Thêm Hình ảnh Manga</string>
+    <string name="addMangaCategory">Thêm Thể loại Manga</string>
+    <string name="addManga">Thêm Manga</string>
+    <string name="addNewChapter">Thêm Chương Mới</string>
+    <string name="addChapterManga">Thêm Chương Manga</string>
+    <string name="searchKeyWord">Nhập từ khóa (Manga hoặc Thể loại)</string>
 
 </resources>
