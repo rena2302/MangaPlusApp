@@ -31,8 +31,8 @@ import java.util.List;
 
 import com.example.mangaplusapp.Adapter.CategoryAdapter;
 import com.example.mangaplusapp.Adapter.ImageSliderAdapter;
-import com.example.mangaplusapp.object.Category;
-import com.example.mangaplusapp.object.TruyenTranh;
+import com.example.mangaplusapp.object.Categories;
+import com.example.mangaplusapp.object.Mangas;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,9 +47,9 @@ public class HomeFragment extends Fragment {
     private static final int PERMISSION_REQUEST_READ_MEDIA_IMAGES = 1001;
     ViewPager2 viewPager2;
     Handler handler = new Handler();
-    List<Category> categoryList = new ArrayList<>();
+    List<Categories> categoryList = new ArrayList<>();
     public interface OnDataLoadedListener {
-        void onDataLoaded(List<TruyenTranh> truyenTranhList);
+        void onDataLoaded(List<Mangas> truyenTranhList);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,16 +100,16 @@ public class HomeFragment extends Fragment {
     private void AddListCnT(){
         loadCategories();
     }
-    private void loadMangas(Category category, OnDataLoadedListener listener) {
+    private void loadMangas(Categories category, OnDataLoadedListener listener) {
         //Get all data from firebase > Categories
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
         reference.orderByChild("ID_CATEGORY_MANGA").equalTo(category.getID_CATEGORY()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<TruyenTranh> mangaForCategory = new ArrayList<>();
+                List<Mangas> mangaForCategory = new ArrayList<>();
                 for (DataSnapshot ds : snapshot.getChildren()){
                     //get data
-                    TruyenTranh truyenTranh = ds.getValue(TruyenTranh.class);
+                    Mangas truyenTranh = ds.getValue(Mangas.class);
                     //add to List
                     mangaForCategory.add(truyenTranh);
                 }
@@ -130,11 +130,11 @@ public class HomeFragment extends Fragment {
                 int categoryCount = (int) snapshot.getChildrenCount();
                 for (DataSnapshot ds : snapshot.getChildren()){
                     //get data
-                    Category category = ds.getValue(Category.class);
+                    Categories category = ds.getValue(Categories.class);
                     //add to List
                     loadMangas(category, new OnDataLoadedListener() {
                         @Override
-                        public void onDataLoaded(List<TruyenTranh> truyenTranhList) {
+                        public void onDataLoaded(List<Mangas> truyenTranhList) {
                             category.setTruyenTranhList(truyenTranhList);
                             categoryList.add(category);
                             if (categoryList.size() == categoryCount) {
@@ -169,13 +169,13 @@ public class HomeFragment extends Fragment {
 
     }
     private void SetContentImageSlider(){
-        List<TruyenTranh> truyenTranhList = new ArrayList<>();
+        List<Mangas> truyenTranhList = new ArrayList<>();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()){
-                    TruyenTranh truyenTranh = ds.getValue(TruyenTranh.class);
+                    Mangas truyenTranh = ds.getValue(Mangas.class);
                     truyenTranhList.add(truyenTranh);
                 }
                 viewPager2 = view.findViewById(R.id.vp2_image_slider);

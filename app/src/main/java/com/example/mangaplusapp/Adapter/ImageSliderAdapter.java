@@ -18,14 +18,14 @@ import com.example.mangaplusapp.R;
 
 import java.util.List;
 
-import com.example.mangaplusapp.object.TruyenTranh;
+import com.example.mangaplusapp.object.Mangas;
 import com.example.mangaplusapp.util.ActivityUtils;
 
 public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter.ImageSliderViewHolder>{
     private Context context;
-    private final List<TruyenTranh> imageSlidersList;
+    private final List<Mangas> imageSlidersList;
     private ViewPager2 viewPager2;
-    public ImageSliderAdapter(Context context,List<TruyenTranh> list, ViewPager2 viewPager2){
+    public ImageSliderAdapter(Context context, List<Mangas> list, ViewPager2 viewPager2){
         this.imageSlidersList = list;
         this.viewPager2 = viewPager2;
         this.context = context;
@@ -39,7 +39,7 @@ public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ImageSliderViewHolder holder, int position) {
-        TruyenTranh imageSlider = imageSlidersList.get(position);
+        Mangas imageSlider = imageSlidersList.get(position);
         if(imageSlider == null) {
             return;
         }

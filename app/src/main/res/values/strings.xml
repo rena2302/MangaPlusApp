@@ -67,6 +67,14 @@
     <string name="addMangaPicture">Add Manga Picture</string>
     <string name="addMangaCategory">Add Manga Category</string>
     <string name="addManga">Add Manga</string>
+    <string name="addMangaPremium">Premium manga ?</string>
+    <!--Edit Manga-->
+    <string name="editManga">Edit Manga</string>
+    <string name="editMangaDescription">Edit Manga Description</string>
+    <string name="editMangaPicture">Edit Manga Picture</string>
+    <string name="editMangaCategory">Edit Manga Category</string>
+    <string name="editMangaName">Edit Manga Name</string>
+    <string name="editMangaPremium">Premium manga ?</string>
     <!--Add a new Chapter-->
     <string name="addNewChapter">Add New Chapter</string>
     <string name="addChapterManga">Add Chapter Manga</string>

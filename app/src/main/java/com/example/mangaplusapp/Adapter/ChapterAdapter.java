@@ -1,38 +1,29 @@
 package com.example.mangaplusapp.Adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mangaplusapp.Activity.Base.ChapterPdfActivity;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ItemChapterBinding;
-import com.example.mangaplusapp.databinding.ItemDashboardBinding;
-import com.example.mangaplusapp.object.Chapter;
+import com.example.mangaplusapp.object.Chapters;
 import com.example.mangaplusapp.util.ActivityUtils;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterViewHolder>{
     ItemChapterBinding itemChapterBinding;
     private Context context;
-    private List<Chapter> chapterList;
+    private List<Chapters> chapterList;
     private int selectedPosition = 0;
-    public void setData(Context context, List<Chapter> chapterList){
+    public void setData(Context context, List<Chapters> chapterList){
         this.context = context;
         this.chapterList = chapterList;
     }
@@ -49,7 +40,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
 
     @Override
     public void onBindViewHolder(@NonNull ChapterViewHolder holder, int position) {
-        Chapter chapter = chapterList.get(position);
+        Chapters chapter = chapterList.get(position);
         if(chapter == null){
             return;
         }

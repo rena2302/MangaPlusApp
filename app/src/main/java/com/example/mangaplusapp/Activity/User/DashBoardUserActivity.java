@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.R;
 
-public class DashBoardUserActivity extends AppCompatActivity {
+public class DashBoardUserActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

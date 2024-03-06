@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.R;
 
 import org.json.JSONException;
@@ -41,7 +42,7 @@ import vn.momo.momo_partner.AppMoMoLib;
 import vn.momo.momo_partner.MoMoParameterNameMap;
 import vn.momo.momo_partner.MoMoParameterNamePayment;
 
-public class PaymentActivity extends Activity {
+public class PaymentActivity extends BaseActivity {
     TextView tvEnvironment;
     TextView tvMerchantCode;
     TextView tvMerchantName;
@@ -49,7 +50,7 @@ public class PaymentActivity extends Activity {
     TextView tvMessage;
     Button btnPayMoMo;
     private  Map<String, Object> eventValue = new HashMap<>();
-    private String amount = "10000";
+    private String amount = "100000";
     private String fee = "0";
     int environment = 0;//developer default
     private String merchantName = "RAU MÁ SẠCH";

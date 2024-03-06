@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.EditorFragment">
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:id="@+id/editMangaEditTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/editMangaName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Edit name Manga"/>
+        <EditText
+            android:id="@+id/editMangaDescription"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="Edit description Manga"/>
+        <EditText
+            android:id="@+id/editMangaPicture"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="Edit picture Manga"/>
+        <TextView
+            android:id="@+id/editMangaCategory"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:drawableEnd="@drawable/ic_expand"
+            android:hint="Choose Category"
+            android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/editMangaPre"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:hint="@string/addMangaPremium"
+                android:layout_weight="1"
+                android:textSize="18sp"/>
+            <CheckBox
+                android:id="@+id/editMangaPreCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+    <Button
+        android:id="@+id/editMangaSubmit"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Submit"
+        android:layout_below="@+id/editMangaEditTxt"/>
+
+</RelativeLayout>

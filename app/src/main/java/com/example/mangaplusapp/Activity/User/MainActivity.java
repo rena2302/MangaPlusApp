@@ -23,10 +23,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.Admin.DashBoardAdminActivity;
-import com.example.mangaplusapp.Activity.RegionFragment;
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.Fragment.CreatorFragment;
 import com.example.mangaplusapp.Fragment.HomeFragment;
 import com.example.mangaplusapp.Fragment.HotFragment;
+import com.example.mangaplusapp.Fragment.RegionFragment;
 import com.example.mangaplusapp.Fragment.SearchFragment;
 import com.example.mangaplusapp.Fragment.UserProfileFragment;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
@@ -36,7 +37,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends BaseActivity {
     NavigationView navigationView;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
