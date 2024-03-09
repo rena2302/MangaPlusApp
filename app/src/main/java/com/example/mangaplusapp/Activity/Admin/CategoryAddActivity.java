@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.databinding.ActivityCategoryAddBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-public class CategoryAddActivity extends AppCompatActivity {
+public class CategoryAddActivity extends BaseActivity {
     private ActivityCategoryAddBinding binding;
     private FirebaseAuth firebaseAuth;
     @Override

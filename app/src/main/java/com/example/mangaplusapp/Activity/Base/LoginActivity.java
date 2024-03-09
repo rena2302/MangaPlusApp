@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -13,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.mangaplusapp.Activity.User.ForgotControlActivity;
@@ -25,13 +23,11 @@ import com.example.mangaplusapp.ModelAndPresenter.Login.LoginPresenter;
 import com.example.mangaplusapp.ModelAndPresenter.Login.MVPLoginView;
 import com.example.mangaplusapp.R;
 
-public class LoginActivity extends AppCompatActivity implements MVPLoginView {
+public class LoginActivity extends BaseActivity implements MVPLoginView {
     EditText emailTxt, passwordTxt;
     TextView forgotPasswordTxt,toSignUpTxt;
     AppCompatButton btnLoginTxt;
     UserDBHelper db;
-    int idUser;
-
     //Create sign in Google
 
     ImageView googleBtn;
@@ -69,7 +65,6 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
         //****************************************************************************************//
         //===============================CONNECT DATABASE=========================================//
         db = new UserDBHelper(this);
-        db.open();
         //=============================== End Connect DataBase====================================//
         //****************************************************************************************//
         //=============================== BEGIN NAVIGATE LAYOUT===================================//
@@ -90,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements MVPLoginView {
             // this event final
             public void onClick(View v) {
                 btnLoginTxt.startAnimation(scaleAnimation);
-                loginPresenter.receivedHandleLogin(emailTxt,passwordTxt,db,idUser,editor);
+                loginPresenter.receivedHandleLogin(emailTxt,passwordTxt,db,editor);
                 //đang ở ActView thông báo cho presenter khi đươc click sự kiện
             }
         });

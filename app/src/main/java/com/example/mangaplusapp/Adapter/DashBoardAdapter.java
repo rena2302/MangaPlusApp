@@ -3,6 +3,7 @@ package com.example.mangaplusapp.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mangaplusapp.Activity.Admin.EditorActivity;
 import com.example.mangaplusapp.Activity.Base.ChapterPdfActivity;
 import com.example.mangaplusapp.Fragment.MangaListFragment;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ItemDashboardBinding;
-import com.example.mangaplusapp.object.Category;
-import com.example.mangaplusapp.object.Chapter;
+import com.example.mangaplusapp.object.Categories;
+import com.example.mangaplusapp.object.Chapters;
 import com.example.mangaplusapp.util.ActivityUtils;
 import com.example.mangaplusapp.util.filter.FilterCategory;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,11 +35,11 @@ import java.util.List;
 
 public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.DashBoardViewHolder> implements Filterable {
     private Context context;
-    private List<Category> categoryList, filterList;
-    private List<Chapter> chapterList;
+    private List<Categories> categoryList, filterList;
+    private List<Chapters> chapterList;
     private ItemDashboardBinding binding;
     private FilterCategory filterCategory;
-    public void setData(Context context, List<Category> categoryList){
+    public void setData(Context context, List<Categories> categoryList){
         this.context = context;
         this.categoryList = categoryList;
         this.filterList = categoryList;
@@ -45,11 +47,11 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
     public DashBoardAdapter(){
 
     }
-    public DashBoardAdapter(Context context, List<Chapter> chapterList){
+    public DashBoardAdapter(Context context, List<Chapters> chapterList){
         this.context = context;
         this.chapterList = chapterList;
     }
-    public void setCategoryList(List<Category> categoryList) {
+    public void setCategoryList(List<Categories> categoryList) {
         this.categoryList = categoryList;
     }
 
@@ -63,9 +65,21 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
     @Override
     public void onBindViewHolder(@NonNull DashBoardViewHolder holder, int position) {
         if(categoryList != null && !categoryList.isEmpty()){
-            Category category = categoryList.get(position);// Take item in category list at present position
+            Categories category = categoryList.get(position);// Take item in category list at present position
 
             holder.dashText.setText(category.getNAME_CATEGORY());
+            holder.dashButtonEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("session_edit", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("session", "category");
+                    editor.apply();
+                    ActivityUtils.startNewActivityAndFinishCurrent(context, EditorActivity.class,
+                            "ID_CATEGORY", category.getID_CATEGORY(),
+                            "NAME_CATEGORY",category.getNAME_CATEGORY());
+                }
+            });
             holder.dashButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -96,7 +110,7 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
             });
         }
         if(chapterList != null && !chapterList.isEmpty()){
-            Chapter chapter = chapterList.get(position);
+            Chapters chapter = chapterList.get(position);
             holder.dashText.setText(chapter.getNAME_CHAPTER());
             holder.dashButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -120,6 +134,20 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
                             .show();
                 }
             });
+            holder.dashButtonEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("session_edit", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("session", "chapter");
+                    editor.apply();
+                    ActivityUtils.startNewActivityAndFinishCurrent(context, EditorActivity.class,
+                            "ID_CHAPTER", chapter.getID_CHAPTER(),
+                            "NAME_CHAPTER", chapter.getNAME_CHAPTER(),
+                            "ID_MANGA_CHAPTER", chapter.getID_MANGA_CHAPTER(),
+                            "MANGA_CHAPTER", chapter.getMANGA_CHAPTER());
+                }
+            });
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -133,7 +161,7 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
             });
         }
     }
-    private void deleteChapter(Chapter chapter) {
+    private void deleteChapter(Chapters chapter) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chapters");
         String chapterId = chapter.getID_CHAPTER();
         reference.child(chapterId)
@@ -152,11 +180,11 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
                 });
 
     }
-    private void showCategoryDialog(Category category) {
+    private void showCategoryDialog(Categories category) {
          MangaListFragment dialogFragment = new MangaListFragment(category);
          dialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), "category_dialog");
     }
-    private void deleteCategory(Category category) {
+    private void deleteCategory(Categories category) {
         //get id from object
         String idCategory = category.getID_CATEGORY();
         //Attach to Firebase > Categories > ID_CATEGORY
@@ -199,11 +227,13 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
     public static class DashBoardViewHolder extends RecyclerView.ViewHolder {
         TextView dashText;
         ImageButton dashButton;
+        ImageButton dashButtonEdit;
 
         public DashBoardViewHolder(@NonNull View itemView) {
             super(itemView);
             dashText = (TextView) itemView.findViewById(R.id.itemDashText);
             dashButton = (ImageButton) itemView.findViewById(R.id.itemDashBtn);
+            dashButtonEdit = (ImageButton) itemView.findViewById(R.id.itemDashEditBtn);
         }
     }
 }

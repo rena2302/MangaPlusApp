@@ -3,31 +3,24 @@ package com.example.mangaplusapp.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mangaplusapp.Activity.Admin.DashBoardAdminActivity;
 import com.example.mangaplusapp.Adapter.CateSearchAdapter;
 import com.example.mangaplusapp.Adapter.TruyenTranhAdapter;
-import com.example.mangaplusapp.Helper.DBHelper.CategoryDBHelper;
 import com.example.mangaplusapp.R;
-import com.example.mangaplusapp.databinding.FragmentSearchBinding;
-import com.example.mangaplusapp.object.Category;
-import com.example.mangaplusapp.object.TruyenTranh;
+import com.example.mangaplusapp.object.Categories;
+import com.example.mangaplusapp.object.Mangas;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,10 +35,10 @@ public class SearchFragment extends Fragment {
     TruyenTranhAdapter truyenTranhAdapter;
     CateSearchAdapter cateSearchAdapter;
     public interface OnMangaLoadedListener {
-        void onMangaLoaded(List<TruyenTranh> truyenTranhList);
+        void onMangaLoaded(List<Mangas> truyenTranhList);
     }
     public interface OnCateLoadedListener {
-        void onCateLoaded(List<Category> categoryList);
+        void onCateLoaded(List<Categories> categoryList);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,14 +51,14 @@ public class SearchFragment extends Fragment {
         recyclerViewManga();
         loadMangas(new OnMangaLoadedListener() {
             @Override
-            public void onMangaLoaded(List<TruyenTranh> truyenTranhList) {
+            public void onMangaLoaded(List<Mangas> truyenTranhList) {
                 truyenTranhAdapter.SetData(truyenTranhList);
                 truyenTranhAdapter.notifyDataSetChanged();
             }
         });
         loadCategories(new OnCateLoadedListener() {
             @Override
-            public void onCateLoaded(List<Category> categoryList) {
+            public void onCateLoaded(List<Categories> categoryList) {
                 cateSearchAdapter.setData(categoryList);
                 cateSearchAdapter.notifyDataSetChanged();
             }
@@ -82,9 +75,9 @@ public class SearchFragment extends Fragment {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<TruyenTranh> truyenTranhList = new ArrayList<>();
+                List<Mangas> truyenTranhList = new ArrayList<>();
                 for(DataSnapshot ds : snapshot.getChildren()){
-                    TruyenTranh truyenTranh = ds.getValue(TruyenTranh.class);
+                    Mangas truyenTranh = ds.getValue(Mangas.class);
                         truyenTranhList.add(truyenTranh);
                 }
                 // Gọi callback khi dữ liệu đã sẵn sàng
@@ -99,14 +92,14 @@ public class SearchFragment extends Fragment {
     private void loadCategories(OnCateLoadedListener listener) {
         //Get all data from firebase > Categories
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Categories");
-        List<Category> categoryList = new ArrayList<>();
+        List<Categories> categoryList = new ArrayList<>();
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 categoryList.clear();
                 for (DataSnapshot ds : snapshot.getChildren()){
                     //get data
-                    Category category = ds.getValue(Category.class);
+                    Categories category = ds.getValue(Categories.class);
                     //add to List
                     categoryList.add(category);
                 }

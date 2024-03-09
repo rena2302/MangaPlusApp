@@ -1,13 +1,22 @@
 package com.example.mangaplusapp.object;
 
-public class TruyenTranh {
+public class Mangas {
     private String NAME_MANGA, ID_MANGA, DESCRIPTION_MANGA, PICTURE_MANGA, CATEGORY_MANGA, ID_CATEGORY_MANGA;
+    private boolean PREMIUM_MANGA;
     //empty for firebase
-    public TruyenTranh() {
+    public Mangas() {
     }
-    public TruyenTranh(String NAME_MANGA, String PICTURE_MANGA) {
+    public Mangas(String NAME_MANGA, String PICTURE_MANGA) {
         this.NAME_MANGA = NAME_MANGA;
         this.PICTURE_MANGA = PICTURE_MANGA;
+    }
+
+    public boolean isPREMIUM_MANGA() {
+        return PREMIUM_MANGA;
+    }
+
+    public void setPREMIUM_MANGA(boolean PREMIUM_MANGA) {
+        this.PREMIUM_MANGA = PREMIUM_MANGA;
     }
 
     public String getNAME_MANGA() {

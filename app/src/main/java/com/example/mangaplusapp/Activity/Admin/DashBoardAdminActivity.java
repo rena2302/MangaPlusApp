@@ -1,7 +1,6 @@
 package com.example.mangaplusapp.Activity.Admin;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,10 +11,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.Adapter.DashBoardAdapter;
 import com.example.mangaplusapp.databinding.ActivityDashBoardAdminBinding;
-import com.example.mangaplusapp.object.Category;
-import com.example.mangaplusapp.object.TruyenTranh;
+import com.example.mangaplusapp.object.Categories;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,11 +24,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashBoardAdminActivity extends AppCompatActivity {
+public class DashBoardAdminActivity extends BaseActivity {
     private ActivityDashBoardAdminBinding binding;
     DashBoardAdapter dashBoardAdapter = new DashBoardAdapter(this, new ArrayList<>());
     public interface OnDataLoadedListener {
-        void onDataLoaded(List<Category> categoryList);
+        void onDataLoaded(List<Categories> categoryList);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class DashBoardAdminActivity extends AppCompatActivity {
         binding.adminRcvContainer.setAdapter(dashBoardAdapter);
         loadCategories(new OnDataLoadedListener() {
             @Override
-            public void onDataLoaded(List<Category> categoryList) {
+            public void onDataLoaded(List<Categories> categoryList) {
                 dashBoardAdapter.setData(DashBoardAdminActivity.this, categoryList);
                 searchEvent();
                 dashBoardAdapter.notifyDataSetChanged();
@@ -79,14 +78,14 @@ public class DashBoardAdminActivity extends AppCompatActivity {
     private void loadCategories(OnDataLoadedListener listener) {
         //Get all data from firebase > Categories
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Categories");
-        List<Category> categoryList = new ArrayList<>();
+        List<Categories> categoryList = new ArrayList<>();
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 categoryList.clear();
                 for (DataSnapshot ds : snapshot.getChildren()){
                     //get data
-                    Category category = ds.getValue(Category.class);
+                    Categories category = ds.getValue(Categories.class);
                     //add to List
                     categoryList.add(category);
                 }

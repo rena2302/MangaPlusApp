@@ -13,11 +13,11 @@
     <string name="Library">Thư Viện</string>
     <string name="newMemberSignUp"><b>Tạo Tài Khoản</b> </string>
     <string name="questionHaveAccount">Bạn đã có <b>Tài Khoản ?</b> </string>
-    <string name="HOT">HOT</string>
-    <string name="HOME">HOME</string>
-    <string name="CREATOR">CREATOR</string>
-    <string name="PROFILE">PROFILE</string>
-    <string name="SEARCH">SEARCH</string>
+    <string name="HOT">Nổi bật</string>
+    <string name="HOME">Trang chủ</string>
+    <string name="CREATOR">Nhà sáng tạo</string>
+    <string name="PROFILE">Trang của tôi</string>
+    <string name="SEARCH">Tìm kiếm</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="manga_plus_home">Manga Plus!</string>
     <string name="navigation_drawer_open">Open Navigation drawer</string>
@@ -78,5 +78,13 @@
     <string name="payment">Thanh toán</string>
     <string name="favorite">Yêu thích</string>
     <string name="changeTheme">Đổi giao diện</string>
+    <string name="addANewManga">Thêm Manga Mới</string>
+    <string name="addMangaDescription">Thêm Mô tả Manga</string>
+    <string name="addMangaPicture">Thêm Hình ảnh Manga</string>
+    <string name="addMangaCategory">Thêm Thể loại Manga</string>
+    <string name="addManga">Thêm Manga</string>
+    <string name="addNewChapter">Thêm Chương Mới</string>
+    <string name="addChapterManga">Thêm Chương Manga</string>
+    <string name="searchKeyWord">Nhập từ khóa (Manga hoặc Thể loại)</string>
 
 </resources>

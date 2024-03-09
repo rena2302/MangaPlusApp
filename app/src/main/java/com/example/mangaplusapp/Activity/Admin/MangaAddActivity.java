@@ -9,13 +9,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.databinding.ActivityAddMangaBinding;
-import com.example.mangaplusapp.object.Category;
+import com.example.mangaplusapp.object.Categories;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,10 +25,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MangaAddActivity extends AppCompatActivity {
+public class MangaAddActivity extends BaseActivity {
     ActivityAddMangaBinding binding;
-    private FirebaseAuth firebaseAuth;
-    private List<Category> categoryList;
+    private List<Categories> categoryList;
     private String selectedCategoryId;
 
     @Override
@@ -37,7 +35,6 @@ public class MangaAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAddMangaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        firebaseAuth = FirebaseAuth.getInstance();
         loadCategories();
         onClickEvent();
 
@@ -54,7 +51,7 @@ public class MangaAddActivity extends AppCompatActivity {
                 categoryList.clear();
                 for(DataSnapshot ds : snapshot.getChildren()){
                     //get Data
-                    Category category = ds.getValue(Category.class);
+                    Categories category = ds.getValue(Categories.class);
                     //add to list
                     categoryList.add(category);
                 }
@@ -147,6 +144,12 @@ public class MangaAddActivity extends AppCompatActivity {
         hashMap.put("PICTURE_MANGA", ""+binding.addMangaPicture.getText());
         hashMap.put("CATEGORY_MANGA", ""+binding.addMangaCategory.getText());
         hashMap.put("ID_CATEGORY_MANGA",""+selectedCategoryId);
+        if (binding.addMangaPreCheck.isChecked()){
+            hashMap.put("PREMIUM_MANGA",true);
+        }
+        else {
+            hashMap.put("PREMIUM_MANGA",false);
+        }
         //hashMap.put("UID_MANGA", firebaseAuth.getUid());
 
         //add to firebase db

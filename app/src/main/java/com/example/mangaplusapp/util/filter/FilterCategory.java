@@ -6,17 +6,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mangaplusapp.Adapter.CateSearchAdapter;
 import com.example.mangaplusapp.Adapter.DashBoardAdapter;
-import com.example.mangaplusapp.object.Category;
+import com.example.mangaplusapp.object.Categories;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class FilterCategory extends Filter {
-    List<Category> categoryList;
+    List<Categories> categoryList;
     private RecyclerView.Adapter adapter;
 
-    public FilterCategory(List<Category> categoryList, RecyclerView.Adapter adapter) {
+    public FilterCategory(List<Categories> categoryList, RecyclerView.Adapter adapter) {
         this.categoryList = categoryList;
         this.adapter = adapter;
     }
@@ -27,7 +26,7 @@ public class FilterCategory extends Filter {
         if (constraint != null && constraint.length() > 0){
             //Change upper case or lower case
             constraint = constraint.toString().toUpperCase();
-            List<Category> filterModels = new ArrayList<>();
+            List<Categories> filterModels = new ArrayList<>();
             for ( int i = 0; i < categoryList.size(); i++){
                 //validate
                 if(categoryList.get(i).getNAME_CATEGORY().toUpperCase().contains(constraint)){
@@ -49,11 +48,11 @@ public class FilterCategory extends Filter {
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
             if (adapter instanceof DashBoardAdapter) {
-                ((DashBoardAdapter) adapter).setCategoryList((List<Category>) results.values);
+                ((DashBoardAdapter) adapter).setCategoryList((List<Categories>) results.values);
                 ((DashBoardAdapter) adapter).notifyDataSetChanged();
             }
             else if (adapter instanceof CateSearchAdapter){
-                ((CateSearchAdapter) adapter).setCategoryList((List<Category>) results.values);
+                ((CateSearchAdapter) adapter).setCategoryList((List<Categories>) results.values);
                 ((CateSearchAdapter) adapter).notifyDataSetChanged();
             }
     }

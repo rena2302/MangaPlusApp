@@ -78,5 +78,14 @@
     <string name="payment">지불</string>
     <string name="favorite">좋아하는</string>
     <string name="changeTheme">테마 변경</string>
+    <string name="addANewManga">새 만화 추가</string>
+    <string name="addMangaDescription">만화 설명 추가</string>
+    <string name="addMangaPicture">만화 사진 추가</string>
+    <string name="addMangaCategory">만화 카테고리 추가</string>
+    <string name="addManga">만화 추가</string>
+    <string name="addNewChapter">새 챕터 추가</string>
+    <string name="addChapterManga">챕터 만화 추가</string>
+    <string name="searchKeyWord">키워드 입력 (만화 또는 카테고리)</string>
+
 
 </resources>

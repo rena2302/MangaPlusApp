@@ -19,6 +19,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class EditNameFragment extends Fragment {
     ImageButton Backbtn;
@@ -26,7 +29,9 @@ public class EditNameFragment extends Fragment {
     String userName;
     UserDBHelper dbhelper;
     AppCompatButton submit;
-    int userId;
+    String userId;
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
     public EditNameFragment()
     {
 
@@ -44,12 +49,14 @@ public class EditNameFragment extends Fragment {
         //===================================Data=================================================//
         dbhelper = new UserDBHelper(requireContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
-        userId=preferences.getInt("user_id",-1);
+        mAuth=FirebaseAuth.getInstance();
+        currentUser=mAuth.getCurrentUser();
+        userId= currentUser.getProviderId();
         //****************************************************************************************//
         getUserName = root.findViewById(R.id.userNewNameTxt);
         submit= root.findViewById(R.id.btnSubmitInfoName);
 
-        if(userId!=-1){
+        if(!userId.isEmpty()){
                navigate();
         } else{
             return root;
@@ -61,7 +68,10 @@ public class EditNameFragment extends Fragment {
         if(!dbhelper.validName(userName)){
             return false;
         }else{
-            dbhelper.UpdateUserName(userId,userName);
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(userName)
+                    .build();
+            currentUser.updateProfile(profileUpdates);
             return true;
         }
     }
@@ -72,7 +82,6 @@ public class EditNameFragment extends Fragment {
         submit.setOnClickListener(v->{
             if(setName()){
                 Toast.makeText(getActivity(), "Update User Name Successful", Toast.LENGTH_SHORT).show();
-//                loadFragment(new UserProfileFragment(),false);
                 startAct();
             }
             else{

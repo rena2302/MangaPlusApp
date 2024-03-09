@@ -18,6 +18,12 @@
             android:layout_weight="1"
             android:text="Category Title"/>
         <ImageButton
+            android:id="@+id/itemDashEditBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_edit"
+            android:backgroundTint="@color/transparent"/>
+        <ImageButton
             android:id="@+id/itemDashBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"

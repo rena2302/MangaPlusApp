@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:background="@drawable/back01"
     android:layout_height="match_parent"
-    tools:context=".Activity.Admin.CategoryAddActivity">
+    tools:context=".Activity.Admin.MangaAddActivity">
     <RelativeLayout
-        android:id="@+id/addCategoryLabel"
+        android:id="@+id/editLabel"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/shape_toolbar">
 
         <ImageButton
-            android:id="@+id/addCategoryBack"
+            android:id="@+id/editBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -27,7 +27,7 @@
 
         </ImageButton>
         <ImageView
-            android:id="@+id/addCategoryImg"
+            android:id="@+id/editImg"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:src="@drawable/logo_test"
@@ -37,25 +37,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/addANewCategory"
+            android:text="Edit Dashboard"
             android:textSize="20dp"
             android:textColor="@color/white"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/addCategoryImg">
+            android:layout_below="@+id/editImg">
         </TextView>
     </RelativeLayout>
-    <EditText
-        android:id="@+id/addCategoryName"
+    <FrameLayout
+        android:id="@+id/editFmContainer"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="match_parent"
         android:layout_margin="16dp"
-        android:hint="@string/addANewCategory"
-        android:layout_below="@+id/addCategoryLabel"/>
-    <Button
-        android:id="@+id/addCategorySubmit"
-        android:layout_margin="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Submit"
-        android:layout_below="@+id/addCategoryName"/>
+        android:layout_below="@+id/editLabel"/>
 </RelativeLayout>

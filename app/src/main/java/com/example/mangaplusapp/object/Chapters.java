@@ -1,9 +1,9 @@
 package com.example.mangaplusapp.object;
 
-public class Chapter {
+public class Chapters {
     String ID_CHAPTER, NAME_CHAPTER, MANGA_CHAPTER, ID_MANGA_CHAPTER,PDF_CHAPTER;
 
-    public Chapter() {
+    public Chapters() {
     }
 
     public String getID_CHAPTER() {
