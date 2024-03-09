@@ -72,7 +72,6 @@ public class MainActivity extends BaseActivity {
         userNameTxt = navigationView.getHeaderView(0).findViewById(R.id.menu_drawer_header_username);
         imgViewUser=  navigationView.getHeaderView(0).findViewById(R.id.menu_drawer_header_image_user);
         SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
         dbHelper = new UserDBHelper(this);
         mAuth = FirebaseAuth.getInstance();
         currentUser=mAuth.getCurrentUser();

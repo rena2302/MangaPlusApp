@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_accept"
                     android:fontFamily="@font/interextrabold"
-                    android:text="@string/Finish"
+                    android:text="@string/submit"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="20sp"

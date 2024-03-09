@@ -1,7 +1,5 @@
 package com.example.mangaplusapp.Fragment;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,14 +16,20 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ChangePasswordFragment extends Fragment {
     ImageButton backBtn;
     EditText getOldPass,getNewPass,getCfPass;
-    String oldPass,newPass,cfPass;
+    String oldPass,newPass,cfPass,authPassword;
     UserDBHelper dbHelper;
     AppCompatButton submit;
-    int userID;
+    String userID;
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
     public  ChangePasswordFragment()
     {
 
@@ -48,11 +52,12 @@ public class ChangePasswordFragment extends Fragment {
         //****************************************************************************************//
         //========================================GET DATA========================================//
         dbHelper = new UserDBHelper(requireContext());
-        SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = preferences.edit();
-        userID=preferences.getInt("user_id",-1);
+        mAuth=FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        userID=currentUser.getProviderId();
+
         //****************************************************************************************//
-        if(userID!=-1){
+        if(!userID.isEmpty()){
             navigate();
         }
         return  root;
@@ -70,33 +75,44 @@ public class ChangePasswordFragment extends Fragment {
         oldPass= getOldPass.getText().toString();
         newPass = getNewPass.getText().toString();
         cfPass= getCfPass.getText().toString();
+        AuthCredential credential = EmailAuthProvider.getCredential(currentUser.getEmail(), oldPass);
         if(oldPass.isEmpty()||newPass.isEmpty()||cfPass.isEmpty()){
             Toast.makeText(getContext(),"Please enter all fields",Toast.LENGTH_SHORT).show();
         }
         else
         {
-            if(dbHelper.CheckPassword(userID,oldPass)){
-                if(newPass.equals(cfPass)){
-                    if(dbHelper.validPassword(newPass)){
-                        //=================================Success case===============================//
-                        dbHelper.resetPassword(newPass);
-                        Toast.makeText(getContext(),"Update password successful",Toast.LENGTH_SHORT).show();
-                        loadFragment(new UserProfileFragment(),false);
-                        //*****************************************************************************//
-                    }
-                    else{
-                        Toast.makeText(getContext(),"Please enter password length >= 8 or <= 12 ",Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else{
-                    Toast.makeText(getContext(),"Password and Confirm password not match",Toast.LENGTH_SHORT).show();
-                }
+            currentUser.reauthenticate(credential)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            if(newPass.equals(cfPass)){
+                                if(dbHelper.validPassword(newPass)){
+                                    //=================================Success case===============================//
+                                    UpdatePass(newPass);
+                                }
+                                else{
+                                    Toast.makeText(getContext(),"Please enter password length >= 8 or <= 12 ",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            else{
+                                Toast.makeText(getContext(),"Password and Confirm password not match",Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getContext(),"Password not match",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+    private void UpdatePass(String newPass){
+        currentUser.updatePassword(newPass).addOnCompleteListener(task->{
+            if(task.isSuccessful()){
+                Toast.makeText(getContext(),"Update password successful",Toast.LENGTH_SHORT).show();
+                loadFragment(new UserProfileFragment(),false);
+                //*****************************************************************************//
             }
             else{
-                Toast.makeText(getContext(),"Password not match",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Update password Failed by system",Toast.LENGTH_SHORT).show();
             }
-        }
-
+        });
     }
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
