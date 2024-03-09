@@ -5,29 +5,23 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.Fragment.ForgotFragment;
-import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
-import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.Fragment.VerificationFragment;
+import com.example.mangaplusapp.R;
 
 public class ForgotControlActivity extends BaseActivity {
-    UserDBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_control);
         SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
-        dbHelper = new UserDBHelper(this);
         String email = getIntent().getStringExtra("EMAIL");
-
-
         if(email==null){
             //======================================Nav to ForgotFragment=========================//
             loadFragment(new ForgotFragment(),false);

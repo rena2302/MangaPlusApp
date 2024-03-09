@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.widget.EditText;
 
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginModel {
     //tao element để khi xử lí logic xong sẽ trả về thông báo cho presenter thông qua interface MVPLoginPresenter
@@ -14,7 +16,7 @@ public LoginModel(MVPLoginPresenter ModelResponseToPresenter)
 }
 //END CREATE
     //Xử lí logic cho presenter
-    public void handleLogin(EditText emailTxt, EditText passwordTxt, UserDBHelper db, int idUser, SharedPreferences.Editor editor){
+    public void handleLogin(EditText emailTxt, EditText passwordTxt, UserDBHelper db, SharedPreferences.Editor editor){
         String userEmail = emailTxt.getText().toString();
         String userPassword = passwordTxt.getText().toString();
         // if user do nothing or Missing input
@@ -24,21 +26,33 @@ public LoginModel(MVPLoginPresenter ModelResponseToPresenter)
         else{
             if(db.validEmail(userEmail)){
                 if(db.validPassword(userPassword)){
-                    Boolean checkEmailPass= db.CheckEmailPassword(userEmail,userPassword);
-                    // if email and password valid -> nav to home activity
-                    if(checkEmailPass){
-                        ////////===========================Begin Login Successful=========================//////////
-                        idUser=db.loginUser(userEmail,userPassword);
-                        editor.putInt("user_id",idUser);
-                        editor.putString("user_email", userEmail);
-                        editor.apply();
-                        ModelResponseToPresenter.LoginSuccess();
-                        ////////===========================END Login Successful=========================////////////
-                    }
-                    // show message input error
-                    else{
-                        ModelResponseToPresenter.LoginFailed();
-                    }
+                    // Xác thực người dùng bằng Firebase Authentication
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    mAuth.signInWithEmailAndPassword(userEmail, userPassword)
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    // Đăng nhập thành công
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    if (user != null) {
+                                        // Lấy id người dùng hiện tại
+                                        String userId = user.getUid();
+
+                                        // Lưu thông tin người dùng vào SharedPreferences
+                                        editor.putString("user_id", userId);
+                                        editor.putString("user_email", userEmail);
+                                        editor.apply();
+
+                                        // Gửi thông báo đăng nhập thành công tới Presenter
+                                        ModelResponseToPresenter.LoginSuccess();
+                                    } else {
+                                        // Đăng nhập thất bại do không tìm thấy người dùng
+                                        ModelResponseToPresenter.LoginFailed();
+                                    }
+                                } else {
+                                    // Đăng nhập thất bại do email hoặc mật khẩu không chính xác
+                                    ModelResponseToPresenter.LoginFailed();
+                                }
+                            });
                 }
                 else{
                     ModelResponseToPresenter.Passwordnotvalid();

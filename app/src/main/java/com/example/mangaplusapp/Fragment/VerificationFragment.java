@@ -25,12 +25,14 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.example.mangaplusapp.Activity.User.RegisterActivity;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.Helper.LoadHelper.LoadFragment;
 import com.example.mangaplusapp.Helper.ServiceHelper.OTP;
 import com.example.mangaplusapp.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
 public class VerificationFragment extends Fragment{
     FirebaseAuth auth;
@@ -40,10 +42,11 @@ public class VerificationFragment extends Fragment{
     AppCompatButton submitOtp;
     OTP otpHelper;
     LoadFragment fragmentHelper;
-    int userID;
     String keyOtp;
     EditText otp1Input,otp2Input,otp3Input,otp4Input;
     ImageButton backOTPBtn;
+    DatabaseReference usersRef;
+    String userID;
 
     //Resend OTP time
     private final int resendTime=60;
@@ -145,25 +148,20 @@ public class VerificationFragment extends Fragment{
             if(otp.length()==4)
             {
                 if(otp.equals(keyOtp)||otp.equals(fakeOtp)){
-                    //===============================Case forgot password=============================//
-                    if(dbHelper.CheckEmailExists(emailUser)){
-                        // khi có figma thì cho chạy vào form edit password
-                        userID =dbHelper.loginUser(emailUser);
-                        editor.putString("user_email", emailUser);
-                        editor.putInt("user_id",userID); // put user id
-                        editor.apply();
-                        fragmentHelper = new LoadFragment();
-                        fragmentHelper.loadFragment(getParentFragmentManager(),new CreatePasswordFragment(),false,R.id.forgotContainer);
-                    }
-                    //===============================Case Register ===================================//
-                    else{
-                        userID =dbHelper.loginUser(emailUser);
-                        editor.putString("user_email", emailUser);
-                        editor.apply();
-                        // nav to new password and confirm password and insert data into database -> nav to login
-                        fragmentHelper = new LoadFragment();
-                        fragmentHelper.loadFragment(getParentFragmentManager(),new CreatePasswordFragment(),false,R.id.forgotContainer);
-                    }
+                    dbHelper.checkEmailExists(emailUser, new UserDBHelper.userCheckFirebaseListener() {
+                        @Override
+                        public void onEmailCheckResult(boolean exists) {
+                            if (exists) {
+                                //===========================Case forgot==========================//
+                                fragmentHelper = new LoadFragment();
+                                fragmentHelper.loadFragment(getParentFragmentManager(), new CreatePasswordFragment(), false, R.id.forgotContainer);
+                            } else {
+                                //===========================Case Register========================//
+                                fragmentHelper = new LoadFragment();
+                                fragmentHelper.loadFragment(getParentFragmentManager(), new CreatePasswordFragment(), false, R.id.forgotContainer);
+                            }
+                        }
+                    });
                 }
                 else{
                     Toast.makeText(getContext(),"Wrong OTP code", Toast.LENGTH_SHORT).show();
@@ -183,13 +181,17 @@ public class VerificationFragment extends Fragment{
     }
     private  void BackPageVertication(){
         backOTPBtn.setOnClickListener(v->{
-            if(dbHelper.CheckEmailExists(emailUser)){
-                loadFragment(new ForgotFragment(),false);
-            }
-            else{
-                Intent loadToRegister = new Intent(getContext(), RegisterActivity.class);
-                startActivity(loadToRegister);
-            }
+            dbHelper.checkEmailExists(emailUser, new UserDBHelper.userCheckFirebaseListener() {
+                @Override
+                public void onEmailCheckResult(boolean exists) {
+                    if(exists){
+                        loadFragment(new ForgotFragment(),false);
+                    }else {
+                        Intent loadToRegister = new Intent(getContext(), RegisterActivity.class);
+                        startActivity(loadToRegister);
+                    }
+                }
+            });
         });
     }
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {

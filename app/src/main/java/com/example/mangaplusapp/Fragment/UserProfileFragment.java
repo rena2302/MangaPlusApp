@@ -1,11 +1,8 @@
 package com.example.mangaplusapp.Fragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -32,15 +29,20 @@ import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.Base.LoginActivity;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class UserProfileFragment extends Fragment {
     ImageView TabDialog,getUserAvtIMG;
     UserDBHelper db;
     CardView avtContainer;
     TextView getUserNameInfoTxt,getUserNameTittleTxt,getUserEmailTxt,getUserPasswordTxt,HeaderEmail;
-    int userId;
+    String userId;
     String userEmail,userPassword,userName,userAvt;
     LinearLayout navToRegion;
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
     private static final int SELECT_IMAGE = 100;
 
 
@@ -50,7 +52,6 @@ public class UserProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,14 +72,15 @@ public class UserProfileFragment extends Fragment {
         //****************************************************************************************//
         //=========================================Get data=======================================//
         db = new UserDBHelper(requireContext());
-        SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        userId= preferences.getInt("user_id",-1);
-        userName = db.getUserName(userId);
-        userPassword = db.getUserPassword(userId);
-        userEmail = db.getUserEmail(userId);
-        userAvt = db.getPicture(userId);
-        if(userId!=-1){
+        mAuth=FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        userId=currentUser.getProviderId();
+        Log.d("Profile", "ID " + userId);
+
+        if(!userId.isEmpty()){
+            userName = currentUser.getDisplayName();
+            userEmail = currentUser.getEmail();
+            userAvt = String.valueOf(currentUser.getPhotoUrl());
             userExists();
             userSetIMG();
         }
@@ -94,7 +96,7 @@ public class UserProfileFragment extends Fragment {
         getActivity().startActivity(intent); // Khởi động lại hoạt động
     }
     private boolean isLoggedIn(){
-        return db.isUserLoggedIn();
+        return currentUser != null;
     }
     private void handleNotLoggedIn() {
         getUserNameInfoTxt.setText("Guest");
@@ -137,15 +139,19 @@ public class UserProfileFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == SELECT_IMAGE && resultCode == Activity.RESULT_OK && data != null){
             Uri uri = data.getData();
-            // Hiển thị hình ảnh được chọn
-            // Thêm dữ liệu vào cơ sở dữ liệu
-            Log.d("ADD URI ", "TRUE" + uri.toString());
-            db.updatePicture(userId,uri);
-            String spoilPicture = db.getPicture(userId);
-            Glide.with(this).load(spoilPicture).into(getUserAvtIMG);
-            Toast.makeText(getActivity(), "Update Avatar Successful", Toast.LENGTH_SHORT).show();
-            startAct();
-
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setPhotoUri(uri)
+                    .build();
+            currentUser.updateProfile(profileUpdates).addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    Glide.with(this).load(uri).into(getUserAvtIMG);
+                    Toast.makeText(getActivity(), "Update Avatar Successful", Toast.LENGTH_SHORT).show();
+                    startAct();
+                }
+                else{
+                    Toast.makeText(getActivity(), "Update Avatar Failed", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
     private void showDialog()
@@ -181,7 +187,6 @@ public class UserProfileFragment extends Fragment {
             logout.setOnClickListener(v -> {
                 // Clear session and navigate to login activity
                 try {
-                    clearSession();
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
                     Toast.makeText(getActivity(), "Log out successful", Toast.LENGTH_SHORT).show();
@@ -203,9 +208,6 @@ public class UserProfileFragment extends Fragment {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
-    }
-    private void clearSession() {
-        db.clearUserSession();
     }
 
 }
