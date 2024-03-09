@@ -3,6 +3,7 @@ package com.example.mangaplusapp.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -37,6 +39,8 @@ public class CreatePasswordFragment extends Fragment {
     RelativeLayout layoutInputUserName;
     ImageButton backRegisterBtn;
     String userId;
+    String hardIMG = "https://media.discordapp.net/attachments/1062386055258570804/1212303621354561556/logo_test.png?ex=65f158ba&is=65dee3ba&hm=0f1f490837c7544ada46aca5e652a769a8c0f02f7529133bc5c9f981e719b992&=&format=webp&quality=lossless&width=525&height=525";
+    Uri imgDefault = Uri.parse(hardIMG);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -182,7 +186,18 @@ public class CreatePasswordFragment extends Fragment {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         String userId = user.getUid();
-
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(userName) // Đặt tên người dùng
+                                .setPhotoUri(imgDefault)
+                                .build();
+                        user.updateProfile(profileUpdates)
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        Log.d("TAG", "User profile updated.");
+                                    } else {
+                                        Log.w("", "Failed to update user profile.", task1.getException());
+                                    }
+                                });
                         // Lưu thông tin người dùng vào Firebase Realtime Database
                         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
                         usersRef.child(userId).setValue(new User(userName, userEmail,dbHelper.hashPassword(userPassword)));
