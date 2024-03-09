@@ -45,7 +45,6 @@ public class MainActivity extends BaseActivity {
     ActionBarDrawerToggle toggle;
     private ActivityMainBinding binding;
     private BottomNavigationView bottomNavigationView;
-    private FrameLayout frameLayout;
     private DrawerLayout drawerLayout;
     private FragmentManager fragmentManager;
     TextView userNameTxt;
@@ -160,7 +159,7 @@ public class MainActivity extends BaseActivity {
     }
     private void focusFragment() { // ham chay ra main cua fragment
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
-        frameLayout = findViewById(R.id.frameLayout);
+        FrameLayout frameLayout = findViewById(R.id.frameLayout);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

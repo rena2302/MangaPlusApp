@@ -17,11 +17,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mangaplusapp.Activity.User.MainActivity;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+
+import java.util.concurrent.Executor;
 
 public class EditNameFragment extends Fragment {
     ImageButton Backbtn;
@@ -71,6 +74,21 @@ public class EditNameFragment extends Fragment {
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                     .setDisplayName(userName)
                     .build();
+            currentUser.updateProfile(profileUpdates).addOnCompleteListener(requireActivity(), task ->{
+                if(task.isSuccessful()){
+                    Intent intent = getActivity().getIntent();
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+                else {
+                    // Xử lý lỗi khi cập nhật thông tin người dùng thất bại
+                    Exception e = task.getException();
+                    if (e != null) {
+                        // Log hoặc hiển thị thông báo lỗi
+                        e.printStackTrace();
+                    }
+                }
+            });
             currentUser.updateProfile(profileUpdates);
             return true;
         }
@@ -82,7 +100,6 @@ public class EditNameFragment extends Fragment {
         submit.setOnClickListener(v->{
             if(setName()){
                 Toast.makeText(getActivity(), "Update User Name Successful", Toast.LENGTH_SHORT).show();
-                startAct();
             }
             else{
                 Toast.makeText(getActivity(),"Please enter user name >= 5 ",Toast.LENGTH_SHORT).show();
@@ -100,10 +117,5 @@ public class EditNameFragment extends Fragment {
             fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
         }
         fragmentTransaction.commit();
-    }
-    private void startAct(){
-        getActivity().finish(); // Kết thúc hoạt động hiện tại
-        Intent intent = getActivity().getIntent(); // Lấy intent hiện tại
-        getActivity().startActivity(intent); // Khởi động lại hoạt động
     }
 }
