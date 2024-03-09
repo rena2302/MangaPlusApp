@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 
 import com.example.mangaplusapp.Database.MangaPlusDatabase;
 import com.example.mangaplusapp.util.table.UserTable;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -318,5 +319,30 @@ public class UserDBHelper  extends MangaPlusDatabase {
             }
         });
     }
+    private void loginUserWithFirebaseAndCheckEmail(String email, String password) {
+        // Đăng nhập người dùng bằng Firebase Authentication
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Đăng nhập thành công, kiểm tra xem email có tồn tại trong cơ sở dữ liệu Firebase không
+                        checkEmailExists(email, new UserDBHelper.userCheckFirebaseListener() {
+                            @Override
+                            public void onEmailCheckResult(boolean exists) {
+                                if (exists) {
+                                    // Email tồn tại trong cơ sở dữ liệu, thực hiện các thao tác cần thiết (ví dụ: chuyển hướng đến màn hình chính)
+                                    // Đây là nơi bạn thực hiện các hành động sau khi người dùng đăng nhập thành công và email tồn tại trong cơ sở dữ liệu
+                                } else {
+                                    // Email không tồn tại trong cơ sở dữ liệu, bạn có thể hiển thị thông báo lỗi hoặc thực hiện các hành động khác tùy theo yêu cầu của ứng dụng
+                                }
+                            }
+                        });
+                    } else {
+                        // Đăng nhập thất bại, bạn có thể hiển thị thông báo lỗi hoặc thực hiện các hành động khác tùy theo yêu cầu của ứng dụng
+                    }
+                });
+    }
+
+
 
 }

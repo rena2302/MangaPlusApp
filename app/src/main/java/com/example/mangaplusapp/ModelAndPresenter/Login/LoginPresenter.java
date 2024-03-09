@@ -12,10 +12,10 @@ public class LoginPresenter implements MVPLoginPresenter {
     {
         this.PresenterResponseToViewAct=PresenterResponseToViewAct;
     }
-    public void receivedHandleLogin(EditText emailTxt, EditText passwordTxt, UserDBHelper db, int idUser, SharedPreferences.Editor editor)
+    public void receivedHandleLogin(EditText emailTxt, EditText passwordTxt, UserDBHelper db, SharedPreferences.Editor editor)
     {
         loginmodel=new LoginModel(this);
-       loginmodel.handleLogin(emailTxt,passwordTxt, db, idUser,editor);//thông báo cho model để sử lí logic
+       loginmodel.handleLogin(emailTxt,passwordTxt, db,editor);//thông báo cho model để sử lí logic
     }
     public void RegisterAction()
     {
