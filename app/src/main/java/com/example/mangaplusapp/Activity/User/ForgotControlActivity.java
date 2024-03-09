@@ -22,8 +22,6 @@ public class ForgotControlActivity extends BaseActivity {
         SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
         String email = getIntent().getStringExtra("EMAIL");
-
-
         if(email==null){
             //======================================Nav to ForgotFragment=========================//
             loadFragment(new ForgotFragment(),false);

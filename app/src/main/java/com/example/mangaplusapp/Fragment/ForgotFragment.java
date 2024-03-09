@@ -23,7 +23,7 @@ public class ForgotFragment extends Fragment {
     AppCompatButton SendOtpBtn;
     String userEmail;
     UserDBHelper db;
-    int userID;
+    String userID;
     EditText getUserEmailTxt;
     ImageButton BackbtnLogin;
     public ForgotFragment() {
@@ -52,29 +52,32 @@ public class ForgotFragment extends Fragment {
         db=new UserDBHelper(getContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
-        userID=preferences.getInt("user_id",-1);
+        userID=preferences.getString("user_id","");
         //=====================================Send EMAIL=======================================//
         SendOtpBtn.setOnClickListener(v->{
-            if(getUserEmailTxt.getText().toString().isEmpty()){
+            String emailInput = getUserEmailTxt.getText().toString();
+            if(emailInput.isEmpty()){
                 Toast.makeText(getContext() ,"Please enter your email", Toast.LENGTH_SHORT).show();
             }
             else{
-                boolean checkExists = db.CheckEmailExists(getUserEmailTxt.getText().toString());
-                if(checkExists){
-                    userEmail = getUserEmailTxt.getText().toString(); // get user email input
-                    editor.putString("user_email", userEmail); // put to session
-                    editor.apply(); // apply session
-                    //*DEBUG*//
-                    String xx = preferences.getString("user_email","error"); // get data form session
-                    Log.d("FORGOT FRAGMENT SEND EMAIL ERROR", xx); // log cat
-                    //*DEBUG*//
-                    loadFragment(new VerificationFragment(),false);
-                }
-                else{
-                    Toast.makeText(getContext() ,"Email not exists in our app", Toast.LENGTH_SHORT).show();
-                    // new Feature : new button nav to Register
-
-                }
+                db.checkEmailExists(emailInput, new UserDBHelper.userCheckFirebaseListener() {
+                    @Override
+                    public void onEmailCheckResult(boolean exists) {
+                        if(exists){
+                            userEmail = emailInput; // get user email input
+                            editor.putString("user_email", userEmail); // put to session
+                            editor.apply(); // apply session
+                            //*DEBUG*//
+                            String xx = preferences.getString("user_email","error"); // get data form session
+                            Log.d("FORGOT FRAGMENT SEND EMAIL ERROR", xx); // log cat
+                            //*DEBUG*//
+                            loadFragment(new VerificationFragment(),false);
+                        }
+                        else{
+                            Toast.makeText(getContext() ,"Email not exists in our app", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
         BackbtnLogin.setOnClickListener(new View.OnClickListener() {

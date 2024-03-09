@@ -36,7 +36,7 @@ public class CreatePasswordFragment extends Fragment {
     RelativeLayout layoutInput;
     RelativeLayout layoutInputUserName;
     ImageButton backRegisterBtn;
-    int userId;
+    String userId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,14 +51,14 @@ public class CreatePasswordFragment extends Fragment {
         dbHelper= new UserDBHelper(getContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        userId=preferences.getInt("user_id",-1);
-        if(userId==-1)
+        userId=preferences.getString("user_id","");
+        if(userId.isEmpty())
         {
             Log.d("sss", "null-1 ");
         }
         else
         {
-            Log.d("aaa", String.valueOf(userId));
+            Log.d("aaa", userId);
         }
         layoutInputUserName=root.findViewById(R.id.InputUNCP);
         btnSubmit = root.findViewById(R.id.btnSubmitInfo);
@@ -76,19 +76,24 @@ public class CreatePasswordFragment extends Fragment {
             }
         });
 
-        //===================================ForgotPassword Case==================================//
-        if(dbHelper.CheckEmailExists(userEmail)){
-            layoutInput.removeView(layoutInputUserName);
-            btnSubmit.setOnClickListener(v->{
-                updatePassword();
-            });
-        }
-        //===================================New Account Case=====================================//
-        else{
-            btnSubmit.setOnClickListener(v->{
-                registerNewAccount();
-            });
-        }
+        dbHelper.checkEmailExists(userEmail, new UserDBHelper.userCheckFirebaseListener() {
+            @Override
+            public void onEmailCheckResult(boolean exists) {
+                if(exists){
+                    //=============================ForgotPassword Case============================//
+                    layoutInput.removeView(layoutInputUserName);
+                    btnSubmit.setOnClickListener(v->{
+                        updatePassword();
+                    });
+                }
+                else{
+                    //=============================NewAccount Case================================//
+                    btnSubmit.setOnClickListener(v->{
+                        registerNewAccount();
+                    });
+                }
+            }
+        });
         return root;
 
     }
@@ -112,20 +117,33 @@ public class CreatePasswordFragment extends Fragment {
         }
 
         // Thực hiện cập nhật mật khẩu bằng Firebase Realtime Database
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             String userId = user.getUid();
-            usersRef.child(userId).child("password").setValue(userPassword)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // Cập nhật mật khẩu thành công
-                            Toast.makeText(getContext(), "Password update successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getContext(), LoginActivity.class));
+            String newPassword = getUserPasswordTxt.getText().toString().trim();
+            // Cập nhật mật khẩu trên Firebase Authentication
+            user.updatePassword(newPassword)
+                    .addOnCompleteListener(authTask -> {
+                        if (authTask.isSuccessful()) {
+                            // Cập nhật mật khẩu thành công trên Authentication
+
+                            // Tiếp tục cập nhật mật khẩu trên Realtime Database
+                            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+                            usersRef.child(userId).child("password").setValue(dbHelper.hashPassword(newPassword))
+                                    .addOnCompleteListener(dbTask -> {
+                                        if (dbTask.isSuccessful()) {
+                                            // Cập nhật mật khẩu thành công trên Realtime Database
+                                            Toast.makeText(getContext(), "Password update successful", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(getContext(), LoginActivity.class));
+                                        } else {
+                                            // Cập nhật mật khẩu thất bại trên Realtime Database
+                                            Toast.makeText(getContext(), "Realtime Database update failed: " + dbTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                         } else {
-                            // Cập nhật mật khẩu thất bại
-                            Toast.makeText(getContext(), "Password update failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            // Cập nhật mật khẩu thất bại trên Authentication
+                            Toast.makeText(getContext(), "Authentication update failed: " + authTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }
@@ -157,7 +175,7 @@ public class CreatePasswordFragment extends Fragment {
             return;
         }
 
-        // Thực hiện đăng ký mới bằng Firebase Realtime Database
+        // Thực hiện đăng ký mới bằng Firebase Auth -> convert to Realtime Database  = cách sử dụng nút User
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(task -> {
@@ -167,7 +185,7 @@ public class CreatePasswordFragment extends Fragment {
 
                         // Lưu thông tin người dùng vào Firebase Realtime Database
                         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
-                        usersRef.child(userId).setValue(new User(userName, userEmail));
+                        usersRef.child(userId).setValue(new User(userName, userEmail,dbHelper.hashPassword(userPassword)));
 
                         Toast.makeText(getContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getContext(), LoginActivity.class));

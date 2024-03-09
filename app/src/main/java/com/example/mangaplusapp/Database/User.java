@@ -3,17 +3,26 @@ package com.example.mangaplusapp.Database;
 public class User {
     private String userName;
     private String email;
+    private String password;
 
     public User() {
         // Constructor mặc định để phù hợp với Firebase
     }
 
-    public User(String userName, String email) {
+    public User(String userName, String email,String password) {
         this.userName = userName;
         this.email = email;
+        this.password = password;
     }
 
     // Getters và setters
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public String getUserName() {
         return userName;
     }
