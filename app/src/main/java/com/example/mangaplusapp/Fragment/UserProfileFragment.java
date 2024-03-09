@@ -96,7 +96,7 @@ public class UserProfileFragment extends Fragment {
         getActivity().startActivity(intent); // Khởi động lại hoạt động
     }
     private boolean isLoggedIn(){
-        return db.isUserLoggedIn();
+        return currentUser != null;
     }
     private void handleNotLoggedIn() {
         getUserNameInfoTxt.setText("Guest");
@@ -187,7 +187,6 @@ public class UserProfileFragment extends Fragment {
             logout.setOnClickListener(v -> {
                 // Clear session and navigate to login activity
                 try {
-                    clearSession();
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
                     Toast.makeText(getActivity(), "Log out successful", Toast.LENGTH_SHORT).show();
@@ -209,9 +208,6 @@ public class UserProfileFragment extends Fragment {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
-    }
-    private void clearSession() {
-        db.clearUserSession();
     }
 
 }

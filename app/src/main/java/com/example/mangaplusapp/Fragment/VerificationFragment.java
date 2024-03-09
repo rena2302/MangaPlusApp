@@ -181,13 +181,17 @@ public class VerificationFragment extends Fragment{
     }
     private  void BackPageVertication(){
         backOTPBtn.setOnClickListener(v->{
-            if(dbHelper.CheckEmailExists(emailUser)){
-                loadFragment(new ForgotFragment(),false);
-            }
-            else{
-                Intent loadToRegister = new Intent(getContext(), RegisterActivity.class);
-                startActivity(loadToRegister);
-            }
+            dbHelper.checkEmailExists(emailUser, new UserDBHelper.userCheckFirebaseListener() {
+                @Override
+                public void onEmailCheckResult(boolean exists) {
+                    if(exists){
+                        loadFragment(new ForgotFragment(),false);
+                    }else {
+                        Intent loadToRegister = new Intent(getContext(), RegisterActivity.class);
+                        startActivity(loadToRegister);
+                    }
+                }
+            });
         });
     }
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
