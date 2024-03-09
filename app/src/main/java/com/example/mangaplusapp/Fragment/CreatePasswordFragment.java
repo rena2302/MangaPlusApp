@@ -12,13 +12,20 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.example.mangaplusapp.Activity.Base.LoginActivity;
+import com.example.mangaplusapp.Database.User;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CreatePasswordFragment extends Fragment {
 
@@ -73,72 +80,101 @@ public class CreatePasswordFragment extends Fragment {
         if(dbHelper.CheckEmailExists(userEmail)){
             layoutInput.removeView(layoutInputUserName);
             btnSubmit.setOnClickListener(v->{
-                userPassword=getUserPasswordTxt.getText().toString();
-                userRePassword = getUserRePasswordTxt.getText().toString();
-                if(userPassword.equals(" ")|| userRePassword.equals(" ")){
-                    Toast.makeText(getContext(),"Password and Confirm Password not matches", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    if(dbHelper.validPassword(userPassword)){
-                        //=================================SUCCESSFUL=============================//
-                        Log.d("user_email", userEmail);
-                        Log.d("user_password", userPassword);
-                        Log.d("user_rePassword", userRePassword);
-
-                        dbHelper.UpdatePassword(userId,userPassword.trim());
-                        Toast.makeText(getContext(),"RePassword Successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getContext(),LoginActivity.class);
-                        startActivity(intent);
-                        //=================================SUCCESSFUL=============================//
-                    }
-                    else if(userPassword.length() <8){
-                        Toast.makeText(getContext(),"Please enter password length >= 8", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        Toast.makeText(getContext(),"Please enter password valid", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                updatePassword();
             });
         }
         //===================================New Account Case=====================================//
         else{
             btnSubmit.setOnClickListener(v->{
-                userName_register = getUserNameTxt.getText().toString();
-                userPassword=getUserPasswordTxt.getText().toString();
-                userRePassword = getUserRePasswordTxt.getText().toString();
-                if(userPassword.equals(" ")|| userRePassword.equals(" ")){
-                    Toast.makeText(getContext(),"Password and Confirm Password not matches", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    if(dbHelper.validPassword(userPassword)){
-                        if(dbHelper.validName(userName_register)){
-                            //=================================SUCCESSFUL=============================//
-                            dbHelper.insertData(userEmail,userPassword,userName_register);
-                            Log.d("user_email", userEmail);
-                            Log.d("user_password", userPassword);
-                            Log.d("user_rePassword", userRePassword);
-                            Log.d("user_name", userName_register);
-                            Toast.makeText(getContext(),"Register Successful", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getContext(),LoginActivity.class);
-                            startActivity(intent);
-                            //=================================SUCCESSFUL=============================//
-                        }
-                        else{
-                            Toast.makeText(getContext(),"Please enter user name length >= 5 ", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                    else if(userPassword.length() <8){
-                        Toast.makeText(getContext(),"Please enter password length >= 8", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        Toast.makeText(getContext(),"Please enter password valid", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                registerNewAccount();
             });
         }
         return root;
 
+    }
+    private void updatePassword() {
+        String userPassword = getUserPasswordTxt.getText().toString().trim();
+        String userRePassword = getUserRePasswordTxt.getText().toString().trim();
+
+        if (!userPassword.equals(userRePassword)) {
+            Toast.makeText(getContext(), "Password and Confirm Password do not match", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (userPassword.length() < 8) {
+            Toast.makeText(getContext(), "Please enter a password of at least 8 characters", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!dbHelper.validPassword(userPassword)) {
+            Toast.makeText(getContext(), "Please enter a valid password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Thực hiện cập nhật mật khẩu bằng Firebase Realtime Database
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
+            usersRef.child(userId).child("password").setValue(userPassword)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            // Cập nhật mật khẩu thành công
+                            Toast.makeText(getContext(), "Password update successful", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getContext(), LoginActivity.class));
+                        } else {
+                            // Cập nhật mật khẩu thất bại
+                            Toast.makeText(getContext(), "Password update failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+
+    private void registerNewAccount() {
+        String userName = getUserNameTxt.getText().toString().trim();
+        String userPassword = getUserPasswordTxt.getText().toString().trim();
+        String userRePassword = getUserRePasswordTxt.getText().toString().trim();
+
+        if (!userPassword.equals(userRePassword)) {
+            Toast.makeText(getContext(), "Password and Confirm Password do not match", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (userPassword.length() < 8) {
+            Toast.makeText(getContext(), "Please enter a password of at least 8 characters", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!dbHelper.validPassword(userPassword)) {
+            Toast.makeText(getContext(), "Please enter a valid password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!dbHelper.validName(userName)) {
+            Toast.makeText(getContext(), "Please enter a user name of at least 5 characters", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Thực hiện đăng ký mới bằng Firebase Realtime Database
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.createUserWithEmailAndPassword(userEmail, userPassword)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        String userId = user.getUid();
+
+                        // Lưu thông tin người dùng vào Firebase Realtime Database
+                        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+                        usersRef.child(userId).setValue(new User(userName, userEmail));
+
+                        Toast.makeText(getContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getContext(), LoginActivity.class));
+                    } else {
+                        Toast.makeText(getContext(), "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

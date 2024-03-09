@@ -10,8 +10,15 @@ import android.net.Uri;
 import android.util.Log;
 import android.util.Patterns;
 
+import androidx.annotation.NonNull;
+
 import com.example.mangaplusapp.Database.MangaPlusDatabase;
 import com.example.mangaplusapp.util.table.UserTable;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -292,4 +299,24 @@ public class UserDBHelper  extends MangaPlusDatabase {
         }
         return pictureUrl;
     }
+    public interface userCheckFirebaseListener {
+        void onEmailCheckResult(boolean exists);
+    }
+
+    public void checkEmailExists(String email, final userCheckFirebaseListener listener) {
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+        usersRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean exists = dataSnapshot.exists();
+                listener.onEmailCheckResult(exists);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onEmailCheckResult(false); // Trả về false nếu xảy ra lỗi
+            }
+        });
+    }
+
 }
