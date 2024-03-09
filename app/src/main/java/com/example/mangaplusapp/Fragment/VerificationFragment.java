@@ -152,45 +152,16 @@ public class VerificationFragment extends Fragment{
                         @Override
                         public void onEmailCheckResult(boolean exists) {
                             if (exists) {
-                                // Email tồn tại trong hệ thống - Quên mật khẩu
-//                                userID = dbHelper.loginUser(emailUser);
-//                                editor.putString("user_email", emailUser);
-//                                editor.putInt("user_id", userID); // Lưu user id
-//                                editor.apply();
-                                // Chuyển hướng đến màn hình tạo mật khẩu mới
+                                //===========================Case forgot==========================//
                                 fragmentHelper = new LoadFragment();
                                 fragmentHelper.loadFragment(getParentFragmentManager(), new CreatePasswordFragment(), false, R.id.forgotContainer);
                             } else {
-                                // Email không tồn tại trong hệ thống - Đăng ký mới
-//                                userID = dbHelper.loginUser(emailUser);
-//                                editor.putString("user_email", emailUser);
-//                                editor.apply();
-                                // Chuyển hướng đến màn hình tạo mật khẩu mới và xác nhận mật khẩu
+                                //===========================Case Register========================//
                                 fragmentHelper = new LoadFragment();
                                 fragmentHelper.loadFragment(getParentFragmentManager(), new CreatePasswordFragment(), false, R.id.forgotContainer);
                             }
                         }
                     });
-                    //===============================Case forgot password=============================//
-//                    if(dbHelper.CheckEmailExists(emailUser)){
-//                        // khi có figma thì cho chạy vào form edit password
-//                        userID =dbHelper.loginUser(emailUser);
-//                        editor.putString("user_email", emailUser);
-//                        editor.putInt("user_id",userID); // put user id
-//                        editor.apply();
-//                        fragmentHelper = new LoadFragment();
-//                        fragmentHelper.loadFragment(getParentFragmentManager(),new CreatePasswordFragment(),false,R.id.forgotContainer);
-//                    }
-                    //===============================Case Register ===================================//
-//                    else{
-
-//                        userID =dbHelper.loginUser(emailUser);
-//                        editor.putString("user_email", emailUser);
-//                        editor.apply();
-//                        // nav to new password and confirm password and insert data into database -> nav to login
-//                        fragmentHelper = new LoadFragment();
-//                        fragmentHelper.loadFragment(getParentFragmentManager(),new CreatePasswordFragment(),false,R.id.forgotContainer);
-//                    }
                 }
                 else{
                     Toast.makeText(getContext(),"Wrong OTP code", Toast.LENGTH_SHORT).show();

@@ -23,7 +23,6 @@ public class ForgotFragment extends Fragment {
     AppCompatButton SendOtpBtn;
     String userEmail;
     UserDBHelper db;
-    String userID;
     EditText getUserEmailTxt;
     ImageButton BackbtnLogin;
     public ForgotFragment() {
@@ -52,7 +51,6 @@ public class ForgotFragment extends Fragment {
         db=new UserDBHelper(getContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
-        userID=preferences.getString("user_id","");
         //=====================================Send EMAIL=======================================//
         SendOtpBtn.setOnClickListener(v->{
             String emailInput = getUserEmailTxt.getText().toString();

@@ -1,41 +1,25 @@
 package com.example.mangaplusapp.Database;
 
 public class User {
-    private String userName;
-    private String email;
-    private String password;
-
+    private String idUser;
+    private String emailUser;
     public User() {
         // Constructor mặc định để phù hợp với Firebase
     }
 
-    public User(String userName, String email,String password) {
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
+    public User(String idUser,String emailUser) {
+        this.idUser=idUser;
+        this.emailUser = emailUser;
     }
 
     // Getters và setters
-    public String getPassword() {
-        return password;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setIdUser(String id) {
+        this.idUser = id;
     }
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getUserEmail(){return emailUser;}
+    public void  setUserEmail(String emailUser){this.emailUser=emailUser;}
 }
