@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mangaplusapp.Adapter.CateSearchAdapter;
 import com.example.mangaplusapp.Adapter.TruyenTranhAdapter;
+import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.object.Categories;
 import com.example.mangaplusapp.object.Mangas;
@@ -44,6 +47,8 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_search, container, false);
+        LinearLayout mainLayout=view.findViewById(R.id.OverlaySearch);
+        KeyBoardHelper.ActionRemoveKeyBoardForFragment(mainLayout,requireContext());
         truyenTranhAdapter = new TruyenTranhAdapter(new ArrayList<>(), view.getContext());
         cateSearchAdapter = new CateSearchAdapter(new ArrayList<>(), view.getContext());
         searchEvent();

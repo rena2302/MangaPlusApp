@@ -2,7 +2,15 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MangaPlusApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">#00FFFFFF</item>
+    </style>
+    <style name="Base.Theme.LoginActivity" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/Login_background</item>
+    </style>
+    <style name="Base.Theme.Loading" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#E7DFDD</item>
     </style>
     <style name="Theme.MangaPlusApp" parent="Base.Theme.MangaPlusApp" />
     <style name="DialogAnimation">

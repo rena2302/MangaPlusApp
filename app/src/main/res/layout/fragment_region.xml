@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".Activity.RegionFragment">
+    tools:context=".Fragment.RegionFragment">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -35,11 +35,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        app:boxStrokeColor="@color/black"
         android:layout_margin="16dp"
         android:hint="Languages"
+        android:textColorHint="@color/black"
         app:startIconDrawable="@drawable/icon_laguage"
         app:startIconTint="@color/black"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
         <AutoCompleteTextView
             android:id="@+id/regionSpinner"
             android:paddingTop="16dp"
