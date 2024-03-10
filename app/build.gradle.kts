@@ -68,4 +68,8 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")// request HTTPs
 
     implementation("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
+
+    // Stripe Android SDK
+    implementation ("com.stripe:stripe-android:20.39.0")
+    implementation ("com.android.volley:volley:1.2.1")
 }

@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity {
                 } else if (itemId==R.id.menu_drawer_change_language) {
                     loadFragmentBasic(new RegionFragment(),false);
                 } else if (itemId==R.id.menu_drawer_payment) {
-                    Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
+                    Intent intent = new Intent(MainActivity.this, PaymentStripeActivity.class);
                     startActivity(intent);
                 }else if(itemId == R.id.menu_drawer_favorite){
                     MangaListFragment dialogFragment = new MangaListFragment();
