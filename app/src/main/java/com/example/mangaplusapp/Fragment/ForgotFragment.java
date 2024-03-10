@@ -10,12 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.Toast;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.mangaplusapp.Activity.Base.LoginActivity;
+import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 
@@ -40,8 +42,8 @@ public class ForgotFragment extends Fragment {
         //Ẩn keyboard
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_forgot, container, false);
-//        KeyBoardHelper.ActionRemoveKeyBoardForFragment(root,requireContext());
-
+        ScrollView mainLayout= root.findViewById(R.id.OverlayForgot);
+        KeyBoardHelper.ActionRemoveKeyBoardForFragment(mainLayout,requireContext());
         SendOtpBtn = root.findViewById(R.id.btnForgotSendOtp);
         //========================================GET ID==========================================//
         getUserEmailTxt=root.findViewById(R.id.forgotEmailUser_Input);

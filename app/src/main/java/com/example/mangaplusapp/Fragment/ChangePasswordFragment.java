@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 import com.google.firebase.auth.AuthCredential;
@@ -43,6 +45,8 @@ public class ChangePasswordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root =inflater.inflate(R.layout.fragment_change_pasword, container, false);
+        ScrollView mainLayout=root.findViewById(R.id.OverlayChangePass);
+        KeyBoardHelper.ActionRemoveKeyBoardForFragment(mainLayout,requireContext());
         //========================================GET ID==========================================//
         backBtn=root.findViewById(R.id.backChangedPassBtn);
         getOldPass = root.findViewById(R.id.EditOldPassTxt);

@@ -6,6 +6,7 @@
     import android.view.View;
     import android.widget.EditText;
     import android.widget.ImageButton;
+    import android.widget.ScrollView;
     import android.widget.Toast;
 
     import androidx.appcompat.widget.AppCompatButton;
@@ -31,8 +32,8 @@
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_register);
             //Ẩn KeyBoard
-            View mainLayout = findViewById(R.id.ResEmailOverlay);
-            KeyBoardHelper.ActionRemoveKeyBoardForActivity(mainLayout,RegisterActivity.this);
+            ScrollView mainLayout = findViewById(R.id.ResEmailOverlay);
+            KeyBoardHelper.ActionRemoveKeyBoardForActivity(mainLayout,this);
             //===============================Begin GET ID=============================================//
             haveAccount=findViewById(R.id.toLogin);
             btnToLogin = findViewById(R.id.backRegisterBtn);

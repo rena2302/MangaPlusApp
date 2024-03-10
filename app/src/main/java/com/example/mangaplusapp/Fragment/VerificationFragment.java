@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mangaplusapp.Activity.User.MainActivity;
 import com.example.mangaplusapp.Activity.User.RegisterActivity;
+import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.Helper.LoadHelper.LoadFragment;
 import com.example.mangaplusapp.Helper.ServiceHelper.OTP;
@@ -66,9 +69,9 @@ public class VerificationFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //Ẩn keyboard
-        //
         View root = inflater.inflate(R.layout.fragment_verification, container, false);
+        ScrollView mainLayout=root.findViewById(R.id.OverlayOTP);
+        KeyBoardHelper.ActionRemoveKeyBoardForFragment(mainLayout,requireContext());
         //=========================================GET ID=========================================//
         getEmailUserTxt=root.findViewById(R.id.forgot_EmailUserTxt);
         otp1Input=root.findViewById(R.id.otp1);

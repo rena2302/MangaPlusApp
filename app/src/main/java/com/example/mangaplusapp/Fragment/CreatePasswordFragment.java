@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -21,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mangaplusapp.Activity.Base.LoginActivity;
 import com.example.mangaplusapp.Database.User;
+import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,9 +51,9 @@ public class CreatePasswordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //Ẩn keyboard
-        // Inflate the layout for this fragment
         View root =inflater.inflate(R.layout.fragment_create_password, container, false);
+        ScrollView mainLayout=root.findViewById(R.id.OverlayCreateInfo);
+        KeyBoardHelper.ActionRemoveKeyBoardForFragment(mainLayout,requireContext());
         dbHelper= new UserDBHelper(getContext());
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         emailUser =preferences.getString("user_email",null);

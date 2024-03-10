@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Login_background"
-    tools:context=".Activity.Base.LoginActivity"
-    android:id="@+id/LoginOverlay">
+    tools:context=".Activity.Base.LoginActivity">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="500dp"
@@ -14,13 +13,7 @@
         android:scaleType="fitCenter"
         android:src="@drawable/background_login">
     </ImageView>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="350dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/login_backgroung1">
-    </ImageView>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,6 +22,7 @@
         android:background="@drawable/login_background2">
     </ImageView>
     <ScrollView
+        android:id="@+id/OverlayLogin"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout

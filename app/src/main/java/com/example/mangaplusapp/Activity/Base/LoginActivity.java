@@ -1,14 +1,18 @@
 package com.example.mangaplusapp.Activity.Base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +28,7 @@ import com.example.mangaplusapp.ModelAndPresenter.Login.MVPLoginView;
 import com.example.mangaplusapp.R;
 
 public class LoginActivity extends BaseActivity implements MVPLoginView {
+    ScrollView scrollView;
     EditText emailTxt, passwordTxt;
     TextView forgotPasswordTxt,toSignUpTxt;
     AppCompatButton btnLoginTxt;
@@ -40,12 +45,8 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //Bắt sự kiện tắt bàn phím
-        //Ẩn KeyBoard
-        View mainLayout = findViewById(R.id.LoginOverlay);
-        KeyBoardHelper.ActionRemoveKeyBoardForActivity(mainLayout,LoginActivity.this);
-        //Kết thúc sự kiện tắt bàn phím
         //===============================Begin get id for login basic=============================//
+        scrollView=findViewById(R.id.OverlayLogin);
         toSignUpTxt = findViewById(R.id.toSignUp);
         emailTxt = (EditText) findViewById(R.id.editTextEmail);
         passwordTxt = (EditText) findViewById(R.id.editTextPassword);
@@ -54,6 +55,7 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
         //================================End get id for login basic==============================//
         //****************************************************************************************//
         //================================Begin get data for login basic==========================//
+        KeyBoardHelper.ActionRemoveKeyBoardForActivity(scrollView,this);
         SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         //================================END get data for login basic============================//
@@ -77,6 +79,7 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
         //****************************************************************************************//
         //===============================BEGIN LOGIC LOGIN BASIC==================================//
         //===============================CREATE CALL PRESENTER====================================//
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         loginPresenter=new LoginPresenter(this);
         //===============================END CALL PRESENTER====================================//
         final Animation scaleAnimation = AnimationUtils.loadAnimation(this, R.anim.scale_btn);
