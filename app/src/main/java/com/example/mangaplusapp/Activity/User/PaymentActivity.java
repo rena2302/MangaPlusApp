@@ -296,4 +296,9 @@ public class PaymentActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        startNewActivityAndFinishCurrent(MainActivity.class);
+        super.onBackPressed();
+    }
 }
