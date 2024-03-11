@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="manga_plus_home">
         <item name="android:textSize">40sp</item>
         <item name="android:letterSpacing">0.12</item>
@@ -11,9 +12,11 @@
         <item name="android:shadowRadius">4</item>
         <item name="fontFamily">@font/square_peg</item>
     </style>
+
     <style name="navigation_drawer" parent="Base.Theme.MangaPlusApp">
         <item name="android:statusBarColor">#00000000</item>
     </style>
+
     <style name="textview_createaccount">
         <item name="android:textSize">20sp</item>
         <item name="android:letterSpacing">0.12</item>
@@ -23,6 +26,7 @@
         <item name="android:shadowDy">4</item>
         <item name="android:shadowRadius">4</item>
     </style>
+
     <style name="let_s_get_s">
         <item name="android:textSize">38sp</item>
         <item name="android:letterSpacing">0.12</item>
@@ -32,6 +36,7 @@
         <item name="android:shadowDy">4</item>
         <item name="android:shadowRadius">4</item>
     </style>
+
     <style name="registration">
         <item name="android:textSize">32sp</item>
         <item name="android:letterSpacing">0.12</item>
@@ -41,6 +46,7 @@
         <item name="android:shadowDy">4</item>
         <item name="android:shadowRadius">4</item>
     </style>
+
     <style name="RecommendRes">
         <item name="android:textSize">15sp</item>
         <item name="android:letterSpacing">0.05</item>

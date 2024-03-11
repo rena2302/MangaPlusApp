@@ -86,7 +86,8 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        ActivityUtils.startNewActivityAndFinishCurrent(context, PaymentActivity.class);
+                                        ActivityUtils.startNewActivityAndFinishCurrent(context, PaymentActivity.class,
+                                                "ID_MANGA", truyenTranh.getID_MANGA());
                                     }
                                 })
                                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

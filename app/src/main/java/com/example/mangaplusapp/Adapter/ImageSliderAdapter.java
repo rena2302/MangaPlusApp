@@ -1,6 +1,8 @@
 package com.example.mangaplusapp.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.User.MangaDetailActivity;
+import com.example.mangaplusapp.Activity.User.PaymentActivity;
 import com.example.mangaplusapp.R;
 
 import java.util.List;
@@ -53,11 +56,30 @@ public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityUtils.startNewActivityAndFinishCurrent(context, MangaDetailActivity.class,
-                        "ID_MANGA", imageSlider.getID_MANGA(),
-                        "NAME_MANGA", imageSlider.getNAME_MANGA(),
-                        "PICTURE_MANGA", imageSlider.getPICTURE_MANGA(),
-                        "DESCRIPTION_MANGA", imageSlider.getDESCRIPTION_MANGA());
+                if(imageSlider.isPREMIUM_MANGA()){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Premium Manga")
+                            .setMessage("If you wanna read this manga, you have to buy it")
+                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ActivityUtils.startNewActivityAndFinishCurrent(context, PaymentActivity.class);
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }else {
+                    ActivityUtils.startNewActivity(context, MangaDetailActivity.class,
+                            "ID_MANGA", imageSlider.getID_MANGA(),
+                            "NAME_MANGA", imageSlider.getNAME_MANGA(),
+                            "PICTURE_MANGA", imageSlider.getPICTURE_MANGA(),
+                            "DESCRIPTION_MANGA", imageSlider.getDESCRIPTION_MANGA());
+                }
             }
         });
     }
