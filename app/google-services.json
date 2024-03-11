@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "582511096552",
+    "firebase_url": "https://manga-plus-app-932a7-default-rtdb.firebaseio.com",
     "project_id": "manga-plus-app-932a7",
     "storage_bucket": "manga-plus-app-932a7.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.mangaplusapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "582511096552-fiolivf0lkke4taih4soi9s772srv2cj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mangaplusapp",
+            "certificate_hash": "77dc76bc2b93e1a3be0ac841885a128a21c05f30"
+          }
+        },
+        {
+          "client_id": "582511096552-366h5rijadolmjmlice7od0dnj335716.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBDAAKiqDz4zZHp4QKlE3p5gFBncsfqJ-g"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582511096552-366h5rijadolmjmlice7od0dnj335716.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
