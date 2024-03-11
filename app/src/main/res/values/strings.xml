@@ -97,6 +97,4 @@
     <string name="payment">Payment</string>
     <string name="favorite">Favorite</string>
     <string name="changeTheme">Change theme</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
