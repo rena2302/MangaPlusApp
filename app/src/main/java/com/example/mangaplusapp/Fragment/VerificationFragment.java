@@ -1,5 +1,7 @@
 package com.example.mangaplusapp.Fragment;
 
+import static android.content.Intent.getIntent;
+
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -22,6 +24,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -33,11 +36,18 @@ import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.Helper.LoadHelper.LoadFragment;
 import com.example.mangaplusapp.Helper.ServiceHelper.OTP;
 import com.example.mangaplusapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 public class VerificationFragment extends Fragment{
     FirebaseAuth auth;
+    FirebaseUser currentUser;
+    String userID;
     String emailUser;
     TextView getEmailUserTxt,reSendOtp;
     UserDBHelper dbHelper;
@@ -48,7 +58,6 @@ public class VerificationFragment extends Fragment{
     EditText otp1Input,otp2Input,otp3Input,otp4Input;
     ImageButton backOTPBtn;
     DatabaseReference usersRef;
-    String userID;
 
     //Resend OTP time
     private final int resendTime=60;
@@ -136,9 +145,6 @@ public class VerificationFragment extends Fragment{
                 startCountDownTimer();
             }
         });
-
-
-
         submitOtp.setOnClickListener(v->{
             String otp1 = otp1Input.getText().toString();
             String otp2 = otp2Input.getText().toString();
@@ -156,8 +162,9 @@ public class VerificationFragment extends Fragment{
                             if (exists) {
                                 //===========================Case forgot==========================//
                                 fragmentHelper = new LoadFragment();
-                                fragmentHelper.loadFragment(getParentFragmentManager(), new SuccessFragment(), false, R.id.forgotContainer);
-                            } else {
+                                 fragmentHelper.loadFragment(getParentFragmentManager(), new SuccessFragment(), false, R.id.forgotContainer);
+                            }
+                            else {
                                 //===========================Case Register========================//
                                 fragmentHelper = new LoadFragment();
                                 fragmentHelper.loadFragment(getParentFragmentManager(), new CreatePasswordFragment(), false, R.id.forgotContainer);
@@ -188,7 +195,8 @@ public class VerificationFragment extends Fragment{
                 public void onEmailCheckResult(boolean exists) {
                     if(exists){
                         loadFragment(new ForgotFragment(),false);
-                    }else {
+                    }
+                    else {
                         Intent loadToRegister = new Intent(getContext(), RegisterActivity.class);
                         startActivity(loadToRegister);
                     }

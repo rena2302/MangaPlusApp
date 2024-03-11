@@ -44,6 +44,7 @@
     <string name="Language">Language</string>
     <string name="changeLanguage">Change Language</string>
     <string name="ChoosePaymentOption">Choose Payment option</string>
+    <string name="EditEmail">Change Email</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">Forgot Password</string>
     <string name="forgotDescripstion">Forgot password? Easily recover with our apps user-friendly feature for a secure experience</string>

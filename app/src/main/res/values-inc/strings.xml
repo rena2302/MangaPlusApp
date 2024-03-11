@@ -45,6 +45,7 @@
     <string name="Language">भाषा</string>
     <string name="changeLanguage">भाषा बदलें</string>
     <string name="ChoosePaymentOption">भुगतान विकल्प चुनें</string>
+    <string name="EditEmail">बदले ई - मेल</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">अपना कूट शब्द भूल गए?</string>
     <string name="forgotDescripstion">पासवर्ड भूल गए? सुरक्षित अनुभव के लिए हमारे ऐप्स की उपयोगकर्ता-अनुकूल सुविधा के साथ आसानी से पुनर्प्राप्त करें</string>
