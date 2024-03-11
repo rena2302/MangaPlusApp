@@ -39,6 +39,7 @@ public class MangaListFragment extends DialogFragment {
     public interface OnDataLoadedListener {
         void onDataLoaded(List<Mangas> truyenTranhList);
     }
+    private String tag;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
 
@@ -47,9 +48,14 @@ public class MangaListFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        // Lấy Bundle chứa dữ liệu từ nơi gọi
+        Bundle args = getArguments();
+        if (args != null) {
+            tag = args.getString("tag");
+            // Sử dụng giá trị tag ở đây
+        }
         // Khởi tạo adapter trước khi hiển thị dialog
         TruyenTranhAdapter adapter = new TruyenTranhAdapter(new ArrayList<>(), getContext());
-
         // Tạo dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
@@ -82,7 +88,7 @@ public class MangaListFragment extends DialogFragment {
 
 
         // Load dữ liệu và cập nhật adapter khi dữ liệu đã sẵn sàng
-        loadMangas(new OnDataLoadedListener() {
+        loadMangas(tag, new OnDataLoadedListener() {
             @Override
             public void onDataLoaded(List<Mangas> truyenTranhList) {
                 adapter.SetData(truyenTranhList);
@@ -92,29 +98,9 @@ public class MangaListFragment extends DialogFragment {
 
         return builder.create();
     }
-
-    private void loadMangas(OnDataLoadedListener listener) {
-        if (category != null){
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
-            reference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    List<Mangas> truyenTranhList = new ArrayList<>();
-                    for(DataSnapshot ds : snapshot.getChildren()){
-                        Mangas mangas = ds.getValue(Mangas.class);
-                        if (mangas != null && mangas.getID_CATEGORY_MANGA().equals(category.getID_CATEGORY())) {
-                            truyenTranhList.add(mangas);
-                        }
-                    }
-                    // Gọi callback khi dữ liệu đã sẵn sàng
-                    listener.onDataLoaded(truyenTranhList);
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getContext(), "The loading mangas was interrupted",Toast.LENGTH_SHORT).show();
-                }
-            });
-        }else {
+    private void loadMangas(String tag, OnDataLoadedListener listener) {
+        if (tag.equals("Favorite")) {
+            // Load danh sách manga được người dùng đánh dấu là yêu thích
             if (currentUser != null) {
                 String uid = currentUser.getUid();
                 DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference("Users")
@@ -164,6 +150,79 @@ public class MangaListFragment extends DialogFragment {
                     }
                 });
             }
+        } else if (tag.equals("Bought")) {
+            // Load danh sách manga đã mua
+            if (currentUser != null) {
+                String uid = currentUser.getUid();
+                DatabaseReference purchasesRef = FirebaseDatabase.getInstance().getReference("Users")
+                        .child(uid).child("HistoryPayment");
+
+                purchasesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        List<String> mangaIds = new ArrayList<>();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String mangaId = snapshot.child("ID_MANGA").getValue(String.class);
+                            mangaIds.add(mangaId);
+                        }
+
+                        // Tạo một danh sách tạm thời để lưu trữ dữ liệu manga
+                        List<Mangas> mangasList = new ArrayList<>();
+                        DatabaseReference mangaRef = FirebaseDatabase.getInstance().getReference("Mangas");
+                        for (String mangaId : mangaIds) {
+                            mangaRef.orderByChild("ID_MANGA").equalTo(mangaId)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            for (DataSnapshot mangaSnapshot : dataSnapshot.getChildren()) {
+                                                Mangas mangas = mangaSnapshot.getValue(Mangas.class);
+                                                mangasList.add(mangas);
+                                            }
+
+                                            // Kiểm tra xem đã tải tất cả dữ liệu chưa
+                                            if (mangasList.size() == mangaIds.size()) {
+                                                listener.onDataLoaded(mangasList);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            // Xử lý lỗi nếu cần
+                                            Toast.makeText(getContext(), "The loading mangas was interrupted", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Xử lý lỗi nếu cần
+                        Toast.makeText(getContext(), "The loading mangas was interrupted", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        } else {
+            // Load tất cả manga (không có tag)
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<Mangas> truyenTranhList = new ArrayList<>();
+                    for(DataSnapshot ds : snapshot.getChildren()){
+                        Mangas mangas = ds.getValue(Mangas.class);
+                        if (category != null && mangas.getID_CATEGORY_MANGA().equals(category.getID_CATEGORY())) {
+                            truyenTranhList.add(mangas);
+                        }
+                    }
+                    // Gọi callback khi dữ liệu đã sẵn sàng
+                    listener.onDataLoaded(truyenTranhList);
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(getContext(), "The loading mangas was interrupted",Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
+
 }

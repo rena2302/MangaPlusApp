@@ -119,7 +119,16 @@ public class MainActivity extends BaseActivity {
                     startActivity(intent);
                 }else if(itemId == R.id.menu_drawer_favorite){
                     MangaListFragment dialogFragment = new MangaListFragment();
+                    Bundle args = new Bundle();
+                    args.putString("tag", "Favorite");
+                    dialogFragment.setArguments(args);
                     dialogFragment.show(getSupportFragmentManager(), "Favorite");
+                } else if (itemId == R.id.menu_drawer_bought) {
+                    MangaListFragment dialogFragment = new MangaListFragment();
+                    Bundle args = new Bundle();
+                    args.putString("tag", "Bought");
+                    dialogFragment.setArguments(args);
+                    dialogFragment.show(getSupportFragmentManager(), "Bought");
                 }
                 return true;
             }

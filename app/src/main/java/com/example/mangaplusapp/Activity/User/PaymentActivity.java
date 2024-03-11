@@ -8,9 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,6 +54,7 @@ public class PaymentActivity extends BaseActivity {
     EditText edAmount;
     TextView tvMessage;
     Button btnPayMoMo;
+    FirebaseAuth firebaseAuth;
     private  Map<String, Object> eventValue = new HashMap<>();
     private String amount = "100000";
     private String fee = "0";
@@ -57,6 +63,7 @@ public class PaymentActivity extends BaseActivity {
     private String merchantCode = "MOMORPBF20220425";
     private String merchantNameLabel = "Nhà cung cấp";
     private String description = "Rau má";
+    private String mangaId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +88,8 @@ public class PaymentActivity extends BaseActivity {
         edAmount = (EditText) findViewById(R.id.edAmount);
         tvMessage = (TextView) findViewById(R.id.tvMessage);
         btnPayMoMo = (Button) findViewById(R.id.btnPayMoMo);
+        mangaId = getIntent().getStringExtra("ID_MANGA");
+        firebaseAuth = FirebaseAuth.getInstance();
     }
     //example payment
     /*------------------------------END-----------------------------------------*/
@@ -140,7 +149,9 @@ public class PaymentActivity extends BaseActivity {
                     }
                     if(token != null && !token.equals("")) {
                         // TODO: send phoneNumber & token to your server side to process payment with MoMo server
-                        sendPaymentInfoToServer();
+
+                        isBought();// demo payment successful
+
                         // IF Momo topup success, continue to process your order
                     } else {
                         tvMessage.setText("message: " + ("Khong thanh cong"));
@@ -264,4 +275,25 @@ public class PaymentActivity extends BaseActivity {
         return hexStringBuilder.toString();
     }
     /*------------------------------END-----------------------------------------*/
+
+    /*------------------------------BEGIN-----------------------------------------*/
+    public void isBought(){
+        if(firebaseAuth.getCurrentUser() == null){
+            Toast.makeText(this,"You're not login", Toast.LENGTH_SHORT).show();
+            return;
+        }else {
+            HashMap<String,Object> hashMap = new HashMap<>();
+            hashMap.put("ID_MANGA", mangaId);
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+            reference.child(firebaseAuth.getUid()).child("HistoryPayment").child(mangaId)
+                    .setValue(hashMap)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(PaymentActivity.this, "Buy manga successful", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
 }
