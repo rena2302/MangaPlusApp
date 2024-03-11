@@ -15,11 +15,27 @@
       },
       "oauth_client": [
         {
+          "client_id": "582511096552-afn2s8pn1g5kvi2jdk70ode6idjfvvnu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mangaplusapp",
+            "certificate_hash": "428e521029bf76741d6253127fcfc0165cb72f49"
+          }
+        },
+        {
           "client_id": "582511096552-fiolivf0lkke4taih4soi9s772srv2cj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.mangaplusapp",
             "certificate_hash": "77dc76bc2b93e1a3be0ac841885a128a21c05f30"
+          }
+        },
+        {
+          "client_id": "582511096552-nhat7ruo78ocuen8dp252llb9aonfeqp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mangaplusapp",
+            "certificate_hash": "0b97309b32c01b305fded920873e7ff6e9e86a1b"
           }
         },
         {
