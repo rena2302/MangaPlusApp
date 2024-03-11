@@ -157,7 +157,7 @@ public class VerificationFragment extends Fragment{
                             if (exists) {
                                 //===========================Case forgot==========================//
                                 fragmentHelper = new LoadFragment();
-                                fragmentHelper.loadFragment(getParentFragmentManager(), new CreatePasswordFragment(), false, R.id.forgotContainer);
+                                fragmentHelper.loadFragment(getParentFragmentManager(), new SuccessFragment(), false, R.id.forgotContainer);
                             } else {
                                 //===========================Case Register========================//
                                 fragmentHelper = new LoadFragment();
