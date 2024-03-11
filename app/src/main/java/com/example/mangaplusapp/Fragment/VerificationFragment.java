@@ -30,7 +30,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.mangaplusapp.Activity.User.MainActivity;
 import com.example.mangaplusapp.Activity.User.RegisterActivity;
 import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
@@ -163,10 +162,9 @@ public class VerificationFragment extends Fragment{
                             if (exists) {
                                 //===========================Case forgot==========================//
                                 fragmentHelper = new LoadFragment();
-                                fragmentHelper.loadFragment(getParentFragmentManager(), new CreatePasswordFragment(), false, R.id.forgotContainer);
+                                 fragmentHelper.loadFragment(getParentFragmentManager(), new SuccessFragment(), false, R.id.forgotContainer);
                             }
-                           else
-                            {
+                            else {
                                 //===========================Case Register========================//
                                 fragmentHelper = new LoadFragment();
                                 fragmentHelper.loadFragment(getParentFragmentManager(), new CreatePasswordFragment(), false, R.id.forgotContainer);

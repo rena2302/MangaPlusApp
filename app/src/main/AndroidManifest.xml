@@ -26,26 +26,29 @@
         tools:replace="android:theme"
         tools:targetApi="34">
         <activity
-            android:name=".Activity.Admin.EditorActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:name=".Activity.User.PaymentStripeActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activity.Admin.EditorActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activity.Base.ChapterPdfActivity"
-            android:windowSoftInputMode="adjustResize"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activity.Admin.MangaDetailAdminActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activity.Admin.ChapterAddActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activity.User.PaymentActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.MAIN" />
 
@@ -58,28 +61,25 @@
         </activity>
         <activity
             android:name=".Activity.User.MangaDetailActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activity.Admin.CategoryAddActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activity.Admin.MangaAddActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activity.User.ForgotControlActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".Activity.User.UserEditActivity"
-            android:exported="false" />
-        <activity
-            android:theme="@style/Base.Theme.Loading"
-            android:windowSoftInputMode="adjustResize"
             android:name=".Activity.Base.LoadingActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Base.Theme.Loading"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -88,12 +88,12 @@
         </activity>
         <activity
             android:name=".Activity.User.DashBoardUserActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activity.Admin.DashBoardAdminActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -107,14 +107,14 @@
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:theme="@style/Base.Theme.LoginActivity"
             android:name=".Activity.Base.LoginActivity"
             android:exported="false"
+            android:theme="@style/Base.Theme.LoginActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activity.User.MainActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

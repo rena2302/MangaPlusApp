@@ -68,4 +68,25 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")// request HTTPs
 
     implementation("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
+    implementation ("com.google.firebase:firebase-database:20.3.1")
+
+    // Stripe Android SDK
+    implementation ("com.stripe:stripe-android:20.39.0")
+    implementation ("com.android.volley:volley:1.2.1")
+
+    //===========================================GOOGLE===========================================//
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth")
+
+    // Also add the dependency for the Google Play services library and specify its version
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    //===========================================END GOOGLE=======================================//
+
+
 }
