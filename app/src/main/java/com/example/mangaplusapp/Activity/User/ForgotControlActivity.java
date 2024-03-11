@@ -30,7 +30,7 @@ public class ForgotControlActivity extends BaseActivity {
         else{
             editor.putString("user_email",email);
             editor.apply();
-            Log.d("email", email);;
+            Log.d("email", email);
             loadFragment(new VerificationFragment(),false);
         }
 

@@ -45,6 +45,7 @@
     <string name="Language">언어</string>
     <string name="changeLanguage">잔돈 언어</string>
     <string name="ChoosePaymentOption">결제 옵션을 선택하세요</string>
+    <string name="EditEmail">이메일을 바꾸다</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">비밀번호를 잊으 셨나요</string>
     <string name="forgotDescripstion">비밀번호를 잊으 셨나요? 안전한 경험을 위해 당사 앱의 사용자 친화적인 기능으로 쉽게 복구하세요</string>

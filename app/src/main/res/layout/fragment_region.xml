@@ -16,6 +16,19 @@
             android:scaleType="fitCenter"
             android:src="@drawable/background_language">
         </ImageView>
+        <ImageButton
+            android:id="@+id/backEditRegionToProfileBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/transparent"
+            android:padding="5dp"
+            android:src="@drawable/ic_back_black"
+            tools:ignore="TouchTargetSizeCheck">
+        </ImageButton>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/Language_Apply"
             android:layout_centerHorizontal="true"
@@ -33,10 +46,13 @@
             />
     </RelativeLayout>
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_below="@id/backEditProfileBtn"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         app:boxStrokeColor="@color/black"
-        android:layout_margin="16dp"
         android:hint="Languages"
         android:textColorHint="@color/black"
         app:startIconDrawable="@drawable/icon_laguage"

@@ -26,6 +26,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.example.mangaplusapp.Activity.Base.EditControlActivity;
 import com.example.mangaplusapp.Activity.Base.LoginActivity;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
@@ -39,7 +40,7 @@ public class UserProfileFragment extends Fragment {
     CardView avtContainer;
     TextView getUserNameInfoTxt,getUserNameTittleTxt,getUserEmailTxt,getUserPasswordTxt,HeaderEmail;
     String userId;
-    String userEmail,userPassword,userName,userAvt;
+    String userEmail,userName,userAvt;
     LinearLayout navToRegion;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
@@ -154,6 +155,11 @@ public class UserProfileFragment extends Fragment {
             });
         }
     }
+    private void openActivityWithFragmentData(String data) {
+        Intent intent = new Intent(getContext(), EditControlActivity.class);
+        intent.putExtra("FRAGMENT_DATA", data);
+        startActivity(intent);
+    }
     private void showDialog()
     {
         final Dialog dialog=new Dialog(getContext());
@@ -164,19 +170,34 @@ public class UserProfileFragment extends Fragment {
 
         editprofile.setOnClickListener(v->{
             dialog.dismiss();
-            loadFragment(new EditNameFragment(),false);
+//            loadFragment(new EditNameFragment(),false);
+            getActivity().finish();
+            openActivityWithFragmentData("Fragment1Data");
         });
+        LinearLayout editemail=dialog.findViewById(R.id.ChangedEmailBtn);
+
+        editemail.setOnClickListener(v->{
+            dialog.dismiss();
+//            loadFragment(new ChangeEmailFragment(),false);
+            getActivity().finish();
+            openActivityWithFragmentData("Fragment2Data");
+        });
+
         LinearLayout editpass=dialog.findViewById(R.id.EditPass);
 
         editpass.setOnClickListener(v->{
             dialog.dismiss();
-            loadFragment(new ChangePasswordFragment(),false);
+//            loadFragment(new ChangePasswordFragment(),false);
+            getActivity().finish();
+            openActivityWithFragmentData("Fragment3Data");
         });
 
         navToRegion=dialog.findViewById(R.id.navToLanguage);
         navToRegion.setOnClickListener(v->{
             dialog.dismiss();
-            loadFragment(new RegionFragment(),false);
+//            loadFragment(new RegionFragment(),false);
+            getActivity().finish();
+            openActivityWithFragmentData("Fragment4Data");
         });
 
         AppCompatButton logout=dialog.findViewById(R.id.Logout);
@@ -187,6 +208,7 @@ public class UserProfileFragment extends Fragment {
             logout.setOnClickListener(v -> {
                 // Clear session and navigate to login activity
                 try {
+                    FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
                     Toast.makeText(getActivity(), "Log out successful", Toast.LENGTH_SHORT).show();
@@ -197,6 +219,7 @@ public class UserProfileFragment extends Fragment {
         }
         else {
             logout.setOnClickListener(v->{
+                getActivity().finish();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             });

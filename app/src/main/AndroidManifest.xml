@@ -99,6 +99,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Activity.Base.EditControlActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".Activity.User.RegisterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
@@ -113,7 +117,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <!-- xx -->

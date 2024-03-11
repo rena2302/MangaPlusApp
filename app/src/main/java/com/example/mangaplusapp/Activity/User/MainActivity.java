@@ -31,6 +31,7 @@ import com.example.mangaplusapp.Fragment.RegionFragment;
 import com.example.mangaplusapp.Fragment.SearchFragment;
 import com.example.mangaplusapp.Fragment.UserProfileFragment;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
+import com.example.mangaplusapp.Helper.LoadHelper.LoadFragment;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -61,10 +62,19 @@ public class MainActivity extends BaseActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot()); // set content phải trước focus nha
         loadFragment(new HomeFragment(),false, R.menu.home_fragment_header_menu);
+        BackToProfile();
         focusFragment();
         loadMenuDrawer();
         navToDrawerMenuBottom();
         setInfo();
+    }
+    private void BackToProfile()
+    {
+        int getData=getIntent().getIntExtra("BackToProfile",0);
+        if(getData==1)
+        {
+            loadFragment(new UserProfileFragment(), false, R.menu.library_fragment_header_menu);
+        }
     }
     private void setInfo(){
         navigationView = findViewById(R.id.navigation_drawer_container);

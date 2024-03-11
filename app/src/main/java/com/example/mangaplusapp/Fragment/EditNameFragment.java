@@ -12,12 +12,14 @@ import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.Activity.User.MainActivity;
 import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
@@ -80,7 +82,8 @@ public class EditNameFragment extends Fragment {
                     .build();
             currentUser.updateProfile(profileUpdates).addOnCompleteListener(requireActivity(), task ->{
                 if(task.isSuccessful()){
-                    Intent intent = getActivity().getIntent();
+                    Intent intent=new Intent(getContext(), MainActivity.class);
+                    intent.putExtra("BackToProfile", 1);
                     startActivity(intent);
                     getActivity().finish();
                 }
@@ -99,7 +102,10 @@ public class EditNameFragment extends Fragment {
     }
     private void navigate(){
         Backbtn.setOnClickListener(v->{
-            loadFragment(new UserProfileFragment(),false);
+            Intent intent=new Intent(getContext(), MainActivity.class);
+            intent.putExtra("BackToProfile", 1);
+            startActivity(intent);
+            getActivity().finish();
         });
         submit.setOnClickListener(v->{
             if(setName()){

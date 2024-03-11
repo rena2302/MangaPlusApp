@@ -12,10 +12,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
+import com.example.mangaplusapp.Activity.User.MainActivity;
 import com.example.mangaplusapp.R;
 
 import java.util.Locale;
@@ -25,6 +27,7 @@ public class RegionFragment extends Fragment {
     AutoCompleteTextView spinner;
     AppCompatButton reset_btn;
     ArrayAdapter<String> adapter;
+    ImageButton backBtn;
     String[] languages = {"English","VietNam","Hindi","Korean"};
     public RegionFragment() {
     }
@@ -42,6 +45,7 @@ public class RegionFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_region, container, false);
         spinner =root.findViewById(R.id.regionSpinner);
+        backBtn=root.findViewById(R.id.backEditRegionToProfileBtn);
         adapter = new ArrayAdapter<String>(requireContext(),R.layout.list_item_laguage,languages);
 //        adapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
         spinner.setAdapter(adapter);
@@ -70,12 +74,19 @@ public class RegionFragment extends Fragment {
             setLocal(requireContext(),GetKey[0]);
             startAct();
         });
+        backBtn.setOnClickListener(v->{
+            Intent intent=new Intent(getContext(), MainActivity.class);
+            intent.putExtra("BackToProfile", 1);
+            startActivity(intent);
+            getActivity().finish();
+        });
         return root;
     }
     private void startAct(){
-        getActivity().finish(); // Kết thúc hoạt động hiện tại
-        Intent intent = getActivity().getIntent(); // Lấy intent hiện tại
-        getActivity().startActivity(intent); // Khởi động lại hoạt động
+        Intent intent=new Intent(getContext(), MainActivity.class);
+        intent.putExtra("BackToProfile", 1);
+        startActivity(intent);
+        getActivity().finish();
     }
     private void setLocal(Context context, String langCode){
         Locale locale = new Locale(langCode);
