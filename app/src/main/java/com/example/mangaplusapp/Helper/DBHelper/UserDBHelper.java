@@ -28,7 +28,7 @@ public class UserDBHelper  {
     }
     public boolean validPassword(String password){
         password = password.trim();
-        return password.length() >= 8;
+        return password.length() >= 6;
     }
     public String hashPassword(String pass){
         return BCrypt.hashpw(pass,BCrypt.gensalt());

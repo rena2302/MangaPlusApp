@@ -76,10 +76,7 @@ public class CreatePasswordFragment extends Fragment {
             public void onEmailCheckResult(boolean exists) {
                 if(exists){
                     //=============================ForgotPassword Case============================//
-                    layoutInput.removeView(layoutInputUserName);
-                    btnSubmit.setOnClickListener(v->{
-                        updatePassword();
-                    });
+                    loadFragment(new SuccessFragment(),false);
                 }
                 else{
                     //=============================NewAccount Case================================//
@@ -92,42 +89,6 @@ public class CreatePasswordFragment extends Fragment {
         return root;
 
     }
-    private void updatePassword() {
-        String userPassword = getUserPasswordTxt.getText().toString().trim();
-        String userRePassword = getUserRePasswordTxt.getText().toString().trim();
-
-        if (!userPassword.equals(userRePassword)) {
-            Toast.makeText(getContext(), "Password and Confirm Password do not match", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (userPassword.length() < 8) {
-            Toast.makeText(getContext(), "Please enter a password of at least 8 characters", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!dbHelper.validPassword(userPassword)) {
-            Toast.makeText(getContext(), "Please enter a valid password", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null) {
-            String newPassword = getUserPasswordTxt.getText().toString().trim();
-            // Cập nhật mật khẩu trên Firebase Authentication
-            user.updatePassword(newPassword)
-                    .addOnCompleteListener(authTask -> {
-                        if (authTask.isSuccessful()) {
-                            // Cập nhật mật khẩu thành công trên Authentication
-                            Toast.makeText(getContext(), "Password update successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getContext(), LoginActivity.class));
-                        } else {
-                            // Cập nhật mật khẩu thất bại trên Authentication
-                            Toast.makeText(getContext(), "Authentication update failed: " + authTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
-    }
     private void registerNewAccount() {
         String userName = getUserNameTxt.getText().toString().trim();
         String userPassword = getUserPasswordTxt.getText().toString().trim();
@@ -138,8 +99,8 @@ public class CreatePasswordFragment extends Fragment {
             return;
         }
 
-        if (userPassword.length() < 8) {
-            Toast.makeText(getContext(), "Please enter a password of at least 8 characters", Toast.LENGTH_SHORT).show();
+        if (userPassword.length() < 6) {
+            Toast.makeText(getContext(), "Please enter a password of at least 6 characters", Toast.LENGTH_SHORT).show();
             return;
         }
 
