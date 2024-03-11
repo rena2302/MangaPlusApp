@@ -85,7 +85,6 @@ public class MainActivity extends BaseActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUser=mAuth.getCurrentUser();
         userID = currentUser.getProviderId();
-        userID = preferences.getString("user_id","");
         userName = currentUser.getDisplayName();
         Uri imgUser = currentUser.getPhotoUrl();
         Log.d("Main", "User id : "+userID);
