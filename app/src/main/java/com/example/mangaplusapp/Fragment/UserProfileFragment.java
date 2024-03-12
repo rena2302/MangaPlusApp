@@ -162,14 +162,12 @@ public class UserProfileFragment extends Fragment {
 
         editprofile.setOnClickListener(v->{
             dialog.dismiss();
-//            loadFragment(new EditNameFragment(),false);
             openActivityWithFragmentData("Fragment1Data");
         });
         LinearLayout editemail=dialog.findViewById(R.id.ChangedEmailBtn);
 
         editemail.setOnClickListener(v->{
             dialog.dismiss();
-//            loadFragment(new ChangeEmailFragment(),false);
             openActivityWithFragmentData("Fragment2Data");
         });
 
@@ -177,7 +175,6 @@ public class UserProfileFragment extends Fragment {
 
         editpass.setOnClickListener(v->{
             dialog.dismiss();
-//            loadFragment(new ChangePasswordFragment(),false);
             getActivity().finish();
             openActivityWithFragmentData("Fragment3Data");
         });
@@ -185,7 +182,6 @@ public class UserProfileFragment extends Fragment {
         navToRegion=dialog.findViewById(R.id.navToLanguage);
         navToRegion.setOnClickListener(v->{
             dialog.dismiss();
-//            loadFragment(new RegionFragment(),false);
             openActivityWithFragmentData("Fragment4Data");
         });
 

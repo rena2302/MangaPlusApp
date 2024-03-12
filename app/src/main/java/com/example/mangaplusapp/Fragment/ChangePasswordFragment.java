@@ -2,6 +2,7 @@ package com.example.mangaplusapp.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.mangaplusapp.Activity.User.MainActivity;
 import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
+import com.example.mangaplusapp.Helper.LoadHelper.LoadFragment;
 import com.example.mangaplusapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,13 +32,15 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class ChangePasswordFragment extends Fragment {
     ImageButton backBtn;
-    EditText getOldPass,getNewPass,getCfPass;
-    String oldPass,newPass,cfPass,authPassword;
+    EditText getOldPass;
+    String oldPass;
     UserDBHelper dbHelper;
     AppCompatButton submit;
     String userID;
+    LoadFragment fragmentHelper;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
+    AuthCredential credential;
     public  ChangePasswordFragment()
     {
 
@@ -55,8 +59,6 @@ public class ChangePasswordFragment extends Fragment {
         //========================================GET ID==========================================//
         backBtn=root.findViewById(R.id.backChangedPassBtn);
         getOldPass = root.findViewById(R.id.EditOldPassTxt);
-        getNewPass = root.findViewById(R.id.NewPasswordTxt);
-        getCfPass = root.findViewById(R.id.userRePasswordTxt);
         submit= root.findViewById(R.id.btnSubmitInfo_Edit);
         //****************************************************************************************//
         //========================================GET DATA========================================//
@@ -64,11 +66,8 @@ public class ChangePasswordFragment extends Fragment {
         mAuth=FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         userID=currentUser.getProviderId();
-
+        navigate();
         //****************************************************************************************//
-        if(!userID.isEmpty()){
-            navigate();
-        }
         return  root;
     }
     private void navigate(){
@@ -79,26 +78,23 @@ public class ChangePasswordFragment extends Fragment {
             getActivity().finish();
         });
         submit.setOnClickListener(v->{
-            sendResetPasswordByEmail(currentUser.getEmail());
+            CheckOldEmail();
         });
-
     }
-    private void sendResetPasswordByEmail (String userEmail){
-        FirebaseAuth.getInstance().sendPasswordResetEmail(userEmail)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), "Password reset email sent successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(getContext(), MainActivity.class);
-                            intent.putExtra("BackToProfile", 1);
-                            startActivity(intent);
-                            getActivity().finish();
-                            // Thông báo cho người dùng rằng email đã được gửi thành công
-                        } else {
-                            Toast.makeText(getContext(), "Failed to send password reset email: ", Toast.LENGTH_SHORT).show();
-                            // Xử lý trường hợp gửi email thất bại
-                        }
+    private void CheckOldEmail()
+    {
+        Log.d("Email", currentUser.getEmail());
+
+        oldPass=getOldPass.getText().toString();
+        Log.d("Password", oldPass);
+        credential = EmailAuthProvider.getCredential(currentUser.getEmail(), oldPass);
+        currentUser.reauthenticate(credential)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        fragmentHelper = new LoadFragment();
+                        fragmentHelper.loadFragment(getParentFragmentManager(), new SuccessFragment(), false, R.id.editFmContainer);
+                    } else {
+                        Toast.makeText(getContext(),"Invalid password",Toast.LENGTH_SHORT).show();
                     }
                 });
     }
