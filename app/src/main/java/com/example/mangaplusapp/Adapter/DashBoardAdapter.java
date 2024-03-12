@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -182,6 +183,9 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
     }
     private void showCategoryDialog(Categories category) {
          MangaListFragment dialogFragment = new MangaListFragment(category);
+        Bundle args = new Bundle();
+        args.putString("tag", "category_dialog");
+        dialogFragment.setArguments(args);
          dialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), "category_dialog");
     }
     private void deleteCategory(Categories category) {

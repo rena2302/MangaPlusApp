@@ -201,7 +201,7 @@ public class MangaListFragment extends DialogFragment {
                     }
                 });
             }
-        } else {
+        } else if (tag.equals("category_dialog")) {
             // Load tất cả manga (không có tag)
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
             reference.addValueEventListener(new ValueEventListener() {

@@ -124,18 +124,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Book Description"/>
-
-                <ImageButton
-                    android:id="@+id/mangaDetailFavorite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/mangaDetailInfo"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="140dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_toRightOf="@+id/mangaDetailDescriptionTitle"
-                    android:src="@drawable/ic_favorite"
-                    android:background="@color/transparent"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/Layout_Content_book"
@@ -165,13 +153,67 @@ Set in rural Japan shortly after World War II, this gripping novel tells the sto
 Translated into English for the first time, this novel is about an affair gone wrong between a former university student, Kōji; his would-be mentor, the eminent literary critic Ippei Kusakado; and Ippei’s beautiful, enigmatic wife, Yūko. When brought face-to-face with one of Ippei’s many marital indiscretions, Kōji finds his growing desire for Yūko compels him to action in a way that changes all three of their lives profoundly. Originally published in 1961 and now available in English for the first time, The Frolic of the Beasts is a haunting examination of the various guises we assume throughout our lives.
 
 "/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mangaDetailRcv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_below="@+id/mangaDetailDescription"/>
+                <TextView
+                    android:layout_below="@+id/mangaDetailDescription"
+                    android:padding="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/interextrabold"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/Content_showmore"
+                    android:layout_width="wrap_content"
+                    android:text="Show more"
+                    android:drawablePadding="10dp"
+                    android:drawableBottom="@drawable/dialog_tab"
+                    android:layout_height="wrap_content"/>
             </RelativeLayout>
+            <LinearLayout
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="40dp"
+                android:layout_below="@+id/Layout_Content_book"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/mangaDetailFavorite"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/OverlayIconFavorite"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="@color/black"
+                        android:background="@drawable/layout_save"/>
+
+                    <ImageView
+                        android:id="@+id/IconFavorite"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_centerInParent="true"
+                        app:tint="@color/white"
+                        android:src="@drawable/save_book" />
+                </RelativeLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/Buy_Book"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reading"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/interextrabold"
+                    android:textSize="18sp"
+                    android:background="@drawable/btn_buy_book"/>
+            </LinearLayout>
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/mangaDetailRcv"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_below="@+id/mangaDetailDescription"/>-->
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

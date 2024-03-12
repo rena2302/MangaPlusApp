@@ -4,20 +4,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
     tools:context=".Fragment.SuccessFragment">
-
+    <ImageView
+        android:id="@+id/BackGroundSuccesFull"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/sendemailsuccessfull">
+    </ImageView>
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:layout_marginTop="-60dp"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
+        android:text="Send Successfull !"
+        android:textColor="#000000"
+        android:fontFamily="@font/interextrabold"
+        android:textSize="30sp"/>
+    <TextView
+        android:id="@+id/requestResEmail"
+        android:layout_below="@+id/HeadTiltleForgot"
+        android:layout_width="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:text="We've sent a link to your email, click on it to update your password"
+        android:textAppearance="@style/RecommendRes"
+        android:fontFamily="@font/ubuntubold"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal|center_vertical">
+    </TextView>
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:text="vao login ne"
+        android:gravity="center"
         android:id="@+id/navToLogin"
-        android:layout_height="wrap_content">
-
-    </androidx.appcompat.widget.AppCompatButton>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/forgotPassword_act"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_accept"
+        android:backgroundTint="#EA9696"
+        android:fontFamily="@font/interextrabold"
+        android:text="Back to login"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 </LinearLayout>
