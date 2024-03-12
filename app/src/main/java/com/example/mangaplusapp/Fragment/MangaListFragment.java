@@ -63,7 +63,7 @@ public class MangaListFragment extends DialogFragment {
         RecyclerView recyclerView = view.findViewById(R.id.dashFragmentRcv);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setAdapter(adapter);
-        if(category != null){
+        if(tag.equals("category_dialog")){
             builder
                     .setView(view)
                     .setTitle(category.getNAME_CATEGORY())
@@ -73,7 +73,7 @@ public class MangaListFragment extends DialogFragment {
                             dialog.dismiss();
                         }
                     });
-        }else {
+        }else if (tag.equals("Favorite")){
             builder
                     .setView(view)
                     .setTitle("Favorites")
@@ -84,6 +84,16 @@ public class MangaListFragment extends DialogFragment {
                         }
                     });
 
+        } else if (tag.equals("Bought")) {
+            builder
+                    .setView(view)
+                    .setTitle("Bought")
+                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
         }
 
 
