@@ -2,6 +2,7 @@ package com.example.mangaplusapp.Adapter;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,9 @@ public class CateSearchAdapter extends RecyclerView.Adapter<CateSearchAdapter.Ca
     }
     private void showCategoryDialog(Categories category) {
         MangaListFragment dialogFragment = new MangaListFragment(category);
+        Bundle args = new Bundle();
+        args.putString("tag", "category_dialog");
+        dialogFragment.setArguments(args);
         dialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), "category_dialog");
     }
 
