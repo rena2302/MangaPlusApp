@@ -59,7 +59,7 @@ public class PaymentStripeActivity extends AppCompatActivity {
     }
     private void fetchApi(){ // POST
         RequestQueue queue = Volley.newRequestQueue(this);
-            String url ="https://4240-1-53-52-229.ngrok-free.app";
+            String url ="https://0f7a-14-241-234-102.ngrok-free.app";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
