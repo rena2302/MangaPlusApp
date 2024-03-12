@@ -18,18 +18,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.Base.EditControlActivity;
 import com.example.mangaplusapp.Activity.Base.LoginActivity;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -104,18 +108,6 @@ public class UserProfileFragment extends Fragment {
         getUserNameTittleTxt.setText("Guest");
         HeaderEmail.setText("Not logged in");
         getUserEmailTxt.setText("Not logged in");
-    }
-    private void loadFragment(Fragment fragment, boolean isAppInitialized) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        if (isAppInitialized) {
-            fragmentTransaction.add(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
-        } else {
-            fragmentTransaction.replace(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
-            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
-        }
-        fragmentTransaction.commit();
     }
     void userExists(){
         getUserEmailTxt.setText(userEmail);
@@ -204,14 +196,7 @@ public class UserProfileFragment extends Fragment {
             ///////===========================Begin Logout=========================/////////////////////
             logout.setOnClickListener(v -> {
                 // Clear session and navigate to login activity
-                try {
-                    FirebaseAuth.getInstance().signOut();
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent);
-                    Toast.makeText(getActivity(), "Log out successful", Toast.LENGTH_SHORT).show();
-                }catch(Exception e){
-                    Toast.makeText(getActivity(), "Something was wrong", Toast.LENGTH_SHORT).show();
-                }
+                signOut();
             });
         }
         else {
@@ -229,5 +214,32 @@ public class UserProfileFragment extends Fragment {
         dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
+    private void signOut(){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivity());
+        if (account != null) {
+            // Đăng xuất khỏi Firebase Auth
+            FirebaseAuth.getInstance().signOut();
 
+            // Đăng xuất khỏi Google
+            GoogleSignIn.getClient(getActivity(), GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .signOut()
+                    .addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                // Đăng xuất thành công khỏi cả Firebase và Google
+                                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(getActivity(), "Log out successful", Toast.LENGTH_SHORT).show();
+                            } else {
+                                // Xảy ra lỗi khi đăng xuất khỏi Google
+                                Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        } else {
+            // Người dùng chưa đăng nhập bằng Google
+            // Xử lý tùy thuộc vào yêu cầu của bạn
+        }
+    }
 }

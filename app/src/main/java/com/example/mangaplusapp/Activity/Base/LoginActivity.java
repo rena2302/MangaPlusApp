@@ -162,7 +162,7 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
                             HashMap<String,Object> map = new HashMap<>();
                             map.put("idUser",user.getUid());
 //                            map.put("name",user.getDisplayName());
-                            map.put("email",user.getEmail());
+                            map.put("userEmail",user.getEmail());
 //                            map.put("profile",user.getPhotoUrl().toString());
                             databaseFirebase.getReference().child("Users").child(user.getUid()).setValue(map);
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
