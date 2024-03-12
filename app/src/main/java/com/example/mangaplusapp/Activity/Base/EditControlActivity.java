@@ -11,6 +11,8 @@ import com.example.mangaplusapp.Fragment.ChangeEmailFragment;
 import com.example.mangaplusapp.Fragment.ChangePasswordFragment;
 import com.example.mangaplusapp.Fragment.EditNameFragment;
 import com.example.mangaplusapp.Fragment.RegionFragment;
+import com.example.mangaplusapp.Fragment.SuccessFragment;
+import com.example.mangaplusapp.Helper.LoadHelper.LoadFragment;
 import com.example.mangaplusapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,7 +37,7 @@ public class EditControlActivity extends BaseActivity{
                 loadFragment(new ChangeEmailFragment(),false);
                 break;
             case "Fragment3Data":
-                loadFragment(new ChangePasswordFragment(),false);
+                loadFragment(new SuccessFragment(),false);
                 break;
             case "Fragment4Data":
                 loadFragment(new RegionFragment(),false);

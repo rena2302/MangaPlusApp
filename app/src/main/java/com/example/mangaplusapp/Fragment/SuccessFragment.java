@@ -52,6 +52,7 @@ public class SuccessFragment extends Fragment {
     }
     private void navigate(){
         btn.setOnClickListener(v->{
+            getActivity().finish();
             Intent intent = new Intent(getContext(),LoginActivity.class);
             startActivity(intent);
         });

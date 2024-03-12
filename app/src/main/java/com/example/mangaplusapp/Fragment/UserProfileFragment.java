@@ -186,6 +186,7 @@ public class UserProfileFragment extends Fragment {
         editpass.setOnClickListener(v->{
             dialog.dismiss();
 //            loadFragment(new ChangePasswordFragment(),false);
+            getActivity().finish();
             openActivityWithFragmentData("Fragment3Data");
         });
 
