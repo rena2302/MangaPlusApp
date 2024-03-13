@@ -185,7 +185,6 @@ Translated into English for the first time, this novel is about an affair gone w
                         android:id="@+id/OverlayIconFavorite"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:backgroundTint="@color/black"
                         android:background="@drawable/layout_save"/>
 
                     <ImageView
@@ -193,8 +192,7 @@ Translated into English for the first time, this novel is about an affair gone w
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_centerInParent="true"
-                        app:tint="@color/white"
-                        android:src="@drawable/save_book" />
+                        android:src="@drawable/ic_favorite" />
                 </RelativeLayout>
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Buy_Book"

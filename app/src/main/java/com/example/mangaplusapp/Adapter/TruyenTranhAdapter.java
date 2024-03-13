@@ -78,34 +78,15 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                             "NAME_MANGA", truyenTranh.getNAME_MANGA(),
                             "PICTURE_MANGA", truyenTranh.getPICTURE_MANGA(),
                             "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA());
-                }else {
-                    if(truyenTranh.isPREMIUM_MANGA()){
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setTitle("Premium Manga")
-                                .setMessage("If you wanna read this manga, you have to buy it")
-                                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        ActivityUtils.startNewActivityAndFinishCurrent(context, PaymentActivity.class,
-                                                "ID_MANGA", truyenTranh.getID_MANGA());
-                                    }
-                                })
-                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                })
-                                .show();
                     }else {
                         ActivityUtils.startNewActivity(context, MangaDetailActivity.class,
                                 "ID_MANGA", truyenTranh.getID_MANGA(),
                                 "NAME_MANGA", truyenTranh.getNAME_MANGA(),
                                 "PICTURE_MANGA", truyenTranh.getPICTURE_MANGA(),
-                                "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA());
+                                "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA(),
+                                "PREMIUM_MANGA",String.valueOf(truyenTranh.isPREMIUM_MANGA()));
                     }
                 }
-            }
         });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
