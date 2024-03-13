@@ -3,23 +3,7 @@
   <component name="deploymentTargetDropDown">
     <value>
       <entry key="app">
-<<<<<<< HEAD
-        <State>
-          <runningDeviceTargetsSelectedWithDialog>
-            <Target>
-              <type value="RUNNING_DEVICE_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\Admin\.android\avd\Medium_Phone_API_VanillaIceCream.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </runningDeviceTargetsSelectedWithDialog>
-        </State>
-=======
         <State />
->>>>>>> a5ba487dd3850e367d4cd3d816430477b390fbf6
       </entry>
     </value>
   </component>
