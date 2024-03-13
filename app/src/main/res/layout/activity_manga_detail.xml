@@ -168,6 +168,48 @@ Translated into English for the first time, this novel is about an affair gone w
                     android:drawableBottom="@drawable/dialog_tab"
                     android:layout_height="wrap_content"/>
             </RelativeLayout>
+<<<<<<< HEAD
+=======
+            <LinearLayout
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="120dp"
+                android:layout_below="@+id/Layout_Content_book"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/mangaDetailFavorite"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/OverlayIconFavorite"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/layout_save"/>
+
+                    <ImageView
+                        android:id="@+id/IconFavorite"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_favorite" />
+                </RelativeLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/Buy_Book"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reading"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/interextrabold"
+                    android:textSize="18sp"
+                    android:background="@drawable/btn_buy_book"/>
+            </LinearLayout>
+>>>>>>> a5ba487dd3850e367d4cd3d816430477b390fbf6
 <!--                <androidx.recyclerview.widget.RecyclerView-->
 <!--                    android:id="@+id/mangaDetailRcv"-->
 <!--                    android:layout_width="match_parent"-->

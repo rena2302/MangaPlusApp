@@ -56,31 +56,14 @@ public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(imageSlider.isPREMIUM_MANGA()){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Premium Manga")
-                            .setMessage("If you wanna read this manga, you have to buy it")
-                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    ActivityUtils.startNewActivityAndFinishCurrent(context, PaymentActivity.class);
-                                }
-                            })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .show();
-                }else {
+
                     ActivityUtils.startNewActivity(context, MangaDetailActivity.class,
                             "ID_MANGA", imageSlider.getID_MANGA(),
                             "NAME_MANGA", imageSlider.getNAME_MANGA(),
                             "PICTURE_MANGA", imageSlider.getPICTURE_MANGA(),
                             "DESCRIPTION_MANGA", imageSlider.getDESCRIPTION_MANGA());
                 }
-            }
+
         });
     }
 
