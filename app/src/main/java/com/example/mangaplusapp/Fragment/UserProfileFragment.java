@@ -239,9 +239,18 @@ public class UserProfileFragment extends Fragment {
         } else {
             // Đăng xuất khỏi Firebase Auth
             Log.d("@@@@@", "signOut: Email");
-            FirebaseAuth.getInstance().signOut();
+            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
+            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
+            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
+            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
+            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
+            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
+            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
+            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
+            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
+
         }
     }
 }
