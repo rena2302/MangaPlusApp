@@ -217,9 +217,6 @@ public class UserProfileFragment extends Fragment {
     private void signOut(){
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivity());
         if (account != null) {
-            // Đăng xuất khỏi Firebase Auth
-            FirebaseAuth.getInstance().signOut();
-
             // Đăng xuất khỏi Google
             GoogleSignIn.getClient(getActivity(), GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .signOut()
@@ -228,6 +225,7 @@ public class UserProfileFragment extends Fragment {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 // Đăng xuất thành công khỏi cả Firebase và Google
+                                Log.d("@@@@@", "signOut: Google");
                                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                                 startActivity(intent);
                                 Toast.makeText(getActivity(), "Log out successful", Toast.LENGTH_SHORT).show();
@@ -237,9 +235,13 @@ public class UserProfileFragment extends Fragment {
                             }
                         }
                     });
+
         } else {
-            // Người dùng chưa đăng nhập bằng Google
-            // Xử lý tùy thuộc vào yêu cầu của bạn
+            // Đăng xuất khỏi Firebase Auth
+            Log.d("@@@@@", "signOut: Email");
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
         }
     }
 }
