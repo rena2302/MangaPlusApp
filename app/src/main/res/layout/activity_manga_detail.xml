@@ -170,7 +170,7 @@ Translated into English for the first time, this novel is about an affair gone w
             <LinearLayout
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="120dp"
                 android:layout_below="@+id/Layout_Content_book"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
@@ -214,4 +214,9 @@ Translated into English for the first time, this novel is about an affair gone w
 <!--                    android:layout_below="@+id/mangaDetailDescription"/>-->
         </RelativeLayout>
     </ScrollView>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_blur_detail"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

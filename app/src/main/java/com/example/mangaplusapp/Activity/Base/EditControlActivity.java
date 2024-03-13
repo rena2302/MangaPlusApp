@@ -37,7 +37,7 @@ public class EditControlActivity extends BaseActivity{
                 loadFragment(new ChangeEmailFragment(),false);
                 break;
             case "Fragment3Data":
-                loadFragment(new SuccessFragment(),false);
+                loadFragment(new ChangePasswordFragment(),false);
                 break;
             case "Fragment4Data":
                 loadFragment(new RegionFragment(),false);

@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 public class MangaDetailActivity extends BaseActivity {
     Intent intent;
     FirebaseAuth firebaseAuth;
@@ -287,5 +288,20 @@ public class MangaDetailActivity extends BaseActivity {
         startActivity(new Intent(MangaDetailActivity.this, MainActivity.class));
         finish();
         super.onBackPressed();
+    }
+    private void showdialog()
+    {
+        final Dialog dialog=new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_option_payment);
+        LinearLayout back=dialog.findViewById(R.id.BackToProduct);
+        back.setOnClickListener(v->{
+            dialog.dismiss();
+        });
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 }

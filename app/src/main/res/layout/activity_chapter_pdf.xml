@@ -35,7 +35,6 @@
             android:src="@drawable/ic_back_black"
             android:background="@color/transparent"/>
     </RelativeLayout>
-
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdfView"
         android:layout_width="match_parent"
