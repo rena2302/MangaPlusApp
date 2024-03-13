@@ -28,7 +28,7 @@
                         android:type="linear"
                         android:startX="150"
                         android:startY="90.5"
-                        android:endX="230"
+                        android:endX="200"
                         android:endY="90.5"
                         >
                         <item

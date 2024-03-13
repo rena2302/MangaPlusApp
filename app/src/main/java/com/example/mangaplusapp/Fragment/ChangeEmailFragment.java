@@ -26,6 +26,7 @@ import com.example.mangaplusapp.Activity.User.RegisterActivity;
 import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
+import com.google.android.gms.common.internal.Preconditions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -40,6 +41,7 @@ public class ChangeEmailFragment extends Fragment {
     ImageButton Backbtn;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
+    String NewEmail;
     public ChangeEmailFragment() {
     }
 
@@ -61,7 +63,42 @@ public class ChangeEmailFragment extends Fragment {
         db = new UserDBHelper(getContext());
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        VeritificationAccount();
         return root;
+    }
+    private void VeritificationAccount()
+    {
+        AuthCredential credential = EmailAuthProvider
+                .getCredential("hoangphongcuade@gmail.com", "26112004");
+
+        currentUser.reauthenticate(credential)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(getContext(),"CheckSuccessfull",Toast.LENGTH_SHORT).show();
+                            SendOtpBtn.setOnClickListener(v->{
+                                NewEmail=InputEmail.getText().toString();
+                                currentUser.updateEmail(NewEmail)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(getContext(),"UpdateSuccesfull",Toast.LENGTH_SHORT).show();
+                                                }
+                                                else {
+                                                    Toast.makeText(getContext(),"Update Failed",Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                            });
+                        }
+                        else {
+                            Toast.makeText(getContext(),"Check Failed",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
 }
