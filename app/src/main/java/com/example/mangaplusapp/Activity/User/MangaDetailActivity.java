@@ -1,11 +1,5 @@
 package com.example.mangaplusapp.Activity.User;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -14,16 +8,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+
 import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.Activity.Base.ChapterPdfActivity;
 import com.example.mangaplusapp.Adapter.ChapterAdapter;
-import com.example.mangaplusapp.Fragment.HomeFragment;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityMangaDetailBinding;
 import com.example.mangaplusapp.object.Chapters;
-import com.example.mangaplusapp.object.Mangas;
-import com.example.mangaplusapp.util.ActivityUtils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
