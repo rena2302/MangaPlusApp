@@ -112,23 +112,7 @@ public class MangaDetailActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (isPremium) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MangaDetailActivity.this);
-                    builder.setTitle("Premium Manga")
-                            .setMessage("If you wanna read this manga, you have to buy it")
-                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    startNewActivityAndFinishCurrent(PaymentActivity.class,
-                                            "ID_MANGA", mangaId);
-                                }
-                            })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .show();
+                    showdialog();
                 }else {
                     DatabaseReference chapterRef = FirebaseDatabase.getInstance().getReference("Chapters");
                     chapterRef.orderByChild("ID_MANGA_CHAPTER").equalTo(mangaId)
