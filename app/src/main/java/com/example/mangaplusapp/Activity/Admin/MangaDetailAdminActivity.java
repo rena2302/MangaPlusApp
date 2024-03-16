@@ -56,7 +56,6 @@ public class MangaDetailAdminActivity extends BaseActivity {
                 Toast.makeText(MangaDetailAdminActivity.this, "The loading mangas was interrupted",Toast.LENGTH_SHORT).show();
             }
         });
-
     }
     private void setTextItem() {
         Intent intent = getIntent();
