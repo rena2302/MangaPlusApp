@@ -2,7 +2,9 @@ package com.example.mangaplusapp.Fragment;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -39,6 +41,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class UserProfileFragment extends Fragment {
+    private static SharedPreferences sharedPreferences;
     ImageView TabDialog,getUserAvtIMG;
     UserDBHelper db;
     CardView avtContainer;
@@ -49,9 +52,6 @@ public class UserProfileFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
     private static final int SELECT_IMAGE = 100;
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +62,7 @@ public class UserProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_user_profile, container,false);
+        sharedPreferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
         //=========================================Get id=========================================//
         getUserNameInfoTxt = root.findViewById(R.id.userName_info);
         getUserNameTittleTxt = root.findViewById(R.id.userName_Tittle);
@@ -220,11 +221,15 @@ public class UserProfileFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
+                                Toast.makeText(getActivity(), "Log out successful", Toast.LENGTH_SHORT).show();
+                                SharedPreferences.Editor editor=sharedPreferences.edit();
+                                editor.putBoolean("keyBiometric",false);
+                                editor.apply();
+                                editor.commit();
                                 // Đăng xuất thành công khỏi cả Firebase và Google
                                 Log.d("@@@@@", "signOut: Google");
                                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                                 startActivity(intent);
-                                Toast.makeText(getActivity(), "Log out successful", Toast.LENGTH_SHORT).show();
                             } else {
                                 // Xảy ra lỗi khi đăng xuất khỏi Google
                                 Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -233,7 +238,13 @@ public class UserProfileFragment extends Fragment {
                     });
 
         } else {
+
             // Đăng xuất khỏi Firebase Auth
+            Toast.makeText(getActivity(), "Log out successful", Toast.LENGTH_SHORT).show();
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putBoolean("keyBiometric",false);
+            editor.apply();
+            editor.commit();
             Log.d("@@@@@", "signOut: Email");
             Log.d("@@@@@", "signOut: " + currentUser.getEmail());
             Log.d("@@@@@", "signOut: " + currentUser.getEmail());
@@ -246,7 +257,6 @@ public class UserProfileFragment extends Fragment {
             Log.d("@@@@@", "signOut: " + currentUser.getEmail());
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
-
         }
     }
 }

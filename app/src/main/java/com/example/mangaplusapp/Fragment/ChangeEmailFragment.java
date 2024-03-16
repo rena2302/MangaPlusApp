@@ -113,7 +113,7 @@ public class ChangeEmailFragment extends Fragment {
                                     NewEmail=InputEmail.getText().toString();
                                     changeNewEmail(NewEmail);
                                 } else {
-                                    Toast.makeText(getContext(), "Authentication failure !", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Invalid password or email !", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

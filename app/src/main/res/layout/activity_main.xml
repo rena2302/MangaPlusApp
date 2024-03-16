@@ -52,5 +52,8 @@
             app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
             android:layout_alignParentBottom="true">
         </com.google.android.material.bottomnavigation.BottomNavigationView>
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height=""
     </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
