@@ -1,12 +1,24 @@
 package com.example.mangaplusapp.Activity.User;
 
+import static androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG;
+import static androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK;
+import static androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL;
+
+import static java.security.AccessController.getContext;
+
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
+import android.service.autofill.UserData;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +27,11 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
@@ -37,18 +53,24 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Executor;
 
 
 public class MangaDetailActivity extends BaseActivity {
+    private static SharedPreferences sharedPreferences;
     Intent intent;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
     ActivityMangaDetailBinding binding;
+    BiometricPrompt biometricPrompt;
     private List<Chapters> chapterList = new ArrayList<>();
     // Khởi tạo adapter trước khi hiển thi
     private ChapterAdapter chapterAdapter ;
     String mangaId, nameManga, mangaPicture, mangaDescription;
     private Boolean mangaPremium;
+    private boolean checkBiometric;
     public interface OnPurchasedMangaIdsLoadedListener {
         void onPurchasedMangaIdsLoaded(Boolean premium);
     }
@@ -56,6 +78,7 @@ public class MangaDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMangaDetailBinding.inflate(getLayoutInflater());
+        sharedPreferences = this.getSharedPreferences("user_session", Context.MODE_PRIVATE);
         intent = getIntent();
         mangaPremium = Boolean.parseBoolean(intent.getStringExtra("PREMIUM_MANGA"));
         setContentView(binding.getRoot());
@@ -65,6 +88,44 @@ public class MangaDetailActivity extends BaseActivity {
         mangaDescription = intent.getStringExtra("DESCRIPTION_MANGA");
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
+        onClickEvent();
+        setFavorite();
+        setTextItem();
+        checkBioMetricSpperted();
+        boolean ssss=sharedPreferences.getBoolean("keyBiometric",false);
+        Toast.makeText(this,"aaaaa"+ssss,Toast.LENGTH_SHORT).show();
+        Executor executor= ContextCompat.getMainExecutor(this);
+        biometricPrompt=new BiometricPrompt(MangaDetailActivity.this,executor, new BiometricPrompt.AuthenticationCallback(){
+            @Override
+            public void onAuthenticationError(int errorCode,
+                                              @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+                Toast.makeText(getApplicationContext(),
+                                "Authentication error: " + errString, Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(
+                    @NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                Toast.makeText(getApplicationContext(),
+                        "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+                         SharedPreferences.Editor editor=sharedPreferences.edit();
+                         editor.putBoolean("keyBiometric",true);
+                         editor.apply();
+                         editor.commit();
+                         showdialog();
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+                Toast.makeText(getApplicationContext(), "Authentication failed",
+                                Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
         loadPurchasedMangaIds(new OnPurchasedMangaIdsLoadedListener() {
             @Override
             public void onPurchasedMangaIdsLoaded(Boolean premium) {
@@ -73,9 +134,6 @@ public class MangaDetailActivity extends BaseActivity {
 
             }
         });
-        onClickEvent();
-        setFavorite();
-        setTextItem();
     }
     private void onClickEvent(){
         binding.backDetailProductBtn.setOnClickListener(new View.OnClickListener() {
@@ -106,13 +164,28 @@ public class MangaDetailActivity extends BaseActivity {
             }
         });
     }
+    private BiometricPrompt.PromptInfo.Builder dialogMetric()
+    {
+            return new BiometricPrompt.PromptInfo.Builder()
+                    .setTitle("Manga plus needs to confirm")
+                    .setSubtitle("Fingerprint verification");
+    }
     private void onClickPayment(Boolean isPremium){
-
         binding.BuyBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                checkBiometric=sharedPreferences.getBoolean("keyBiometric",false);
+                Log.d("Check", "onClickPayment: "+checkBiometric);
                 if (isPremium) {
-                    showdialog();
+                    if(checkBiometric)
+                    {
+                        showdialog();
+                    }
+                    else {
+                        BiometricPrompt.PromptInfo.Builder promptinfo= dialogMetric();
+                        promptinfo.setDeviceCredentialAllowed(true);
+                        biometricPrompt.authenticate(promptinfo.build());
+                    }
                 }else {
                     DatabaseReference chapterRef = FirebaseDatabase.getInstance().getReference("Chapters");
                     chapterRef.orderByChild("ID_MANGA_CHAPTER").equalTo(mangaId)
@@ -293,5 +366,28 @@ public class MangaDetailActivity extends BaseActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+    }
+    private void checkBioMetricSpperted()
+    {
+        BiometricManager biometricManager = BiometricManager.from(this);
+        String info=" ";
+        switch (biometricManager.canAuthenticate(BIOMETRIC_WEAK | BIOMETRIC_STRONG)) {
+            case BiometricManager.BIOMETRIC_SUCCESS:
+                info="App can authenticate using biometric.";
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+                info="No biometric features available on this device.";
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+                info="Biometric features are currently unavailable.";
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+                info="Need register at least one finger print.";
+                final Intent enrollIntent = new Intent(Settings.ACTION_BIOMETRIC_ENROLL);
+                enrollIntent.putExtra(Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
+                        BIOMETRIC_STRONG | DEVICE_CREDENTIAL);
+                startActivity(enrollIntent);
+                break;
+        }
     }
 }
