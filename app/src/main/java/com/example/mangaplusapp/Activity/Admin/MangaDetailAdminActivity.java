@@ -32,7 +32,6 @@ public class MangaDetailAdminActivity extends BaseActivity {
         setTextItem();
         loadChapters();
     }
-
     private void loadChapters() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chapters");
         reference.addValueEventListener(new ValueEventListener() {
