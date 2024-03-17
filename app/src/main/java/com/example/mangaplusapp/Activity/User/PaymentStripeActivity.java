@@ -57,7 +57,7 @@ public class PaymentStripeActivity extends AppCompatActivity {
         paymentSheet=new PaymentSheet(this,this::onPaymentSheetResult);
     }
     private void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult){
-        if(paymentSheetResult instanceof  PaymentSheetResult.Canceled){=
+        if(paymentSheetResult instanceof  PaymentSheetResult.Canceled){
             Toast.makeText(this,"Canceled", Toast.LENGTH_SHORT).show();
         }
         if(paymentSheetResult instanceof  PaymentSheetResult.Failed){
