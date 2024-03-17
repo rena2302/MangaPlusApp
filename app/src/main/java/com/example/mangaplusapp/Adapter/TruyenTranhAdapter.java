@@ -84,7 +84,9 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                                 "NAME_MANGA", truyenTranh.getNAME_MANGA(),
                                 "PICTURE_MANGA", truyenTranh.getPICTURE_MANGA(),
                                 "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA(),
-                                "PREMIUM_MANGA",String.valueOf(truyenTranh.isPREMIUM_MANGA()));
+                                "PREMIUM_MANGA",String.valueOf(truyenTranh.isPREMIUM_MANGA()),
+                                "VIEW_MANGA", String.valueOf(truyenTranh.getVIEW_MANGA()),
+                                "BOUGHT_MANGA",truyenTranh.getBOUGHT_MANGA());
                     }
                 }
         });

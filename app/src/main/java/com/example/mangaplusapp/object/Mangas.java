@@ -1,8 +1,9 @@
 package com.example.mangaplusapp.object;
 
 public class Mangas {
-    private String NAME_MANGA, ID_MANGA, DESCRIPTION_MANGA, PICTURE_MANGA, CATEGORY_MANGA, ID_CATEGORY_MANGA;
+    private String NAME_MANGA, ID_MANGA, DESCRIPTION_MANGA, PICTURE_MANGA, CATEGORY_MANGA, ID_CATEGORY_MANGA, BOUGHT_MANGA;
     private boolean PREMIUM_MANGA;
+    private long VIEW_MANGA;
     //empty for firebase
     public Mangas() {
     }
@@ -65,5 +66,21 @@ public class Mangas {
 
     public void setID_CATEGORY_MANGA(String ID_CATEGORY_MANGA) {
         this.ID_CATEGORY_MANGA = ID_CATEGORY_MANGA;
+    }
+
+    public long getVIEW_MANGA() {
+        return VIEW_MANGA;
+    }
+
+    public void setVIEW_MANGA(long VIEW_MANGA) {
+        this.VIEW_MANGA = VIEW_MANGA;
+    }
+
+    public String getBOUGHT_MANGA() {
+        return BOUGHT_MANGA;
+    }
+
+    public void setBOUGHT_MANGA(String BOUGHT_MANGA) {
+        this.BOUGHT_MANGA = BOUGHT_MANGA;
     }
 }

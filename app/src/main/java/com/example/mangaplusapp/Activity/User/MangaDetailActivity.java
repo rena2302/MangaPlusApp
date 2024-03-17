@@ -60,39 +60,49 @@ import java.util.concurrent.Executor;
 
 
 public class MangaDetailActivity extends BaseActivity {
-    private static SharedPreferences sharedPreferences;
+
     Intent intent;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
     ActivityMangaDetailBinding binding;
     BiometricPrompt biometricPrompt;
+    String mangaId, nameManga, mangaPicture, mangaDescription, mangaView;
+    int countChapter;
     private List<Chapters> chapterList = new ArrayList<>();
     // Khởi tạo adapter trước khi hiển thi
     private ChapterAdapter chapterAdapter ;
-    String mangaId, nameManga, mangaPicture, mangaDescription;
+    private static SharedPreferences sharedPreferences;
     private Boolean mangaPremium;
     private boolean checkBiometric;
     public interface OnPurchasedMangaIdsLoadedListener {
         void onPurchasedMangaIdsLoaded(Boolean premium);
     }
+    public interface OnLoadComplete{
+        void onLoadComplete(int count);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMangaDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         sharedPreferences = this.getSharedPreferences("user_session", Context.MODE_PRIVATE);
+
         intent = getIntent();
         mangaPremium = Boolean.parseBoolean(intent.getStringExtra("PREMIUM_MANGA"));
-        setContentView(binding.getRoot());
         mangaId = intent.getStringExtra("ID_MANGA");
         nameManga = intent.getStringExtra("NAME_MANGA");
         mangaPicture = intent.getStringExtra("PICTURE_MANGA");
         mangaDescription = intent.getStringExtra("DESCRIPTION_MANGA");
+        mangaView = intent.getStringExtra("VIEW_MANGA");
+
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
+
         onClickEvent();
         setFavorite();
-        setTextItem();
         checkBioMetricSpperted();
+
         Executor executor= ContextCompat.getMainExecutor(this);
         biometricPrompt=new BiometricPrompt(MangaDetailActivity.this,executor, new BiometricPrompt.AuthenticationCallback(){
             @Override
@@ -131,6 +141,13 @@ public class MangaDetailActivity extends BaseActivity {
 
                 onClickPayment(premium);
 
+            }
+        });
+        loadCountChapter(new OnLoadComplete() {
+            @Override
+            public void onLoadComplete(int count) {
+                countChapter = count;
+                setTextItem();
             }
         });
     }
@@ -194,6 +211,7 @@ public class MangaDetailActivity extends BaseActivity {
                                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                         Chapters chapter = dataSnapshot.getValue(Chapters.class);
                                         if (chapter.getNAME_CHAPTER().equals("Chapter 1")) {
+                                            updateCountView(chapter);
                                             startNewActivityAndFinishCurrent(ChapterPdfActivity.class,
                                                     "ID_CHAPTER", chapter.getID_CHAPTER(),
                                                     "NAME_CHAPTER", chapter.getNAME_CHAPTER(),
@@ -211,6 +229,25 @@ public class MangaDetailActivity extends BaseActivity {
                                 }
                             });
                 }
+            }
+        });
+    }
+    private void updateCountView(Chapters chapter){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
+        reference.child(chapter.getID_MANGA_CHAPTER()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Lấy giá trị hiện tại của countView
+                Long currentCountView = snapshot.child("VIEW_MANGA").getValue(Long.class);
+                // Tăng giá trị countView lên 1
+                Long newCountView = currentCountView != null ? currentCountView + 1 : 1;
+                // Cập nhật giá trị mới của countView vào cơ sở dữ liệu
+                snapshot.getRef().child("VIEW_MANGA").setValue(newCountView);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Xử lý khi cancel
             }
         });
     }
@@ -333,15 +370,34 @@ public class MangaDetailActivity extends BaseActivity {
             }
         });
     }
+    private void loadCountChapter(OnLoadComplete listener){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chapters");
+        reference.orderByChild("ID_MANGA_CHAPTER").equalTo(mangaId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        int count = 0;
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()) count++;
+
+                        listener.onLoadComplete(count);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
     private void setTextItem() {
-        binding.mangaDetailDescription.setText(intent.getStringExtra("DESCRIPTION_MANGA"));
+        binding.mangaDetailDescription.setText(mangaDescription);
         binding.mangaDetailTitle.setText(intent.getStringExtra("NAME_MANGA"));
         if (!isDestroyed()) {
             Glide.with(binding.mangaDetailImg)
                     .load(intent.getStringExtra("PICTURE_MANGA"))
                     .into(binding.mangaDetailImg);
         }
-
+        binding.mangaDetailReadNumber.setText(mangaView);
+        binding.mangaDetailChapterNumber.setText(String.valueOf(countChapter));
     }
     @Override
     public void onBackPressed() {
