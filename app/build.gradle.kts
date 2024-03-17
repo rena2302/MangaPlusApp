@@ -86,6 +86,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:21.0.0")
     implementation("com.google.firebase:firebase-analytics")
     implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+
+    //Authenticate your phone's PIN and fingerprint in Java
+    implementation ("androidx.biometric:biometric:1.1.0")
     //===========================================END GOOGLE=======================================//
 
 
