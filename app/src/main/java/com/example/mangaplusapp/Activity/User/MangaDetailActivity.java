@@ -84,7 +84,7 @@ public class MangaDetailActivity extends BaseActivity {
                 onBackPressed();
             }
         });
-        binding.mangaDetailDescription.setOnClickListener(new View.OnClickListener() {
+        binding.ContentShowmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MangaDetailActivity.this);
