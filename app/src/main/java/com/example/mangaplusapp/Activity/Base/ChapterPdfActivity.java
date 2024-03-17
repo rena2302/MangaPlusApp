@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.mangaplusapp.Activity.User.MainActivity;
 import com.example.mangaplusapp.Adapter.ChapterAdapter;
+import com.example.mangaplusapp.Fragment.ChapterListFragment;
 import com.example.mangaplusapp.Fragment.ChapterViewFragment;
 import com.example.mangaplusapp.Fragment.HomeFragment;
 import com.example.mangaplusapp.R;
@@ -49,8 +51,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ChapterPdfActivity extends BaseActivity{
-
+public class ChapterPdfActivity extends BaseActivity implements ChapterViewFragment.ActivityCallback{
+    private boolean isPdfLoaded = false;
+    String mangaId;
     View view;
     ActivityChapterPdfBinding binding;
     @Override
@@ -58,10 +61,35 @@ public class ChapterPdfActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         binding = ActivityChapterPdfBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        mangaId = getIntent().getStringExtra("ID_MANGA_CHAPTER");
+        onClickEvent();
         loadFragmentBasic(new ChapterViewFragment(), false,
                 "NAME_CHAPTER", getIntent().getStringExtra("NAME_CHAPTER"),
                 "PDF_CHAPTER", getIntent().getStringExtra("PDF_CHAPTER"),
                 "ID_MANGA_CHAPTER", getIntent().getStringExtra("ID_MANGA_CHAPTER"));
+    }
+    private void showChapterDialog() {
+        ChapterListFragment dialogFragment = new ChapterListFragment();
+        Bundle args = new Bundle();
+        args.putString("ID_MANGA_CHAPTER", mangaId);
+        dialogFragment.setArguments(args);
+        dialogFragment.setPdfLoaded(isPdfLoaded);
+        // Sử dụng getChildFragmentManager() để quản lý Fragment trong Fragment
+        dialogFragment.show(getSupportFragmentManager(), "chapter_dialog");
+    }
+    private void onClickEvent(){
+        binding.pdfViewBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        binding.pdfViewChapterSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showChapterDialog();
+            }
+        });
     }
     private void loadFragmentBasic(Fragment fragment, boolean isAppInitialized, String... extras) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -82,5 +110,21 @@ public class ChapterPdfActivity extends BaseActivity{
             fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
         }
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isPdfLoaded) {
+            super.onBackPressed(); // Chỉ cho phép back khi PDF đã load xong
+            startNewActivityAndFinishCurrent(MainActivity.class);
+        } else {
+            Toast.makeText(ChapterPdfActivity.this,"Manga on loading please wait...", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    @Override
+    public void updatePdfLoadStatus(boolean isPdfLoaded) {
+        this.isPdfLoaded = isPdfLoaded;
     }
 }

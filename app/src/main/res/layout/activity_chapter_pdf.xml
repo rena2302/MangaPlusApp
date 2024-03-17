@@ -5,8 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.Base.ChapterPdfActivity">
+    <RelativeLayout
+        android:id="@+id/pdfViewLabel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/background_blur_toolbar"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/pdfViewBackBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/custom_button_circle"
+            android:backgroundTint="@color/black"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_back_black"
+            android:tint="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/pdfViewChapterSelect"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/custom_button_circle"
+            android:backgroundTint="#66D8D8D8"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_menu_navigation" />
+    </RelativeLayout>
     <FrameLayout
         android:id="@+id/pdfView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/pdfViewLabel"/>
 </RelativeLayout>

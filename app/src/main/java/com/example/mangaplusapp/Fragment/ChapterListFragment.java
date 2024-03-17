@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +32,8 @@ import java.util.List;
 public class ChapterListFragment extends DialogFragment {
     View view;
     String mangaId;
+    private boolean isPdfLoaded = false;
+
     public interface OnDataLoadedListener {
         void onDataLoaded(List<Chapters> chaptersList);
     }
@@ -45,7 +48,9 @@ public class ChapterListFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-        ChapterAdapter adapter = new ChapterAdapter(new ArrayList<>(), getContext());
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+        ChapterAdapter adapter = new ChapterAdapter(new ArrayList<>(), getContext(), isPdfLoaded, fragmentManager);
         LayoutInflater inflater = getLayoutInflater();
         view = inflater.inflate(R.layout.fragment_chapter_list, null);
 
@@ -71,6 +76,9 @@ public class ChapterListFragment extends DialogFragment {
         });
 
         return builder.create();
+    }
+    public void setPdfLoaded(boolean pdfLoaded) {
+        this.isPdfLoaded = pdfLoaded;
     }
     private void loadChapters(OnDataLoadedListener listener) {
         List<Chapters> chaptersList = new ArrayList<>();

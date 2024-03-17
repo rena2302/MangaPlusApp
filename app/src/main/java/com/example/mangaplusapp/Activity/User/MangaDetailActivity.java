@@ -93,8 +93,6 @@ public class MangaDetailActivity extends BaseActivity {
         setFavorite();
         setTextItem();
         checkBioMetricSpperted();
-        boolean ssss=sharedPreferences.getBoolean("keyBiometric",false);
-        Toast.makeText(this,"aaaaa"+ssss,Toast.LENGTH_SHORT).show();
         Executor executor= ContextCompat.getMainExecutor(this);
         biometricPrompt=new BiometricPrompt(MangaDetailActivity.this,executor, new BiometricPrompt.AuthenticationCallback(){
             @Override

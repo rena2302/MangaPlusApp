@@ -28,15 +28,20 @@ import java.util.List;
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterViewHolder>{
     ItemChapterBinding itemChapterBinding;
     ActivityChapterPdfBinding activityChapterPdfBinding;
+    private boolean isPdfLoaded = false;
+
     private Context context;
     private List<Chapters> chapterList;
+    private FragmentManager fragmentManager;
     public void setData(List<Chapters> chapterList){
         this.chapterList = chapterList;
     }
 
-    public ChapterAdapter(List<Chapters> chapterList, Context context) {
+    public ChapterAdapter(List<Chapters> chapterList, Context context, boolean isPdfLoaded, FragmentManager fragmentManager) {
         this.chapterList = chapterList;
         this.context = context;
+        this.fragmentManager = fragmentManager; // Lưu tham chiếu tới FragmentManager
+        this.isPdfLoaded = isPdfLoaded;
     }
 
     @NonNull
@@ -58,19 +63,17 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*ActivityUtils.startNewActivityAndFinishCurrent(context, ChapterPdfActivity.class,
-                        "ID_CHAPTER", chapter.getID_CHAPTER(),
-                        "NAME_CHAPTER", chapter.getNAME_CHAPTER(),
-                        "ID_MANGA_CHAPTER", chapter.getID_MANGA_CHAPTER(),
-                        "MANGA_CHAPTER", chapter.getMANGA_CHAPTER(),
-                        "PDF_CHAPTER", chapter.getPDF_CHAPTER());*/
-                loadFragmentBasic(((ChapterPdfActivity) context).getSupportFragmentManager(), new ChapterViewFragment(), false,
-                        "ID_CHAPTER", chapter.getID_CHAPTER(),
-                        "NAME_CHAPTER", chapter.getNAME_CHAPTER(),
-                        "ID_MANGA_CHAPTER", chapter.getID_MANGA_CHAPTER(),
-                        "MANGA_CHAPTER", chapter.getMANGA_CHAPTER(),
-                        "PDF_CHAPTER", chapter.getPDF_CHAPTER());
-                Toast.makeText(context, "Are in " + chapter.getNAME_CHAPTER(), Toast.LENGTH_SHORT).show();
+                if (isPdfLoaded) {
+                    loadFragmentBasic(fragmentManager, new ChapterViewFragment(), false,
+                            "ID_CHAPTER", chapter.getID_CHAPTER(),
+                            "NAME_CHAPTER", chapter.getNAME_CHAPTER(),
+                            "ID_MANGA_CHAPTER", chapter.getID_MANGA_CHAPTER(),
+                            "MANGA_CHAPTER", chapter.getMANGA_CHAPTER(),
+                            "PDF_CHAPTER", chapter.getPDF_CHAPTER());
+                    Toast.makeText(context, "Are in " + chapter.getNAME_CHAPTER(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "PDF is not loaded yet", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

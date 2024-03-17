@@ -1,7 +1,9 @@
 package com.example.mangaplusapp.Fragment;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -49,10 +51,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChapterViewFragment extends Fragment {
-    private boolean isPdfLoaded = false;
     FragmentChapterViewBinding chapterViewBinding;
     Bundle args;
-    String mangaId;
+    private ActivityCallback activityCallback;
+    public interface ActivityCallback {
+        void updatePdfLoadStatus(boolean isPdfLoaded);
+    }
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            activityCallback = (ActivityCallback) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement ActivityCallback");
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,40 +73,27 @@ public class ChapterViewFragment extends Fragment {
         chapterViewBinding = FragmentChapterViewBinding.inflate(getLayoutInflater());
         args = getArguments();
         String pdfURL = args.getString("PDF_CHAPTER");
-        mangaId = args.getString("ID_MANGA_CHAPTER");
-        onClickEvent();
+        activityCallback.updatePdfLoadStatus(false);
         loadChapterFromURL(pdfURL);
         return chapterViewBinding.getRoot();
 
     }
-    private void onClickEvent(){
-        chapterViewBinding.pdfViewBackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isPdfLoaded){
-                    startActivity(new Intent(getContext(), MainActivity.class));
-                }
-                else {
-                    Toast.makeText(getContext(), "Manga is loading... please wait", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        chapterViewBinding.pdfViewChapterSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showChapterDialog();
-            }
-        });
-    }
+
     private void loadChapterFromURL(String pdfURL) {
         StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(pdfURL);
         reference.getBytes(Constans.MAX_BYTES_PDF)
                 .addOnSuccessListener(new OnSuccessListener<byte[]>() {
                     @Override
                     public void onSuccess(byte[] bytes) {
-                        isPdfLoaded = true;
                         chapterViewBinding.pdfView.fromBytes(bytes)
                                 .swipeHorizontal(false)// false = vertical , true = horizontal
+                                .onLoad(new OnLoadCompleteListener() {
+                                    @Override
+                                    public void loadComplete(int nbPages) {
+                                        activityCallback.updatePdfLoadStatus(true);
+                                        chapterViewBinding.pdfViewChapterName.setText(args.getString("NAME_CHAPTER"));
+                                    }
+                                })
                                 .onPageChange(new OnPageChangeListener() {
                                     @Override
                                     public void onPageChanged(int page, int pageCount) {
@@ -117,9 +117,6 @@ public class ChapterViewFragment extends Fragment {
                                     }
                                 })
                                 .load();
-                        if (isPdfLoaded) {
-                            chapterViewBinding.pdfViewChapterName.setText(args.getString("NAME_CHAPTER"));
-                        }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -128,13 +125,6 @@ public class ChapterViewFragment extends Fragment {
                     }
                 });
     }
-    private void showChapterDialog() {
-        ChapterListFragment dialogFragment = new ChapterListFragment();
-        Bundle args = new Bundle();
-        args.putString("ID_MANGA_CHAPTER", mangaId);
-        dialogFragment.setArguments(args);
 
-        // Sử dụng getChildFragmentManager() để quản lý Fragment trong Fragment
-        dialogFragment.show(requireActivity().getSupportFragmentManager(), "chapter_dialog");
-    }
+
 }
