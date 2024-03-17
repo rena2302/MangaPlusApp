@@ -71,12 +71,8 @@ public class MangaDetailActivity extends BaseActivity {
     private ChapterAdapter chapterAdapter ;
     String mangaId, nameManga, mangaPicture, mangaDescription;
     private Boolean mangaPremium;
-<<<<<<< HEAD
     ImageView creditCardImg,momoImg;
-
-=======
     private boolean checkBiometric;
->>>>>>> c631a1708efb4ee0798d5d18150022f79087b383
     public interface OnPurchasedMangaIdsLoadedListener {
         void onPurchasedMangaIdsLoaded(Boolean premium);
     }
@@ -94,9 +90,6 @@ public class MangaDetailActivity extends BaseActivity {
         mangaDescription = intent.getStringExtra("DESCRIPTION_MANGA");
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
-<<<<<<< HEAD
-
-=======
         onClickEvent();
         setFavorite();
         setTextItem();
@@ -135,7 +128,6 @@ public class MangaDetailActivity extends BaseActivity {
                         .show();
             }
         });
->>>>>>> c631a1708efb4ee0798d5d18150022f79087b383
         loadPurchasedMangaIds(new OnPurchasedMangaIdsLoadedListener() {
             @Override
             public void onPurchasedMangaIdsLoaded(Boolean premium) {
