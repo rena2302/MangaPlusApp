@@ -13,6 +13,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mangaplusapp.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.paymentsheet.PaymentSheet;
 import com.stripe.android.paymentsheet.PaymentSheetResult;
@@ -28,10 +33,16 @@ public class PaymentStripeActivity extends AppCompatActivity {
     PaymentSheet paymentSheet;
     String paymentIntentClientSecret;
     PaymentSheet.CustomerConfiguration configuration;
+    FirebaseAuth auth;
+    FirebaseUser currentUser;
+    private String mangaId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_stripe);
+        auth=FirebaseAuth.getInstance();
+        currentUser=auth.getCurrentUser();
+        mangaId = getIntent().getStringExtra("ID_MANGA");
         fetchApi();
         btn = findViewById(R.id.btnSubmitPaymentStripe);
         btn.setOnClickListener(v -> {
@@ -54,12 +65,30 @@ public class PaymentStripeActivity extends AppCompatActivity {
         }
         if(paymentSheetResult instanceof  PaymentSheetResult.Completed){
             fetchApi();
-            Toast.makeText(this,"Payment Success", Toast.LENGTH_SHORT).show();
+            isBought();
+        }
+    }
+    public void isBought(){
+        if(currentUser == null){
+            Toast.makeText(this,"You're not login", Toast.LENGTH_SHORT).show();
+            return;
+        }else {
+            HashMap<String,Object> hashMap = new HashMap<>();
+            hashMap.put("ID_MANGA", mangaId);
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+            reference.child(currentUser.getUid()).child("HistoryPayment").child(mangaId)
+                    .setValue(hashMap)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(PaymentStripeActivity.this,"Payment Success", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
     }
     private void fetchApi(){ // POST
         RequestQueue queue = Volley.newRequestQueue(this);
-            String url ="https://0f7a-14-241-234-102.ngrok-free.app";
+            String url ="https://badf-1-53-52-229.ngrok-free.app";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

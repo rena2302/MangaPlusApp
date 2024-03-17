@@ -48,6 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
+                        android:id="@+id/creditCardPay"
                         android:layout_centerInParent="true"
                         android:src="@drawable/credit_card_icon"
                         android:layout_width="100dp"
@@ -56,19 +57,14 @@
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
-                    <RelativeLayout
-                        android:id="@+id/MomoPay"
-                        android:elevation="20dp"
-                        android:background="@drawable/card_credit"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp">
-
                         <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:id="@+id/momoPay"
+                            android:elevation="20dp"
+                            android:background="@drawable/card_credit"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_centerInParent="true"
                             android:src="@drawable/momo" />
-                    </RelativeLayout>
                 </LinearLayout>
                 <androidx.cardview.widget.CardView
                     android:layout_below="@+id/Option_credit_card"

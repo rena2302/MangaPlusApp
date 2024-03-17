@@ -23,6 +23,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -70,6 +71,7 @@ public class MangaDetailActivity extends BaseActivity {
     private ChapterAdapter chapterAdapter ;
     String mangaId, nameManga, mangaPicture, mangaDescription;
     private Boolean mangaPremium;
+    ImageView creditCardImg,momoImg;
     private boolean checkBiometric;
     public interface OnPurchasedMangaIdsLoadedListener {
         void onPurchasedMangaIdsLoaded(Boolean premium);
@@ -366,6 +368,17 @@ public class MangaDetailActivity extends BaseActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+        creditCardImg = dialog.findViewById(R.id.creditCardPay);
+        momoImg = dialog.findViewById(R.id.momoPay);
+        creditCardImg.setOnClickListener(v->{
+            Intent intent = new Intent(this,PaymentStripeActivity.class);
+            intent.putExtra("ID_MANGA",mangaId);
+            startActivity(intent);
+        });
+        momoImg.setOnClickListener(v->{
+            Intent intent = new Intent(this,PaymentActivity.class);
+            startActivity(intent);
+        });
     }
     private void checkBioMetricSpperted()
     {
