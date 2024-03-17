@@ -89,7 +89,7 @@
                             android:drawableStart="@drawable/ic_personal"
                             android:drawablePadding="10dp"
                             android:layout_width="match_parent"
-                            android:hint="@string/forgotEnterEmail"
+                            android:hint="Enter New Email"
                             android:fontFamily="@font/inter"
                             android:inputType="textEmailAddress"
                             android:background="@drawable/input_grayblur"
@@ -98,14 +98,14 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </RelativeLayout>
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnSubmitInfoName"
+                    android:id="@+id/btnchangeNewEmail"
                     android:layout_below="@+id/InputUserNameEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#FD4D73"
                     android:background="@drawable/btn_accept"
                     android:fontFamily="@font/interextrabold"
-                    android:text="@string/sendOtp"
+                    android:text="Accept"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="20sp"
