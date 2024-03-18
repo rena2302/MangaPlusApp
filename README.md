@@ -36,5 +36,8 @@ API / RESFULAPI
         Bundle bundle = new Bundle();
         bundle.putString("email", email);
 put get extra when activity to acitivity
-  
+
+file apk : keytool -list -v -keystore "D:\android Project\key.jks" -alias key0 -storepass 123456789@asd -keypass 123456789@asd
+coppy sha-1 , add into firebase sha-1
+
   
