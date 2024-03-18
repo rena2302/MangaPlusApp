@@ -8,6 +8,10 @@
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/Login_background</item>
     </style>
+    <style name="Base.Theme.MainActivity" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#FFCDAA</item>
+    </style>
     <style name="Base.Theme.Loading" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">#E7DFDD</item>

@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navHot"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/ic_bottom_nav_hot"
         android:title="@string/HOT" />
     <item
         android:id="@+id/navSearch"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/ic_bottom_nav_search"
         android:title="@string/SEARCH" />
     <item
         android:id="@+id/navHome"
         android:icon="@drawable/ic_bottom_nav_home"
+        app:showAsAction="ifRoom"
         android:enabled="true"
         android:title="@string/HOME" />
-<!--    <item-->
-<!--        android:id="@+id/navCreator"-->
-<!--        android:icon="@drawable/ic_bottom_nav_creator"-->
-<!--        android:title="@string/CREATOR" />-->
+    <item
+        android:id="@+id/navCreator"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_bottom_nav_creator"
+        android:title="@string/CREATOR" />
     <item
         android:id="@+id/navProfile"
         android:icon="@drawable/ic_bottom_nav_user"
+        app:showAsAction="ifRoom"
         android:title="@string/PROFILE" />
 </menu>

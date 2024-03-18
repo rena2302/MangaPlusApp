@@ -1,6 +1,7 @@
 package com.example.mangaplusapp.Activity.User;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,12 +37,16 @@ public class PaymentStripeActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser currentUser;
     private String mangaId;
+    String userName;
+    int price;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_stripe);
         auth=FirebaseAuth.getInstance();
         currentUser=auth.getCurrentUser();
+        userName=currentUser.getDisplayName();
+        price=1000;
         mangaId = getIntent().getStringExtra("ID_MANGA");
         fetchApi();
         btn = findViewById(R.id.btnSubmitPaymentStripe);
@@ -64,7 +69,6 @@ public class PaymentStripeActivity extends AppCompatActivity {
             Toast.makeText(this,((PaymentSheetResult.Failed) paymentSheetResult).getError().getMessage(), Toast.LENGTH_SHORT).show();
         }
         if(paymentSheetResult instanceof  PaymentSheetResult.Completed){
-            fetchApi();
             isBought();
         }
     }
@@ -88,8 +92,8 @@ public class PaymentStripeActivity extends AppCompatActivity {
     }
     private void fetchApi(){ // POST
         RequestQueue queue = Volley.newRequestQueue(this);
-            String url ="https://badf-1-53-52-229.ngrok-free.app";
-
+            String url ="https://1a00-2405-4802-8127-cf0-95d-67fb-554b-62e9.ngrok-free.app/";
+    
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -117,6 +121,10 @@ public class PaymentStripeActivity extends AppCompatActivity {
             protected Map<String, String> getParams(){
                 Map<String, String> paramV = new HashMap<>();
                 paramV.put("authKey", "abc");
+                // Thêm tên người dùng vào yêu cầu POST
+                paramV.put("userName", userName);
+                Log.d("userName", userName);
+                paramV.put("amount", String.valueOf(price));
                 return paramV;
             }
         };

@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
                 recyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
                     @Override
                     public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                        boolean appBarExpanded = appBarLayout.getHeight() + verticalOffset == 0;
+                        boolean appBarExpanded = appBarLayout.getHeight() + verticalOffset ==0;
                         nestedScrollView.setNestedScrollingEnabled(appBarExpanded);
                     }
                 });
