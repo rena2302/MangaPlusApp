@@ -116,6 +116,7 @@
         <activity
             android:name=".Activity.User.MainActivity"
             android:exported="true"
+            android:theme="@style/Base.Theme.MainActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

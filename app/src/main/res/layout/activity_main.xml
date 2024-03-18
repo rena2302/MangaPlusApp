@@ -19,10 +19,19 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_linear_main"/>
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/main_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             app:menu="@menu/home_fragment_header_menu">
             <TextView
                 android:layout_width="wrap_content"
@@ -34,23 +43,29 @@
                 android:fontFamily="@font/square_peg"
                 android:layout_gravity="center"/>
         </androidx.appcompat.widget.Toolbar>
-        <FrameLayout
-            android:id="@+id/frameLayout"
-            android:layout_width="match_parent"
-            android:layout_below="@+id/main_header"
-            android:layout_above="@+id/bottom_nav_view"
-            android:layout_height="match_parent">
-        </FrameLayout>
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            style="@style/ShapeAppearanceOverlay.Material3.Chip"
-            android:id="@+id/bottom_nav_view"
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/Layer_bottom"
+            android:layout_width="wrap_content"
+            app:cardCornerRadius="30dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/pinkPastel_background"
-            app:itemTextColor="@color/black"
-            app:menu="@menu/bottom_nav_menu"
-            app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
-            android:layout_alignParentBottom="true">
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
+            android:elevation="5dp"
+            android:translationZ="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp">
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                style="@style/ShapeAppearanceOverlay.Material3.Chip"
+                android:id="@+id/bottom_nav_view"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:backgroundTint="@color/pinkPastel_background"
+                app:itemTextColor="#FF7A00"
+                app:itemIconTint="#FF7A00"
+                app:menu="@menu/bottom_nav_menu"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                app:itemActiveIndicatorStyle="@style/App.Custom.Indicator">
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
+        </androidx.cardview.widget.CardView>
     </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
