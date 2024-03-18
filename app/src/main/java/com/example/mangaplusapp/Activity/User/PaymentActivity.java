@@ -1,6 +1,5 @@
 package com.example.mangaplusapp.Activity.User;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +13,7 @@ import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,23 +28,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-
 import javax.crypto.Mac;
-import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.ByteString;
-import okio.HashingSink;
 import vn.momo.momo_partner.AppMoMoLib;
-import vn.momo.momo_partner.MoMoParameterNameMap;
 import vn.momo.momo_partner.MoMoParameterNamePayment;
 
 public class PaymentActivity extends BaseActivity {
@@ -55,11 +49,12 @@ public class PaymentActivity extends BaseActivity {
     TextView tvMessage;
     Button btnPayMoMo;
     FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser;
     private  Map<String, Object> eventValue = new HashMap<>();
     private String amount = "100000";
     private String fee = "0";
     int environment = 0;//developer default
-    private String merchantName = "RAU MÁ SẠCH";
+    private String merchantName = "MANGA PLUS";
     private String merchantCode = "MOMORPBF20220425";
     private String merchantNameLabel = "Nhà cung cấp";
     private String description = "Rau má";
@@ -73,6 +68,7 @@ public class PaymentActivity extends BaseActivity {
         tvEnvironment.setText("Development Environment");
         tvMerchantCode.setText("Merchant Code: "+merchantCode);
         tvMerchantName.setText("Merchant Name: "+merchantName);
+        currentUser = firebaseAuth.getCurrentUser();
         btnPayMoMo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +115,7 @@ public class PaymentActivity extends BaseActivity {
         JSONObject objExtraData = new JSONObject();
         try {
             objExtraData.put("site_code", "003");
-            objExtraData.put("site_name", "RAU MA SACH");
+            objExtraData.put("site_name", "MANGA PLUS");
         } catch (JSONException e) {
             e.printStackTrace();
         }
