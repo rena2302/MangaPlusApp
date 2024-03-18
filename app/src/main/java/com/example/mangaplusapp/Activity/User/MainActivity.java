@@ -64,6 +64,7 @@ public class MainActivity extends BaseActivity {
         loadFragment(new HomeFragment(),false, R.menu.home_fragment_header_menu);
         mAuth = FirebaseAuth.getInstance();
         currentUser=mAuth.getCurrentUser();
+        userID = currentUser.getProviderId();
         BackToProfile();
         focusFragment();
         loadMenuDrawer();
@@ -84,7 +85,6 @@ public class MainActivity extends BaseActivity {
         imgViewUser=  navigationView.getHeaderView(0).findViewById(R.id.menu_drawer_header_image_user);
         SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
         dbHelper = new UserDBHelper(this);
-        userID = currentUser.getProviderId();
         userName = currentUser.getDisplayName();
         Uri imgUser = currentUser.getPhotoUrl();
         Log.d("Main", "User id : "+userID);
@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
-                if(currentUser.equals("r7HLhPBfmoMFHouJ1K4SudZCm872")){
+                if(userID.equals("r7HLhPBfmoMFHouJ1K4SudZCm872")){
                     if (itemId == R.id.adminPlace) {
                         Intent intent = new Intent(MainActivity.this, DashBoardAdminActivity.class);
                         startActivity(intent);
