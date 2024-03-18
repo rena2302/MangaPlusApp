@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/home_fragment_bg"
+    android:paddingVertical="80dp"
+    android:paddingHorizontal="10dp"
     tools:context=".Fragment.HomeFragment">
     <!-- TODO: Update blank fragment layout -->
     <androidx.core.widget.NestedScrollView
