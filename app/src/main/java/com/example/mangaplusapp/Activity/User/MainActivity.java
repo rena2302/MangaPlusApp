@@ -170,9 +170,9 @@ public class MainActivity extends BaseActivity {
                     case "HomeFragment":
                         bottomNavigationView.getMenu().findItem(R.id.navHome).setChecked(true);
                         break;
-//                    case "HotFragment":
-//                        bottomNavigationView.getMenu().findItem(R.id.navHot).setChecked(true);
-//                        break;
+                    case "HotFragment":
+                         bottomNavigationView.getMenu().findItem(R.id.navHot).setChecked(true);
+                        break;
                     case "UserProfileFragment":
                         bottomNavigationView.getMenu().findItem(R.id.navProfile).setChecked(true);
                         break;
@@ -201,8 +201,8 @@ public class MainActivity extends BaseActivity {
                 //Load Fragment and Menu
                 if (itemId == R.id.navHome) {
                     loadFragment(new HomeFragment(), false, R.menu.home_fragment_header_menu);
-//                } else if (itemId == R.id.navHot) {
-//                    loadFragment(new HotFragment(), false, R.menu.hot_fragment_header_menu);
+                } else if (itemId == R.id.navHot) {
+                    loadFragment(new HotFragment(), false, R.menu.hot_fragment_header_menu);
                 } else if (itemId == R.id.navSearch) {
                     loadFragment(new SearchFragment(), false, R.menu.search_fragment_header_menu);
 //                } else if (itemId == R.id.navCreator) {

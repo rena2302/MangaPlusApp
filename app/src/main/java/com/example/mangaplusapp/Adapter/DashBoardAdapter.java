@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mangaplusapp.Activity.Admin.EditorActivity;
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.Activity.Base.ChapterPdfActivity;
 import com.example.mangaplusapp.Fragment.MangaListFragment;
 import com.example.mangaplusapp.R;
@@ -183,9 +184,9 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
     }
     private void showCategoryDialog(Categories category) {
          MangaListFragment dialogFragment = new MangaListFragment(category);
-        Bundle args = new Bundle();
-        args.putString("tag", "category_dialog");
-        dialogFragment.setArguments(args);
+         Bundle args = new Bundle();
+         args.putString("tag", "category_dialog");
+         dialogFragment.setArguments(args);
          dialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), "category_dialog");
     }
     private void deleteCategory(Categories category) {

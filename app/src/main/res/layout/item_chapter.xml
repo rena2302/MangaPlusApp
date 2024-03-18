@@ -2,6 +2,10 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="2dp"
+    android:layout_marginTop="2dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:contentPadding="5dp"
     app:cardUseCompatPadding="true"
@@ -15,11 +19,6 @@
             android:id="@+id/itemChapterText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Category Title"/>
-        <CheckBox
-            android:id="@+id/itemChapterCheck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_weight="1"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
