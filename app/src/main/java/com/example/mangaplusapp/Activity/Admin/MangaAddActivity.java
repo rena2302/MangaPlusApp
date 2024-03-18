@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -83,6 +84,12 @@ public class MangaAddActivity extends BaseActivity {
                 startActivity(new Intent(MangaAddActivity.this,DashBoardAdminActivity.class));
             }
         });
+        binding.addMangaPreCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                binding.addMangaPrice.setEnabled(isChecked);
+            }
+        });
     }
     private void categoryPickDialog() {
         //get string Array from categoryList
@@ -146,6 +153,7 @@ public class MangaAddActivity extends BaseActivity {
         hashMap.put("ID_CATEGORY_MANGA",""+selectedCategoryId);
         if (binding.addMangaPreCheck.isChecked()){
             hashMap.put("PREMIUM_MANGA",true);
+            hashMap.put("PRICE_MANGA", binding.addMangaPrice.getText());
         }
         else {
             hashMap.put("PREMIUM_MANGA",false);

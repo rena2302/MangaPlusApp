@@ -56,12 +56,14 @@ public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    ActivityUtils.startNewActivity(context, MangaDetailActivity.class,
-                            "ID_MANGA", imageSlider.getID_MANGA(),
-                            "NAME_MANGA", imageSlider.getNAME_MANGA(),
-                            "PICTURE_MANGA", imageSlider.getPICTURE_MANGA(),
-                            "DESCRIPTION_MANGA", imageSlider.getDESCRIPTION_MANGA());
+                ActivityUtils.startNewActivity(context, MangaDetailActivity.class,
+                        "ID_MANGA", imageSlider.getID_MANGA(),
+                        "NAME_MANGA", imageSlider.getNAME_MANGA(),
+                        "PICTURE_MANGA", imageSlider.getPICTURE_MANGA(),
+                        "DESCRIPTION_MANGA", imageSlider.getDESCRIPTION_MANGA(),
+                        "PREMIUM_MANGA",String.valueOf(imageSlider.isPREMIUM_MANGA()),
+                        "VIEW_MANGA", String.valueOf(imageSlider.getVIEW_MANGA()),
+                        "BOUGHT_MANGA",imageSlider.getBOUGHT_MANGA());
                 }
 
         });

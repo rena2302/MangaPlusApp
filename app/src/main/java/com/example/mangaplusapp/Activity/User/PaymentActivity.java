@@ -1,6 +1,5 @@
 package com.example.mangaplusapp.Activity.User;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,12 +9,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,23 +33,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-
 import javax.crypto.Mac;
-import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.ByteString;
-import okio.HashingSink;
 import vn.momo.momo_partner.AppMoMoLib;
-import vn.momo.momo_partner.MoMoParameterNameMap;
 import vn.momo.momo_partner.MoMoParameterNamePayment;
 
 public class PaymentActivity extends BaseActivity {
@@ -55,11 +54,12 @@ public class PaymentActivity extends BaseActivity {
     TextView tvMessage;
     Button btnPayMoMo;
     FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser;
     private  Map<String, Object> eventValue = new HashMap<>();
-    private String amount = "100000";
+    private String amount = "1000";
     private String fee = "0";
     int environment = 0;//developer default
-    private String merchantName = "RAU MÁ SẠCH";
+    private String merchantName = "MANGA PLUS";
     private String merchantCode = "MOMORPBF20220425";
     private String merchantNameLabel = "Nhà cung cấp";
     private String description = "Rau má";
@@ -69,10 +69,8 @@ public class PaymentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
         initView();
-        AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.DEVELOPMENT);
-//        tvEnvironment.setText("Development Environment");
-//        tvMerchantCode.setText("Merchant Code: "+merchantCode);
-//        tvMerchantName.setText("Merchant Name: "+merchantName);
+        AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.PRODUCTION);
+        currentUser = firebaseAuth.getCurrentUser();
         btnPayMoMo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,11 +80,6 @@ public class PaymentActivity extends BaseActivity {
     }
     /*------------------------------BEGIN-----------------------------------------*/
     private void initView(){
-//        tvEnvironment = (TextView) findViewById(R.id.tvEnvironment);
-//        tvMerchantCode = (TextView) findViewById(R.id.tvMerchantCode);
-//        tvMerchantName = (TextView) findViewById(R.id.tvMerchantName);
-//        edAmount = (EditText) findViewById(R.id.edAmount);
-//        tvMessage = (TextView) findViewById(R.id.tvMessage);
         btnPayMoMo = (Button) findViewById(R.id.btnPayMoMo);
         mangaId = getIntent().getStringExtra("ID_MANGA");
         firebaseAuth = FirebaseAuth.getInstance();
@@ -119,7 +112,7 @@ public class PaymentActivity extends BaseActivity {
         JSONObject objExtraData = new JSONObject();
         try {
             objExtraData.put("site_code", "003");
-            objExtraData.put("site_name", "RAU MA SACH");
+            objExtraData.put("site_name", "MANGA PLUS");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -290,12 +283,31 @@ public class PaymentActivity extends BaseActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
+                            updateCountBought();
                             Toast.makeText(PaymentActivity.this, "Buy manga successful", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
     }
+    private void updateCountBought(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
+        reference.child(mangaId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Lấy giá trị hiện tại của countView
+                Long currentBought = snapshot.child("BOUGHT_MANGA").getValue(Long.class);
+                // Tăng giá trị countView lên 1
+                Long newCountBought = currentBought != null ? currentBought + 1 : 1;
+                // Cập nhật giá trị mới của countView vào cơ sở dữ liệu
+                snapshot.getRef().child("BOUGHT_MANGA").setValue(newCountBought);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     @Override
     public void onBackPressed() {
         startNewActivityAndFinishCurrent(MainActivity.class);
