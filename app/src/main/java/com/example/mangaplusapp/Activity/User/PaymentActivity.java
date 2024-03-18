@@ -51,7 +51,7 @@ public class PaymentActivity extends BaseActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
     private  Map<String, Object> eventValue = new HashMap<>();
-    private String amount = "100000";
+    private String amount = "1000";
     private String fee = "0";
     int environment = 0;//developer default
     private String merchantName = "MANGA PLUS";
@@ -64,7 +64,7 @@ public class PaymentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
         initView();
-        AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.DEVELOPMENT);
+        AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.PRODUCTION);
         tvEnvironment.setText("Development Environment");
         tvMerchantCode.setText("Merchant Code: "+merchantCode);
         tvMerchantName.setText("Merchant Name: "+merchantName);
