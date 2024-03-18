@@ -8,34 +8,37 @@
     <RelativeLayout
         android:id="@+id/pdfViewLabel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_toolbar">
-        <TextView
-            android:id="@+id/pdfViewChapterName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="4dp"
-            android:text="Chapter N"
-            android:textSize="24sp" />
-        <TextView
-            android:id="@+id/pdfViewPage"
-            android:text="N/N"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:layout_below="@+id/pdfViewChapterName"
-            android:layout_centerHorizontal="true"/>
-        <ImageButton
+        android:layout_height="50dp"
+        android:background="@drawable/background_blur_toolbar"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/pdfViewBackBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/custom_button_circle"
+            android:backgroundTint="@color/black"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_back_black"
-            android:background="@color/transparent"/>
+            android:tint="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/pdfViewChapterSelect"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/custom_button_circle"
+            android:backgroundTint="#66D8D8D8"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_menu_navigation" />
     </RelativeLayout>
-    <com.github.barteksc.pdfviewer.PDFView
+    <FrameLayout
         android:id="@+id/pdfView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

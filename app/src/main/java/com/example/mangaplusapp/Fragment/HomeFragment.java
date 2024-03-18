@@ -113,7 +113,7 @@ public class HomeFragment extends Fragment {
     private void AddListCnT(){
         loadCategories();
     }
-    private void loadMangas(Categories category,List<String> mangaPurchased, OnDataLoadedListener listener) {
+    private void loadMangas(Categories category, OnDataLoadedListener listener) {
         //Get all data from firebase > Categories
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
         reference.orderByChild("ID_CATEGORY_MANGA").equalTo(category.getID_CATEGORY())
@@ -124,14 +124,7 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot ds : snapshot.getChildren()){
                     //get data
                     Mangas truyenTranh = ds.getValue(Mangas.class);
-                    if(mangaPurchased.contains(truyenTranh.getID_MANGA())){
-                        truyenTranh.setPREMIUM_MANGA(false);
-                        mangaForCategory.add(truyenTranh);
-                    }else{
-                        mangaForCategory.add(truyenTranh);
-                    }
-                    //add to List
-
+                    mangaForCategory.add(truyenTranh);
                 }
                 listener.onDataLoaded(mangaForCategory);
             }
@@ -153,46 +146,22 @@ public class HomeFragment extends Fragment {
                     //get data
                     Categories category = ds.getValue(Categories.class);
                     //add to List
-                    loadPurchasedMangaIds(new OnPurchasedMangaIdsLoadedListener() {
+                    loadMangas(category, new OnDataLoadedListener() {
                         @Override
-                        public void onPurchasedMangaIdsLoaded(List<String> purchasedMangaIds) {
-                            loadMangas(category,purchasedMangaIds, new OnDataLoadedListener() {
-                                @Override
-                                public void onDataLoaded(List<Mangas> truyenTranhList) {
-                                    category.setTruyenTranhList(truyenTranhList);
-                                    categoryList.add(category);
-                                    if (categoryList.size() == categoryCount) {
-                                        SetContentImageSlider(purchasedMangaIds);
-                                        SetContentRecycleView();
-                                        setRecyclerViewAnimation();
-                                    }
-                                }
-                            });
+                        public void onDataLoaded(List<Mangas> truyenTranhList) {
+                            category.setTruyenTranhList(truyenTranhList);
+                            categoryList.add(category);
+                            if (categoryList.size() == categoryCount) {
+                                SetContentImageSlider();
+                                SetContentRecycleView();
+                                setRecyclerViewAnimation();
+                            }
                         }
                     });
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
-    private void loadPurchasedMangaIds(OnPurchasedMangaIdsLoadedListener listener) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("HistoryPayment");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<String> purchasedMangaIds = new ArrayList<>();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    String mangaId = ds.getKey(); // Assuming mangaId is stored as a key
-                    purchasedMangaIds.add(mangaId);
-                }
-                listener.onPurchasedMangaIdsLoaded(purchasedMangaIds);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle error
             }
         });
     }
@@ -213,7 +182,7 @@ public class HomeFragment extends Fragment {
         recyclerViewCategory.setNestedScrollingEnabled(false);
 
     }
-    private void SetContentImageSlider(List<String> mangaPurchased){
+    private void SetContentImageSlider(){
         List<Mangas> truyenTranhList = new ArrayList<>();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
         reference.addValueEventListener(new ValueEventListener() {
@@ -221,12 +190,7 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()){
                     Mangas truyenTranh = ds.getValue(Mangas.class);
-                    if(mangaPurchased.contains(truyenTranh.getID_MANGA())){
-                        truyenTranh.setPREMIUM_MANGA(false);
-                        truyenTranhList.add(truyenTranh);
-                    }else {
-                        truyenTranhList.add(truyenTranh);
-                    }
+                    truyenTranhList.add(truyenTranh);
                 }
                 viewPager2 = view.findViewById(R.id.vp2_image_slider);
 

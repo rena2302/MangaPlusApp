@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.ChapterViewFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/pdfView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <LinearLayout
+        android:id="@+id/pdfViewProgress"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:background="@drawable/background_blur_detail">
+        <TextView
+            android:id="@+id/pdfViewPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="3dp"
+            android:text="n/n"
+            android:textSize="14sp"
+            android:fontFamily="@font/ubuntu_regular"/>
+        <ProgressBar
+            android:id="@+id/pdfViewProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:paddingHorizontal="20dp"
+            android:progressTint="@color/black"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+        <TextView
+            android:id="@+id/pdfViewChapterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="6dp"
+            android:text="Chapter"
+            android:textSize="16sp"
+            android:fontFamily="@font/ubuntu_regular"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -22,6 +22,9 @@ import com.example.mangaplusapp.Activity.Admin.EditorActivity;
 import com.example.mangaplusapp.Activity.Admin.MangaDetailAdminActivity;
 import com.example.mangaplusapp.Activity.User.MangaDetailActivity;
 import com.example.mangaplusapp.Activity.User.PaymentActivity;
+import com.example.mangaplusapp.Fragment.HotBoughtFragment;
+import com.example.mangaplusapp.Fragment.HotFragment;
+import com.example.mangaplusapp.Fragment.HotViewFragment;
 import com.example.mangaplusapp.R;
 
 import java.util.List;
@@ -36,13 +39,23 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.TruyenTranhViewHolder> implements Filterable {
     private Context context;
+    private View view;
     private List<Mangas> truyenTranhList, filterList;
     private FilterManga filterManga;
+    private HotViewFragment hotViewFragment;
+    private HotBoughtFragment hotBoughtFragment;
     public void SetData(List<Mangas> truyenTranhList){
         this.truyenTranhList = truyenTranhList;
         this.filterList = truyenTranhList;
     }
-    public TruyenTranhAdapter(){}
+    public TruyenTranhAdapter(Context context, HotViewFragment hotFragment){
+        this.hotViewFragment = hotFragment;
+        this.context = context;
+    }
+    public TruyenTranhAdapter(Context context, HotBoughtFragment hotBoughtFragment){
+        this.hotBoughtFragment = hotBoughtFragment;
+        this.context = context;
+    }
     public TruyenTranhAdapter(Context context){
         this.context = context;
     }
@@ -54,7 +67,11 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
     @NonNull
     @Override
     public TruyenTranhViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_truyen, parent, false);
+        if (hotViewFragment != null || hotBoughtFragment != null){
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hot, parent, false);
+        }else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_truyen, parent, false);
+        }
         return new TruyenTranhViewHolder(view);
     }
 
@@ -64,66 +81,94 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
         if (truyenTranh == null){
             return;
         }
-        Glide.with(holder.itemView.getContext())
-                .load(truyenTranh.getPICTURE_MANGA())
-                .into(holder.imageTruyen);
-        holder.txtTruyen.setText(truyenTranh.getNAME_MANGA());
-        /*Code for DashBoardMangaListFragment*/
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (context instanceof DashBoardAdminActivity){
-                    ActivityUtils.startNewActivity(context, MangaDetailAdminActivity.class,
+        if (hotViewFragment != null || hotBoughtFragment != null){
+            Glide.with(holder.itemView.getContext())
+                    .load(truyenTranh.getPICTURE_MANGA())
+                    .into(holder.imageHot);
+            holder.txtHot.setText(truyenTranh.getNAME_MANGA());
+            if(hotViewFragment != null)holder.txtView.setText("View: " + truyenTranh.getVIEW_MANGA());
+            else holder.txtView.setText("Bought: " + truyenTranh.getBOUGHT_MANGA());
+
+            holder.txtRank.setText(String.valueOf(position + 1));
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ActivityUtils.startNewActivity(context, MangaDetailActivity.class,
                             "ID_MANGA", truyenTranh.getID_MANGA(),
                             "NAME_MANGA", truyenTranh.getNAME_MANGA(),
                             "PICTURE_MANGA", truyenTranh.getPICTURE_MANGA(),
-                            "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA());
+                            "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA(),
+                            "PREMIUM_MANGA",String.valueOf(truyenTranh.isPREMIUM_MANGA()),
+                            "VIEW_MANGA", String.valueOf(truyenTranh.getVIEW_MANGA()),
+                            "BOUGHT_MANGA",truyenTranh.getBOUGHT_MANGA());
+                }
+            });
+        }else {
+            Glide.with(holder.itemView.getContext())
+                    .load(truyenTranh.getPICTURE_MANGA())
+                    .into(holder.imageTruyen);
+            holder.txtTruyen.setText(truyenTranh.getNAME_MANGA());
+            /*Code for DashBoardMangaListFragment*/
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (context instanceof DashBoardAdminActivity){
+                        ActivityUtils.startNewActivity(context, MangaDetailAdminActivity.class,
+                                "ID_MANGA", truyenTranh.getID_MANGA(),
+                                "NAME_MANGA", truyenTranh.getNAME_MANGA(),
+                                "PICTURE_MANGA", truyenTranh.getPICTURE_MANGA(),
+                                "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA());
                     }else {
                         ActivityUtils.startNewActivity(context, MangaDetailActivity.class,
                                 "ID_MANGA", truyenTranh.getID_MANGA(),
                                 "NAME_MANGA", truyenTranh.getNAME_MANGA(),
                                 "PICTURE_MANGA", truyenTranh.getPICTURE_MANGA(),
                                 "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA(),
-                                "PREMIUM_MANGA",String.valueOf(truyenTranh.isPREMIUM_MANGA()));
+                                "PREMIUM_MANGA",String.valueOf(truyenTranh.isPREMIUM_MANGA()),
+                                "VIEW_MANGA", String.valueOf(truyenTranh.getVIEW_MANGA()),
+                                "BOUGHT_MANGA",truyenTranh.getBOUGHT_MANGA());
                     }
                 }
-        });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (context instanceof DashBoardAdminActivity){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Manga DashBoard")
-                            .setPositiveButton("Edit", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    SharedPreferences sharedPreferences = context.getSharedPreferences("session_edit", Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString("session", "manga");
-                                    editor.apply();
-                                    ActivityUtils.startNewActivityAndFinishCurrent(context, EditorActivity.class,
-                                            "ID_MANGA", truyenTranh.getID_MANGA(),
-                                            "NAME_MANGA", truyenTranh.getNAME_MANGA(),
-                                            "PICTURE_MANGA", truyenTranh.getPICTURE_MANGA(),
-                                            "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA(),
-                                            "CATEGORY_MANGA", truyenTranh.getCATEGORY_MANGA(),
-                                            "ID_CATEGORY_MANGA", truyenTranh.getID_CATEGORY_MANGA(),
-                                            "PREMIUM_MANGA", ""+truyenTranh.isPREMIUM_MANGA());
-                                }
-                            })
-                            .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(context, "Deleting...", Toast.LENGTH_LONG).show();
-                                    deleteMangas(truyenTranh);
-                                }
-                            })
-                            .show();
+            });
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (context instanceof DashBoardAdminActivity){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Manga DashBoard")
+                                .setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        SharedPreferences sharedPreferences = context.getSharedPreferences("session_edit", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString("session", "manga");
+                                        editor.apply();
+                                        ActivityUtils.startNewActivityAndFinishCurrent(context, EditorActivity.class,
+                                                "ID_MANGA", truyenTranh.getID_MANGA(),
+                                                "NAME_MANGA", truyenTranh.getNAME_MANGA(),
+                                                "PICTURE_MANGA", truyenTranh.getPICTURE_MANGA(),
+                                                "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA(),
+                                                "CATEGORY_MANGA", truyenTranh.getCATEGORY_MANGA(),
+                                                "ID_CATEGORY_MANGA", truyenTranh.getID_CATEGORY_MANGA(),
+                                                "PREMIUM_MANGA", ""+truyenTranh.isPREMIUM_MANGA(),
+                                                "PRICE_MANGA",truyenTranh.getPRICE_MANGA());
+                                    }
+                                })
+                                .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Toast.makeText(context, "Deleting...", Toast.LENGTH_LONG).show();
+                                        deleteMangas(truyenTranh);
+                                    }
+                                })
+                                .show();
 
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
+
     }
     private void deleteMangas(Mangas truyenTranh) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
@@ -161,10 +206,16 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
     }
 
     public static class TruyenTranhViewHolder extends RecyclerView.ViewHolder{
-        ImageView imageTruyen;
-        TextView txtTruyen;
+        ImageView imageTruyen, imageHot;
+        TextView txtTruyen, txtHot, txtView, txtRank;
+
+
         public TruyenTranhViewHolder(@NonNull View itemView) {
             super(itemView);
+            imageHot = (ImageView) itemView.findViewById(R.id.itemHotImg);
+            txtHot = (TextView) itemView.findViewById(R.id.itemHotName);
+            txtView = (TextView) itemView.findViewById(R.id.itemHotView);
+            txtRank = (TextView) itemView.findViewById(R.id.itemHotRank);
             imageTruyen = (ImageView) itemView.findViewById(R.id.imgAnhTruyen);
             txtTruyen = (TextView) itemView.findViewById(R.id.txvTenTruyen);
         }

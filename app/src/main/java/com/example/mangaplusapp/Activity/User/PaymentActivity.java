@@ -9,13 +9,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -286,12 +291,31 @@ public class PaymentActivity extends BaseActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
+                            updateCountBought();
                             Toast.makeText(PaymentActivity.this, "Buy manga successful", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
     }
+    private void updateCountBought(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
+        reference.child(mangaId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Lấy giá trị hiện tại của countView
+                Long currentBought = snapshot.child("BOUGHT_MANGA").getValue(Long.class);
+                // Tăng giá trị countView lên 1
+                Long newCountBought = currentBought != null ? currentBought + 1 : 1;
+                // Cập nhật giá trị mới của countView vào cơ sở dữ liệu
+                snapshot.getRef().child("BOUGHT_MANGA").setValue(newCountBought);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     @Override
     public void onBackPressed() {
         startNewActivityAndFinishCurrent(MainActivity.class);

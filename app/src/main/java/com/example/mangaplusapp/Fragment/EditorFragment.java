@@ -18,6 +18,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.example.mangaplusapp.databinding.FragmentEditorCategoryBinding;
@@ -113,6 +114,12 @@ public class EditorFragment extends Fragment {
                     categoryPickDialog();
                 }
             });
+            binding.editMangaPreCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    binding.editMangaPrice.setEnabled(isChecked);
+                }
+            });
         }
         private String manga = "";
         private void validateData() {
@@ -134,10 +141,10 @@ public class EditorFragment extends Fragment {
                 binding.editMangaCategory.setText("");
                 binding.editMangaDescription.getText().clear();
                 binding.editMangaName.getText().clear();
+                binding.editMangaPrice.getText().clear();
             }
         }
         private void editMangaFireBase() {
-            long timestamp = System.currentTimeMillis();
             //setup info to add in firebase db
             HashMap<String,Object> hashMap = new HashMap<>();
             hashMap.put("NAME_MANGA", ""+manga);
@@ -147,6 +154,7 @@ public class EditorFragment extends Fragment {
             hashMap.put("ID_CATEGORY_MANGA",""+extras.getString("ID_CATEGORY_MANGA"));
             if (binding.editMangaPreCheck.isChecked()){
                 hashMap.put("PREMIUM_MANGA",true);
+                hashMap.put("PRICE_MANGA", binding.editMangaPrice.getText().toString());
             }
             else {
                 hashMap.put("PREMIUM_MANGA",false);
@@ -393,8 +401,10 @@ public class EditorFragment extends Fragment {
             mangaSession.binding.editMangaCategory.setText(extras.getString("CATEGORY_MANGA"));
             if(!Boolean.parseBoolean(extras.getString("PREMIUM_MANGA"))) {
                 mangaSession.binding.editMangaPreCheck.setChecked(false);
+                mangaSession.binding.editMangaPrice.setEnabled(false);
             }else {
                 mangaSession.binding.editMangaPreCheck.setChecked(true);
+                mangaSession.binding.editMangaPrice.setText(extras.getString("PRICE_MANGA"));
             }
         }
         /*Category Session*/
