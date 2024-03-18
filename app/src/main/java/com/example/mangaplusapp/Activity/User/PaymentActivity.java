@@ -70,9 +70,6 @@ public class PaymentActivity extends BaseActivity {
         setContentView(R.layout.activity_payment);
         initView();
         AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.PRODUCTION);
-        tvEnvironment.setText("Development Environment");
-        tvMerchantCode.setText("Merchant Code: "+merchantCode);
-        tvMerchantName.setText("Merchant Name: "+merchantName);
         currentUser = firebaseAuth.getCurrentUser();
         btnPayMoMo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,11 +80,6 @@ public class PaymentActivity extends BaseActivity {
     }
     /*------------------------------BEGIN-----------------------------------------*/
     private void initView(){
-        tvEnvironment = (TextView) findViewById(R.id.tvEnvironment);
-        tvMerchantCode = (TextView) findViewById(R.id.tvMerchantCode);
-        tvMerchantName = (TextView) findViewById(R.id.tvMerchantName);
-        edAmount = (EditText) findViewById(R.id.edAmount);
-        tvMessage = (TextView) findViewById(R.id.tvMessage);
         btnPayMoMo = (Button) findViewById(R.id.btnPayMoMo);
         mangaId = getIntent().getStringExtra("ID_MANGA");
         firebaseAuth = FirebaseAuth.getInstance();
