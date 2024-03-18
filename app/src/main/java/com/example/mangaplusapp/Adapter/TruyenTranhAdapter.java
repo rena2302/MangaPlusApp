@@ -100,7 +100,8 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                             "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA(),
                             "PREMIUM_MANGA",String.valueOf(truyenTranh.isPREMIUM_MANGA()),
                             "VIEW_MANGA", String.valueOf(truyenTranh.getVIEW_MANGA()),
-                            "BOUGHT_MANGA",truyenTranh.getBOUGHT_MANGA());
+                            "BOUGHT_MANGA",String.valueOf(truyenTranh.getBOUGHT_MANGA()),
+                            "PRICE_MANGA", truyenTranh.getPRICE_MANGA());
                 }
             });
         }else {
@@ -126,7 +127,8 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                                 "DESCRIPTION_MANGA", truyenTranh.getDESCRIPTION_MANGA(),
                                 "PREMIUM_MANGA",String.valueOf(truyenTranh.isPREMIUM_MANGA()),
                                 "VIEW_MANGA", String.valueOf(truyenTranh.getVIEW_MANGA()),
-                                "BOUGHT_MANGA",truyenTranh.getBOUGHT_MANGA());
+                                "BOUGHT_MANGA",String.valueOf(truyenTranh.getBOUGHT_MANGA()),
+                                "PRICE_MANGA", truyenTranh.getPRICE_MANGA());
                     }
                 }
             });
@@ -216,6 +218,7 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
             txtHot = (TextView) itemView.findViewById(R.id.itemHotName);
             txtView = (TextView) itemView.findViewById(R.id.itemHotView);
             txtRank = (TextView) itemView.findViewById(R.id.itemHotRank);
+
             imageTruyen = (ImageView) itemView.findViewById(R.id.imgAnhTruyen);
             txtTruyen = (TextView) itemView.findViewById(R.id.txvTenTruyen);
         }

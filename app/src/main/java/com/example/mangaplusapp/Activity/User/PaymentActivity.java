@@ -11,8 +11,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.R;
+import com.example.mangaplusapp.databinding.ActivityPaymentBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -55,21 +57,24 @@ public class PaymentActivity extends BaseActivity {
     Button btnPayMoMo;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
+    ActivityPaymentBinding activityPaymentBinding;
     private  Map<String, Object> eventValue = new HashMap<>();
-    private String amount = "1000";
+    private String amount = "";
     private String fee = "0";
     int environment = 0;//developer default
     private String merchantName = "MANGA PLUS";
     private String merchantCode = "MOMORPBF20220425";
     private String merchantNameLabel = "Nhà cung cấp";
-    private String description = "Rau má";
+    private String description = "";
     private String mangaId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment);
+        activityPaymentBinding = ActivityPaymentBinding.inflate(getLayoutInflater());
+        setContentView(activityPaymentBinding.getRoot());
         initView();
-        AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.PRODUCTION);
+        hookIntent();
+        AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.DEVELOPMENT);
         currentUser = firebaseAuth.getCurrentUser();
         btnPayMoMo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,15 +91,22 @@ public class PaymentActivity extends BaseActivity {
     }
     //example payment
     /*------------------------------END-----------------------------------------*/
+    private void hookIntent(){
+        Intent intent = getIntent();
+        description = intent.getStringExtra("NAME_MANGA");
+        amount = intent.getStringExtra("PRICE_MANGA");
 
+        Glide.with(this)
+                .load(intent.getStringExtra("PICTURE_MANGA"))
+                .into(activityPaymentBinding.mangaDetailImg);
+        activityPaymentBinding.NameProduct.setText(intent.getStringExtra("NAME_MANGA"));
+        activityPaymentBinding.TotalPrice.setText(intent.getStringExtra("PRICE_MANGA") + "$");
+
+    }
     /*------------------------------BEGIN-----------------------------------------*/
     private void requestPayment() {
         AppMoMoLib.getInstance().setAction(AppMoMoLib.ACTION.PAYMENT);
         AppMoMoLib.getInstance().setActionType(AppMoMoLib.ACTION_TYPE.GET_TOKEN);
-
-        if (edAmount.getText().toString() != null && edAmount.getText().toString().trim().length() != 0)
-            amount = edAmount.getText().toString().trim();
-
         //client Required
         eventValue.put(MoMoParameterNamePayment.MERCHANT_NAME, merchantName);
         eventValue.put(MoMoParameterNamePayment.MERCHANT_CODE, merchantCode);
@@ -132,7 +144,7 @@ public class PaymentActivity extends BaseActivity {
         if(requestCode == AppMoMoLib.getInstance().REQUEST_CODE_MOMO && resultCode == -1) {
             if(data != null) {
                 if(data.getIntExtra("status", -1) == 0) {
-                    tvMessage.setText("message: " + "Get token " + data.getStringExtra("message"));
+                    Toast.makeText(PaymentActivity.this, "message: " + "Get token " + data.getStringExtra("message"), Toast.LENGTH_SHORT).show();
                     String token = data.getStringExtra("data"); //Token response
                     Log.d("requestCode", "onActivityResult: " + token);
                     String phoneNumber = data.getStringExtra("phonenumber");
@@ -147,21 +159,21 @@ public class PaymentActivity extends BaseActivity {
 
                         // IF Momo topup success, continue to process your order
                     } else {
-                        tvMessage.setText("message: " + ("Khong thanh cong"));
+                        Toast.makeText(PaymentActivity.this,"message: " + ("Khong thanh cong"), Toast.LENGTH_SHORT).show();
                     }
                 } else if(data.getIntExtra("status", -1) == 1) {
                     String message = data.getStringExtra("message") != null?data.getStringExtra("message"):"Thất bại";
-                    tvMessage.setText("message: " + message);
+                    Toast.makeText(PaymentActivity.this,"message: " + message, Toast.LENGTH_SHORT).show();
                 } else if(data.getIntExtra("status", -1) == 2) {
-                    tvMessage.setText("message: " + ("Khong thanh cong"));
+                    Toast.makeText(PaymentActivity.this,"message: " + ("Khong thanh cong"), Toast.LENGTH_SHORT).show();
                 } else {
-                    tvMessage.setText("message: " + ("Khong thanh cong"));
+                    Toast.makeText(PaymentActivity.this,"message: " + ("Khong thanh cong"), Toast.LENGTH_SHORT).show();
                 }
             } else {
-                tvMessage.setText("message: " + ("Khong thanh cong"));
+                Toast.makeText(PaymentActivity.this,"message: " + ("Khong thanh cong"), Toast.LENGTH_SHORT).show();
             }
         } else {
-            tvMessage.setText("message: " + ("Khong thanh cong, vui long gui lai"));
+            Toast.makeText(PaymentActivity.this,"message: " + ("Khong thanh cong, vui long gui lai"), Toast.LENGTH_SHORT).show();
         }
     }
     /*------------------------------END-----------------------------------------*/

@@ -67,7 +67,7 @@ public class MangaDetailActivity extends BaseActivity {
     ActivityMangaDetailBinding binding;
     BiometricPrompt biometricPrompt;
     ImageView creditCardImg,momoImg;
-    String mangaId, nameManga, mangaPicture, mangaDescription, mangaView;
+    String mangaId, nameManga, mangaPicture, mangaDescription, mangaView, mangaPrice;
     int countChapter;
     private List<Chapters> chapterList = new ArrayList<>();
     // Khởi tạo adapter trước khi hiển thi
@@ -96,7 +96,7 @@ public class MangaDetailActivity extends BaseActivity {
         mangaPicture = intent.getStringExtra("PICTURE_MANGA");
         mangaDescription = intent.getStringExtra("DESCRIPTION_MANGA");
         mangaView = intent.getStringExtra("VIEW_MANGA");
-
+        mangaPrice = intent.getStringExtra("PRICE_MANGA");
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
 
@@ -424,14 +424,18 @@ public class MangaDetailActivity extends BaseActivity {
         creditCardImg = dialog.findViewById(R.id.creditCardPay);
         momoImg = dialog.findViewById(R.id.momoPay);
         creditCardImg.setOnClickListener(v->{
-            Intent intent = new Intent(this,PaymentStripeActivity.class);
-            intent.putExtra("ID_MANGA",mangaId);
-            startActivity(intent);
+            startNewActivity(PaymentStripeActivity.class,
+                    "ID_MANGA", mangaId,
+                    "PICTURE_MANGA", mangaPicture,
+                    "NAME_MANGA",nameManga,
+                    "PRICE_MANGA", mangaPrice);
         });
         momoImg.setOnClickListener(v->{
-            Intent intent = new Intent(this,PaymentActivity.class);
-            intent.putExtra("ID_MANGA",mangaId);
-            startActivity(intent);
+            startNewActivity(PaymentActivity.class,
+                    "ID_MANGA", mangaId,
+                    "PICTURE_MANGA", mangaPicture,
+                    "NAME_MANGA",nameManga,
+                    "PRICE_MANGA", mangaPrice);
         });
     }
     private void checkBioMetricSpperted()

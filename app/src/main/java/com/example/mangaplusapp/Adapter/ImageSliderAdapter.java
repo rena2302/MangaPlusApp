@@ -63,7 +63,8 @@ public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter
                         "DESCRIPTION_MANGA", imageSlider.getDESCRIPTION_MANGA(),
                         "PREMIUM_MANGA",String.valueOf(imageSlider.isPREMIUM_MANGA()),
                         "VIEW_MANGA", String.valueOf(imageSlider.getVIEW_MANGA()),
-                        "BOUGHT_MANGA",imageSlider.getBOUGHT_MANGA());
+                        "BOUGHT_MANGA",String.valueOf(imageSlider.getBOUGHT_MANGA()),
+                        "PRICE_MANGA", imageSlider.getPRICE_MANGA());
                 }
 
         });
