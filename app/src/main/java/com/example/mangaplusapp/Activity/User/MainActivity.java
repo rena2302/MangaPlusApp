@@ -62,9 +62,6 @@ public class MainActivity extends BaseActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot()); // set content phải trước focus nha
         loadFragment(new HomeFragment(),false, R.menu.home_fragment_header_menu);
-        mAuth = FirebaseAuth.getInstance();
-        currentUser=mAuth.getCurrentUser();
-        userID = currentUser.getProviderId();
         BackToProfile();
         focusFragment();
         loadMenuDrawer();
@@ -85,6 +82,9 @@ public class MainActivity extends BaseActivity {
         imgViewUser=  navigationView.getHeaderView(0).findViewById(R.id.menu_drawer_header_image_user);
         SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
         dbHelper = new UserDBHelper(this);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser=mAuth.getCurrentUser();
+        userID = currentUser.getProviderId();
         userName = currentUser.getDisplayName();
         Uri imgUser = currentUser.getPhotoUrl();
         Log.d("Main", "User id : "+userID);
@@ -105,45 +105,25 @@ public class MainActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
-                if(userID.equals("r7HLhPBfmoMFHouJ1K4SudZCm872")){
-                    if (itemId == R.id.adminPlace) {
-                        Intent intent = new Intent(MainActivity.this, DashBoardAdminActivity.class);
-                        startActivity(intent);
-                    } else if (itemId==R.id.menu_drawer_change_language) {
-                        loadFragmentBasic(new RegionFragment(),false);
-                    }else if(itemId == R.id.menu_drawer_favorite){
-                        MangaListFragment dialogFragment = new MangaListFragment();
-                        Bundle args = new Bundle();
-                        args.putString("tag", "Favorite");
-                        dialogFragment.setArguments(args);
-                        dialogFragment.show(getSupportFragmentManager(), "Favorite");
-                    } else if (itemId == R.id.menu_drawer_bought) {
-                        MangaListFragment dialogFragment = new MangaListFragment();
-                        Bundle args = new Bundle();
-                        args.putString("tag", "Bought");
-                        dialogFragment.setArguments(args);
-                        dialogFragment.show(getSupportFragmentManager(), "Bought");
-                    }
-                    return true;
+                if (itemId == R.id.adminPlace) {
+                    Intent intent = new Intent(MainActivity.this, DashBoardAdminActivity.class);
+                    startActivity(intent);
+                } else if (itemId==R.id.menu_drawer_change_language) {
+                    loadFragmentBasic(new RegionFragment(),false);
+                }else if(itemId == R.id.menu_drawer_favorite){
+                    MangaListFragment dialogFragment = new MangaListFragment();
+                    Bundle args = new Bundle();
+                    args.putString("tag", "Favorite");
+                    dialogFragment.setArguments(args);
+                    dialogFragment.show(getSupportFragmentManager(), "Favorite");
+                } else if (itemId == R.id.menu_drawer_bought) {
+                    MangaListFragment dialogFragment = new MangaListFragment();
+                    Bundle args = new Bundle();
+                    args.putString("tag", "Bought");
+                    dialogFragment.setArguments(args);
+                    dialogFragment.show(getSupportFragmentManager(), "Bought");
                 }
-                else{
-                    if (itemId==R.id.menu_drawer_change_language){
-                        loadFragmentBasic(new RegionFragment(),false);
-                    } else if(itemId == R.id.menu_drawer_favorite){
-                        MangaListFragment dialogFragment = new MangaListFragment();
-                        Bundle args = new Bundle();
-                        args.putString("tag", "Favorite");
-                        dialogFragment.setArguments(args);
-                        dialogFragment.show(getSupportFragmentManager(), "Favorite");
-                    } else if (itemId == R.id.menu_drawer_bought) {
-                        MangaListFragment dialogFragment = new MangaListFragment();
-                        Bundle args = new Bundle();
-                        args.putString("tag", "Bought");
-                        dialogFragment.setArguments(args);
-                        dialogFragment.show(getSupportFragmentManager(), "Bought");
-                    }
-                    return false;
-                }
+                return true;
             }
         });
     }
