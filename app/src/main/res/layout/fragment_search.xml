@@ -24,6 +24,7 @@
             android:layout_margin="8dp" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchFmRcv"
+            android:paddingBottom="70dp"
             android:layout_margin="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
