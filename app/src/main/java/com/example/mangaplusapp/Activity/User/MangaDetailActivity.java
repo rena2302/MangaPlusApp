@@ -402,10 +402,6 @@ public class MangaDetailActivity extends BaseActivity {
     }
     @Override
     public void onBackPressed() {
-        // Xử lý sự kiện khi nút back được nhấn trong activity này
-        // Ví dụ: Trở về màn hình trước đó hoặc thoát ứng dụng
-        startActivity(new Intent(MangaDetailActivity.this, MainActivity.class));
-        finish();
         super.onBackPressed();
     }
     private void showdialog()

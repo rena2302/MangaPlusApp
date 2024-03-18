@@ -72,10 +72,11 @@ public class PaymentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         activityPaymentBinding = ActivityPaymentBinding.inflate(getLayoutInflater());
         setContentView(activityPaymentBinding.getRoot());
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
         initView();
         hookIntent();
         AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.DEVELOPMENT);
-        currentUser = firebaseAuth.getCurrentUser();
         btnPayMoMo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +102,14 @@ public class PaymentActivity extends BaseActivity {
                 .into(activityPaymentBinding.mangaDetailImg);
         activityPaymentBinding.NameProduct.setText(intent.getStringExtra("NAME_MANGA"));
         activityPaymentBinding.TotalPrice.setText(intent.getStringExtra("PRICE_MANGA") + "$");
+        activityPaymentBinding.UserName.setText(currentUser.getDisplayName());
 
+        activityPaymentBinding.backToDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     /*------------------------------BEGIN-----------------------------------------*/
     private void requestPayment() {
@@ -322,7 +330,6 @@ public class PaymentActivity extends BaseActivity {
     }
     @Override
     public void onBackPressed() {
-        startNewActivityAndFinishCurrent(MainActivity.class);
         super.onBackPressed();
     }
 }

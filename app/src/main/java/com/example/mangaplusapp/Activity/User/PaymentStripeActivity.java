@@ -1,7 +1,9 @@
 package com.example.mangaplusapp.Activity.User;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.R;
+import com.example.mangaplusapp.databinding.ActivityPaymentBinding;
+import com.example.mangaplusapp.databinding.ActivityPaymentStripeBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,6 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PaymentStripeActivity extends AppCompatActivity {
+    ActivityPaymentStripeBinding activityPaymentBinding;
     AppCompatButton btn;
     PaymentSheet paymentSheet;
     String paymentIntentClientSecret;
@@ -42,7 +48,9 @@ public class PaymentStripeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment_stripe);
+
+        activityPaymentBinding = ActivityPaymentStripeBinding.inflate(getLayoutInflater());
+        setContentView(activityPaymentBinding.getRoot());
         auth=FirebaseAuth.getInstance();
         currentUser=auth.getCurrentUser();
         userName=currentUser.getDisplayName();
@@ -60,6 +68,25 @@ public class PaymentStripeActivity extends AppCompatActivity {
             }
         });
         paymentSheet=new PaymentSheet(this,this::onPaymentSheetResult);
+
+        hookIntent();
+
+    }
+    private void hookIntent(){
+        Intent intent = getIntent();
+        Glide.with(this)
+                .load(intent.getStringExtra("PICTURE_MANGA"))
+                .into(activityPaymentBinding.mangaDetailImg);
+        activityPaymentBinding.NameProduct.setText(intent.getStringExtra("NAME_MANGA"));
+        activityPaymentBinding.TotalPrice.setText(intent.getStringExtra("PRICE_MANGA") + "$");
+        activityPaymentBinding.UserName.setText(userName);
+
+        activityPaymentBinding.backToDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     private void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult){
         if(paymentSheetResult instanceof  PaymentSheetResult.Canceled){
