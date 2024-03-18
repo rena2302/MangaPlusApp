@@ -38,7 +38,7 @@
             android:layout_marginStart="20dp"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="#31000000"></ImageView>
+            android:background="#31000000"/>
         <LinearLayout
             android:id="@+id/momoPay"
             android:paddingTop="20dp"

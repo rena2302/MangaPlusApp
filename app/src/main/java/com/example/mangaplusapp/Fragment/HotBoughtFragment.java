@@ -52,8 +52,9 @@ public class HotBoughtFragment extends Fragment {
     private void loadTopBought(HotViewFragment.OnDataLoadedListener listener){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
         reference.orderByChild("BOUGHT_MANGA")
+                .limitToLast(10)
                 .addValueEventListener(new ValueEventListener() {
-                    List<Mangas> mangasList = new ArrayList<>(10);
+                    List<Mangas> mangasList = new ArrayList<>();
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){

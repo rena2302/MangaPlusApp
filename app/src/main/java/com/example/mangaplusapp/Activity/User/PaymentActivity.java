@@ -1,15 +1,23 @@
 package com.example.mangaplusapp.Activity.User;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
@@ -164,7 +172,7 @@ public class PaymentActivity extends BaseActivity {
                         // TODO: send phoneNumber & token to your server side to process payment with MoMo server
 
                         isBought();// demo payment successful
-
+                        dialogSuccess();
                         // IF Momo topup success, continue to process your order
                     } else {
                         Toast.makeText(PaymentActivity.this,"message: " + ("Khong thanh cong"), Toast.LENGTH_SHORT).show();
@@ -325,6 +333,22 @@ public class PaymentActivity extends BaseActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+    private void dialogSuccess(){
+        final Dialog dialog=new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_success_payment);
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().setGravity(Gravity.CENTER);
+
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                onBackPressed();
             }
         });
     }
