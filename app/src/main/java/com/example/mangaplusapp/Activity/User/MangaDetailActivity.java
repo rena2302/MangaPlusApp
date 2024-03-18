@@ -4,8 +4,6 @@ import static androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRON
 import static androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK;
 import static androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL;
 
-import static java.security.AccessController.getContext;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,9 +13,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -28,7 +24,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
@@ -54,55 +49,44 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.Executor;
 
 
 public class MangaDetailActivity extends BaseActivity {
-
+    private static SharedPreferences sharedPreferences;
     Intent intent;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
     ActivityMangaDetailBinding binding;
     BiometricPrompt biometricPrompt;
-    String mangaId, nameManga, mangaPicture, mangaDescription, mangaView;
-    int countChapter;
     private List<Chapters> chapterList = new ArrayList<>();
     // Khởi tạo adapter trước khi hiển thi
     private ChapterAdapter chapterAdapter ;
-    private static SharedPreferences sharedPreferences;
+    String mangaId, nameManga, mangaPicture, mangaDescription;
     private Boolean mangaPremium;
+    ImageView creditCardImg,momoImg;
     private boolean checkBiometric;
     public interface OnPurchasedMangaIdsLoadedListener {
         void onPurchasedMangaIdsLoaded(Boolean premium);
-    }
-    public interface OnLoadComplete{
-        void onLoadComplete(int count);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMangaDetailBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
         sharedPreferences = this.getSharedPreferences("user_session", Context.MODE_PRIVATE);
-
         intent = getIntent();
         mangaPremium = Boolean.parseBoolean(intent.getStringExtra("PREMIUM_MANGA"));
+        setContentView(binding.getRoot());
         mangaId = intent.getStringExtra("ID_MANGA");
         nameManga = intent.getStringExtra("NAME_MANGA");
         mangaPicture = intent.getStringExtra("PICTURE_MANGA");
         mangaDescription = intent.getStringExtra("DESCRIPTION_MANGA");
-        mangaView = intent.getStringExtra("VIEW_MANGA");
-
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
-
         onClickEvent();
         setFavorite();
+        setTextItem();
         checkBioMetricSpperted();
-
         Executor executor= ContextCompat.getMainExecutor(this);
         biometricPrompt=new BiometricPrompt(MangaDetailActivity.this,executor, new BiometricPrompt.AuthenticationCallback(){
             @Override
@@ -120,11 +104,11 @@ public class MangaDetailActivity extends BaseActivity {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(),
                         "Authentication succeeded!", Toast.LENGTH_SHORT).show();
-                         SharedPreferences.Editor editor=sharedPreferences.edit();
-                         editor.putBoolean("keyBiometric",true);
-                         editor.apply();
-                         editor.commit();
-                         showdialog();
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putBoolean("keyBiometric",true);
+                editor.apply();
+                editor.commit();
+                showdialog();
             }
 
             @Override
@@ -143,13 +127,6 @@ public class MangaDetailActivity extends BaseActivity {
 
             }
         });
-        loadCountChapter(new OnLoadComplete() {
-            @Override
-            public void onLoadComplete(int count) {
-                countChapter = count;
-                setTextItem();
-            }
-        });
     }
     private void onClickEvent(){
         binding.backDetailProductBtn.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +135,7 @@ public class MangaDetailActivity extends BaseActivity {
                 onBackPressed();
             }
         });
-        binding.ContentShowmore.setOnClickListener(new View.OnClickListener() {
+        binding.mangaDetailDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MangaDetailActivity.this);
@@ -182,9 +159,9 @@ public class MangaDetailActivity extends BaseActivity {
     }
     private BiometricPrompt.PromptInfo.Builder dialogMetric()
     {
-            return new BiometricPrompt.PromptInfo.Builder()
-                    .setTitle("Manga plus needs to confirm")
-                    .setSubtitle("Fingerprint verification");
+        return new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Manga plus needs to confirm")
+                .setSubtitle("Fingerprint verification");
     }
     private void onClickPayment(Boolean isPremium){
         binding.BuyBook.setOnClickListener(new View.OnClickListener() {
@@ -211,7 +188,6 @@ public class MangaDetailActivity extends BaseActivity {
                                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                         Chapters chapter = dataSnapshot.getValue(Chapters.class);
                                         if (chapter.getNAME_CHAPTER().equals("Chapter 1")) {
-                                            updateCountView(chapter);
                                             startNewActivityAndFinishCurrent(ChapterPdfActivity.class,
                                                     "ID_CHAPTER", chapter.getID_CHAPTER(),
                                                     "NAME_CHAPTER", chapter.getNAME_CHAPTER(),
@@ -229,25 +205,6 @@ public class MangaDetailActivity extends BaseActivity {
                                 }
                             });
                 }
-            }
-        });
-    }
-    private void updateCountView(Chapters chapter){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
-        reference.child(chapter.getID_MANGA_CHAPTER()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // Lấy giá trị hiện tại của countView
-                Long currentCountView = snapshot.child("VIEW_MANGA").getValue(Long.class);
-                // Tăng giá trị countView lên 1
-                Long newCountView = currentCountView != null ? currentCountView + 1 : 1;
-                // Cập nhật giá trị mới của countView vào cơ sở dữ liệu
-                snapshot.getRef().child("VIEW_MANGA").setValue(newCountView);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Xử lý khi cancel
             }
         });
     }
@@ -269,7 +226,6 @@ public class MangaDetailActivity extends BaseActivity {
                         }
                     });
         }
-
     }
     protected void removeFromFavorite(String mangaIdToRemove){
         if(firebaseAuth.getCurrentUser() == null){
@@ -281,19 +237,19 @@ public class MangaDetailActivity extends BaseActivity {
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                dataSnapshot.getRef().removeValue()
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                Toast.makeText(MangaDetailActivity.this, "Remove from favorite successful", Toast.LENGTH_SHORT).show();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(MangaDetailActivity.this, "Failed to remove from favorite", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
+                            dataSnapshot.getRef().removeValue()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(MangaDetailActivity.this, "Remove from favorite successful", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(MangaDetailActivity.this, "Failed to remove from favorite", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                         }
 
                         @Override
@@ -370,34 +326,15 @@ public class MangaDetailActivity extends BaseActivity {
             }
         });
     }
-    private void loadCountChapter(OnLoadComplete listener){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chapters");
-        reference.orderByChild("ID_MANGA_CHAPTER").equalTo(mangaId)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        int count = 0;
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()) count++;
-
-                        listener.onLoadComplete(count);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-    }
     private void setTextItem() {
-        binding.mangaDetailDescription.setText(mangaDescription);
+        binding.mangaDetailDescription.setText(intent.getStringExtra("DESCRIPTION_MANGA"));
         binding.mangaDetailTitle.setText(intent.getStringExtra("NAME_MANGA"));
         if (!isDestroyed()) {
             Glide.with(binding.mangaDetailImg)
                     .load(intent.getStringExtra("PICTURE_MANGA"))
                     .into(binding.mangaDetailImg);
         }
-        binding.mangaDetailReadNumber.setText(mangaView);
-        binding.mangaDetailChapterNumber.setText(String.valueOf(countChapter));
+
     }
     @Override
     public void onBackPressed() {
@@ -421,6 +358,18 @@ public class MangaDetailActivity extends BaseActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+        creditCardImg = dialog.findViewById(R.id.creditCardPay);
+        momoImg = dialog.findViewById(R.id.momoPay);
+        creditCardImg.setOnClickListener(v->{
+            Intent intent = new Intent(this,PaymentStripeActivity.class);
+            intent.putExtra("ID_MANGA",mangaId);
+            startActivity(intent);
+        });
+        momoImg.setOnClickListener(v->{
+            Intent intent = new Intent(this,PaymentActivity.class);
+            intent.putExtra("ID_MANGA",mangaId);
+            startActivity(intent);
+        });
     }
     private void checkBioMetricSpperted()
     {
