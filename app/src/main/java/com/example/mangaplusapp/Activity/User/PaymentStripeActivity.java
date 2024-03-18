@@ -1,6 +1,7 @@
 package com.example.mangaplusapp.Activity.User;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,12 +37,16 @@ public class PaymentStripeActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser currentUser;
     private String mangaId;
+    String userName;
+    int price;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_stripe);
         auth=FirebaseAuth.getInstance();
         currentUser=auth.getCurrentUser();
+        userName=currentUser.getDisplayName();
+        price=1000;
         mangaId = getIntent().getStringExtra("ID_MANGA");
         fetchApi();
         btn = findViewById(R.id.btnSubmitPaymentStripe);
@@ -117,6 +122,10 @@ public class PaymentStripeActivity extends AppCompatActivity {
             protected Map<String, String> getParams(){
                 Map<String, String> paramV = new HashMap<>();
                 paramV.put("authKey", "abc");
+                // Thêm tên người dùng vào yêu cầu POST
+                paramV.put("userName", userName);
+                Log.d("userName", userName);
+                paramV.put("amount", String.valueOf(price));
                 return paramV;
             }
         };
