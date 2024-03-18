@@ -367,6 +367,7 @@ public class MangaDetailActivity extends BaseActivity {
         });
         momoImg.setOnClickListener(v->{
             Intent intent = new Intent(this,PaymentActivity.class);
+            intent.putExtra("ID_MANGA",mangaId);
             startActivity(intent);
         });
     }
