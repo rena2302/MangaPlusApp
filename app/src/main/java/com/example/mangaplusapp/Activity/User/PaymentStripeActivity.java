@@ -69,7 +69,6 @@ public class PaymentStripeActivity extends AppCompatActivity {
             Toast.makeText(this,((PaymentSheetResult.Failed) paymentSheetResult).getError().getMessage(), Toast.LENGTH_SHORT).show();
         }
         if(paymentSheetResult instanceof  PaymentSheetResult.Completed){
-            fetchApi();
             isBought();
         }
     }
