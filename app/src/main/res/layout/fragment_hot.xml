@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="10dp"
     android:paddingVertical="85dp"
+    android:background="@drawable/background_hot"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Fragment.HotFragment">
