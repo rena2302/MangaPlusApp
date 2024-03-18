@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -34,23 +32,13 @@ import com.example.mangaplusapp.Fragment.RegionFragment;
 import com.example.mangaplusapp.Fragment.SearchFragment;
 import com.example.mangaplusapp.Fragment.UserProfileFragment;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
-import com.example.mangaplusapp.Helper.LoadHelper.LoadFragment;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityMainBinding;
-import com.example.mangaplusapp.object.Mangas;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends BaseActivity {
     NavigationView navigationView;
@@ -74,6 +62,8 @@ public class MainActivity extends BaseActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot()); // set content phải trước focus nha
         loadFragment(new HomeFragment(),false, R.menu.home_fragment_header_menu);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser=mAuth.getCurrentUser();
         BackToProfile();
         focusFragment();
         loadMenuDrawer();
@@ -94,8 +84,6 @@ public class MainActivity extends BaseActivity {
         imgViewUser=  navigationView.getHeaderView(0).findViewById(R.id.menu_drawer_header_image_user);
         SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
         dbHelper = new UserDBHelper(this);
-        mAuth = FirebaseAuth.getInstance();
-        currentUser=mAuth.getCurrentUser();
         userID = currentUser.getProviderId();
         userName = currentUser.getDisplayName();
         Uri imgUser = currentUser.getPhotoUrl();
@@ -117,28 +105,45 @@ public class MainActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
-                if (itemId == R.id.adminPlace) {
-                    Intent intent = new Intent(MainActivity.this, DashBoardAdminActivity.class);
-                    startActivity(intent);
-                } else if (itemId==R.id.menu_drawer_change_language) {
-                    loadFragmentBasic(new RegionFragment(),false);
-                } else if (itemId==R.id.menu_drawer_payment) {
-                    Intent intent = new Intent(MainActivity.this, PaymentStripeActivity.class);
-                    startActivity(intent);
-                }else if(itemId == R.id.menu_drawer_favorite){
-                    MangaListFragment dialogFragment = new MangaListFragment();
-                    Bundle args = new Bundle();
-                    args.putString("tag", "Favorite");
-                    dialogFragment.setArguments(args);
-                    dialogFragment.show(getSupportFragmentManager(), "Favorite");
-                } else if (itemId == R.id.menu_drawer_bought) {
-                    MangaListFragment dialogFragment = new MangaListFragment();
-                    Bundle args = new Bundle();
-                    args.putString("tag", "Bought");
-                    dialogFragment.setArguments(args);
-                    dialogFragment.show(getSupportFragmentManager(), "Bought");
+                if(currentUser.equals("r7HLhPBfmoMFHouJ1K4SudZCm872")){
+                    if (itemId == R.id.adminPlace) {
+                        Intent intent = new Intent(MainActivity.this, DashBoardAdminActivity.class);
+                        startActivity(intent);
+                    } else if (itemId==R.id.menu_drawer_change_language) {
+                        loadFragmentBasic(new RegionFragment(),false);
+                    }else if(itemId == R.id.menu_drawer_favorite){
+                        MangaListFragment dialogFragment = new MangaListFragment();
+                        Bundle args = new Bundle();
+                        args.putString("tag", "Favorite");
+                        dialogFragment.setArguments(args);
+                        dialogFragment.show(getSupportFragmentManager(), "Favorite");
+                    } else if (itemId == R.id.menu_drawer_bought) {
+                        MangaListFragment dialogFragment = new MangaListFragment();
+                        Bundle args = new Bundle();
+                        args.putString("tag", "Bought");
+                        dialogFragment.setArguments(args);
+                        dialogFragment.show(getSupportFragmentManager(), "Bought");
+                    }
+                    return true;
                 }
-                return true;
+                else{
+                    if (itemId==R.id.menu_drawer_change_language){
+                        loadFragmentBasic(new RegionFragment(),false);
+                    } else if(itemId == R.id.menu_drawer_favorite){
+                        MangaListFragment dialogFragment = new MangaListFragment();
+                        Bundle args = new Bundle();
+                        args.putString("tag", "Favorite");
+                        dialogFragment.setArguments(args);
+                        dialogFragment.show(getSupportFragmentManager(), "Favorite");
+                    } else if (itemId == R.id.menu_drawer_bought) {
+                        MangaListFragment dialogFragment = new MangaListFragment();
+                        Bundle args = new Bundle();
+                        args.putString("tag", "Bought");
+                        dialogFragment.setArguments(args);
+                        dialogFragment.show(getSupportFragmentManager(), "Bought");
+                    }
+                    return false;
+                }
             }
         });
     }

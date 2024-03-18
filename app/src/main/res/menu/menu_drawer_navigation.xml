@@ -30,10 +30,6 @@
                     android:id="@+id/menu_drawer_change_language"
                     android:icon="@mipmap/ic_search"
                     android:title="@string/changeLanguage"/>
-                <item
-                    android:id="@+id/menu_drawer_change_theme"
-                    android:icon="@mipmap/ic_search"
-                    android:title="@string/changeTheme"/>
             </group>
         </menu>
     </item>
