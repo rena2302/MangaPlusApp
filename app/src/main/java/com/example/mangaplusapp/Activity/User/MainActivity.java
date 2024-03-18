@@ -105,6 +105,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
+                Log.d("IDUser", currentUser.getUid());
                 if(userID.equals("r7HLhPBfmoMFHouJ1K4SudZCm872")){
                     if (itemId == R.id.adminPlace) {
                         Intent intent = new Intent(MainActivity.this, DashBoardAdminActivity.class);

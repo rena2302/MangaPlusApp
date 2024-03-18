@@ -5,51 +5,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/home_fragment_bg"
-    android:paddingVertical="80dp"
-    android:paddingHorizontal="10dp"
     tools:context=".Fragment.HomeFragment">
     <!-- TODO: Update blank fragment layout -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/home_fm_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_category"
+        android:layout_height="match_parent">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"/>
-    </androidx.core.widget.NestedScrollView>
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/imgslider_container"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:background="@color/transparent"
-        android:fitsSystemWindows="true"
-        android:theme="@style/Theme.MangaPlusApp">
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/imgslider_container_collapsing"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:titleEnabled="false"
-            app:contentScrim="@color/transparent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-           <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/vp2_image_slider"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_marginTop="120dp"
+                android:id="@+id/imgslider_container"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:fitsSystemWindows="true"
+                android:theme="@style/Theme.MangaPlusApp">
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/imgslider_container_collapsing"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    app:titleEnabled="false"
+                    app:contentScrim="@color/transparent"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vp2_image_slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="20dp"
+                        android:paddingStart="80dp"
+                        android:paddingEnd="80dp"
+                        app:layout_collapseMode="parallax"/>
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@+id/imgslider_container"
+                android:paddingBottom="100dp"
+                android:id="@+id/rcv_category"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:paddingStart="80dp"
-                android:paddingEnd="80dp"
-                app:layout_collapseMode="parallax"/>
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/imgslider_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_collapseMode="pin"/>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+                android:scrollbars="vertical"/>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
