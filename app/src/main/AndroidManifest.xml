@@ -28,6 +28,7 @@
         tools:replace="android:theme"
         tools:targetApi="34">
         <activity
+            android:theme="@style/Base.Theme.PaymentCredit"
             android:name=".Activity.User.PaymentStripeActivity"
             android:exported="false" />
         <activity
@@ -48,6 +49,7 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:theme="@style/Base.Theme.PaymentCredit"
             android:name=".Activity.User.PaymentActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">

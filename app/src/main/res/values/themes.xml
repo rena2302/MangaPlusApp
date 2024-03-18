@@ -37,4 +37,8 @@
     <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">#668692F7</item>
     </style>
+    <style name="Base.Theme.PaymentCredit" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#E3EBF8</item>
+    </style>
 </resources>

@@ -67,7 +67,6 @@ public class MainActivity extends BaseActivity {
     String userID;
     FirebaseAuth mAuth ;
     FirebaseUser currentUser ;
-    List<Mangas> mangasList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
