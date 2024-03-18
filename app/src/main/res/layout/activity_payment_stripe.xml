@@ -91,6 +91,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentTop="true"
                             android:layout_marginTop="14dp"
+                            android:singleLine="true"
                             android:textStyle="bold"
                             android:fontFamily="@font/patrickhandsc"
                             android:text="one piece"

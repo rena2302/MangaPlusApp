@@ -1,9 +1,16 @@
 package com.example.mangaplusapp.Activity.User;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityPaymentBinding;
 import com.example.mangaplusapp.databinding.ActivityPaymentStripeBinding;
@@ -34,7 +42,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PaymentStripeActivity extends AppCompatActivity {
+public class PaymentStripeActivity extends BaseActivity {
     ActivityPaymentStripeBinding activityPaymentBinding;
     AppCompatButton btn;
     PaymentSheet paymentSheet;
@@ -88,6 +96,22 @@ public class PaymentStripeActivity extends AppCompatActivity {
             }
         });
     }
+    private void dialogSuccess(){
+        final Dialog dialog=new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_success_payment);
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().setGravity(Gravity.CENTER);
+
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                onBackPressed();
+            }
+        });
+    }
     private void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult){
         if(paymentSheetResult instanceof  PaymentSheetResult.Canceled){
             Toast.makeText(this,"Canceled", Toast.LENGTH_SHORT).show();
@@ -97,6 +121,7 @@ public class PaymentStripeActivity extends AppCompatActivity {
         }
         if(paymentSheetResult instanceof  PaymentSheetResult.Completed){
             isBought();
+            dialogSuccess();
         }
     }
     public void isBought(){
@@ -156,5 +181,9 @@ public class PaymentStripeActivity extends AppCompatActivity {
             }
         };
         queue.add(stringRequest);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

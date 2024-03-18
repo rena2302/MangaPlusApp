@@ -67,7 +67,7 @@ public class PaymentActivity extends BaseActivity {
     FirebaseUser currentUser;
     ActivityPaymentBinding activityPaymentBinding;
     private  Map<String, Object> eventValue = new HashMap<>();
-    private String amount = "";
+    private String amount = "10000";
     private String fee = "0";
     int environment = 0;//developer default
     private String merchantName = "MANGA PLUS";
