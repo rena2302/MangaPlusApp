@@ -23,11 +23,10 @@
             android:layout_height="50dp"
             android:layout_margin="8dp" />
         <androidx.recyclerview.widget.RecyclerView
-            android:paddingBottom="80dp"
             android:id="@+id/searchFmRcv"
             android:layout_margin="8dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingStart="27dp"
             android:paddingEnd="10dp"/>
     </LinearLayout>

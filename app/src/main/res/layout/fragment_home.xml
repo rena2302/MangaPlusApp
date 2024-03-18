@@ -16,10 +16,10 @@
             android:layout_height="wrap_content">
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_marginTop="120dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:id="@+id/imgslider_container"
                 android:layout_width="match_parent"
-                android:layout_height="420dp"
+                android:layout_height="350dp"
                 android:fitsSystemWindows="true"
                 android:theme="@style/Theme.MangaPlusApp">
                 <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -34,7 +34,6 @@
                         android:id="@+id/vp2_image_slider"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingBottom="20dp"
                         android:paddingStart="80dp"
                         android:paddingEnd="80dp"
                         app:layout_collapseMode="parallax"/>
