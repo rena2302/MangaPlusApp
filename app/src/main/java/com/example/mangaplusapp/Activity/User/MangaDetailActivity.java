@@ -4,8 +4,6 @@ import static androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRON
 import static androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK;
 import static androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL;
 
-import static java.security.AccessController.getContext;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,9 +13,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -28,7 +24,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
@@ -54,8 +49,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.Executor;
 
 
@@ -235,7 +228,6 @@ public class MangaDetailActivity extends BaseActivity {
                         }
                     });
         }
-
     }
     protected void removeFromFavorite(String mangaIdToRemove){
         if(firebaseAuth.getCurrentUser() == null){

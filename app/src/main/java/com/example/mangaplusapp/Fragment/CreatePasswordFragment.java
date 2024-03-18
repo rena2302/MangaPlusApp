@@ -40,7 +40,7 @@ public class CreatePasswordFragment extends Fragment {
     RelativeLayout layoutInput;
     RelativeLayout layoutInputUserName;
     ImageButton backRegisterBtn;
-    String hardIMG = "https://media.discordapp.net/attachments/1062386055258570804/1212303621354561556/logo_test.png?ex=65f158ba&is=65dee3ba&hm=0f1f490837c7544ada46aca5e652a769a8c0f02f7529133bc5c9f981e719b992&=&format=webp&quality=lossless&width=525&height=525";
+    String hardIMG = "https://raw.githubusercontent.com/YunneeToiChoi/MangaPlusApp/master/7265c2d295839a50ce67526baf2e0753.png";
     Uri imgDefault = Uri.parse(hardIMG);
 
     @Override
