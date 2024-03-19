@@ -108,14 +108,14 @@ public class MainActivity extends BaseActivity {
                 if (itemId == R.id.adminPlace) {
                     Intent intent = new Intent(MainActivity.this, DashBoardAdminActivity.class);
                     startActivity(intent);
-                } else if (itemId==R.id.menu_drawer_change_language) {
-                    loadFragmentBasic(new RegionFragment(),false);
-                }else if(itemId == R.id.menu_drawer_favorite){
-                    MangaListFragment dialogFragment = new MangaListFragment();
-                    Bundle args = new Bundle();
-                    args.putString("tag", "Favorite");
-                    dialogFragment.setArguments(args);
-                    dialogFragment.show(getSupportFragmentManager(), "Favorite");
+//                } else if (itemId==R.id.menu_drawer_change_language) {
+//                    loadFragmentBasic(new RegionFragment(),false);
+//                }else if(itemId == R.id.menu_drawer_favorite){
+//                    MangaListFragment dialogFragment = new MangaListFragment();
+//                    Bundle args = new Bundle();
+//                    args.putString("tag", "Favorite");
+//                    dialogFragment.setArguments(args);
+//                    dialogFragment.show(getSupportFragmentManager(), "Favorite");
                 } else if (itemId == R.id.menu_drawer_bought) {
                     MangaListFragment dialogFragment = new MangaListFragment();
                     Bundle args = new Bundle();

@@ -21,8 +21,8 @@
     <item
         android:id="@+id/navCreator"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_bottom_nav_creator"
-        android:title="@string/CREATOR" />
+        android:icon="@drawable/icon_favorite_nav"
+        android:title="@string/favorite" />
     <item
         android:id="@+id/navProfile"
         android:icon="@drawable/ic_bottom_nav_user"

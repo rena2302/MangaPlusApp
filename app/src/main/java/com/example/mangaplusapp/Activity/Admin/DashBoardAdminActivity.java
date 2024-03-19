@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
+import com.example.mangaplusapp.Activity.User.MainActivity;
 import com.example.mangaplusapp.Adapter.DashBoardAdapter;
+import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityDashBoardAdminBinding;
 import com.example.mangaplusapp.object.Categories;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +29,7 @@ import java.util.List;
 
 public class DashBoardAdminActivity extends BaseActivity {
     private ActivityDashBoardAdminBinding binding;
+    ImageButton shutDown;
     DashBoardAdapter dashBoardAdapter = new DashBoardAdapter(this, new ArrayList<>());
     public interface OnDataLoadedListener {
         void onDataLoaded(List<Categories> categoryList);
@@ -41,6 +45,7 @@ public class DashBoardAdminActivity extends BaseActivity {
         binding.adminRcvContainer.setLayoutManager(linearLayoutManager);
         //set adapter
         binding.adminRcvContainer.setAdapter(dashBoardAdapter);
+        backToMain();
         loadCategories(new OnDataLoadedListener() {
             @Override
             public void onDataLoaded(List<Categories> categoryList) {
@@ -120,6 +125,15 @@ public class DashBoardAdminActivity extends BaseActivity {
                 startActivity(new Intent(DashBoardAdminActivity.this, ChapterAddActivity.class));
                 finish();
             }
+        });
+    }
+    private void backToMain()
+    {
+        shutDown=findViewById(R.id.shutDownAdmin);
+        shutDown.setOnClickListener(v->{
+            Intent intent=new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 }
