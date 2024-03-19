@@ -274,11 +274,12 @@ public class MainActivity extends BaseActivity {
             // Handle action for HomeFragment
             loadFragment(new SearchFragment(),false, R.menu.search_fragment_header_menu);
             return true;
-        } else if (itemId == R.id.hot_fm_profile) {
-            // Handle action for HotFragment
-            Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
-            return true;
         }
+//        else if (itemId == R.id.hot_fm_profile) {
+//            // Handle action for HotFragment
+//            Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
         //If you wanna more feature add more condition
         return super.onOptionsItemSelected(item);
     }

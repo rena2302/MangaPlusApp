@@ -2,22 +2,14 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Gradient từ xám tới trắng ở phần trên -->
-    <item android:top="0dp" android:bottom="400dp">
-        <shape android:shape="rectangle">
-            <gradient
-                android:startColor="#E1E1E1"
-                android:centerColor="#EFEFEF"
-                android:endColor="#FFFFFF"
-                android:angle="270"/>
-        </shape>
-    </item>
+
 
     <!-- Gradient từ đỏ tới trắng ở phần dưới -->
-    <item android:top="400dp" android:bottom="0dp">
+    <item android:bottom="0dp">
         <shape android:shape="rectangle">
             <gradient
-                android:startColor="#FF0000"
-                android:centerColor="#FFC0C0"
+                android:startColor="#FEB6B9"
+                android:centerColor="#FFD7D9"
                 android:endColor="#FFFFFF"
                 android:angle="90"/>
         </shape>

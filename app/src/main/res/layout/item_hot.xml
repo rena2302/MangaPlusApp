@@ -4,54 +4,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="120dp"
+    android:elevation="4dp"
     android:layout_margin="12dp"
     app:cardCornerRadius="8dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/itemHotImg"
-            android:layout_width="80dp"
-            android:layout_height="100dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CardImg"
             android:layout_marginLeft="20dp"
+            app:cardCornerRadius="8dp"
+            android:elevation="4dp"
+            android:translationZ="10dp"
             android:layout_centerVertical="true"
-            android:src="@color/black"
-            android:scaleType="centerCrop"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/itemHotImg"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:src="@color/black"
+                android:scaleType="centerCrop"/>
+        </androidx.cardview.widget.CardView>
         <TextView
             android:id="@+id/itemHotRank"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/itemHotImg"
+            android:layout_toRightOf="@+id/CardImg"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="25dp"
             android:text="1"
+            android:layout_centerInParent="true"
             android:textColor="#E30000"
-            android:textSize="40sp"
-            android:fontFamily="@font/ubuntu_regular"/>
+            android:textSize="50sp"
+            android:fontFamily="@font/stylescript"/>
 
         <TextView
             android:id="@+id/itemHotName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:layout_toRightOf="@id/itemHotRank"
             android:singleLine="true"
             android:text="Manga Name"
-            android:textSize="26dp"
-            android:fontFamily="@font/ubuntu_regular"/>
+            android:textSize="28dp"
+            android:fontFamily="@font/patrickhandsc"/>
         <TextView
             android:id="@+id/itemHotView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/itemHotRank"
             android:layout_below="@+id/itemHotName"
             android:text="View:"
             android:textSize="20sp"
-            android:fontFamily="@font/ubuntu_regular"/>
+            android:fontFamily="@font/strait"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

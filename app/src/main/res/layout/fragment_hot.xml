@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="10dp"
-    android:paddingVertical="85dp"
+    android:paddingTop="85dp"
     android:background="@drawable/background_hot"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -13,14 +13,18 @@
     <!-- TODO: Update blank fragment layout -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/hotFmTab"
+        android:background="@drawable/rounded_tab_background"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabSelectedTextColor="@color/black"
+        app:tabTextAppearance="@style/TextHot"
+        app:tabSelectedTextColor="#C65555"
         app:tabTextColor="@color/gray"/>
     
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/hotFmViewPager"
+        android:clipToPadding="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent">
+    </androidx.viewpager.widget.ViewPager>
 </LinearLayout>
