@@ -32,19 +32,21 @@
             android:name=".Activity.User.PaymentStripeActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/Base.Theme.DashBoard"
             android:name=".Activity.Admin.EditorActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:theme="@style/Base.Theme.DashBoard"
             android:name=".Activity.Base.ChapterPdfActivity"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activity.Admin.MangaDetailAdminActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:theme="@style/Base.Theme.DashBoard"
             android:name=".Activity.Admin.ChapterAddActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
@@ -68,10 +70,12 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:theme="@style/Base.Theme.DashBoard"
             android:name=".Activity.Admin.CategoryAddActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:theme="@style/Base.Theme.DashBoard"
             android:name=".Activity.Admin.MangaAddActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
@@ -91,10 +95,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/Base.Theme.DashBoard"
             android:name=".Activity.User.DashBoardUserActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:theme="@style/Base.Theme.DashBoardAdmin"
             android:name=".Activity.Admin.DashBoardAdminActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">

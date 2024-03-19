@@ -41,4 +41,12 @@
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">#E3EBF8</item>
     </style>
+    <style name="Base.Theme.DashBoard" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/login2_color</item>
+    </style>
+    <style name="Base.Theme.DashBoardAdmin" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/main_color_form</item>
+    </style>
 </resources>
