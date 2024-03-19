@@ -86,6 +86,6 @@
     <string name="addManga">Thêm Manga</string>
     <string name="addNewChapter">Thêm Chương Mới</string>
     <string name="addChapterManga">Thêm Chương Manga</string>
-    <string name="searchKeyWord">Nhập từ khóa (Manga hoặc Thể loại)</string>
+    <string name="searchKeyWord">Tìm kiếm sách</string>
 
 </resources>

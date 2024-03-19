@@ -87,7 +87,7 @@
     <!--DashBoard User-->
     <string name="dashBoardUser">DashBoard User</string>
     <!--Search-->
-    <string name="searchKeyWord">Input keyword (Manga or Category)</string>
+    <string name="searchKeyWord">Search book</string>
     <!--User edit-->
     <string name="changeImage">Change Image</string>
     <!--User profile-->

@@ -2,16 +2,19 @@
 <androidx.cardview.widget.CardView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
-    android:layout_height="25dp"
+    android:layout_width="111dp"
+    android:layout_height="30dp"
     android:layout_margin="12dp"
-    app:cardCornerRadius="8dp"
-    android:backgroundTint="@color/gray">
+    app:cardCornerRadius="15dp"
+    android:backgroundTint="#70BBDED7">
     <TextView
         android:id="@+id/itemSearchTxt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="cate"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:fontFamily="@font/sourceserif"
         android:textAlignment="center"
         android:singleLine="true"
         android:textColor="@color/black"/>
