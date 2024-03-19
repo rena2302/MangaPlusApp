@@ -86,7 +86,7 @@
     <string name="addManga">만화 추가</string>
     <string name="addNewChapter">새 챕터 추가</string>
     <string name="addChapterManga">챕터 만화 추가</string>
-    <string name="searchKeyWord">키워드 입력 (만화 또는 카테고리)</string>
+    <string name="searchKeyWord">도서검색</string>
 
 
 </resources>
