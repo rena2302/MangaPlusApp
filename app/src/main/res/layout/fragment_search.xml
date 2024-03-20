@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.SearchFragment">
         <LinearLayout
-            android:paddingTop="100dp"
+            android:paddingTop="90dp"
             android:id="@+id/OverlaySearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
