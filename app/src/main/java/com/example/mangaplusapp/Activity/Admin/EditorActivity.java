@@ -25,7 +25,7 @@ public class EditorActivity extends BaseActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNewActivityAndFinishCurrent(DashBoardAdminActivity.class);
+                onBackPressed();
             }
         });
     }
@@ -46,7 +46,6 @@ public class EditorActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        startNewActivityAndFinishCurrent(DashBoardAdminActivity.class);
         super.onBackPressed();
     }
 }

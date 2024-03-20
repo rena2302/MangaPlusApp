@@ -60,7 +60,7 @@ public class HotBoughtFragment extends Fragment {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
 
                             Mangas manga = dataSnapshot.getValue(Mangas.class);
-                            if (manga.isPREMIUM_MANGA()){
+                            if (manga.isPREMIUM_MANGA() && manga.getBOUGHT_MANGA() > 0){
                                 mangasList.add(manga);
                             }
                         }
