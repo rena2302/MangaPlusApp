@@ -11,10 +11,10 @@
             android:pathData="M0 0H360V140H0V0Z"
             />
         <group
-            android:translateX="1"
-            android:translateY="0"
+            android:translateX="0"
+            android:translateY="4"
             android:pivotX="180"
-            android:pivotY="70"
+            android:pivotY="80"
             android:scaleX="2"
             android:scaleY="3"
             android:rotation="90"
@@ -25,9 +25,9 @@
                 <aapt:attr name="android:fillColor">
                     <gradient
                         android:type="linear"
-                        android:startX="140"
+                        android:startX="120"
                         android:startY="70"
-                        android:endX="220"
+                        android:endX="190"
                         android:endY="70"
                         >
                         <item
