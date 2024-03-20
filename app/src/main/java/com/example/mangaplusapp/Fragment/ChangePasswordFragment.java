@@ -41,6 +41,7 @@ public class ChangePasswordFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
     AuthCredential credential;
+    String data;
     public  ChangePasswordFragment()
     {
 

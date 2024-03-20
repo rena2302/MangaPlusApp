@@ -26,8 +26,6 @@ public class EditControlActivity extends BaseActivity{
         setContentView(R.layout.activity_default_edit);
         mAuth=FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        Intent intent = new Intent(this, EditControlActivity.class);
-        intent.putExtra("KEYBack", "back");
         String fragmentData = getIntent().getStringExtra("FRAGMENT_DATA");
         switch (fragmentData) {
             case "Fragment1Data":
