@@ -422,6 +422,7 @@ public class MangaDetailActivity extends BaseActivity {
                     "PICTURE_MANGA", mangaPicture,
                     "NAME_MANGA",nameManga,
                     "PRICE_MANGA", mangaPrice);
+            dialog.dismiss();
         });
         momoImg.setOnClickListener(v->{
             dialog.dismiss();
@@ -430,6 +431,7 @@ public class MangaDetailActivity extends BaseActivity {
                     "PICTURE_MANGA", mangaPicture,
                     "NAME_MANGA",nameManga,
                     "PRICE_MANGA", mangaPrice);
+            dialog.dismiss();
         });
     }
     private void checkBioMetricSpperted()

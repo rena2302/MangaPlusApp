@@ -32,6 +32,7 @@
             android:id="@+id/main_header"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:gravity="top"
             app:menu="@menu/home_fragment_header_menu">
             <TextView
                 android:layout_width="wrap_content"
@@ -41,7 +42,7 @@
                 android:textColor="#7E675E"
                 android:textStyle="bold"
                 android:fontFamily="@font/square_peg"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center_horizontal"/>
         </androidx.appcompat.widget.Toolbar>
         <androidx.cardview.widget.CardView
             android:id="@+id/Layer_bottom"

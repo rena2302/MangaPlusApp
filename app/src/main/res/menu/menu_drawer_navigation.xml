@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<!--    <item android:title="Profile">-->
-<!--        <menu>-->
-<!--            <group android:checkableBehavior="single" >-->
-<!--&lt;!&ndash;                <item&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:id="@+id/menu_drawer_favorite"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:icon="@drawable/icon_favorite_nav"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:title="@string/favorite"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <item&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:id="@+id/menu_drawer_payment"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:icon="@mipmap/ic_search"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:title="@string/payment"/>&ndash;&gt;-->
-<!--            </group>-->
-<!--        </menu>-->
-<!--    </item>-->
+    <item android:title="Profile">
+        <menu>
+            <group android:checkableBehavior="single" >
+                <item
+                    android:id="@+id/menu_drawer_favorite"
+                    android:icon="@drawable/icon_favorite_nav"
+                    android:title="@string/favorite"/>
+                <item
+                    android:id="@+id/menu_drawer_bought"
+                    android:icon="@drawable/shopping_cart_svgrepo_com"
+                    android:title="@string/bought"/>
+            </group>
+        </menu>
+    </item>
 
     <item android:title="Admin">
         <menu>
@@ -22,14 +22,6 @@
                     android:id="@+id/adminPlace"
                     android:icon="@drawable/icon_admin_nav"
                     android:title="@string/placeForAdmin"/>
-                <item
-                    android:id="@+id/menu_drawer_bought"
-                    android:icon="@drawable/shopping_cart_svgrepo_com"
-                    android:title="@string/bought"/>
-<!--                <item-->
-<!--                    android:id="@+id/menu_drawer_change_language"-->
-<!--                    android:icon="@mipmap/ic_search"-->
-<!--                    android:title="@string/changeLanguage"/>-->
             </group>
         </menu>
     </item>
