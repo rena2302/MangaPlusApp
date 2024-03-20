@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mangaplusapp.Activity.Base.ChapterPdfActivity;
+import com.example.mangaplusapp.Fragment.ChapterListFragment;
 import com.example.mangaplusapp.Fragment.ChapterViewFragment;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityChapterPdfBinding;
@@ -33,15 +34,18 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
     private Context context;
     private List<Chapters> chapterList;
     private FragmentManager fragmentManager;
+    private ChapterListFragment dialog;
     public void setData(List<Chapters> chapterList){
         this.chapterList = chapterList;
     }
 
-    public ChapterAdapter(List<Chapters> chapterList, Context context, boolean isPdfLoaded, FragmentManager fragmentManager) {
+    public ChapterAdapter(List<Chapters> chapterList, Context context, boolean isPdfLoaded, FragmentManager fragmentManager,
+                          ChapterListFragment dialog) {
         this.chapterList = chapterList;
         this.context = context;
         this.fragmentManager = fragmentManager; // Lưu tham chiếu tới FragmentManager
         this.isPdfLoaded = isPdfLoaded;
+        this.dialog = dialog;
     }
 
     @NonNull
@@ -64,6 +68,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
             @Override
             public void onClick(View v) {
                 if (isPdfLoaded) {
+                    dialog.dismiss();
                     loadFragmentBasic(fragmentManager, new ChapterViewFragment(), false,
                             "ID_CHAPTER", chapter.getID_CHAPTER(),
                             "NAME_CHAPTER", chapter.getNAME_CHAPTER(),
@@ -72,6 +77,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
                             "PDF_CHAPTER", chapter.getPDF_CHAPTER());
                     Toast.makeText(context, "Are in " + chapter.getNAME_CHAPTER(), Toast.LENGTH_SHORT).show();
                 } else {
+                    dialog.dismiss();
                     Toast.makeText(context, "PDF is not loaded yet", Toast.LENGTH_SHORT).show();
                 }
             }

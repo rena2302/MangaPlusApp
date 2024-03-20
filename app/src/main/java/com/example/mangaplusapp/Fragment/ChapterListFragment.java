@@ -50,7 +50,7 @@ public class ChapterListFragment extends DialogFragment {
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
-        ChapterAdapter adapter = new ChapterAdapter(new ArrayList<>(), getContext(), isPdfLoaded, fragmentManager);
+        ChapterAdapter adapter = new ChapterAdapter(new ArrayList<>(), getContext(), isPdfLoaded, fragmentManager,this);
         LayoutInflater inflater = getLayoutInflater();
         view = inflater.inflate(R.layout.fragment_chapter_list, null);
 
