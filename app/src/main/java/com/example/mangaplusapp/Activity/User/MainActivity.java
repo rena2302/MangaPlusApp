@@ -109,14 +109,13 @@ public class MainActivity extends BaseActivity {
                 if (itemId == R.id.adminPlace) {
                     Intent intent = new Intent(MainActivity.this, DashBoardAdminActivity.class);
                     startActivity(intent);
-//                } else if (itemId==R.id.menu_drawer_change_language) {
-//                    loadFragmentBasic(new RegionFragment(),false);
-//                }else if(itemId == R.id.menu_drawer_favorite){
-//                    MangaListFragment dialogFragment = new MangaListFragment();
-//                    Bundle args = new Bundle();
-//                    args.putString("tag", "Favorite");
-//                    dialogFragment.setArguments(args);
-//                    dialogFragment.show(getSupportFragmentManager(), "Favorite");
+                }
+                else if(itemId == R.id.menu_drawer_favorite){
+                    MangaListFragment dialogFragment = new MangaListFragment();
+                    Bundle args = new Bundle();
+                    args.putString("tag", "Favorite");
+                    dialogFragment.setArguments(args);
+                    dialogFragment.show(getSupportFragmentManager(), "Favorite");
                 } else if (itemId == R.id.menu_drawer_bought) {
                     MangaListFragment dialogFragment = new MangaListFragment();
                     Bundle args = new Bundle();
@@ -128,19 +127,6 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-    private void loadFragmentBasic(Fragment fragment, boolean isAppInitialized) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        if (isAppInitialized) {
-            fragmentTransaction.add(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
-        } else {
-            fragmentTransaction.replace(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
-            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
-        }
-        fragmentTransaction.commit();
-    }
-    /*Non-override Function*/
     private void updateBottomNavigationView() {
 
         int backStackEntryCount = fragmentManager.getBackStackEntryCount();
@@ -162,9 +148,6 @@ public class MainActivity extends BaseActivity {
                     case "UserProfileFragment":
                         bottomNavigationView.getMenu().findItem(R.id.navProfile).setChecked(true);
                         break;
-//                    case "CreatorFragment":
-//                        bottomNavigationView.getMenu().findItem(R.id.navCreator).setChecked(true);
-//                        break;
                     case "SearchFragment":
                         bottomNavigationView.getMenu().findItem(R.id.navSearch).setChecked(true);
                         break;
