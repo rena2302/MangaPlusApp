@@ -136,13 +136,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:alpha="0.3"
                     android:id="@+id/mangaDetailDescription"
                     android:lineSpacingExtra="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter"
                     android:textStyle="bold"
-                    android:textColor="#66000000"
+                    android:textColor="#000000"
                     android:letterSpacing="0.02"
                     android:maxLines="10"
                     android:ellipsize="end"
@@ -157,7 +158,7 @@ Translated into English for the first time, this novel is about an affair gone w
                 <TextView
                     android:layout_marginBottom="70dp"
                     android:layout_below="@+id/mangaDetailDescription"
-                    android:padding="10dp"
+                    android:padding="20dp"
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/interextrabold"
@@ -165,8 +166,6 @@ Translated into English for the first time, this novel is about an affair gone w
                     android:id="@+id/Content_showmore"
                     android:layout_width="wrap_content"
                     android:text="Show more"
-                    android:drawablePadding="10dp"
-                    android:drawableBottom="@drawable/dialog_tab"
                     android:layout_height="wrap_content"/>
             </RelativeLayout>
         </RelativeLayout>
