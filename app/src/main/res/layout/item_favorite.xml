@@ -20,45 +20,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/itemHotImg"
+                android:id="@+id/itemFavoImg"
                 android:layout_width="70dp"
                 android:layout_height="100dp"
                 android:src="@color/black"
                 android:scaleType="centerCrop"/>
         </androidx.cardview.widget.CardView>
         <TextView
-            android:id="@+id/itemHotRank"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/CardImg"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="25dp"
-            android:text="1"
-            android:layout_centerInParent="true"
-            android:textColor="#E30000"
-            android:textSize="50sp"
-            android:fontFamily="@font/stylescript"/>
-
-        <TextView
-            android:id="@+id/itemHotName"
+            android:id="@+id/itemFavoName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:layout_toRightOf="@id/itemHotRank"
+            android:layout_marginLeft="50dp"
+            android:layout_toRightOf="@id/CardImg"
             android:singleLine="true"
             android:text="Manga Name"
             android:textSize="28dp"
             android:fontFamily="@font/patrickhandsc"/>
         <TextView
-            android:id="@+id/itemHotView"
+            android:id="@+id/itemFavoPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/itemHotRank"
-            android:layout_below="@+id/itemHotName"
-            android:text="View:"
+            android:layout_toRightOf="@id/CardImg"
+            android:layout_below="@+id/itemFavoName"
+            android:layout_marginLeft="50dp"
+            android:text="Price: "
             android:textSize="20sp"
             android:fontFamily="@font/strait"/>
     </RelativeLayout>
+    <ImageButton
+        android:id="@+id/itemFavoButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="12dp"
+        android:src="@drawable/ic_favo_empty"
+        android:background="@drawable/box_info"
+        android:backgroundTint="#E4CBA2"/>
 </androidx.cardview.widget.CardView>

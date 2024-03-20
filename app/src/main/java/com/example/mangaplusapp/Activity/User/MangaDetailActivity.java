@@ -416,6 +416,7 @@ public class MangaDetailActivity extends BaseActivity {
         creditCardImg = dialog.findViewById(R.id.creditCardPay);
         momoImg = dialog.findViewById(R.id.momoPay);
         creditCardImg.setOnClickListener(v->{
+            dialog.dismiss();
             startNewActivity(PaymentStripeActivity.class,
                     "ID_MANGA", mangaId,
                     "PICTURE_MANGA", mangaPicture,
@@ -423,6 +424,7 @@ public class MangaDetailActivity extends BaseActivity {
                     "PRICE_MANGA", mangaPrice);
         });
         momoImg.setOnClickListener(v->{
+            dialog.dismiss();
             startNewActivity(PaymentActivity.class,
                     "ID_MANGA", mangaId,
                     "PICTURE_MANGA", mangaPicture,

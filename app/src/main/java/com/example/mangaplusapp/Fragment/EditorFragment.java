@@ -158,6 +158,7 @@ public class EditorFragment extends Fragment {
             }
             else {
                 hashMap.put("PREMIUM_MANGA",false);
+                hashMap.put("PRICE_MANGA", "0");
             }
             //hashMap.put("UID_MANGA", firebaseAuth.getUid());
 

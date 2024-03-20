@@ -145,7 +145,7 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                         editor.putString("session", "manga");
                                         editor.apply();
-                                        ActivityUtils.startNewActivityAndFinishCurrent(context, EditorActivity.class,
+                                        ActivityUtils.startNewActivity(context, EditorActivity.class,
                                                 "ID_MANGA", truyenTranh.getID_MANGA(),
                                                 "NAME_MANGA", truyenTranh.getNAME_MANGA(),
                                                 "PICTURE_MANGA", truyenTranh.getPICTURE_MANGA(),
