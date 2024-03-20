@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.Admin.DashBoardAdminActivity;
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.Fragment.CreatorFragment;
+import com.example.mangaplusapp.Fragment.FavoriteFragment;
 import com.example.mangaplusapp.Fragment.HomeFragment;
 import com.example.mangaplusapp.Fragment.HotFragment;
 import com.example.mangaplusapp.Fragment.MangaListFragment;
@@ -190,8 +191,8 @@ public class MainActivity extends BaseActivity {
                     loadFragment(new HotFragment(), false, R.menu.hot_fragment_header_menu);
                 } else if (itemId == R.id.navSearch) {
                     loadFragment(new SearchFragment(), false, R.menu.search_fragment_header_menu);
-//                } else if (itemId == R.id.navCreator) {
-//                    loadFragment(new CreatorFragment(), false, R.menu.creator_fragment_header_menu);
+                } else if (itemId == R.id.navFavorite) {
+                    loadFragment(new FavoriteFragment(), false, R.menu.creator_fragment_header_menu);
                 } else if (itemId == R.id.navProfile) {
                     loadFragment(new UserProfileFragment(), false, R.menu.library_fragment_header_menu);
                 }
