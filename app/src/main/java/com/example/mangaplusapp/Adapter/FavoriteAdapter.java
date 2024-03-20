@@ -20,6 +20,7 @@ import com.example.mangaplusapp.Activity.User.MangaDetailActivity;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ItemFavoriteBinding;
 import com.example.mangaplusapp.object.Mangas;
+import com.example.mangaplusapp.util.ActivityUtils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,6 +68,20 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
             @Override
             public void onClick(View v) {
                 toggleFavorite(mangas.getID_MANGA(), holder);
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityUtils.startNewActivity(context, MangaDetailActivity.class,
+                        "ID_MANGA", mangas.getID_MANGA(),
+                        "NAME_MANGA", mangas.getNAME_MANGA(),
+                        "PICTURE_MANGA", mangas.getPICTURE_MANGA(),
+                        "DESCRIPTION_MANGA", mangas.getDESCRIPTION_MANGA(),
+                        "PREMIUM_MANGA",String.valueOf(mangas.isPREMIUM_MANGA()),
+                        "VIEW_MANGA", String.valueOf(mangas.getVIEW_MANGA()),
+                        "BOUGHT_MANGA",String.valueOf(mangas.getBOUGHT_MANGA()),
+                        "PRICE_MANGA", mangas.getPRICE_MANGA());
             }
         });
     }
