@@ -102,40 +102,6 @@ public class MangaDetailActivity extends BaseActivity {
 
         onClickEvent();
         setFavorite();
-        checkBioMetricSpperted();
-
-        Executor executor= ContextCompat.getMainExecutor(this);
-        biometricPrompt=new BiometricPrompt(MangaDetailActivity.this,executor, new BiometricPrompt.AuthenticationCallback(){
-            @Override
-            public void onAuthenticationError(int errorCode,
-                                              @NonNull CharSequence errString) {
-                super.onAuthenticationError(errorCode, errString);
-                Toast.makeText(getApplicationContext(),
-                                "Authentication error: " + errString, Toast.LENGTH_SHORT)
-                        .show();
-            }
-
-            @Override
-            public void onAuthenticationSucceeded(
-                    @NonNull BiometricPrompt.AuthenticationResult result) {
-                super.onAuthenticationSucceeded(result);
-                Toast.makeText(getApplicationContext(),
-                        "Authentication succeeded!", Toast.LENGTH_SHORT).show();
-                SharedPreferences.Editor editor=sharedPreferences.edit();
-                editor.putBoolean("keyBiometric",true);
-                editor.apply();
-                editor.commit();
-                showdialog();
-            }
-
-            @Override
-            public void onAuthenticationFailed() {
-                super.onAuthenticationFailed();
-                Toast.makeText(getApplicationContext(), "Authentication failed",
-                                Toast.LENGTH_SHORT)
-                        .show();
-            }
-        });
         loadPurchasedMangaIds(new OnPurchasedMangaIdsLoadedListener() {
             @Override
             public void onPurchasedMangaIdsLoaded(Boolean premium) {
@@ -191,6 +157,8 @@ public class MangaDetailActivity extends BaseActivity {
         binding.BuyBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                checkBioMetricSpperted();
+                ActionBioMetric();
                 checkBiometric=sharedPreferences.getBoolean("keyBiometric",false);
                 Log.d("Check", "onClickPayment: "+checkBiometric);
                 if (isPremium) {
@@ -456,5 +424,40 @@ public class MangaDetailActivity extends BaseActivity {
                 startActivity(enrollIntent);
                 break;
         }
+    }
+    private  void ActionBioMetric()
+    {
+        Executor executor= ContextCompat.getMainExecutor(this);
+        biometricPrompt=new BiometricPrompt(MangaDetailActivity.this,executor, new BiometricPrompt.AuthenticationCallback(){
+            @Override
+            public void onAuthenticationError(int errorCode,
+                                              @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+                Toast.makeText(getApplicationContext(),
+                                "Authentication error: " + errString, Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(
+                    @NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                Toast.makeText(getApplicationContext(),
+                        "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putBoolean("keyBiometric",true);
+                editor.apply();
+                editor.commit();
+                showdialog();
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+                Toast.makeText(getApplicationContext(), "Authentication failed",
+                                Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
     }
 }
