@@ -128,16 +128,22 @@ public class MangaDetailActivity extends BaseActivity {
         binding.ContentShowmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MangaDetailActivity.this);
-                builder.setTitle("Manga Description")
-                        .setMessage(mangaDescription)
-                        .setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
+                if (binding.mangaDetailDescription.getMaxLines() == Integer.MAX_VALUE) {
+                    binding.mangaDetailDescription.setLineSpacing(10,1);
+                    binding.mangaDetailDescription.setLetterSpacing(0.02f);
+                    binding.mangaDetailDescription.setMaxLines(10);
+                    binding.ContentShowmore.setText("Show more");
+                    binding.ContentShowmore.setTextColor(Color.BLACK);
+                    binding.mangaDetailDescription.animate().translationY(0).alpha(0.3f).setDuration(500).start();
+                } else {
+                    binding.mangaDetailDescription.setMaxLines(Integer.MAX_VALUE);
+                    binding.mangaDetailDescription.setLineSpacing(20,1);
+                    binding.mangaDetailDescription.setLetterSpacing(0.035f);
+                    binding.ContentShowmore.setText("Hide less");
+                    binding.ContentShowmore.setTextColor(Color.GRAY);
+                    // Di chuyển nội dung xuống
+                    binding.mangaDetailDescription.animate().translationY(8).alpha(0.7f).setDuration(500).start();
+                }
             }
         });
         binding.mangaDetailFavorite.setOnClickListener(new View.OnClickListener() {

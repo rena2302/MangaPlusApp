@@ -18,7 +18,7 @@
                 android:layout_marginTop="120dp"
                 android:id="@+id/imgslider_container"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 android:theme="@style/Theme.MangaPlusApp">
                 <com.google.android.material.appbar.CollapsingToolbarLayout
