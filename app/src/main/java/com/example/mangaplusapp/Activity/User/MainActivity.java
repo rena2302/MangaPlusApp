@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.Admin.DashBoardAdminActivity;
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
+import com.example.mangaplusapp.Activity.Base.LoginActivity;
 import com.example.mangaplusapp.Fragment.CreatorFragment;
 import com.example.mangaplusapp.Fragment.FavoriteFragment;
 import com.example.mangaplusapp.Fragment.HomeFragment;
@@ -35,6 +36,11 @@ import com.example.mangaplusapp.Fragment.UserProfileFragment;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityMainBinding;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -42,6 +48,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends BaseActivity {
+    private static SharedPreferences sharedPreferences;
     NavigationView navigationView;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
@@ -56,6 +63,7 @@ public class MainActivity extends BaseActivity {
     String userID;
     FirebaseAuth mAuth ;
     FirebaseUser currentUser ;
+    UserProfileFragment userProfileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +71,7 @@ public class MainActivity extends BaseActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot()); // set content phải trước focus nha
         loadFragment(new HomeFragment(),false, R.menu.home_fragment_header_menu);
+        sharedPreferences = this.getSharedPreferences("user_session", Context.MODE_PRIVATE);
         BackToProfile();
         focusFragment();
         loadMenuDrawer();
@@ -122,10 +131,84 @@ public class MainActivity extends BaseActivity {
                     args.putString("tag", "Bought");
                     dialogFragment.setArguments(args);
                     dialogFragment.show(getSupportFragmentManager(), "Bought");
+                } else if (itemId==R.id.Logout) {
+                    if(isLoggedIn()){
+                        signOut();
+                    }
+                    else
+                    {
+                        finish();
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                } else if (itemId==R.id.menu_drawer_support1) {
+                    openFacebookPage();
+                    
+                } else if (itemId==R.id.menu_drawer_support2) {
+                    openWebPage();
                 }
                 return true;
             }
         });
+    }
+    private void openFacebookPage() {
+        String facebookUrl = "https://www.facebook.com/HUFLITConfessions";
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=" + facebookUrl));
+            startActivity(intent);
+        } catch (Exception e) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(facebookUrl));
+            startActivity(intent);
+        }
+    }
+    private void openWebPage() {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.huflitconfessions.com/?fbclid=IwAR00-x8kYMBq0DxyhxYYzsOXKKINVCpl_2oJhwlHu3xbApZaCxFZ4XbzNT8"));
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private boolean isLoggedIn(){
+        return currentUser != null;
+    }
+    public void signOut(){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            // Đăng xuất khỏi Google
+            GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .signOut()
+                    .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(MainActivity.this, "Log out successful", Toast.LENGTH_SHORT).show();
+                                SharedPreferences.Editor editor=sharedPreferences.edit();
+                                editor.putBoolean("keyBiometric",false);
+                                editor.apply();
+                                editor.commit();
+                                // Đăng xuất thành công khỏi cả Firebase và Google
+                                Log.d("@@@@@", "signOut: Google");
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                            } else {
+                                // Xảy ra lỗi khi đăng xuất khỏi Google
+                                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+        } else {
+
+            // Đăng xuất khỏi Firebase Auth
+            Toast.makeText(MainActivity.this, "Log out successful", Toast.LENGTH_SHORT).show();
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putBoolean("keyBiometric",false);
+            editor.apply();
+            editor.commit();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
     private void updateBottomNavigationView() {
 
@@ -267,5 +350,4 @@ public class MainActivity extends BaseActivity {
         //If you wanna more feature add more condition
         return super.onOptionsItemSelected(item);
     }
-
 }

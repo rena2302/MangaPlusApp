@@ -211,7 +211,7 @@ public class UserProfileFragment extends Fragment {
         dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
-    private void signOut(){
+    public void signOut(){
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivity());
         if (account != null) {
             // Đăng xuất khỏi Google
@@ -245,16 +245,6 @@ public class UserProfileFragment extends Fragment {
             editor.putBoolean("keyBiometric",false);
             editor.apply();
             editor.commit();
-            Log.d("@@@@@", "signOut: Email");
-            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
-            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
-            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
-            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
-            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
-            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
-            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
-            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
-            Log.d("@@@@@", "signOut: " + currentUser.getEmail());
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
         }

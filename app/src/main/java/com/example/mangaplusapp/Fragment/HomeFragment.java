@@ -209,7 +209,7 @@ public class HomeFragment extends Fragment {
                     public void transformPage(@NonNull View page, float position) {
                         float r = 1 - Math.abs(position);
                         page.setScaleY(0.85f + r * 0.15f);
-                        page.setAlpha(0.5f + r * 0.5f);
+
                     }
                 });
                 viewPager2.setPageTransformer(compositePageTransformer);

@@ -20,7 +20,11 @@
         app:tabTextAppearance="@style/TextHot"
         app:tabSelectedTextColor="#C65555"
         app:tabTextColor="@color/gray"/>
-    
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#37000000"/>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/hotFmViewPager"
         android:clipToPadding="true"

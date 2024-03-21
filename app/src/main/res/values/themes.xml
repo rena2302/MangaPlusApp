@@ -49,4 +49,8 @@
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/main_color_form</item>
     </style>
+    <style name="Base.Theme.MangaDetail" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#F6F6F6</item>
+    </style>
 </resources>

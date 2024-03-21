@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="Profile">
         <menu>
-            <group android:checkableBehavior="single" >
+            <group >
                 <item
                     android:id="@+id/menu_drawer_favorite"
                     android:icon="@drawable/icon_favorite_nav"
@@ -25,7 +25,7 @@
 
     <item android:title="Admin">
         <menu>
-            <group android:checkableBehavior="single">
+            <group >
                 <item
                     android:divider="#00000000"
                     android:id="@+id/adminPlace"
