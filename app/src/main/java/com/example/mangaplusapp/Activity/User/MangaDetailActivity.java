@@ -185,7 +185,7 @@ public class MangaDetailActivity extends BaseActivity {
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                         Chapters chapter = dataSnapshot.getValue(Chapters.class);
-                                        if (chapter.getNAME_CHAPTER().equals("Chapter 1")) {
+                                        if (chapter.getNAME_CHAPTER().contains("1")) {
                                             updateCountView(chapter);
                                             startNewActivityAndFinishCurrent(ChapterPdfActivity.class,
                                                     "ID_CHAPTER", chapter.getID_CHAPTER(),
@@ -193,7 +193,7 @@ public class MangaDetailActivity extends BaseActivity {
                                                     "ID_MANGA_CHAPTER", chapter.getID_MANGA_CHAPTER(),
                                                     "MANGA_CHAPTER", chapter.getMANGA_CHAPTER(),
                                                     "PDF_CHAPTER", chapter.getPDF_CHAPTER());
-                                            break; // Không cần tiếp tục vòng lặp sau khi tìm thấy chapter thích hợp
+                                            break;
                                         }
                                     }
                                 }

@@ -21,11 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="45dp"
+                android:layout_width="55dp"
                 android:layout_marginStart="-30dp"
                 android:layout_marginEnd="20dp"
-                android:layout_height="30dp"
-                android:background="@drawable/mastercard"/>
+                android:layout_height="50dp"
+                android:background="@drawable/mastercredit"/>
             <TextView
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
