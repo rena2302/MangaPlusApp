@@ -66,6 +66,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/Base.Theme.MangaDetail"
             android:name=".Activity.User.MangaDetailActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

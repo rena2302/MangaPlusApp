@@ -48,15 +48,19 @@
                 android:textStyle="italic"
                 android:fontFamily="@font/interextrabold">
             </TextView>
-            <ImageView
+            <TextView
+                android:layout_below="@id/loginTittle"
                 android:id="@+id/AppName"
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/loginTittle"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/tittlemain">
-            </ImageView>
+                android:layout_height="wrap_content"
+                android:text="@string/manga_plus_home"
+                android:textSize="75sp"
+                android:letterSpacing="0.08"
+                android:textColor="#66AFBA"
+                android:textStyle="bold"
+                android:fontFamily="@font/square_peg"
+                android:layout_gravity="center"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_marginStart="20dp"
