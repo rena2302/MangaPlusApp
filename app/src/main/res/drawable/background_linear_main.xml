@@ -31,15 +31,15 @@
                         android:endY="70"
                         >
                         <item
-                            android:color="#FFCDAA"
+                            android:color="#FFFFFF"
                             android:offset="0.22"
                             />
                         <item
-                            android:color="#FFE8D2"
+                            android:color="#C9FFFFFF"
                             android:offset="0.575"
                             />
                         <item
-                            android:color="#52FFFFFF"
+                            android:color="#60FFFFFF"
                             android:offset="0.785"
                             />
                         <item

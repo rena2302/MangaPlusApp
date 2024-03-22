@@ -9,7 +9,6 @@
         android:elevation="4dp"
         android:layout_width="110dp"
         android:layout_height="160dp"
-        android:layout_margin="10dp"
         app:cardCornerRadius="8dp">
         <ImageView
             android:id="@+id/imgAnhTruyen"
