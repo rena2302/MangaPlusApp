@@ -60,7 +60,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         Mangas mangas = mangasList.get(position);
         setFavorite(mangas.getID_MANGA(), holder);
         holder.favoName.setText(mangas.getNAME_MANGA());
-        holder.favoPrice.setText("Price: " + mangas.getPRICE_MANGA() +"đ");
+        holder.favoPrice.setText("Price: " + mangas.getPRICE_MANGA() +"$");
         Glide.with(context)
                 .load(mangas.getPICTURE_MANGA())
                 .into(holder.favoImg);

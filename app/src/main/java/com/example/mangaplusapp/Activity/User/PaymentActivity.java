@@ -101,9 +101,11 @@ public class PaymentActivity extends BaseActivity {
     //example payment
     /*------------------------------END-----------------------------------------*/
     private void hookIntent(){
+
         Intent intent = getIntent();
+        long price = Long.parseLong(intent.getStringExtra("PRICE_MANGA")) * 24000;
         description = intent.getStringExtra("NAME_MANGA");
-        amount = intent.getStringExtra("PRICE_MANGA");
+        amount = String.valueOf(price);
 
         Glide.with(this)
                 .load(intent.getStringExtra("PICTURE_MANGA"))

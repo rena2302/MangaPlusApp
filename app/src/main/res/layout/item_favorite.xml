@@ -49,13 +49,18 @@
             android:textSize="20sp"
             android:fontFamily="@font/strait"/>
     </RelativeLayout>
-    <ImageButton
-        android:id="@+id/itemFavoButton"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+    <androidx.cardview.widget.CardView
         android:layout_gravity="end|bottom"
+        android:layout_width="wrap_content"
         android:layout_margin="12dp"
-        android:src="@drawable/ic_favo_empty"
-        android:background="@drawable/box_info"
-        android:backgroundTint="#E4CBA2"/>
+        app:cardCornerRadius="8dp"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/itemFavoButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_favorite_hurt">
+
+        </ImageButton>
+    </androidx.cardview.widget.CardView>
 </androidx.cardview.widget.CardView>
