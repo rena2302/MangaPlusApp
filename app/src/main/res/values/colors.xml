@@ -29,4 +29,10 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="lavender">#8692f7</color>
+
+    <color name="Home_Bottom">#B2CBD3</color>
+    <color name="Favorite_Bottom">#E2B49C</color>
+    <color name="Profile_Bottom">#CB867C</color>
+    <color name="Search_Bottom">#BEA58C</color>
+    <color name="Hot_Bottom">#D52530</color>
 </resources>

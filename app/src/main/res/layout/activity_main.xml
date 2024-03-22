@@ -27,6 +27,7 @@
             android:layout_height="match_parent">
         </FrameLayout>
         <ImageView
+            android:id="@+id/Background_Linear_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_linear_main"/>
@@ -37,11 +38,12 @@
             android:gravity="top"
             app:menu="@menu/home_fragment_header_menu">
             <TextView
+                android:id="@+id/AppName_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/manga_plus_home"
                 android:textSize="45sp"
-                android:textColor="#7E675E"
+                android:textColor="@color/Home_Bottom"
                 android:textStyle="bold"
                 android:fontFamily="@font/square_peg"
                 android:layout_gravity="center_horizontal"/>
@@ -62,8 +64,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:backgroundTint="#FFFFFF"
-                app:itemTextColor="#F38666"
-                app:itemIconTint="#F38666"
+                app:itemTextColor="@color/Home_Bottom"
+                app:itemIconTint="@color/Home_Bottom"
                 app:menu="@menu/bottom_nav_menu"
                 android:paddingEnd="10dp"
                 android:paddingStart="10dp"

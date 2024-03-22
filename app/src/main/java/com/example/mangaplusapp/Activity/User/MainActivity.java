@@ -4,6 +4,11 @@ package com.example.mangaplusapp.Activity.User;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +20,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -56,14 +64,14 @@ public class MainActivity extends BaseActivity {
     private BottomNavigationView bottomNavigationView;
     private DrawerLayout drawerLayout;
     private FragmentManager fragmentManager;
-    TextView userNameTxt;
+    TextView userNameTxt,NameApp;
     String userName;
-    ImageView imgViewUser;
+    ImageView imgViewUser,headerBackgroundLinear;
     UserDBHelper dbHelper;
     String userID;
     FirebaseAuth mAuth ;
     FirebaseUser currentUser ;
-    UserProfileFragment userProfileFragment;
+    int textColor,iconColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +105,7 @@ public class MainActivity extends BaseActivity {
         userID = currentUser.getProviderId();
         userName = currentUser.getDisplayName();
         Uri imgUser = currentUser.getPhotoUrl();
+        headerBackgroundLinear=findViewById(R.id.Background_Linear_main);
         Log.d("Main", "User id : "+userID);
         if(userID.isEmpty()){
             Log.d("Main Activity", "can not get userID");
@@ -246,6 +255,9 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
         navigationView = findViewById(R.id.navigation_drawer_container);
         FrameLayout frameLayout = findViewById(R.id.frameLayout);
+        NameApp=findViewById(R.id.AppName_Title);
+        int[] colors={Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW};
+        Drawable drawable=getDrawable(R.drawable.background_linear_main);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -253,14 +265,20 @@ public class MainActivity extends BaseActivity {
                 //Load Fragment and Menu
                 if (itemId == R.id.navHome) {
                     loadFragment(new HomeFragment(), false, R.menu.home_fragment_header_menu);
+                    SwapColorBottom(R.color.Home_Bottom);
+                    headerBackgroundLinear.setBackgroundResource(R.drawable.background_linear_main);
                 } else if (itemId == R.id.navHot) {
                     loadFragment(new HotFragment(), false, R.menu.hot_fragment_header_menu);
+                    SwapColorBottom(R.color.Hot_Bottom);
                 } else if (itemId == R.id.navSearch) {
                     loadFragment(new SearchFragment(), false, R.menu.search_fragment_header_menu);
+                    SwapColorBottom(R.color.Search_Bottom);
                 } else if (itemId == R.id.navFavorite) {
                     loadFragment(new FavoriteFragment(), false, R.menu.creator_fragment_header_menu);
+                    SwapColorBottom(R.color.Favorite_Bottom);
                 } else if (itemId == R.id.navProfile) {
                     loadFragment(new UserProfileFragment(), false, R.menu.library_fragment_header_menu);
+                    SwapColorBottom(R.color.Profile_Bottom);
                 }
                 return true;
             }
@@ -272,7 +290,14 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-
+    private void SwapColorBottom(int idColor)
+    {
+        textColor = ContextCompat.getColor(MainActivity.this, idColor);
+        iconColor = ContextCompat.getColor(MainActivity.this, idColor);
+        bottomNavigationView.setItemTextColor(ColorStateList.valueOf(textColor));
+        bottomNavigationView.setItemIconTintList(ColorStateList.valueOf(iconColor));
+        NameApp.setTextColor(iconColor);
+    }
     private void loadFragment(Fragment fragment, boolean isAppInitialized,int menuResId) {
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -342,11 +367,6 @@ public class MainActivity extends BaseActivity {
             loadFragment(new SearchFragment(),false, R.menu.search_fragment_header_menu);
             return true;
         }
-//        else if (itemId == R.id.hot_fm_profile) {
-//            // Handle action for HotFragment
-//            Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
-//            return true;
-//        }
         //If you wanna more feature add more condition
         return super.onOptionsItemSelected(item);
     }
