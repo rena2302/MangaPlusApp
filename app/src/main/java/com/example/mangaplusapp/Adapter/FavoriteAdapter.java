@@ -7,20 +7,25 @@ import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.User.MangaDetailActivity;
+import com.example.mangaplusapp.Fragment.SearchFragment;
 import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ItemFavoriteBinding;
 import com.example.mangaplusapp.object.Mangas;
 import com.example.mangaplusapp.util.ActivityUtils;
+import com.example.mangaplusapp.util.filter.FilterManga;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,18 +39,34 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.List;
 
-public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>{
-    List<Mangas> mangasList;
+public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> implements Filterable {
+    List<Mangas> mangasList, filterList;
     Context context;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
     ItemFavoriteBinding binding;
+    SearchFragment searchFragment;
+    private FilterManga filterManga;
     public FavoriteAdapter(Context context){
         this.context = context;
     }
+
+    public FavoriteAdapter(List<Mangas> mangasList, Context context) {
+        this.mangasList = mangasList;
+        this.context = context;
+    }
+
+    public FavoriteAdapter(List<Mangas> mangasList, Context context, SearchFragment searchFragment) {
+        this.mangasList = mangasList;
+        this.context = context;
+        this.searchFragment = searchFragment;
+    }
+
     public void setData(List<Mangas> mangasList){
         this.mangasList = mangasList;
+        this.filterList = mangasList;
     }
+    public void setFilterManga(List<Mangas> truyenTranhList) {this.mangasList = truyenTranhList;}
     @NonNull
     @Override
     public FavoriteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -60,16 +81,26 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         Mangas mangas = mangasList.get(position);
         setFavorite(mangas.getID_MANGA(), holder);
         holder.favoName.setText(mangas.getNAME_MANGA());
-        holder.favoPrice.setText("Price: " + mangas.getPRICE_MANGA() +"$");
+        if (Long.parseLong(mangas.getPRICE_MANGA()) == 0) {
+            holder.favoPrice.setText("Price: Free!");
+        }
+        else{
+            holder.favoPrice.setText("Price: " + mangas.getPRICE_MANGA() +"$");
+        }
+
         Glide.with(context)
                 .load(mangas.getPICTURE_MANGA())
                 .into(holder.favoImg);
-        holder.favoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleFavorite(mangas.getID_MANGA(), holder);
-            }
-        });
+        if (searchFragment != null){
+            holder.favoButtonCard.setVisibility(View.INVISIBLE);
+        }else {
+            holder.favoButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    toggleFavorite(mangas.getID_MANGA(), holder);
+                }
+            });
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +123,14 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         if(mangasList != null) return mangasList.size();
         return 0;
     }
+    @Override
+    public Filter getFilter() {
+        if(filterManga == null){
+            filterManga = new FilterManga(filterList,this);
+        }
+        return filterManga;
+    }
+
     protected void removeFromFavorite(String mangaIdToRemove, FavoriteViewHolder holder){
         if(firebaseAuth.getCurrentUser() == null){
             Toast.makeText(context,"You're not logged in", Toast.LENGTH_SHORT).show();
@@ -156,12 +195,14 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         ImageView favoImg;
         TextView favoName, favoPrice;
         ImageButton favoButton;
+        CardView favoButtonCard;
         public FavoriteViewHolder(@NonNull View itemView) {
             super(itemView);
             favoButton = (ImageButton) itemView.findViewById(R.id.itemFavoButton);
             favoImg = (ImageView) itemView.findViewById(R.id.itemFavoImg);
             favoName = (TextView) itemView.findViewById(R.id.itemFavoName);
             favoPrice = (TextView) itemView.findViewById(R.id.itemFavoPrice);
+            favoButtonCard = (CardView) itemView.findViewById(R.id.itemFavoCardButton);
         }
     }
 }

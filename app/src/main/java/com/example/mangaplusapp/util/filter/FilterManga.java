@@ -2,6 +2,7 @@ package com.example.mangaplusapp.util.filter;
 
 import android.widget.Filter;
 
+import com.example.mangaplusapp.Adapter.FavoriteAdapter;
 import com.example.mangaplusapp.Adapter.TruyenTranhAdapter;
 import com.example.mangaplusapp.object.Mangas;
 
@@ -10,11 +11,11 @@ import java.util.List;
 
 public class FilterManga extends Filter {
     List<Mangas> truyenTranhList;
-    TruyenTranhAdapter truyenTranhAdapter;
+    FavoriteAdapter favoriteAdapter;
 
-    public FilterManga(List<Mangas> truyenTranhList, TruyenTranhAdapter truyenTranhAdapter) {
+    public FilterManga(List<Mangas> truyenTranhList, FavoriteAdapter favoriteAdapter) {
         this.truyenTranhList = truyenTranhList;
-        this.truyenTranhAdapter = truyenTranhAdapter;
+        this.favoriteAdapter = favoriteAdapter;
     }
 
     @Override
@@ -43,8 +44,8 @@ public class FilterManga extends Filter {
 
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
-        truyenTranhAdapter.setFilterManga((List<Mangas>)results.values);
+        favoriteAdapter.setFilterManga((List<Mangas>)results.values);
 
-        truyenTranhAdapter.notifyDataSetChanged();
+        favoriteAdapter.notifyDataSetChanged();
     }
 }

@@ -103,7 +103,7 @@ public class PaymentActivity extends BaseActivity {
     private void hookIntent(){
 
         Intent intent = getIntent();
-        long price = Long.parseLong(intent.getStringExtra("PRICE_MANGA")) * 24000;
+        float price = Float.valueOf(intent.getStringExtra("PRICE_MANGA")) * 24000;
         description = intent.getStringExtra("NAME_MANGA");
         amount = String.valueOf(price);
 
@@ -162,7 +162,6 @@ public class PaymentActivity extends BaseActivity {
         if(requestCode == AppMoMoLib.getInstance().REQUEST_CODE_MOMO && resultCode == -1) {
             if(data != null) {
                 if(data.getIntExtra("status", -1) == 0) {
-                    Toast.makeText(PaymentActivity.this, "message: " + "Get token " + data.getStringExtra("message"), Toast.LENGTH_SHORT).show();
                     String token = data.getStringExtra("data"); //Token response
                     Log.d("requestCode", "onActivityResult: " + token);
                     String phoneNumber = data.getStringExtra("phonenumber");
@@ -177,21 +176,26 @@ public class PaymentActivity extends BaseActivity {
                         dialogSuccess();
                         // IF Momo topup success, continue to process your order
                     } else {
-                        Toast.makeText(PaymentActivity.this,"message: " + ("Khong thanh cong"), Toast.LENGTH_SHORT).show();
+                        onBackPressed();
+                        Toast.makeText(PaymentActivity.this,R.string.paymentFail, Toast.LENGTH_SHORT).show();
                     }
                 } else if(data.getIntExtra("status", -1) == 1) {
-                    String message = data.getStringExtra("message") != null?data.getStringExtra("message"):"Thất bại";
-                    Toast.makeText(PaymentActivity.this,"message: " + message, Toast.LENGTH_SHORT).show();
+                    onBackPressed();
+                    Toast.makeText(PaymentActivity.this,R.string.paymentFail, Toast.LENGTH_SHORT).show();
                 } else if(data.getIntExtra("status", -1) == 2) {
-                    Toast.makeText(PaymentActivity.this,"message: " + ("Khong thanh cong"), Toast.LENGTH_SHORT).show();
+                    onBackPressed();
+                    Toast.makeText(PaymentActivity.this,R.string.paymentFail, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(PaymentActivity.this,"message: " + ("Khong thanh cong"), Toast.LENGTH_SHORT).show();
+                    onBackPressed();
+                    Toast.makeText(PaymentActivity.this,R.string.paymentFail, Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(PaymentActivity.this,"message: " + ("Khong thanh cong"), Toast.LENGTH_SHORT).show();
+                onBackPressed();
+                Toast.makeText(PaymentActivity.this,R.string.paymentFail, Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(PaymentActivity.this,"message: " + ("Khong thanh cong, vui long gui lai"), Toast.LENGTH_SHORT).show();
+            onBackPressed();
+            Toast.makeText(PaymentActivity.this,R.string.paymentFailRetry, Toast.LENGTH_SHORT).show();
         }
     }
     /*------------------------------END-----------------------------------------*/
@@ -302,7 +306,7 @@ public class PaymentActivity extends BaseActivity {
     /*------------------------------BEGIN-----------------------------------------*/
     public void isBought(){
         if(firebaseAuth.getCurrentUser() == null){
-            Toast.makeText(this,"You're not login", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.isNotLogin, Toast.LENGTH_SHORT).show();
             return;
         }else {
             HashMap<String,Object> hashMap = new HashMap<>();
@@ -314,7 +318,7 @@ public class PaymentActivity extends BaseActivity {
                         @Override
                         public void onSuccess(Void unused) {
                             updateCountBought();
-                            Toast.makeText(PaymentActivity.this, "Buy manga successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PaymentActivity.this, R.string.buyMangSuccess, Toast.LENGTH_SHORT).show();
                         }
                     });
         }

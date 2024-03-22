@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mangaplusapp.Adapter.CateSearchAdapter;
+import com.example.mangaplusapp.Adapter.FavoriteAdapter;
 import com.example.mangaplusapp.Adapter.TruyenTranhAdapter;
 import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.R;
@@ -36,7 +37,7 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
     View view;
-    TruyenTranhAdapter truyenTranhAdapter;
+    FavoriteAdapter favoriteAdapter;
     CateSearchAdapter cateSearchAdapter;
     public interface OnMangaLoadedListener {
         void onMangaLoaded(List<Mangas> truyenTranhList);
@@ -50,7 +51,7 @@ public class SearchFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_search, container, false);
         LinearLayout mainLayout=view.findViewById(R.id.OverlaySearch);
         KeyBoardHelper.ActionRemoveKeyBoardForFragment(mainLayout,requireContext());
-        truyenTranhAdapter = new TruyenTranhAdapter(new ArrayList<>(), view.getContext());
+        favoriteAdapter = new FavoriteAdapter(new ArrayList<>(), view.getContext(), this);
         cateSearchAdapter = new CateSearchAdapter(new ArrayList<>(), view.getContext());
         searchEvent();
         recyclerViewCate();
@@ -58,8 +59,8 @@ public class SearchFragment extends Fragment {
         loadMangas(new OnMangaLoadedListener() {
             @Override
             public void onMangaLoaded(List<Mangas> truyenTranhList) {
-                truyenTranhAdapter.SetData(truyenTranhList);
-                truyenTranhAdapter.notifyDataSetChanged();
+                favoriteAdapter.setData(truyenTranhList);
+                favoriteAdapter.notifyDataSetChanged();
             }
         });
         loadCategories(new OnCateLoadedListener() {
@@ -121,10 +122,10 @@ public class SearchFragment extends Fragment {
     private void recyclerViewManga(){
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.searchFmRcv);
         //set LayoutManager
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
         recyclerView.setLayoutManager(gridLayoutManager);
         //set Adapter
-        recyclerView.setAdapter(truyenTranhAdapter);
+        recyclerView.setAdapter(favoriteAdapter);
     }
     private void recyclerViewCate(){
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.searchFmRcvCate);
@@ -146,7 +147,7 @@ public class SearchFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //called as when user type each letters
                 try {
-                    truyenTranhAdapter.getFilter().filter(s);
+                    favoriteAdapter.getFilter().filter(s);
                     cateSearchAdapter.getFilter().filter(s);
                 }catch (Exception e){
                     Toast.makeText(getContext(), " " + e.getMessage(),Toast.LENGTH_LONG).show();

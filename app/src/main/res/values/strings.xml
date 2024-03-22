@@ -18,6 +18,8 @@
     <string name="PROFILE">PROFILE</string>
     <string name="SEARCH">SEARCH</string>
     <string name="SUCCESS">SUCCESSFUL</string>
+    <string name="dataOccurred">An error occurred while processing data</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="manga_plus_home">Manga Plus!</string>
@@ -46,6 +48,17 @@
     <string name="changeLanguage">Change Language</string>
     <string name="ChoosePaymentOption">Choose Payment option</string>
     <string name="EditEmail">Change Email</string>
+    <string name="googleFail">Google sign in failed. Error code: </string>
+    <string name="unexpect">An unexpected error occurred</string>
+    <string name="signInFail">Invalid Credentials</string>
+    <string name="signInSuccess">Sign-in successful</string>
+    <string name="signInTypeWrong">Please enter all fields</string>
+    <string name="signEmailWrong">Incorrect email format \nEx:YourEmail@gmail.com</string>
+    <string name="signPasswordWrong">Incorrect password \nMust be more than 8 characters</string>
+    <string name="isNotLogin">You are not logged in</string>
+    <string name="removeFavoriteSuccess">Favorite removed successfully</string>
+    <string name="removeFavoriteFail">Failed to remove favorite</string>
+
     <!-- Begin Forgot -->
     <string name="forgotTittle">Forgot Password</string>
     <string name="forgotDescripstion">Forgot password? Easily recover with our apps user-friendly feature for a secure experience</string>
@@ -105,4 +118,17 @@
     <string name="changeTheme">Change theme</string>
     <string name="Buy_book">Buy Book</string>
     <string name="Reading">Reading</string>
+    <!--MANGA-->
+    <string name="mangaLoading">Manga Loading...</string>
+    <string name="addFavoriteSuccess">Favorite added successfully</string>
+    <string name="paymentFail">Payment failed</string>
+    <string name="paymentFailRetry">Payment failed. Please retry.</string>
+    <string name="buyMangSuccess">Manga purchased successfully</string>
+
+    <!--BIOMETRIC-->
+    <string name="bioError">Authentication Error: </string>
+    <string name="bioSuccess">Authentication successful</string>
+    <string name="bioFail">Authentication failed</string>
+
+
 </resources>

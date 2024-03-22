@@ -143,10 +143,10 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
             } catch (ApiException e) {
                 // Lấy mã lỗi từ ApiException
                 int errorCode = e.getStatusCode();
-                Toast.makeText(this, "Google sign in failed. Error code: " + errorCode, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.googleFail + errorCode, Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 // Nếu không phải ApiException, hiển thị lỗi khác
-                Toast.makeText(this, "An unexpected error occurred: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.unexpect + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -170,7 +170,7 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
                             startActivity(intent);
                         }
                         else{
-                            Toast.makeText(LoginActivity.this, "Something was wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, R.string.signInFail, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -193,19 +193,19 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
     //Callback by Presenter
     @Override
     public void LoginSuccess() {
-        Toast.makeText(LoginActivity.this,"Sign Ip Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this,R.string.signInSuccess, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void LoginFailed() {
-        Toast.makeText(LoginActivity.this,"Invalid Credentials", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this,R.string.signInFail, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void LoginDefalt() {
-        Toast.makeText(LoginActivity.this,"Please enter all fields", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this,R.string.signInTypeWrong, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -222,11 +222,11 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
 
     @Override
     public void Emailnoitvalid() {
-        Toast.makeText(LoginActivity.this,"        Email not valid \nEx:YourEmail@gmail.com", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this,R.string.signEmailWrong, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void Passwordnotvalid() {
-        Toast.makeText(LoginActivity.this,"          Password not valid \nMust be more than 8 characters", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this,R.string.signPasswordWrong, Toast.LENGTH_SHORT).show();
     }
 }

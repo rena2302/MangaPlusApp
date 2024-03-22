@@ -240,7 +240,7 @@ public class MangaDetailActivity extends BaseActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(MangaDetailActivity.this, "Add favorite successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MangaDetailActivity.this, R.string.addFavoriteSuccess, Toast.LENGTH_SHORT).show();
                         }
                     });
         }
@@ -248,7 +248,7 @@ public class MangaDetailActivity extends BaseActivity {
     }
     protected void removeFromFavorite(String mangaIdToRemove){
         if(firebaseAuth.getCurrentUser() == null){
-            Toast.makeText(this,"You're not logged in", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.isNotLogin, Toast.LENGTH_SHORT).show();
             return;
         }else {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
@@ -260,20 +260,20 @@ public class MangaDetailActivity extends BaseActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
-                                            Toast.makeText(MangaDetailActivity.this, "Remove from favorite successful", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MangaDetailActivity.this, R.string.removeFavoriteSuccess, Toast.LENGTH_SHORT).show();
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(MangaDetailActivity.this, "Failed to remove from favorite", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MangaDetailActivity.this, R.string.removeFavoriteFail, Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast.makeText(MangaDetailActivity.this, "Database error occurred", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MangaDetailActivity.this, R.string.dataOccurred, Toast.LENGTH_SHORT).show();
                         }
                     });
         }
@@ -439,9 +439,7 @@ public class MangaDetailActivity extends BaseActivity {
             public void onAuthenticationError(int errorCode,
                                               @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
-                Toast.makeText(getApplicationContext(),
-                                "Authentication error: " + errString, Toast.LENGTH_SHORT)
-                        .show();
+                Toast.makeText(getApplicationContext(), R.string.bioError + errString.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -449,7 +447,7 @@ public class MangaDetailActivity extends BaseActivity {
                     @NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(),
-                        "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+                        R.string.bioSuccess, Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 editor.putBoolean("keyBiometric",true);
                 editor.apply();
@@ -460,7 +458,7 @@ public class MangaDetailActivity extends BaseActivity {
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
-                Toast.makeText(getApplicationContext(), "Authentication failed",
+                Toast.makeText(getApplicationContext(), R.string.bioFail,
                                 Toast.LENGTH_SHORT)
                         .show();
             }

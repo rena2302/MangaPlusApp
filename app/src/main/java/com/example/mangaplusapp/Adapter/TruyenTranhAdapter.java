@@ -37,16 +37,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.TruyenTranhViewHolder> implements Filterable {
+public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.TruyenTranhViewHolder>{
     private Context context;
     private View view;
-    private List<Mangas> truyenTranhList, filterList;
-    private FilterManga filterManga;
+    private List<Mangas> truyenTranhList;
     private HotViewFragment hotViewFragment;
     private HotBoughtFragment hotBoughtFragment;
     public void SetData(List<Mangas> truyenTranhList){
         this.truyenTranhList = truyenTranhList;
-        this.filterList = truyenTranhList;
     }
     public TruyenTranhAdapter(Context context, HotViewFragment hotFragment){
         this.hotViewFragment = hotFragment;
@@ -63,7 +61,6 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
         this.truyenTranhList = truyenTranhList;
         this.context = context;
     }
-    public void setFilterManga(List<Mangas> truyenTranhList) {this.truyenTranhList = truyenTranhList;}
     @NonNull
     @Override
     public TruyenTranhViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -198,15 +195,6 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
         }
         return 0;
     }
-
-    @Override
-    public Filter getFilter() {
-        if(filterManga == null){
-            filterManga = new FilterManga(filterList,this);
-        }
-        return filterManga;
-    }
-
     public static class TruyenTranhViewHolder extends RecyclerView.ViewHolder{
         ImageView imageTruyen, imageHot;
         TextView txtTruyen, txtHot, txtView, txtRank;
