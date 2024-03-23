@@ -53,4 +53,8 @@
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">#F6F6F6</item>
     </style>
+    <style name="Base.Theme.Region" parent="ThemeOverlay.Material3.DayNight.SideSheetDialog">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#000000</item>
+    </style>
 </resources>

@@ -132,14 +132,14 @@ public class MangaDetailActivity extends BaseActivity {
                     binding.mangaDetailDescription.setLineSpacing(10,1);
                     binding.mangaDetailDescription.setLetterSpacing(0.02f);
                     binding.mangaDetailDescription.setMaxLines(10);
-                    binding.ContentShowmore.setText("Show more");
+                    binding.ContentShowmore.setText(R.string.Showmore);
                     binding.ContentShowmore.setTextColor(Color.BLACK);
                     binding.mangaDetailDescription.animate().translationY(0).alpha(0.3f).setDuration(500).start();
                 } else {
                     binding.mangaDetailDescription.setMaxLines(Integer.MAX_VALUE);
                     binding.mangaDetailDescription.setLineSpacing(20,1);
                     binding.mangaDetailDescription.setLetterSpacing(0.035f);
-                    binding.ContentShowmore.setText("Hide less");
+                    binding.ContentShowmore.setText(R.string.Hideless);
                     binding.ContentShowmore.setTextColor(Color.GRAY);
                     // Di chuyển nội dung xuống
                     binding.mangaDetailDescription.animate().translationY(8).alpha(0.7f).setDuration(500).start();
@@ -156,8 +156,8 @@ public class MangaDetailActivity extends BaseActivity {
     private BiometricPrompt.PromptInfo.Builder dialogMetric()
     {
         return new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Manga plus needs to confirm")
-                .setSubtitle("Fingerprint verification");
+                .setTitle(getString(R.string.Mangaplusneedstoconfirm))
+                .setSubtitle(getString(R.string.Fingerprintverification));
     }
     private void onClickPayment(Boolean isPremium){
         binding.BuyBook.setOnClickListener(new View.OnClickListener() {

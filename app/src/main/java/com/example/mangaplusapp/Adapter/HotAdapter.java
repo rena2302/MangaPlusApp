@@ -1,7 +1,5 @@
 package com.example.mangaplusapp.Adapter;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -13,16 +11,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.mangaplusapp.Fragment.HotBoughtFragment;
 import com.example.mangaplusapp.Fragment.HotViewFragment;
-import com.example.mangaplusapp.R;
 
 public class HotAdapter extends FragmentStatePagerAdapter {
 
-    Context context;
+
     public HotAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
-    }
-    public void setContext(Context context){
-        this.context = context;
     }
 
     @NonNull
@@ -46,12 +40,10 @@ public class HotAdapter extends FragmentStatePagerAdapter {
         String title = "";
         switch (position){
             case 0:
-                String viewCount = context.getString(R.string.viewHot);
-                title = viewCount;
+                title = "View";
                 break;
             case 1:
-                String buyCount = context.getString(R.string.boughtHot);
-                title = buyCount;
+                title = "Buy";
                 break;
         }
         return title;

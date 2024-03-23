@@ -25,7 +25,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Send Successfull !"
+            android:text="@string/SendSuccessfull"
             android:textColor="#000000"
             android:fontFamily="@font/interextrabold"
             android:textSize="30sp"/>
@@ -37,7 +37,7 @@
             android:layout_marginEnd="30dp"
             android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
-            android:text="We've sent a link to your email, click on it to update your password"
+            android:text="@string/Titlesendsuccess"
             android:textAppearance="@style/RecommendRes"
             android:fontFamily="@font/ubuntubold"
             android:lineSpacingExtra="4dp"
@@ -54,7 +54,7 @@
             android:background="@drawable/btn_accept"
             android:backgroundTint="#EA9696"
             android:fontFamily="@font/interextrabold"
-            android:text="Back to login"
+            android:text="@string/Backtologin"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="20sp" />

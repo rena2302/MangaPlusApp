@@ -87,6 +87,32 @@
     <string name="addNewChapter">नया अध्याय जोड़ें</string>
     <string name="addChapterManga">अध्याय मान्गा जोड़ें</string>
     <string name="searchKeyWord">पुस्तक खोजें</string>
-
-
+    <string name="ResendCode">कोड पुनः भेजें</string>
+    <string name="Resend">पुन: कोड भेजे</string>
+    <string name="SendSuccessfull">सफल भेजें!</string>
+    <string name="Titlesendsuccess">हमने आपके ईमेल पर एक लिंक भेजा है, अपना पासवर्ड अपडेट करने के लिए उस पर क्लिक करें</string>
+    <string name="Backtologin">लॉगिन पर वापस जाएं</string>
+    <string name="View">देखना</string>
+    <string name="Buy">खरीदना</string>
+    <string name="Languages">बोली</string>
+    <string name="Apply">आवेदन करना</string>
+    <string name="EnterNewEmail">नया ईमेल दर्ज करें</string>
+    <string name="TermsofUse">उपयोग की शर्तें</string>
+    <string name="Support">सहायता</string>
+    <string name="Showmore">और दिखाओ</string>
+    <string name="Hideless">कम छुपाएं</string>
+    <string name="Read">पढ़ना</string>
+    <string name="Chapter">अध्याय</string>
+    <string name="BookDescription">पुस्तक विवरण</string>
+    <string name="Mangaplusneedstoconfirm">मंगा प्लस को पुष्टि करने की आवश्यकता है</string>
+    <string name="Fingerprintverification">फ़िंगरप्रिंट सत्यापन</string>
+    <string name="Paybymomo">momo द्वारा भुगतान करें</string>
+    <string name="Paybymastercredit">मास्टर क्रेडिट द्वारा भुगतान करें</string>
+    <string name="Price">कीमत :</string>
+    <string name="Paybycredit">क्रेडिट द्वारा भुगतान करें</string>
+    <string name="Cancel">रद्द करना</string>
+    <string name="PaybyMomo">Momo द्वारा भुगतान करें</string>
+    <string name="Storygenres">कहानी की शैलियाँ</string>
+    <string name="Recommended">अनुशंसित</string>
 </resources>
+
