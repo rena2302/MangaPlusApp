@@ -95,7 +95,7 @@ public class ChangePasswordFragment extends Fragment {
                         fragmentHelper = new LoadFragment();
                         fragmentHelper.loadFragment(getParentFragmentManager(), new SuccessFragment(), false, R.id.editFmContainer);
                     } else {
-                        Toast.makeText(getContext(),"Invalid password",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),R.string.invalidPassword,Toast.LENGTH_SHORT).show();
                     }
                 });
     }

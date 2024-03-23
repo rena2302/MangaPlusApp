@@ -118,7 +118,7 @@ public class ChapterPdfActivity extends BaseActivity implements ChapterViewFragm
             startNewActivityAndFinishCurrent(MainActivity.class);
             super.onBackPressed(); // Chỉ cho phép back khi PDF đã load xong
         } else {
-            Toast.makeText(ChapterPdfActivity.this,"Manga on loading please wait...", Toast.LENGTH_LONG).show();
+            Toast.makeText(ChapterPdfActivity.this,R.string.mangaLoading, Toast.LENGTH_LONG).show();
         }
 
     }

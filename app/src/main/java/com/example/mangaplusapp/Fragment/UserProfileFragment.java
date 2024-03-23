@@ -139,11 +139,11 @@ public class UserProfileFragment extends Fragment {
             currentUser.updateProfile(profileUpdates).addOnCompleteListener(task -> {
                 if(task.isSuccessful()){
                     Glide.with(this).load(uri).into(getUserAvtIMG);
-                    Toast.makeText(getActivity(), "Update Avatar Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.avatar_update_successful, Toast.LENGTH_SHORT).show();
                     startAct();
                 }
                 else{
-                    Toast.makeText(getActivity(), "Update Avatar Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.avatar_update_failed, Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -189,7 +189,7 @@ public class UserProfileFragment extends Fragment {
         AppCompatButton logout=dialog.findViewById(R.id.Logout);
 
         if(isLoggedIn()){
-            logout.setHint("Log Out");
+            logout.setHint(R.string.Logout);
             ///////===========================Begin Logout=========================/////////////////////
             logout.setOnClickListener(v -> {
                 // Clear session and navigate to login activity
@@ -221,7 +221,7 @@ public class UserProfileFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(getActivity(), "Log out successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), R.string.logout_successful, Toast.LENGTH_SHORT).show();
                                 SharedPreferences.Editor editor=sharedPreferences.edit();
                                 editor.putBoolean("keyBiometric",false);
                                 editor.apply();
@@ -232,7 +232,7 @@ public class UserProfileFragment extends Fragment {
                                 startActivity(intent);
                             } else {
                                 // Xảy ra lỗi khi đăng xuất khỏi Google
-                                Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), R.string.google_sign_out_fail, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -240,7 +240,7 @@ public class UserProfileFragment extends Fragment {
         } else {
 
             // Đăng xuất khỏi Firebase Auth
-            Toast.makeText(getActivity(), "Log out successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.logout_successful, Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putBoolean("keyBiometric",false);
             editor.apply();

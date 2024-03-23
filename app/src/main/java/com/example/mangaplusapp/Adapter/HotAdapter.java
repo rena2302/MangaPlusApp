@@ -1,7 +1,5 @@
 package com.example.mangaplusapp.Adapter;
 
-import static android.provider.Settings.System.getString;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -13,7 +11,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.mangaplusapp.Fragment.HotBoughtFragment;
 import com.example.mangaplusapp.Fragment.HotViewFragment;
-import com.example.mangaplusapp.R;
 
 public class HotAdapter extends FragmentStatePagerAdapter {
 
@@ -43,7 +40,7 @@ public class HotAdapter extends FragmentStatePagerAdapter {
         String title = "";
         switch (position){
             case 0:
-                title = "View" ;
+                title = "View";
                 break;
             case 1:
                 title = "Buy";

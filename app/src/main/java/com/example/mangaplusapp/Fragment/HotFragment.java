@@ -36,6 +36,7 @@ public class HotFragment extends Fragment {
         binding = FragmentHotBinding.inflate(inflater);
 
         HotAdapter hotAdapter = new HotAdapter(requireActivity().getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        hotAdapter.setContext(getContext());
         binding.hotFmViewPager.setAdapter(hotAdapter);
         binding.hotFmTab.setupWithViewPager(binding.hotFmViewPager);
         return binding.getRoot();

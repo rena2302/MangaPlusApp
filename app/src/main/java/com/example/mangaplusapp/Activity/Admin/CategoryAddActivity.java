@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
+import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityCategoryAddBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -56,7 +57,7 @@ public class CategoryAddActivity extends BaseActivity {
         //get Data
         category = binding.addCategoryName.getText().toString().trim();
         if(TextUtils.isEmpty(category)){
-            Toast.makeText(this,"Please enter category name...!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.fillCategory, Toast.LENGTH_LONG).show();
         }
         else {
             addCategoryFireBase();
@@ -80,14 +81,14 @@ public class CategoryAddActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         //category add success
-                        Toast.makeText(CategoryAddActivity.this,"Category add successful", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CategoryAddActivity.this,R.string.addCategorySuccess, Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         //category add fail
-                        Toast.makeText(CategoryAddActivity.this,"Category add failure", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CategoryAddActivity.this,R.string.addCategoryFail, Toast.LENGTH_LONG).show();
                     }
                 });
     }

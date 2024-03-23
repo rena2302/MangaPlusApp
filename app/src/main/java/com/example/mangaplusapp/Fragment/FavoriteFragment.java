@@ -96,7 +96,7 @@ public class FavoriteFragment extends Fragment {
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
-                                    Toast.makeText(getContext(), "The loading mangas was interrupted", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.loadingInterupted, Toast.LENGTH_SHORT).show();
                                 }
                             });
                 }
@@ -104,7 +104,7 @@ public class FavoriteFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "The loading mangas was interrupted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.loadingInterupted, Toast.LENGTH_SHORT).show();
             }
         });
     }

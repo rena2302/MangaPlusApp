@@ -59,7 +59,7 @@ public class ForgotFragment extends Fragment {
         SendOtpBtn.setOnClickListener(v->{
             String emailInput = getUserEmailTxt.getText().toString();
             if(emailInput.isEmpty()){
-                Toast.makeText(getContext() ,"Please enter your email", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext() ,R.string.enter_email, Toast.LENGTH_SHORT).show();
             }
             else{
                 db.checkEmailExists(emailInput, new UserDBHelper.userCheckFirebaseListener() {
@@ -76,7 +76,7 @@ public class ForgotFragment extends Fragment {
                             loadFragment(new VerificationFragment(),false);
                         }
                         else{
-                            Toast.makeText(getContext() ,"Email not exists in our app", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext() ,R.string.email_not_found, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
