@@ -6,6 +6,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +33,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MangaListFragment extends DialogFragment {
+    private ImageView Closed_Dialog;
+    private TextView TitleName_Dialog;
+    private RelativeLayout background_dialog;
     private Categories category;
     private View view;
     public MangaListFragment() {}
@@ -59,41 +65,29 @@ public class MangaListFragment extends DialogFragment {
         // Tạo dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
+
         view = inflater.inflate(R.layout.fragment_dashboard_mangalist, null);
+        Closed_Dialog=view.findViewById(R.id.Closed_dialog);
+        TitleName_Dialog=view.findViewById(R.id.Name_Title);
+        background_dialog=view.findViewById(R.id.Background_dialog_nav);
+
         RecyclerView recyclerView = view.findViewById(R.id.dashFragmentRcv);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setAdapter(adapter);
-        if(tag.equals("category_dialog")){
+
+        if (tag.equals("Favorite")){
             builder
-                    .setView(view)
-                    .setTitle(category.getNAME_CATEGORY())
-                    .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-        }else if (tag.equals("Favorite")){
-            builder
-                    .setView(view)
-                    .setTitle(R.string.favorite)
-                    .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
+                    .setView(view);
+            TitleName_Dialog.setText(getString(R.string.favorite));
+            Closed_Dialog.setOnClickListener(v->{dismiss();});
+            background_dialog.setBackgroundResource(R.drawable.background_fav_dialog);
 
         } else if (tag.equals("Bought")) {
             builder
-                    .setView(view)
-                    .setTitle(R.string.bought)
-                    .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
+                    .setView(view);
+            TitleName_Dialog.setText(getString(R.string.bought));
+            Closed_Dialog.setOnClickListener(v->{dismiss();});
+            background_dialog.setBackgroundResource(R.drawable.background_bought_dialog);
         }
 
 

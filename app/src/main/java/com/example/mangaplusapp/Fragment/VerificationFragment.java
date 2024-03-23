@@ -349,7 +349,7 @@ public class VerificationFragment extends Fragment{
             public void onFinish() {
                 resendEnable=true;
                 keyOtp = otpHelper.generateOTP();
-                reSendOtp.setText("Resend Code");
+                reSendOtp.setText(getString(R.string.Resend));
                 reSendOtp.setTextColor(getContext().getResources().getColor(android.R.color.holo_blue_dark));
             }
         }.start();
