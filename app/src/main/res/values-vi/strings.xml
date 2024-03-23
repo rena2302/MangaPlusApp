@@ -140,7 +140,6 @@
     <string name="priceFree">Giá: Miễn phí!</string>
     <string name="isNotLogin">Bạn chưa đăng nhập.</string>
     <string name="emailExists">Email này đã tồn tại trong hệ thống</string>
-    <string name="emailExists">Email này đã tồn tại trong hệ thống của chúng tôi.</string>
     <string name="typeEmailValid">Vui lòng nhập một địa chỉ email hợp lệ.</string>
     <string name="removeFavoriteSuccess">" Xóa khỏi mục yêu thích thành công"</string>
     <string name="removeFavoriteFail">Không thể xóa khỏi mục yêu thích</string>
