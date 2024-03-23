@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         app:boxStrokeColor="@color/black"
-        android:hint="Languages"
+        android:hint="@string/Languages"
         android:textColorHint="@color/black"
         app:startIconDrawable="@drawable/icon_laguage"
         app:startIconTint="@color/black"
