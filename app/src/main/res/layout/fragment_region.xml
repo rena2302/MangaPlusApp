@@ -36,7 +36,7 @@
             android:layout_marginBottom="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apply"
+            android:text="@string/Apply"
             android:elevation="20dp"
             android:translationZ="40dp"
             android:layout_alignParentBottom="true"
@@ -46,6 +46,7 @@
             />
     </RelativeLayout>
     <com.google.android.material.textfield.TextInputLayout
+        android:theme="@style/Base.Theme.Region"
         android:layout_below="@id/backEditProfileBtn"
         android:layout_marginTop="50dp"
         android:layout_marginStart="16dp"

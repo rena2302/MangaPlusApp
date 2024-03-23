@@ -14,11 +14,11 @@
                 <item
                     android:id="@+id/menu_drawer_support1"
                     android:icon="@drawable/term_of_con"
-                    android:title="Terms of Use"/>
+                    android:title="@string/TermsofUse"/>
                 <item
                     android:id="@+id/menu_drawer_support2"
                     android:icon="@drawable/ic_supporter2"
-                    android:title="Support"/>
+                    android:title="@string/Support"/>
             </group>
         </menu>
     </item>
@@ -41,5 +41,5 @@
         android:divider="#00000000"
         android:id="@+id/Logout"
         android:icon="@drawable/ic_logout_nav"
-        android:title="Logout"/>
+        android:title="@string/Logout"/>
 </menu>

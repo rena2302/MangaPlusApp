@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="3dp"
-            android:text="n/n"
+            android:text="..."
             android:textSize="14sp"
             android:fontFamily="@font/ubuntu_regular"/>
         <ProgressBar
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="6dp"
-            android:text="Chapter"
+            android:text="@string/Chapter"
             android:textSize="16sp"
             android:fontFamily="@font/ubuntu_regular"/>
     </LinearLayout>

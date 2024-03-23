@@ -5,7 +5,7 @@
     <!-- BASE  -->
     <string name="Finish">खत्म करना</string>
     <string name="submit">जमा करना</string>
-    <string name="testDemo"></string>
+    <string name="testDemo">परीक्षण डेमो</string>
     <string name="Home">घर</string>
     <string name="Hot">लोकप्रिय</string>
     <string name="Search">ढूँढ</string>
@@ -19,6 +19,7 @@
     <string name="PROFILE">प्रोफ़ाइल</string>
     <string name="SEARCH">खोज</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="SUCCESS">सफल</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="manga_plus_home">Manga Plus!</string>
     <string name="navigation_drawer_open">Open Navigation drawer</string>
@@ -74,6 +75,7 @@
     <string name="oldPasswordProfileUser">पुराना पासवर्ड</string>
     <string name="newPasswordProfileUser">नया पासवर्ड</string>
     <string name="confirmNewPasswordProfileUser">पासवर्ड की पुष्टि करें</string>
+    <string name="card_s_information">कार्ड की जानकारी</string>
     <string name="placeForAdmin">व्यवस्थापक के लिए स्थान</string>
     <string name="bought">खरीदा</string>
     <string name="payment">भुगतान</string>
@@ -83,10 +85,49 @@
     <string name="addMangaDescription">मान्गा विवरण जोड़ें</string>
     <string name="addMangaPicture">मान्गा चित्र जोड़ें</string>
     <string name="addMangaCategory">मान्गा श्रेणी जोड़ें</string>
+    <string name="addMangaPrice">मंगा मूल्य जोड़ें</string>
     <string name="addManga">मान्गा जोड़ें</string>
+    <string name="addMangaPremium">प्रीमियम मंगा?</string>
+    <string name="editDashboard">डैशबोर्ड संपादित करें</string>
+    <string name="editManga">मंगा संपादित करें</string>
+    <string name="editMangaDescription">मंगा विवरण संपादित करें</string>
+    <string name="editMangaPicture">मंगा चित्र संपादित करें</string>
+    <string name="editMangaCategory">मंगा श्रेणी संपादित करें</string>
+    <string name="editMangaName">मंगा नाम संपादित करें</string>
+    <string name="editMangaPremium">प्रीमियम मंगा?</string>
+    <string name="editMangaPrice">मंगा मूल्य संपादित करें</string>
     <string name="addNewChapter">नया अध्याय जोड़ें</string>
     <string name="addChapterManga">अध्याय मान्गा जोड़ें</string>
     <string name="searchKeyWord">पुस्तक खोजें</string>
+    <string name="Buy_book">किताब खरीदें</string>
+    <string name="Reading">पढ़ना</string>
+    <string name="ResendCode">कोड पुनः भेजें</string>
+    <string name="Resend">पुन: कोड भेजे</string>
+    <string name="SendSuccessfull">सफल भेजें!</string>
+    <string name="Titlesendsuccess">हमने आपके ईमेल पर एक लिंक भेजा है, अपना पासवर्ड अपडेट करने के लिए उस पर क्लिक करें</string>
+    <string name="Backtologin">लॉगिन पर वापस जाएं</string>
+    <string name="View">देखना</string>
+    <string name="Buy">खरीदना</string>
+    <string name="Languages">बोली</string>
+    <string name="Apply">आवेदन करना</string>
+    <string name="EnterNewEmail">नया ईमेल दर्ज करें</string>
+    <string name="TermsofUse">उपयोग की शर्तें</string>
+    <string name="Support">सहायता</string>
+    <string name="Showmore">और दिखाओ</string>
+    <string name="Hideless">कम छुपाएं</string>
+    <string name="Read">पढ़ना</string>
+    <string name="Chapter">अध्याय</string>
+    <string name="BookDescription">पुस्तक विवरण</string>
+    <string name="Mangaplusneedstoconfirm">मंगा प्लस को पुष्टि करने की आवश्यकता है</string>
+    <string name="Fingerprintverification">फ़िंगरप्रिंट सत्यापन</string>
+    <string name="Paybymomo">momo द्वारा भुगतान करें</string>
+    <string name="Paybymastercredit">मास्टर क्रेडिट द्वारा भुगतान करें</string>
+    <string name="Price">कीमत :</string>
+    <string name="Paybycredit">क्रेडिट द्वारा भुगतान करें</string>
+    <string name="Cancel">रद्द करना</string>
+    <string name="PaybyMomo">Momo द्वारा भुगतान करें</string>
+    <string name="Storygenres">कहानी की शैलियाँ</string>
+    <string name="Recommended">अनुशंसित</string>
 
 
 </resources>

@@ -183,31 +183,32 @@
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="20sp"/>
+
                     <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/sendOtp"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_marginTop="20dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAppearance="@style/RecommendRes"
-                            android:text="Re-send code in"
+                            android:layout_marginRight="5dp"
                             android:fontFamily="@font/ubuntubold"
                             android:letterSpacing="0.0015"
-                            android:layout_marginRight="5dp">
-                        </TextView>
+                            android:text="@string/ResendCode"
+                            android:textAppearance="@style/RecommendRes"></TextView>
+
                         <TextView
                             android:id="@+id/reSendOtpTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:fontFamily="@font/ubuntubold"
+                            android:gravity="center"
+                            android:text="running. . ."
                             android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:text="running. . .">
-                        </TextView>
+                            android:textStyle="bold"></TextView>
                     </LinearLayout>
                 </RelativeLayout>
             </RelativeLayout>

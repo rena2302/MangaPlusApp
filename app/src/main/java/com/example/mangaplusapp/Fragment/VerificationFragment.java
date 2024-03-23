@@ -146,6 +146,7 @@ public class VerificationFragment extends Fragment{
                 startCountDownTimer();
             }
         });
+
         submitOtp.setOnClickListener(v->{
             String otp1 = otp1Input.getText().toString();
             String otp2 = otp2Input.getText().toString();
@@ -182,13 +183,9 @@ public class VerificationFragment extends Fragment{
                 Toast.makeText(getContext(),"Not entering enough OTP code", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
-
         return root;
     }
+
     private  void BackPageVertication(){
         backOTPBtn.setOnClickListener(v->{
             dbHelper.checkEmailExists(emailUser, new UserDBHelper.userCheckFirebaseListener() {
@@ -205,6 +202,7 @@ public class VerificationFragment extends Fragment{
             });
         });
     }
+
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -217,7 +215,7 @@ public class VerificationFragment extends Fragment{
         }
         fragmentTransaction.commit();
     }
-    //Check Editext has data or not
+
     private int ListenNullText(int SelectedPosition,EditText input1,EditText input2, EditText input3, EditText input4)
     {
         Editable editable1=input1.getText();
@@ -323,6 +321,8 @@ public class VerificationFragment extends Fragment{
         };
         Action.addTextChangedListener(textWatcher);
     }
+
+
     //Display keyboard and focus for each edittext
     private  void showKeyBoard(EditText otpET)
     {
@@ -331,6 +331,8 @@ public class VerificationFragment extends Fragment{
         //Show the keyboard doesn't need to interact with edittext
         inputMethodManager.showSoftInput(otpET,InputMethodManager.SHOW_IMPLICIT);
     }
+
+
     private void startCountDownTimer()
     {
         //if resendEnable=false then start the countdown
@@ -349,7 +351,7 @@ public class VerificationFragment extends Fragment{
             public void onFinish() {
                 resendEnable=true;
                 keyOtp = otpHelper.generateOTP();
-                reSendOtp.setText("Resend Code");
+                reSendOtp.setText(R.string.Resend);
                 reSendOtp.setTextColor(getContext().getResources().getColor(android.R.color.holo_blue_dark));
             }
         }.start();

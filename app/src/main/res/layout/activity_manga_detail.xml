@@ -89,7 +89,7 @@
                             android:layout_height="wrap_content"/>
                         <TextView
                             android:layout_width="wrap_content"
-                            android:text="Read"
+                            android:text="@string/Read"
                             android:textColor="#4D000000"
                             android:fontFamily="@font/intersemibold"
                             android:layout_height="wrap_content"/>
@@ -110,7 +110,7 @@
                             android:layout_height="wrap_content"/>
                         <TextView
                             android:layout_width="wrap_content"
-                            android:text="Chapter"
+                            android:text="@string/Chapter"
                             android:textColor="#4D000000"
                             android:fontFamily="@font/intersemibold"
                             android:layout_height="wrap_content"/>
@@ -125,7 +125,7 @@
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Book Description"/>
+                    android:text="@string/BookDescription"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/Layout_Content_book"
@@ -166,7 +166,7 @@ Translated into English for the first time, this novel is about an affair gone w
                     android:layout_centerHorizontal="true"
                     android:id="@+id/Content_showmore"
                     android:layout_width="wrap_content"
-                    android:text="Show more"
+                    android:text="@string/Showmore"
                     android:layout_height="wrap_content"/>
             </RelativeLayout>
         </RelativeLayout>
@@ -210,7 +210,7 @@ Translated into English for the first time, this novel is about an affair gone w
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reading"
+            android:text="@string/Reading"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:fontFamily="@font/interextrabold"
