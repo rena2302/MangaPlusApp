@@ -43,24 +43,30 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
     private List<Mangas> truyenTranhList;
     private HotViewFragment hotViewFragment;
     private HotBoughtFragment hotBoughtFragment;
+
     public void SetData(List<Mangas> truyenTranhList){
         this.truyenTranhList = truyenTranhList;
     }
+
     public TruyenTranhAdapter(Context context, HotViewFragment hotFragment){
         this.hotViewFragment = hotFragment;
         this.context = context;
     }
+
     public TruyenTranhAdapter(Context context, HotBoughtFragment hotBoughtFragment){
         this.hotBoughtFragment = hotBoughtFragment;
         this.context = context;
     }
+
     public TruyenTranhAdapter(Context context){
         this.context = context;
     }
+
     public TruyenTranhAdapter(List<Mangas> truyenTranhList, Context context){
         this.truyenTranhList = truyenTranhList;
         this.context = context;
     }
+
     @NonNull
     @Override
     public TruyenTranhViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -163,14 +169,13 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                                     }
                                 })
                                 .show();
-
                     }
                     return false;
                 }
             });
         }
-
     }
+
     private void deleteMangas(Mangas truyenTranh) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
         String truyentranhId = truyenTranh.getID_MANGA();
@@ -179,7 +184,7 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(context,"Delete " + truyenTranh.getNAME_MANGA() + " successfully", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context,R.string.Delete + truyenTranh.getNAME_MANGA() + R.string.successfully, Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -188,8 +193,8 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                         Toast.makeText(context," " + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-
     }
+
     @Override
     public int getItemCount() {
         if(truyenTranhList != null){
@@ -197,10 +202,10 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
         }
         return 0;
     }
+
     public static class TruyenTranhViewHolder extends RecyclerView.ViewHolder{
         ImageView imageTruyen, imageHot;
         TextView txtTruyen, txtHot, txtView, txtRank;
-
 
         public TruyenTranhViewHolder(@NonNull View itemView) {
             super(itemView);

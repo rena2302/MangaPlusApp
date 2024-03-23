@@ -92,12 +92,14 @@ public class PaymentActivity extends BaseActivity {
             }
         });
     }
+
     /*------------------------------BEGIN-----------------------------------------*/
     private void initView(){
         btnPayMoMo = (Button) findViewById(R.id.btnPayMoMo);
         mangaId = getIntent().getStringExtra("ID_MANGA");
         firebaseAuth = FirebaseAuth.getInstance();
     }
+
     //example payment
     /*------------------------------END-----------------------------------------*/
     private void hookIntent(){
@@ -121,6 +123,7 @@ public class PaymentActivity extends BaseActivity {
             }
         });
     }
+
     /*------------------------------BEGIN-----------------------------------------*/
     private void requestPayment() {
         AppMoMoLib.getInstance().setAction(AppMoMoLib.ACTION.PAYMENT);
@@ -153,6 +156,7 @@ public class PaymentActivity extends BaseActivity {
         //Request momo app
         AppMoMoLib.getInstance().requestMoMoCallBack(this, eventValue);
     }
+
     /*------------------------------END-----------------------------------------*/
 
     /*------------------------------BEGIN-----------------------------------------*/
@@ -163,7 +167,6 @@ public class PaymentActivity extends BaseActivity {
             if(data != null) {
                 if(data.getIntExtra("status", -1) == 0) {
                     String token = data.getStringExtra("data"); //Token response
-                    Log.d("requestCode", "onActivityResult: " + token);
                     String phoneNumber = data.getStringExtra("phonenumber");
                     String env = data.getStringExtra("env");
                     if(env == null){
@@ -171,7 +174,6 @@ public class PaymentActivity extends BaseActivity {
                     }
                     if(token != null && !token.equals("")) {
                         // TODO: send phoneNumber & token to your server side to process payment with MoMo server
-
                         isBought();// demo payment successful
                         dialogSuccess();
                         // IF Momo topup success, continue to process your order
@@ -223,7 +225,6 @@ public class PaymentActivity extends BaseActivity {
             e.printStackTrace();
         }
         // Tạo một yêu cầu HTTP POST để gửi thông tin đến máy chủ của bạn
-
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.parse("application/json; charset=UTF-8");
         JSONObject jsonObject = new JSONObject();
@@ -240,7 +241,6 @@ public class PaymentActivity extends BaseActivity {
             jsonObject.put("lang","vi");
             jsonObject.put("signature", signature.toString());
             jsonObject.put("requestType", "captureWallet");
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -251,7 +251,6 @@ public class PaymentActivity extends BaseActivity {
                 .post(body)
                 .addHeader("Content-Type", "application/json")
                 .build();
-
         // Thực hiện yêu cầu HTTP
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -342,6 +341,7 @@ public class PaymentActivity extends BaseActivity {
             }
         });
     }
+
     private void dialogSuccess(){
         final Dialog dialog=new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -358,6 +358,7 @@ public class PaymentActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

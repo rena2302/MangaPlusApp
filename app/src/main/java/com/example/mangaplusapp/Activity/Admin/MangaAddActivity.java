@@ -39,7 +39,6 @@ public class MangaAddActivity extends BaseActivity {
         setContentView(binding.getRoot());
         loadCategories();
         onClickEvent();
-
     }
 
     private void loadCategories() {
@@ -63,7 +62,6 @@ public class MangaAddActivity extends BaseActivity {
                 Toast.makeText(MangaAddActivity.this, R.string.loadingInterupted,Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     private void onClickEvent(){
@@ -119,9 +117,9 @@ public class MangaAddActivity extends BaseActivity {
     }
 
     private String manga = "";
+
     private void validateData() {
         /*before adding validate data*/
-
         //get Data
         manga = binding.addMangaName.getText().toString().trim();
         if(TextUtils.isEmpty(manga)){
@@ -152,6 +150,7 @@ public class MangaAddActivity extends BaseActivity {
         hashMap.put("PICTURE_MANGA", ""+binding.addMangaPicture.getText());
         hashMap.put("CATEGORY_MANGA", ""+binding.addMangaCategory.getText());
         hashMap.put("ID_CATEGORY_MANGA",""+selectedCategoryId);
+
         if (binding.addMangaPreCheck.isChecked()){
             hashMap.put("PREMIUM_MANGA",true);
             hashMap.put("PRICE_MANGA", binding.addMangaPrice.getText());

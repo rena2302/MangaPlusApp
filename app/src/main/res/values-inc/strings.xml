@@ -210,5 +210,13 @@
     <string name="bioSuccess">प्रमाणीकरण सफल</string>
     <string name="bioFail">प्रमाणीकरण असफल</string>
     <string name="chooseChapter">अध्याय का चयन करें</string>
+    <string name="Somethingwentwrong">कुछ गलत हो गया</string>
+    <string name="successfully">सफलतापूर्वक</string>
+    <string name="Delete">मिटाना</string>
+    <string name="SendOTPsuccessfully">ओटीपी सफलतापूर्वक भेजें</string>
+    <string name="WrongOTPcode">ग़लत ओटीपी कोड</string>
+    <string name="NotenteringenoughOTPcode">पर्याप्त ओटीपी कोड दर्ज नहीं करना</string>
+    <string name="Admin">व्यवस्थापक</string>
+    <string name="Profile">प्रोफ़ाइल</string>
 </resources>
 

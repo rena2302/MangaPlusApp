@@ -39,12 +39,15 @@ public class SearchFragment extends Fragment {
     View view;
     FavoriteAdapter favoriteAdapter;
     CateSearchAdapter cateSearchAdapter;
+
     public interface OnMangaLoadedListener {
         void onMangaLoaded(List<Mangas> truyenTranhList);
     }
+
     public interface OnCateLoadedListener {
         void onCateLoaded(List<Categories> categoryList);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,11 +86,13 @@ public class SearchFragment extends Fragment {
         });
         return view;
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
+
     private void loadMangasByCategory(Categories category, OnMangaLoadedListener listener) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
         reference.orderByChild("ID_CATEGORY_MANGA").equalTo(category.getID_CATEGORY()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -107,6 +112,7 @@ public class SearchFragment extends Fragment {
             }
         });
     }
+
     private void loadMangas(OnMangaLoadedListener listener) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -126,6 +132,7 @@ public class SearchFragment extends Fragment {
             }
         });
     }
+
     private void loadCategories(OnCateLoadedListener listener) {
         //Get all data from firebase > Categories
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Categories");
@@ -142,13 +149,13 @@ public class SearchFragment extends Fragment {
                 }
                 listener.onCateLoaded(categoryList);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
     }
+
     private void recyclerViewManga(){
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.searchFmRcv);
         //set LayoutManager
@@ -157,6 +164,7 @@ public class SearchFragment extends Fragment {
         //set Adapter
         recyclerView.setAdapter(favoriteAdapter);
     }
+
     private void recyclerViewCate(){
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.searchFmRcvCate);
         //set LayoutManager
@@ -165,12 +173,12 @@ public class SearchFragment extends Fragment {
         //set Adapter
         recyclerView.setAdapter(cateSearchAdapter);
     }
+
     private void searchEvent() {
         EditText editText = (EditText) view.findViewById(R.id.inputManga);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -200,5 +208,4 @@ public class SearchFragment extends Fragment {
             }
         });
     }
-
 }

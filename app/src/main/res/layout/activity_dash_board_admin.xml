@@ -26,7 +26,7 @@
         <TextView
             android:id="@+id/subToolBarAdminTittle"
             android:layout_below="@+id/toolBarAdminTittle"
-            android:text="abc@example"
+            android:text="softwaretestact@gmail.com"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"

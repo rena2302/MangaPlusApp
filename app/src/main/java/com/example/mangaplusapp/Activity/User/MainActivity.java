@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
     private FragmentManager fragmentManager;
     TextView userNameTxt,NameApp;
-    String userName;
+    String userName,userID;
     ImageView imgViewUser,headerBackgroundLinear;
     UserDBHelper dbHelper;
     String userID,userEmail;
@@ -91,6 +91,7 @@ public class MainActivity extends BaseActivity {
         loadMenuDrawer();
         navToDrawerMenuBottom();
     }
+
     private void BackToProfile()
     {
         int getData=getIntent().getIntExtra("BackToProfile",0);
@@ -133,6 +134,7 @@ public class MainActivity extends BaseActivity {
             spaceItem2.setVisible(false);
         }
     }
+
     private void navToDrawerMenuBottom(){
         navigationView=findViewById(R.id.navigation_drawer_container);
         // check admin into create layout place for admin
@@ -177,6 +179,7 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
     private void openFacebookPage() {
         String facebookUrl = "https://www.facebook.com/HUFLITConfessions";
         try {
@@ -187,6 +190,7 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         }
     }
+
     private void openWebPage() {
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.huflitconfessions.com/?fbclid=IwAR00-x8kYMBq0DxyhxYYzsOXKKINVCpl_2oJhwlHu3xbApZaCxFZ4XbzNT8"));
@@ -195,6 +199,7 @@ public class MainActivity extends BaseActivity {
             e.printStackTrace();
         }
     }
+
     private boolean isLoggedIn(){
         return currentUser != null;
     }
@@ -208,26 +213,23 @@ public class MainActivity extends BaseActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(MainActivity.this, "Log out successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, R.string.logout_successful, Toast.LENGTH_SHORT).show();
                                 SharedPreferences.Editor editor=sharedPreferences.edit();
                                 editor.putBoolean("keyBiometric",false);
                                 editor.apply();
                                 editor.commit();
-                                // Đăng xuất thành công khỏi cả Firebase và Google
-                                Log.d("@@@@@", "signOut: Google");
                                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                                 startActivity(intent);
                             } else {
-                                // Xảy ra lỗi khi đăng xuất khỏi Google
-                                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, R.string.google_sign_out_fail, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
-
-        } else {
-
+        }
+        else
+        {
             // Đăng xuất khỏi Firebase Auth
-            Toast.makeText(MainActivity.this, "Log out successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, R.string.logout_successful, Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putBoolean("keyBiometric",false);
             editor.apply();
@@ -236,6 +238,7 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         }
     }
+
     private void updateBottomNavigationView() {
 
         int backStackEntryCount = fragmentManager.getBackStackEntryCount();
@@ -263,11 +266,14 @@ public class MainActivity extends BaseActivity {
                     // Add more cases for other fragments
                 }
             }
-        } else {
+        }
+        else
+        {
             // No fragments in the back stack, set the default item
             bottomNavigationView.getMenu().findItem(R.id.navHome).setChecked(true);
         }
     }
+
     private void focusFragment() { // ham chay ra main cua fragment
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
         navigationView = findViewById(R.id.navigation_drawer_container);
@@ -304,6 +310,7 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
     private void SwapColorBottom(int idColor)
     {
         textColor = ContextCompat.getColor(MainActivity.this, idColor);
@@ -312,6 +319,7 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.setItemIconTintList(ColorStateList.valueOf(iconColor));
         NameApp.setTextColor(iconColor);
     }
+
     private void loadFragment(Fragment fragment, boolean isAppInitialized,int menuResId) {
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -327,6 +335,7 @@ public class MainActivity extends BaseActivity {
         binding.mainHeader.getMenu().clear();
         getMenuInflater().inflate(menuResId, binding.mainHeader.getMenu());
     }
+
     private void loadMenuDrawer(){
         toolbar = (Toolbar) findViewById(R.id.main_header);
         setSupportActionBar(toolbar);
@@ -340,6 +349,7 @@ public class MainActivity extends BaseActivity {
         setInfo();
     }
     /*Override Function*/
+
     @Override
     public void onBackPressed() {
         if (fragmentManager.getBackStackEntryCount() > 0) {
@@ -372,6 +382,7 @@ public class MainActivity extends BaseActivity {
             super.onBackPressed();
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();

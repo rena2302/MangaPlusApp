@@ -74,7 +74,6 @@
                             Log.d("Register", "email not exist in DB");
                             intent.putExtra("EMAIL", email);
                             startActivity(intent);
-
                         } else {
                             Toast.makeText(RegisterActivity.this, R.string.typeEmailValid, Toast.LENGTH_SHORT).show();
                         }
@@ -82,6 +81,7 @@
                 }
             });
         }
+
         void navigateLayout(){
             haveAccount.setOnClickListener(new View.OnClickListener() {
                 @Override

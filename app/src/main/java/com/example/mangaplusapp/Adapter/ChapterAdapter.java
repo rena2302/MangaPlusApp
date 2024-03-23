@@ -30,7 +30,6 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
     ItemChapterBinding itemChapterBinding;
     ActivityChapterPdfBinding activityChapterPdfBinding;
     private boolean isPdfLoaded = false;
-
     private Context context;
     private List<Chapters> chapterList;
     private FragmentManager fragmentManager;
@@ -83,6 +82,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return chapterList.size();

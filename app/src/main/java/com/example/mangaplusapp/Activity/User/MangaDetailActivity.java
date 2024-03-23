@@ -75,12 +75,15 @@ public class MangaDetailActivity extends BaseActivity {
     private static SharedPreferences sharedPreferences;
     private Boolean mangaPremium;
     private boolean checkBiometric;
+
     public interface OnPurchasedMangaIdsLoadedListener {
         void onPurchasedMangaIdsLoaded(Boolean premium);
     }
+
     public interface OnLoadComplete{
         void onLoadComplete(int count);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,9 +108,7 @@ public class MangaDetailActivity extends BaseActivity {
         loadPurchasedMangaIds(new OnPurchasedMangaIdsLoadedListener() {
             @Override
             public void onPurchasedMangaIdsLoaded(Boolean premium) {
-
                 onClickPayment(premium);
-
             }
         });
         loadCountChapter(new OnLoadComplete() {
@@ -118,6 +119,7 @@ public class MangaDetailActivity extends BaseActivity {
             }
         });
     }
+
     private void onClickEvent(){
         binding.backDetailProductBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,7 +143,6 @@ public class MangaDetailActivity extends BaseActivity {
                     binding.mangaDetailDescription.setLetterSpacing(0.035f);
                     binding.ContentShowmore.setText(R.string.Hideless);
                     binding.ContentShowmore.setTextColor(Color.GRAY);
-                    // Di chuyển nội dung xuống
                     binding.mangaDetailDescription.animate().translationY(8).alpha(0.7f).setDuration(500).start();
                 }
             }
@@ -153,12 +154,14 @@ public class MangaDetailActivity extends BaseActivity {
             }
         });
     }
+
     private BiometricPrompt.PromptInfo.Builder dialogMetric()
     {
         return new BiometricPrompt.PromptInfo.Builder()
                 .setTitle(getString(R.string.Mangaplusneedstoconfirm))
                 .setSubtitle(getString(R.string.Fingerprintverification));
     }
+
     private void onClickPayment(Boolean isPremium){
         binding.BuyBook.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,11 +169,10 @@ public class MangaDetailActivity extends BaseActivity {
                 checkBioMetricSpperted();
                 ActionBioMetric();
                 checkBiometric=sharedPreferences.getBoolean("keyBiometric",false);
-                Log.d("Check", "onClickPayment: "+checkBiometric);
                 if (isPremium) {
                     if(checkBiometric)
                     {
-                        showdialog();
+                        ShowDialog();
                     }
                     else {
                         BiometricPrompt.PromptInfo.Builder promptinfo= dialogMetric();
@@ -197,7 +199,6 @@ public class MangaDetailActivity extends BaseActivity {
                                         }
                                     }
                                 }
-
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
 
@@ -207,25 +208,23 @@ public class MangaDetailActivity extends BaseActivity {
             }
         });
     }
+
     private void updateCountView(Chapters chapter){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
         reference.child(chapter.getID_MANGA_CHAPTER()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // Lấy giá trị hiện tại của countView
                 Long currentCountView = snapshot.child("VIEW_MANGA").getValue(Long.class);
-                // Tăng giá trị countView lên 1
                 Long newCountView = currentCountView != null ? currentCountView + 1 : 1;
-                // Cập nhật giá trị mới của countView vào cơ sở dữ liệu
                 snapshot.getRef().child("VIEW_MANGA").setValue(newCountView);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Xử lý khi cancel
             }
         });
     }
+
     protected void addToFavorite(){
         if(firebaseAuth.getCurrentUser() == null){
             Toast.makeText(this,"You're not login", Toast.LENGTH_SHORT).show();
@@ -246,6 +245,7 @@ public class MangaDetailActivity extends BaseActivity {
         }
 
     }
+
     protected void removeFromFavorite(String mangaIdToRemove){
         if(firebaseAuth.getCurrentUser() == null){
             Toast.makeText(this,R.string.isNotLogin, Toast.LENGTH_SHORT).show();
@@ -270,7 +270,6 @@ public class MangaDetailActivity extends BaseActivity {
                                         }
                                     });
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             Toast.makeText(MangaDetailActivity.this, R.string.dataOccurred, Toast.LENGTH_SHORT).show();
@@ -278,6 +277,7 @@ public class MangaDetailActivity extends BaseActivity {
                     });
         }
     }
+
     private void toggleFavorite() {
         DatabaseReference userFavoritesRef = FirebaseDatabase.getInstance().getReference("Users")
                 .child(currentUser.getUid()).child("Favorites");
@@ -304,6 +304,7 @@ public class MangaDetailActivity extends BaseActivity {
                     }
                 });
     }
+
     private void setFavorite(){
         DatabaseReference userFavoritesRef = FirebaseDatabase.getInstance().getReference("Users")
                 .child(currentUser.getUid()).child("Favorites");
@@ -314,7 +315,6 @@ public class MangaDetailActivity extends BaseActivity {
                         if (dataSnapshot.exists()) {
                             binding.OverlayIconFavorite.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#42F44336")));
                             binding.IconFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#F44336")));
-
                         }
                     }
                     @Override
@@ -323,6 +323,7 @@ public class MangaDetailActivity extends BaseActivity {
                     }
                 });
     }
+
     private void loadPurchasedMangaIds(OnPurchasedMangaIdsLoadedListener listener) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("HistoryPayment")
                 .child(mangaId);
@@ -338,13 +339,13 @@ public class MangaDetailActivity extends BaseActivity {
                 }else isPremium = false;
                 listener.onPurchasedMangaIdsLoaded(isPremium);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Handle error
             }
         });
     }
+
     private void loadCountChapter(OnLoadComplete listener){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chapters");
         reference.orderByChild("ID_MANGA_CHAPTER").equalTo(mangaId)
@@ -363,6 +364,7 @@ public class MangaDetailActivity extends BaseActivity {
                     }
                 });
     }
+
     private void setTextItem() {
         binding.mangaDetailDescription.setText(mangaDescription);
         binding.mangaDetailTitle.setText(intent.getStringExtra("NAME_MANGA"));
@@ -374,11 +376,13 @@ public class MangaDetailActivity extends BaseActivity {
         binding.mangaDetailReadNumber.setText(mangaView);
         binding.mangaDetailChapterNumber.setText(String.valueOf(countChapter));
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
-    private void showdialog()
+
+    private void ShowDialog()
     {
         final Dialog dialog=new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -408,6 +412,7 @@ public class MangaDetailActivity extends BaseActivity {
             dialog.dismiss();
         });
     }
+
     private void checkBioMetricSpperted()
     {
         BiometricManager biometricManager = BiometricManager.from(this);
@@ -431,6 +436,7 @@ public class MangaDetailActivity extends BaseActivity {
                 break;
         }
     }
+
     private  void ActionBioMetric()
     {
         Executor executor= ContextCompat.getMainExecutor(this);
@@ -441,7 +447,6 @@ public class MangaDetailActivity extends BaseActivity {
                 super.onAuthenticationError(errorCode, errString);
                 Toast.makeText(getApplicationContext(), R.string.bioError + errString.toString(), Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onAuthenticationSucceeded(
                     @NonNull BiometricPrompt.AuthenticationResult result) {
@@ -452,9 +457,8 @@ public class MangaDetailActivity extends BaseActivity {
                 editor.putBoolean("keyBiometric",true);
                 editor.apply();
                 editor.commit();
-                showdialog();
+                ShowDialog();
             }
-
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();

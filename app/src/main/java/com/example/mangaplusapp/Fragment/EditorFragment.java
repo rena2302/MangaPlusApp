@@ -50,11 +50,13 @@ public class EditorFragment extends Fragment {
         private List<Categories> categoryList;
         private  Bundle extras;
         FragmentEditorMangaBinding binding = FragmentEditorMangaBinding.inflate(getLayoutInflater());
+
         private MangaSession(Bundle extras){
             this.extras = extras;
             loadCategories();
             onClickEvent();
         }
+
         private void loadCategories() {
             //get categories from firebase
             categoryList = new ArrayList<>();
@@ -78,6 +80,7 @@ public class EditorFragment extends Fragment {
             });
 
         }
+
         private void categoryPickDialog() {
             //get string Array from categoryList
             String[] categoriesString = new String[categoryList.size()];
@@ -102,6 +105,7 @@ public class EditorFragment extends Fragment {
                     })
                     .show();
         }
+
         private void onClickEvent(){
             binding.editMangaSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,7 +126,9 @@ public class EditorFragment extends Fragment {
                 }
             });
         }
+
         private String manga = "";
+
         private void validateData() {
             /*before adding validate data*/
 
@@ -145,6 +151,7 @@ public class EditorFragment extends Fragment {
                 binding.editMangaPrice.getText().clear();
             }
         }
+
         private void editMangaFireBase() {
             //setup info to add in firebase db
             HashMap<String,Object> hashMap = new HashMap<>();
@@ -180,6 +187,7 @@ public class EditorFragment extends Fragment {
                     });
         }
     }
+
     class CategorySession{
         FragmentEditorCategoryBinding binding = FragmentEditorCategoryBinding.inflate(getLayoutInflater());
         private  Bundle extras;
@@ -237,6 +245,7 @@ public class EditorFragment extends Fragment {
                     });
         }
     }
+
     class ChapterSession{
         FragmentEditorChapterBinding binding = FragmentEditorChapterBinding.inflate(getLayoutInflater());
         private List<Mangas> truyenTranhList;
@@ -271,6 +280,7 @@ public class EditorFragment extends Fragment {
                 }
             });
         }
+
         private void onClickEvent() {
             binding.editChapterSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -291,6 +301,7 @@ public class EditorFragment extends Fragment {
                 }
             });
         }
+
         private void mangaPickDialog() {
             //get string Array from categoryList
             String[] mangasString = new String[truyenTranhList.size()];
@@ -314,6 +325,7 @@ public class EditorFragment extends Fragment {
                     })
                     .show();
         }
+
         private void pickPdfFile() {
             pickPdfFileLauncher.launch("application/pdf");
         }
@@ -331,6 +343,7 @@ public class EditorFragment extends Fragment {
                     }
                 }
         );
+
         private String chapter = "";
         private void validateData() {
             /*before adding validate data*/
@@ -344,6 +357,7 @@ public class EditorFragment extends Fragment {
                 editChapterFireBase();
             }
         }
+
         private void editChapterFireBase() {
 
             //setup info to add in firebase db
@@ -370,6 +384,7 @@ public class EditorFragment extends Fragment {
                 Toast.makeText(getActivity(), R.string.file_not_found, Toast.LENGTH_SHORT).show();
             }
         }
+
         private void updateDataInFirebase(HashMap<String, Object> hashMap){
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Chapters").child(extras.getString("ID_CHAPTER"));
             databaseReference.updateChildren(hashMap)
@@ -387,6 +402,7 @@ public class EditorFragment extends Fragment {
                     });
         }
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

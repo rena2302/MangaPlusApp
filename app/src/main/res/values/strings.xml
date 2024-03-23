@@ -216,4 +216,12 @@
     <string name="bioFail">Authentication failed</string>
     <!--CHAPTER-->
     <string name="chooseChapter">Select chapter</string>
+    <string name="Somethingwentwrong">Something went wrong</string>
+    <string name="successfully">successfully</string>
+    <string name="Delete">"Delete "</string>
+    <string name="SendOTPsuccessfully">Send OTP successfully</string>
+    <string name="WrongOTPcode">Wrong OTP code</string>
+    <string name="NotenteringenoughOTPcode">Not entering enough OTP code</string>
+    <string name="Admin">Admin</string>
+    <string name="Profile">Profile</string>
 </resources>

@@ -210,4 +210,12 @@
     <string name="bioSuccess">Xác thực thành công</string>
     <string name="bioFail">Xác thực thất bại</string>
     <string name="chooseChapter">Chọn chương</string>
+    <string name="Somethingwentwrong">Đã xảy ra lỗi</string>
+    <string name="successfully">thành công</string>
+    <string name="Delete">Xóa bỏ</string>
+    <string name="SendOTPsuccessfully">Gửi OTP thành công</string>
+    <string name="WrongOTPcode">Mã OTP sai</string>
+    <string name="NotenteringenoughOTPcode">Không nhập đủ mã OTP</string>
+    <string name="Admin">Quản trị viên</string>
+    <string name="Profile">Hồ sơ</string>
 </resources>

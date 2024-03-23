@@ -96,20 +96,24 @@ public class UserProfileFragment extends Fragment {
         //****************************************************************************************//
         return root;
     }
+
     private void startAct(){
         getActivity().finish(); // Kết thúc hoạt động hiện tại
         Intent intent = getActivity().getIntent(); // Lấy intent hiện tại
         getActivity().startActivity(intent); // Khởi động lại hoạt động
     }
+
     private boolean isLoggedIn(){
         return currentUser != null;
     }
+
     private void handleNotLoggedIn() {
         getUserNameInfoTxt.setText("Guest");
         getUserNameTittleTxt.setText("Guest");
         HeaderEmail.setText("Not logged in");
         getUserEmailTxt.setText("Not logged in");
     }
+
     void userExists(){
         getUserEmailTxt.setText(userEmail);
         getUserPasswordTxt.setText("..........");
@@ -118,6 +122,7 @@ public class UserProfileFragment extends Fragment {
         HeaderEmail.setText(userEmail);
         Glide.with(this).load(userAvt).into(getUserAvtIMG);
     }
+
     void userSetIMG(){
         avtContainer.setOnClickListener(v->{
             Intent intent = new Intent (Intent.ACTION_GET_CONTENT);
@@ -128,6 +133,7 @@ public class UserProfileFragment extends Fragment {
             );
         });
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -148,11 +154,13 @@ public class UserProfileFragment extends Fragment {
             });
         }
     }
+
     private void openActivityWithFragmentData(String data) {
         Intent intent = new Intent(getContext(), EditControlActivity.class);
         intent.putExtra("FRAGMENT_DATA", data);
         startActivity(intent);
     }
+
     private void showDialog()
     {
         final Dialog dialog=new Dialog(getContext());
@@ -204,13 +212,13 @@ public class UserProfileFragment extends Fragment {
             });
             ////////===========================End Logout=========================//////////////////////
         }
-
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
+
     public void signOut(){
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivity());
         if (account != null) {
@@ -236,9 +244,9 @@ public class UserProfileFragment extends Fragment {
                             }
                         }
                     });
-
-        } else {
-
+        }
+        else
+        {
             // Đăng xuất khỏi Firebase Auth
             Toast.makeText(getActivity(), R.string.logout_successful, Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor editor=sharedPreferences.edit();

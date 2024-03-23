@@ -32,12 +32,9 @@ public class RegionFragment extends Fragment {
     public RegionFragment() {
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -82,12 +79,14 @@ public class RegionFragment extends Fragment {
         });
         return root;
     }
+
     private void startAct(){
         Intent intent=new Intent(getContext(), MainActivity.class);
         intent.putExtra("BackToProfile", 1);
         startActivity(intent);
         getActivity().finish();
     }
+
     private void setLocal(Context context, String langCode){
         Locale locale = new Locale(langCode);
         Resources resources = context.getResources();

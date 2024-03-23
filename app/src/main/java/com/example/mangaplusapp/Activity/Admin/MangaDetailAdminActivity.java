@@ -33,6 +33,7 @@ public class MangaDetailAdminActivity extends BaseActivity {
         setTextItem();
         loadChapters();
     }
+
     private void loadChapters() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chapters");
         reference.addValueEventListener(new ValueEventListener() {
@@ -58,6 +59,7 @@ public class MangaDetailAdminActivity extends BaseActivity {
             }
         });
     }
+
     private void setTextItem() {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -66,7 +68,6 @@ public class MangaDetailAdminActivity extends BaseActivity {
         Glide.with(binding.mangaDetailImg)
                 .load(extras.getString("PICTURE_MANGA"))
                 .into(binding.mangaDetailImg);
-
     }
 
     @Override

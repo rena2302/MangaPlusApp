@@ -59,12 +59,15 @@ public class PaymentStripeActivity extends BaseActivity {
 
         activityPaymentBinding = ActivityPaymentStripeBinding.inflate(getLayoutInflater());
         setContentView(activityPaymentBinding.getRoot());
+
         auth=FirebaseAuth.getInstance();
         currentUser=auth.getCurrentUser();
         userName=currentUser.getDisplayName();
         price=1000;
         mangaId = getIntent().getStringExtra("ID_MANGA");
+
         fetchApi();
+
         btn = findViewById(R.id.btnSubmitPaymentStripe);
         btn.setOnClickListener(v -> {
             if(paymentIntentClientSecret!=null){
@@ -75,11 +78,12 @@ public class PaymentStripeActivity extends BaseActivity {
                 Toast.makeText(getApplicationContext(),R.string.paymentLoading,Toast.LENGTH_SHORT).show();
             }
         });
-        paymentSheet=new PaymentSheet(this,this::onPaymentSheetResult);
 
+        paymentSheet=new PaymentSheet(this,this::onPaymentSheetResult);
         hookIntent();
 
     }
+
     private void hookIntent(){
         Intent intent = getIntent();
         Glide.with(this)
@@ -96,6 +100,7 @@ public class PaymentStripeActivity extends BaseActivity {
             }
         });
     }
+
     private void dialogSuccess(){
         final Dialog dialog=new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -112,6 +117,7 @@ public class PaymentStripeActivity extends BaseActivity {
             }
         });
     }
+
     private void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult){
         if(paymentSheetResult instanceof  PaymentSheetResult.Canceled){
             Toast.makeText(this,R.string.paymentCancel, Toast.LENGTH_SHORT).show();
@@ -124,6 +130,7 @@ public class PaymentStripeActivity extends BaseActivity {
             dialogSuccess();
         }
     }
+
     public void isBought(){
         if(currentUser == null){
             Toast.makeText(this,R.string.isNotLogin, Toast.LENGTH_SHORT).show();
@@ -142,6 +149,7 @@ public class PaymentStripeActivity extends BaseActivity {
                     });
         }
     }
+
     private void fetchApi(){ // POST
         RequestQueue queue = Volley.newRequestQueue(this);
             String url ="https://1a00-2405-4802-8127-cf0-95d-67fb-554b-62e9.ngrok-free.app/";
@@ -162,7 +170,6 @@ public class PaymentStripeActivity extends BaseActivity {
                         catch (JSONException e){
                             e.printStackTrace();
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -182,6 +189,7 @@ public class PaymentStripeActivity extends BaseActivity {
         };
         queue.add(stringRequest);
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

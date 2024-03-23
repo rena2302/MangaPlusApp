@@ -29,6 +29,9 @@ public class ForgotFragment extends Fragment {
     UserDBHelper db;
     EditText getUserEmailTxt;
     ImageButton BackbtnLogin;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
     public ForgotFragment() {
         // Required empty public constructor
     }
@@ -53,9 +56,16 @@ public class ForgotFragment extends Fragment {
         //****************************************************************************************//
         //=====================================GET DATABASE=======================================//
         db=new UserDBHelper(getContext());
-        SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=preferences.edit();
+        preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
+        editor=preferences.edit();
         //=====================================Send EMAIL=======================================//
+        clickSendToCheckEmail();
+        clickBackLogin();
+        return root;
+    }
+
+    private void clickSendToCheckEmail()
+    {
         SendOtpBtn.setOnClickListener(v->{
             String emailInput = getUserEmailTxt.getText().toString();
             if(emailInput.isEmpty()){
@@ -82,6 +92,10 @@ public class ForgotFragment extends Fragment {
                 });
             }
         });
+    }
+
+    private  void clickBackLogin()
+    {
         BackbtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,8 +103,8 @@ public class ForgotFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        return root;
     }
+
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -103,5 +117,4 @@ public class ForgotFragment extends Fragment {
         }
         fragmentTransaction.commit();
     }
-
 }

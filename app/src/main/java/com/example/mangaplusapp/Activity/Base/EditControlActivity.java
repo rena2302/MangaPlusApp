@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class EditControlActivity extends BaseActivity{
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,7 @@ public class EditControlActivity extends BaseActivity{
                 break;
         }
     }
+
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

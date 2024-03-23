@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Profile">
+    <item android:title="@string/Profile">
         <menu>
             <group >
                 <item
@@ -22,10 +22,9 @@
             </group>
         </menu>
     </item>
-
     <item
         android:id="@+id/adminPlace_container"
-        android:title="Admin">
+        android:title="@string/Admin">
         <menu>
             <group >
                 <item

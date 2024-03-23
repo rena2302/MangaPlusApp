@@ -30,18 +30,22 @@ public class CateSearchAdapter extends RecyclerView.Adapter<CateSearchAdapter.Ca
     public interface OnCategoryClickListener {
         void onCategoryClick(Categories category);
     }
+
     ItemCateSearchBinding binding;
     public void setData(List<Categories> categoryList){
         this.categoryList = categoryList;
         this.filterList =categoryList;
     }
+
     public void setOnCategoryClickListener(OnCategoryClickListener listener) {
         this.listener = listener;
     }
+
     public CateSearchAdapter(List<Categories> categoryList, Context context){
         this.categoryList = categoryList;
         this.context = context;
     }
+
     public void setCategoryList(List<Categories> categoryList){
         this.categoryList = categoryList;
     }
@@ -76,6 +80,7 @@ public class CateSearchAdapter extends RecyclerView.Adapter<CateSearchAdapter.Ca
         }
         return 0;
     }
+
     @Override
     public Filter getFilter() {
         if (filterCategory == null){

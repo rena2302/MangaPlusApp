@@ -15,6 +15,7 @@ import com.example.mangaplusapp.Fragment.VerificationFragment;
 import com.example.mangaplusapp.R;
 
 public class ForgotControlActivity extends BaseActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +34,8 @@ public class ForgotControlActivity extends BaseActivity {
             Log.d("email", email);
             loadFragment(new VerificationFragment(),false);
         }
-
-
-
     }
+
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

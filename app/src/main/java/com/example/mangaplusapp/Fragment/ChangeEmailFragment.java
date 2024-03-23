@@ -63,28 +63,36 @@ public class ChangeEmailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_changeemail, container, false);
+
         ScrollView mainLayout = root.findViewById(R.id.OverlayEditEmail);
         KeyBoardHelper.ActionRemoveKeyBoardForFragment(mainLayout, requireContext());
         AcceptnewEmail = root.findViewById(R.id.btnchangeNewEmail);
         InputEmail = root.findViewById(R.id.userNewNameTxt);
         Backbtn = root.findViewById(R.id.backEditEmailBtn);
+
         db = new UserDBHelper(getContext());
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        Backbtn.setOnClickListener(v->{
-            Intent intent=new Intent(getContext(), MainActivity.class);
-            intent.putExtra("BackToProfile", 1);
-            startActivity(intent);
-            getActivity().finish();
-        });
+
+        BackToPro();
         AcceptnewEmail.setOnClickListener(v->{
             NewEmail=InputEmail.getText().toString();
                 checkEmailExistsAndProceed(NewEmail);
         });
         return root;
     }
+
+    private void BackToPro()
+    {
+        Backbtn.setOnClickListener(v->{
+            Intent intent=new Intent(getContext(), MainActivity.class);
+            intent.putExtra("BackToProfile", 1);
+            startActivity(intent);
+            getActivity().finish();
+        });
+    }
+
     private void checkEmailExistsAndProceed(final String email) {
-        Log.d("Register", "checkEmailExistsAndProceed: checked");
         db.checkEmailExists(email, new UserDBHelper.userCheckFirebaseListener() {
             @Override
             public void onEmailCheckResult(boolean exists) {
@@ -101,6 +109,7 @@ public class ChangeEmailFragment extends Fragment {
             }
         });
     }
+
     private void changeEmailWithoutUpdateEmail(String OldEmail, String OldPass) {
         if (currentUser != null) {
 
@@ -141,6 +150,7 @@ public class ChangeEmailFragment extends Fragment {
                     }
                 });
     }
+
     private void ShowDialog()
     {
         final Dialog dialog=new Dialog(getContext());
@@ -166,6 +176,5 @@ public class ChangeEmailFragment extends Fragment {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
-
     }
 }

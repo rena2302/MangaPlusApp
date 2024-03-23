@@ -33,6 +33,7 @@ public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter
         this.viewPager2 = viewPager2;
         this.context = context;
     }
+
     @NonNull
     @Override
     public ImageSliderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -66,7 +67,6 @@ public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter
                         "BOUGHT_MANGA",String.valueOf(imageSlider.getBOUGHT_MANGA()),
                         "PRICE_MANGA", imageSlider.getPRICE_MANGA());
                 }
-
         });
     }
 
@@ -84,6 +84,7 @@ public class ImageSliderAdapter extends  RecyclerView.Adapter<ImageSliderAdapter
             textSlider = itemView.findViewById(R.id.textslider);
         }
     }
+
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {

@@ -210,4 +210,12 @@
     <string name="bioSuccess">인증 성공</string>
     <string name="bioFail">인증 실패</string>
     <string name="chooseChapter">장을 선택하세요</string>
+    <string name="Somethingwentwrong">문제가 발생했습니다.</string>
+    <string name="successfully">성공적으로</string>
+    <string name="Delete">삭제</string>
+    <string name="SendOTPsuccessfully">OTP 전송 성공</string>
+    <string name="WrongOTPcode">잘못된 OTP 코드</string>
+    <string name="NotenteringenoughOTPcode">OTP 코드를 충분히 입력하지 않았습니다.</string>
+    <string name="Admin">관리자</string>
+    <string name="Profile">프로필</string>
 </resources>
