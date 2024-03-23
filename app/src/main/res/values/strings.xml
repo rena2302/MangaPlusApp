@@ -90,6 +90,7 @@
     <string name="wrong_otp_code">Invalid OTP code</string>
     <string name="not_enough_otp_code">Please enter the complete OTP code</string>
     <string name="resend_code">Resend Code</string>
+    <string name="cant_back_anymore">You can\'t back anymore</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">Forgot Password</string>
     <string name="forgotDescripstion">Forgot password? Easily recover with our apps user-friendly feature for a secure experience</string>

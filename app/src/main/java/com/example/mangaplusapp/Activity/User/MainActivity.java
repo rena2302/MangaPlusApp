@@ -165,9 +165,7 @@ public class MainActivity extends BaseActivity {
                     }
                     else
                     {
-                        finish();
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
+                        startNewActivityAndFinishCurrent(LoginActivity.class);
                     }
                 } else if (itemId==R.id.menu_drawer_support1) {
                     openFacebookPage();
@@ -263,6 +261,9 @@ public class MainActivity extends BaseActivity {
                     case "SearchFragment":
                         bottomNavigationView.getMenu().findItem(R.id.navSearch).setChecked(true);
                         break;
+                    case "FavoriteFragment":
+                        bottomNavigationView.getMenu().findItem(R.id.navFavorite).setChecked(true);
+                        break;
                     // Add more cases for other fragments
                 }
             }
@@ -324,10 +325,11 @@ public class MainActivity extends BaseActivity {
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (isAppInitialized) {
-            fragmentTransaction.add(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
+            fragmentTransaction.replace(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
         } else {
             fragmentTransaction.replace(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
         }
+        fragmentTransaction.setReorderingAllowed(true);
         fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName()); // Ad tag to Stack with the same name of Fragment
         fragmentTransaction.commit();
 
@@ -353,30 +355,34 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         if (fragmentManager.getBackStackEntryCount() > 0) {
-            fragmentManager.popBackStack();
-            int backStackEntryCount = fragmentManager.getBackStackEntryCount(); // Take Length of Stack
-            //Take Fragment below first Fragment of stack
-            FragmentManager.BackStackEntry backEnd = fragmentManager.getBackStackEntryAt(backStackEntryCount - 2);
-            String fragmentTag = backEnd.getName();
-            //Hook Fragment with fragmentTag
-            Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
-
-            // Update the toolbar menu for the current fragment
-            if (currentFragment instanceof HomeFragment) {
-                binding.mainHeader.getMenu().clear();
-                getMenuInflater().inflate(R.menu.home_fragment_header_menu, binding.mainHeader.getMenu());
-            } else if (currentFragment instanceof HotFragment) {
-                binding.mainHeader.getMenu().clear();
-                getMenuInflater().inflate(R.menu.hot_fragment_header_menu, binding.mainHeader.getMenu());
-            } else if (currentFragment instanceof SearchFragment){
-                binding.mainHeader.getMenu().clear();
-                getMenuInflater().inflate(R.menu.search_fragment_header_menu, binding.mainHeader.getMenu());
-            }else if (currentFragment instanceof CreatorFragment){
-                binding.mainHeader.getMenu().clear();
-                getMenuInflater().inflate(R.menu.creator_fragment_header_menu, binding.mainHeader.getMenu());
-            }else{
-                binding.mainHeader.getMenu().clear();
-                getMenuInflater().inflate(R.menu.library_fragment_header_menu, binding.mainHeader.getMenu());
+            fragmentManager.popBackStackImmediate();
+            int backStackEntryCount = fragmentManager.getBackStackEntryCount();
+            if (backStackEntryCount > 0) { // Kiểm tra xem stack back có rỗng không
+                // Lấy Fragment thứ hai từ cuối của stack
+                FragmentManager.BackStackEntry backEnd = fragmentManager.getBackStackEntryAt(backStackEntryCount - 1);
+                String fragmentTag = backEnd.getName();
+                //Hook Fragment với fragmentTag
+                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+                // Update the toolbar menu for the current fragment
+                if (currentFragment instanceof HomeFragment) {
+                    binding.mainHeader.getMenu().clear();
+                    getMenuInflater().inflate(R.menu.home_fragment_header_menu, binding.mainHeader.getMenu());
+                } else if (currentFragment instanceof HotFragment) {
+                    binding.mainHeader.getMenu().clear();
+                    getMenuInflater().inflate(R.menu.hot_fragment_header_menu, binding.mainHeader.getMenu());
+                } else if (currentFragment instanceof SearchFragment){
+                    binding.mainHeader.getMenu().clear();
+                    getMenuInflater().inflate(R.menu.search_fragment_header_menu, binding.mainHeader.getMenu());
+                }else if (currentFragment instanceof CreatorFragment){
+                    binding.mainHeader.getMenu().clear();
+                    getMenuInflater().inflate(R.menu.creator_fragment_header_menu, binding.mainHeader.getMenu());
+                }else{
+                    binding.mainHeader.getMenu().clear();
+                    getMenuInflater().inflate(R.menu.library_fragment_header_menu, binding.mainHeader.getMenu());
+                }
+            } else {
+                startNewActivityAndFinishCurrent(MainActivity.class);
+                Toast.makeText(this, R.string.cant_back_anymore ,Toast.LENGTH_SHORT).show();
             }
         } else {
             super.onBackPressed();

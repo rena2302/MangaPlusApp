@@ -24,6 +24,7 @@ import com.example.mangaplusapp.Adapter.FavoriteAdapter;
 import com.example.mangaplusapp.Adapter.TruyenTranhAdapter;
 import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.R;
+import com.example.mangaplusapp.databinding.FragmentSearchBinding;
 import com.example.mangaplusapp.object.Categories;
 import com.example.mangaplusapp.object.Mangas;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +40,7 @@ public class SearchFragment extends Fragment {
     View view;
     FavoriteAdapter favoriteAdapter;
     CateSearchAdapter cateSearchAdapter;
+    FragmentSearchBinding binding;
 
     public interface OnMangaLoadedListener {
         void onMangaLoaded(List<Mangas> truyenTranhList);
@@ -47,15 +49,21 @@ public class SearchFragment extends Fragment {
     public interface OnCateLoadedListener {
         void onCateLoaded(List<Categories> categoryList);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_search, container, false);
-        LinearLayout mainLayout=view.findViewById(R.id.OverlaySearch);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        binding = FragmentSearchBinding.inflate(getLayoutInflater());
+        LinearLayout mainLayout= binding.OverlaySearch;
         KeyBoardHelper.ActionRemoveKeyBoardForFragment(mainLayout,requireContext());
-        favoriteAdapter = new FavoriteAdapter(new ArrayList<>(), view.getContext(), this);
-        cateSearchAdapter = new CateSearchAdapter(new ArrayList<>(), view.getContext());
+        favoriteAdapter = new FavoriteAdapter(new ArrayList<>(), getContext(), this);
+        cateSearchAdapter = new CateSearchAdapter(new ArrayList<>(), getContext());
         searchEvent();
         recyclerViewCate();
         recyclerViewManga();
@@ -84,13 +92,6 @@ public class SearchFragment extends Fragment {
                 }
             });
         });
-        return view;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        super.onCreate(savedInstanceState);
     }
 
     private void loadMangasByCategory(Categories category, OnMangaLoadedListener listener) {
@@ -115,7 +116,7 @@ public class SearchFragment extends Fragment {
 
     private void loadMangas(OnMangaLoadedListener listener) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Mangas> truyenTranhList = new ArrayList<>();
@@ -157,26 +158,23 @@ public class SearchFragment extends Fragment {
     }
 
     private void recyclerViewManga(){
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.searchFmRcv);
         //set LayoutManager
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        binding.searchFmRcv.setLayoutManager(gridLayoutManager);
         //set Adapter
-        recyclerView.setAdapter(favoriteAdapter);
+        binding.searchFmRcv.setAdapter(favoriteAdapter);
     }
 
     private void recyclerViewCate(){
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.searchFmRcvCate);
         //set LayoutManager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        binding.searchFmRcvCate.setLayoutManager(linearLayoutManager);
         //set Adapter
-        recyclerView.setAdapter(cateSearchAdapter);
+        binding.searchFmRcvCate.setAdapter(cateSearchAdapter);
     }
 
     private void searchEvent() {
-        EditText editText = (EditText) view.findViewById(R.id.inputManga);
-        editText.addTextChangedListener(new TextWatcher() {
+        binding.inputManga.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -197,7 +195,7 @@ public class SearchFragment extends Fragment {
 
             }
         });
-        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        binding.inputManga.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {

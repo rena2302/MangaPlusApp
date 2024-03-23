@@ -27,22 +27,21 @@ import java.util.List;
 
 
 public class HotFragment extends Fragment {
-    View view;
     FragmentHotBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentHotBinding.inflate(inflater);
-        HotAdapter hotAdapter = new HotAdapter(requireActivity().getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        hotAdapter.setData(getContext());
-        binding.hotFmViewPager.setAdapter(hotAdapter);
-        binding.hotFmTab.setupWithViewPager(binding.hotFmViewPager);
         return binding.getRoot();
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        binding = FragmentHotBinding.inflate(getLayoutInflater());
+        HotAdapter hotAdapter = new HotAdapter(requireActivity().getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        hotAdapter.setData(getContext());
+        binding.hotFmViewPager.setAdapter(hotAdapter);
+        binding.hotFmTab.setupWithViewPager(binding.hotFmViewPager);
     }
 }

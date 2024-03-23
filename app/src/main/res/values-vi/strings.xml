@@ -44,6 +44,7 @@
     <string name="Logout">Đăng xuất</string>
     <string name="EditEmail">Thay đổi Email</string>
     <!-- Begin Forgot -->
+    <string name="cant_back_anymore">Bạn không thể quay lại nữa</string>
     <string name="forgotTittle">Quên mật khẩu</string>
     <string name="forgotDescripstion">Quên mật khẩu? Dễ dàng khôi phục với các tính năng thân thiện với người dùng của ứng dụng của chúng tôi để có trải nghiệm an toàn</string>
     <string name="forgotEnterEmail">Nhập Tài Khoản Email Của Bạn</string>

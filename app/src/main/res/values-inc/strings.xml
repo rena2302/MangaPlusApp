@@ -47,6 +47,7 @@
     <string name="ChoosePaymentOption">भुगतान विकल्प चुनें</string>
     <string name="EditEmail">बदले ई - मेल</string>
     <!-- Begin Forgot -->
+    <string name="cant_back_anymore">आप और वापस नहीं जा सकते हैं</string>
     <string name="forgotTittle">अपना कूट शब्द भूल गए?</string>
     <string name="forgotDescripstion">पासवर्ड भूल गए? सुरक्षित अनुभव के लिए हमारे ऐप्स की उपयोगकर्ता-अनुकूल सुविधा के साथ आसानी से पुनर्प्राप्त करें</string>
     <string name="forgotEnterEmail">कृपया अपना ईमेल एड्रेस इंटर करें</string>
