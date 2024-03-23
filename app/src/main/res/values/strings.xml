@@ -21,6 +21,8 @@
     <string name="viewHot">View</string>
     <string name="boughtHot">Buy</string>
     <string name="SUCCESS">SUCCESSFUL</string>
+    <string name="PRICE">Price: %s$</string>
+    <string name="priceFree">Price: Free!</string>
     <string name="dataOccurred">An error occurred while processing data</string>
     <string name="delete">Delete</string>
     <string name="deleteConfirm">Are you sure you want to delete?</string>
@@ -28,7 +30,7 @@
     <string name="deleteSuccess">Deleted %s successfully!</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
-    <string name="loadingInterupted">loading interrupted. Please try again later.</string>
+    <string name="loadingInterupted">Loading interrupted. Please try again later.</string>
     <string name="search_by">Search by %s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
