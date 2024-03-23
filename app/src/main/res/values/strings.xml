@@ -224,4 +224,5 @@
     <string name="NotenteringenoughOTPcode">Not entering enough OTP code</string>
     <string name="Admin">Admin</string>
     <string name="Profile">Profile</string>
+    <string name="ChooseLanguages">Please select language!</string>
 </resources>
