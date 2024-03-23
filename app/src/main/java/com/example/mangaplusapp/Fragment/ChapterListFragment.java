@@ -57,10 +57,9 @@ public class ChapterListFragment extends DialogFragment {
         RecyclerView recyclerView = view.findViewById(R.id.chapterList);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),1));
         recyclerView.setAdapter(adapter);
-
         builder.setView(view)
-                .setTitle("Chapter Select")
-                .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.chooseChapter)
+                .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

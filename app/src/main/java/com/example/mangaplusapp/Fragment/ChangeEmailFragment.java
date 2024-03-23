@@ -89,13 +89,13 @@ public class ChangeEmailFragment extends Fragment {
             @Override
             public void onEmailCheckResult(boolean exists) {
                 if (exists) {
-                    Toast.makeText(getContext(), "This email already exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.emailExists, Toast.LENGTH_SHORT).show();
                 } else {
                     if (db.validEmail(email)) {
                         ShowDialog();
 
                     } else {
-                        Toast.makeText(getContext(), "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.typeEmailValid, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -113,13 +113,13 @@ public class ChangeEmailFragment extends Fragment {
                                     NewEmail=InputEmail.getText().toString();
                                     changeNewEmail(NewEmail);
                                 } else {
-                                    Toast.makeText(getContext(), "Invalid password or email !", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.invalidPasswordOrEmail, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-            } 
+            }
             else {
-                Toast.makeText(getContext(),"Invalid email",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),R.string.invalidEmail,Toast.LENGTH_SHORT).show();
             }
         }
         
@@ -130,13 +130,13 @@ public class ChangeEmailFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), "Email updated successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.emailUpdateSuccess, Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(getContext(), MainActivity.class);
                             intent.putExtra("BackToProfile", 1);
                             startActivity(intent);
                             getActivity().finish();
                         } else {
-                            Toast.makeText(getContext(), "Failed to update email", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.emailUpdateFail, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -156,7 +156,7 @@ public class ChangeEmailFragment extends Fragment {
             OldPass=oldPass.getText().toString();
             if(OldPass.isEmpty()||OldPass.isEmpty())
             {
-                Toast.makeText(getContext(),"Your email or password invalid!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),R.string.invalidPasswordOrEmail,Toast.LENGTH_SHORT).show();
             }
             else {
                 changeEmailWithoutUpdateEmail(OldEmail,OldPass);

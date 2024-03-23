@@ -63,10 +63,10 @@ public class SuccessFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), "Password reset email sent successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.password_reset_email_sent, Toast.LENGTH_SHORT).show();
                             // Thông báo cho người dùng rằng email đã được gửi thành công
                         } else {
-                            Toast.makeText(getContext(), "Failed to send password reset email: ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.password_reset_fail, Toast.LENGTH_SHORT).show();
                             // Xử lý trường hợp gửi email thất bại
                         }
                     }

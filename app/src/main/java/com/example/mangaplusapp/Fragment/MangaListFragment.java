@@ -67,7 +67,7 @@ public class MangaListFragment extends DialogFragment {
             builder
                     .setView(view)
                     .setTitle(category.getNAME_CATEGORY())
-                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -76,8 +76,8 @@ public class MangaListFragment extends DialogFragment {
         }else if (tag.equals("Favorite")){
             builder
                     .setView(view)
-                    .setTitle("Favorites")
-                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                    .setTitle(R.string.favorite)
+                    .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -87,8 +87,8 @@ public class MangaListFragment extends DialogFragment {
         } else if (tag.equals("Bought")) {
             builder
                     .setView(view)
-                    .setTitle("Bought")
-                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                    .setTitle(R.string.bought)
+                    .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -147,7 +147,7 @@ public class MangaListFragment extends DialogFragment {
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
                                             // Xử lý lỗi nếu cần
-                                            Toast.makeText(getContext(), "The loading mangas was interrupted", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), R.string.loadingInterupted, Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }
@@ -156,7 +156,7 @@ public class MangaListFragment extends DialogFragment {
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         // Xử lý lỗi nếu cần
-                        Toast.makeText(getContext(), "The loading mangas was interrupted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.loadingInterupted, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -198,7 +198,7 @@ public class MangaListFragment extends DialogFragment {
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
                                             // Xử lý lỗi nếu cần
-                                            Toast.makeText(getContext(), "The loading mangas was interrupted", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), R.string.loadingInterupted, Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }
@@ -207,7 +207,7 @@ public class MangaListFragment extends DialogFragment {
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         // Xử lý lỗi nếu cần
-                        Toast.makeText(getContext(), "The loading mangas was interrupted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.loadingInterupted, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -229,7 +229,7 @@ public class MangaListFragment extends DialogFragment {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getContext(), "The loading mangas was interrupted",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.loadingInterupted,Toast.LENGTH_SHORT).show();
                 }
             });
         }

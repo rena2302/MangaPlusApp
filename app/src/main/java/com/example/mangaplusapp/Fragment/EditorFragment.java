@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.FragmentEditorCategoryBinding;
 import com.example.mangaplusapp.databinding.FragmentEditorChapterBinding;
 import com.example.mangaplusapp.databinding.FragmentEditorMangaBinding;
@@ -72,7 +73,7 @@ public class EditorFragment extends Fragment {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getContext(), "The loading categories was interrupted",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.loadingInterupted,Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -128,13 +129,13 @@ public class EditorFragment extends Fragment {
             //get Data
             manga = binding.editMangaName.getText().toString().trim();
             if(TextUtils.isEmpty(manga)){
-                Toast.makeText(getContext(),"Please enter manga name...!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),R.string.fillAllField, Toast.LENGTH_LONG).show();
             } else if (TextUtils.isEmpty(binding.editMangaCategory.getText())) {
-                Toast.makeText(getContext(),"Please pick category...!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),R.string.fillAllField, Toast.LENGTH_LONG).show();
             } else if (TextUtils.isEmpty(binding.editMangaDescription.getText())) {
-                Toast.makeText(getContext(),"Please enter manga description..!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),R.string.fillAllField, Toast.LENGTH_LONG).show();
             } else if (TextUtils.isEmpty(binding.editMangaPicture.getText())) {
-                Toast.makeText(getContext(),"Please set manga picture...!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),R.string.fillAllField, Toast.LENGTH_LONG).show();
             } else {
                 editMangaFireBase();
                 binding.editMangaPicture.getText().clear();
@@ -168,13 +169,13 @@ public class EditorFragment extends Fragment {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(getContext(),"Manga edit successful", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),R.string.manga_edit_successful, Toast.LENGTH_LONG).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(),"Manga edit fail", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),R.string.manga_edit_fail, Toast.LENGTH_LONG).show();
                         }
                     });
         }
@@ -202,7 +203,7 @@ public class EditorFragment extends Fragment {
             //get Data
             category = binding.editCategoryName.getText().toString().trim();
             if(TextUtils.isEmpty(category)){
-                Toast.makeText(getContext(),"Please enter category name...!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),R.string.fillCategory, Toast.LENGTH_LONG).show();
             }
             else {
                 editCategoryFireBase();
@@ -224,14 +225,14 @@ public class EditorFragment extends Fragment {
                         @Override
                         public void onSuccess(Void unused) {
                             //category add success
-                            Toast.makeText(getContext(),"Category edit successful", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),R.string.category_edit_successful, Toast.LENGTH_LONG).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             //category add fail
-                            Toast.makeText(getContext(),"Category edit failure", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),R.string.category_edit_fail, Toast.LENGTH_LONG).show();
                         }
                     });
         }
@@ -266,7 +267,7 @@ public class EditorFragment extends Fragment {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getContext(), "The loading mangas was interrupted",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.loadingInterupted,Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -324,7 +325,7 @@ public class EditorFragment extends Fragment {
                     public void onActivityResult(Uri result) {
                         if (result != null) {
                             pdfUri = result;
-                            Toast.makeText(getActivity(), "PDF selected", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), R.string.chapterSelected, Toast.LENGTH_SHORT).show();
                             // Now you can do whatever you want with the selected PDF URI
                         }
                     }
@@ -337,7 +338,7 @@ public class EditorFragment extends Fragment {
             //get Data
             chapter = binding.editChapterName.getText().toString().trim();
             if(TextUtils.isEmpty(chapter)){
-                Toast.makeText(getContext(),"Please enter chapter name...!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),R.string.fillChapter, Toast.LENGTH_SHORT).show();
             }
             else {
                 editChapterFireBase();
@@ -366,7 +367,7 @@ public class EditorFragment extends Fragment {
                 }
             }catch (FileNotFoundException e){
                 e.printStackTrace();
-                Toast.makeText(getActivity(), "File not found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.file_not_found, Toast.LENGTH_SHORT).show();
             }
         }
         private void updateDataInFirebase(HashMap<String, Object> hashMap){
@@ -375,13 +376,13 @@ public class EditorFragment extends Fragment {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(getActivity(), "Chapter uploaded successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), R.string.chapter_uploaded_successfully, Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getActivity(), "Failed to upload chapter", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), R.string.chapter_upload_failed, Toast.LENGTH_SHORT).show();
                         }
                     });
         }

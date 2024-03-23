@@ -110,7 +110,7 @@ public class VerificationFragment extends Fragment{
         //=========================================SEND OTP=======================================//
         keyOtp = otpHelper.generateOTP();
         otpHelper.sendOTPByEmail(keyOtp,emailUser);
-        Toast.makeText(getContext(),"Send OTP successfully",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),R.string.otp_sent_successfully,Toast.LENGTH_SHORT).show();
         BackPageVertication();
         //Event start running timer resend OTP
         //        First run
@@ -174,12 +174,12 @@ public class VerificationFragment extends Fragment{
                     });
                 }
                 else{
-                    Toast.makeText(getContext(),"Wrong OTP code", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),R.string.wrong_otp_code, Toast.LENGTH_SHORT).show();
                 }
             }
             else
             {
-                Toast.makeText(getContext(),"Not entering enough OTP code", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),R.string.not_enough_otp_code, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -349,7 +349,7 @@ public class VerificationFragment extends Fragment{
             public void onFinish() {
                 resendEnable=true;
                 keyOtp = otpHelper.generateOTP();
-                reSendOtp.setText("Resend Code");
+                reSendOtp.setText(R.string.resend_code);
                 reSendOtp.setTextColor(getContext().getResources().getColor(android.R.color.holo_blue_dark));
             }
         }.start();

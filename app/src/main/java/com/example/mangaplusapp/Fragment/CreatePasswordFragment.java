@@ -94,22 +94,22 @@ public class CreatePasswordFragment extends Fragment {
         String userRePassword = getUserRePasswordTxt.getText().toString().trim();
 
         if (!userPassword.equals(userRePassword)) {
-            Toast.makeText(getContext(), "Password and Confirm Password do not match", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.isNotMatchPassword, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (userPassword.length() < 6) {
-            Toast.makeText(getContext(), "Please enter a password of at least 6 characters", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.password_at_least_6_chars, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!dbHelper.validPassword(userPassword)) {
-            Toast.makeText(getContext(), "Please enter a valid password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.invalidPassword, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!dbHelper.validName(userName)) {
-            Toast.makeText(getContext(), "Please enter a user name of at least 5 characters", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.username_min_length, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -135,10 +135,10 @@ public class CreatePasswordFragment extends Fragment {
                         // Lưu thông tin người dùng vào Firebase Realtime Database
                         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
                         usersRef.child(userId).setValue(new User(userId,emailUser));
-                        Toast.makeText(getContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.registration_successful, Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getContext(), LoginActivity.class));
                     } else {
-                        Toast.makeText(getContext(), "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.registration_failed + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

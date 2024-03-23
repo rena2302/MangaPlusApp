@@ -109,10 +109,10 @@ public class EditNameFragment extends Fragment {
         });
         submit.setOnClickListener(v->{
             if(setName()){
-                Toast.makeText(getActivity(), "Update User Name Successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),R.string.update_username_successful, Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(getActivity(),"Please enter user name >= 5 ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),R.string.username_min_length,Toast.LENGTH_SHORT).show();
             }
         });
     }

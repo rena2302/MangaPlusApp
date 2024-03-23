@@ -52,6 +52,8 @@
     <string name="ChangePassword">Change Password</string>
     <string name="Connect">Connect</string>
     <string name="Logout">Log out</string>
+    <string name="logout_successful">Log out successful</string>
+    <string name="google_sign_out_fail">Google sign out failed</string>
     <string name="Language">Language</string>
     <string name="changeLanguage">Change Language</string>
     <string name="ChoosePaymentOption">Choose Payment option</string>
@@ -62,13 +64,28 @@
     <string name="signInSuccess">Sign-in successful</string>
     <string name="signInTypeWrong">Please enter all fields</string>
     <string name="signEmailWrong">Incorrect email format \nEx:YourEmail@gmail.com</string>
-    <string name="signPasswordWrong">Incorrect password \nMust be more than 8 characters</string>
+    <string name="signPasswordWrong">Incorrect password \nMust be more than 6 characters</string>
     <string name="isNotLogin">You are not logged in</string>
     <string name="emailExists">This email already exists in our system.</string>
     <string name="typeEmailValid">Please type a valid email address.</string>
     <string name="removeFavoriteSuccess">Favorite removed successfully</string>
     <string name="removeFavoriteFail">Failed to remove favorite</string>
-
+    <string name="invalidPasswordOrEmail">Invalid password or email</string>
+    <string name="invalidEmail">Invalid email address</string>
+    <string name="invalidPassword">Invalid password address</string>
+    <string name="emailUpdateSuccess">Email updated successfully</string>
+    <string name="emailUpdateFail">Email update failed</string>
+    <string name="password_at_least_6_chars">Please enter a password of at least 6 characters</string>
+    <string name="username_min_length">Please enter a user name of at least 5 characters</string>
+    <string name="registration_successful">Registration Successful</string>
+    <string name="registration_failed">Registration failed: </string>
+    <string name="update_username_successful">Username updated successfully</string>
+    <string name="password_reset_email_sent">Password reset email sent successfully</string>
+    <string name="password_reset_fail">Failed to send password reset email: </string>
+    <string name="otp_sent_successfully">OTP sent successfully</string>
+    <string name="wrong_otp_code">Invalid OTP code</string>
+    <string name="not_enough_otp_code">Please enter the complete OTP code</string>
+    <string name="resend_code">Resend Code</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">Forgot Password</string>
     <string name="forgotDescripstion">Forgot password? Easily recover with our apps user-friendly feature for a secure experience</string>
@@ -76,6 +93,8 @@
     <string name="sendOtp">Send OTP</string>
     <string name="VerificationTittle">Verification</string>
     <string name="VerificationNotify">We will send you one time password this email address.</string>
+    <string name="enter_email">Please enter your email</string>
+    <string name="email_not_found">Email not found in our app</string>
     <!-- End Forgot   -->
     <!-- End  Form  -->
     <!-- Begin DashBoard -->
@@ -110,7 +129,13 @@
     <string name="editMangaName">Edit Manga Name</string>
     <string name="editMangaPremium">Premium manga ?</string>
     <string name="editMangaPrice">Edit manga price</string>
-
+    <string name="manga_edit_successful">Manga edit successful</string>
+    <string name="manga_edit_fail">Manga edit failed</string>
+    <string name="category_edit_successful">Category edited successfully</string>
+    <string name="category_edit_fail">Category edit failed</string>
+    <string name="file_not_found">File not found</string>
+    <string name="chapter_uploaded_successfully">Chapter uploaded successfully</string>
+    <string name="chapter_upload_failed">Failed to upload chapter</string>
     <!--Add a new Chapter-->
     <string name="addNewChapter">Add New Chapter</string>
     <string name="addChapterManga">Add Chapter Manga</string>
@@ -138,10 +163,13 @@
     <string name="placeForAdmin">Place for admin</string>
     <string name="bought">Bought</string>
     <string name="payment">Payment</string>
-    <string name="favorite">FAVORITE</string>
+    <string name="favorite">Favorite</string>
     <string name="changeTheme">Change theme</string>
     <string name="Buy_book">Buy Book</string>
     <string name="Reading">Reading</string>
+    <string name="isNotMatchPassword">Passwords do not match</string>
+    <string name="avatar_update_successful">Avatar updated successfully</string>
+    <string name="avatar_update_failed">Update avatar failed</string>
     <!--MANGA-->
     <string name="mangaLoading">Manga Loading...</string>
     <string name="addFavoriteSuccess">Favorite added successfully</string>
@@ -155,6 +183,6 @@
     <string name="bioError">Authentication Error: </string>
     <string name="bioSuccess">Authentication successful</string>
     <string name="bioFail">Authentication failed</string>
-    <!--Payment-->
-
+    <!--CHAPTER-->
+    <string name="chooseChapter">Selecte chapter</string>
 </resources>
