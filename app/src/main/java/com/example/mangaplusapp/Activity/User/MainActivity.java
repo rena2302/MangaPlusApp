@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity {
     String userName,userID;
     ImageView imgViewUser,headerBackgroundLinear;
     UserDBHelper dbHelper;
-    String userID,userEmail;
+    String userEmail;
     FirebaseAuth mAuth ;
     FirebaseUser currentUser ;
     int textColor,iconColor;
