@@ -17,9 +17,17 @@
     <string name="CREATOR">CREATOR</string>
     <string name="PROFILE">PROFILE</string>
     <string name="SEARCH">SEARCH</string>
+    <string name="viewHot">View</string>
+    <string name="boughtHot">Buy</string>
     <string name="SUCCESS">SUCCESSFUL</string>
     <string name="dataOccurred">An error occurred while processing data</string>
-
+    <string name="delete">Delete</string>
+    <string name="deleteConfirm">Are you sure you want to delete?</string>
+    <string name="deleting">Deleting...</string>
+    <string name="deleteSuccess">Deleted %s successfully!</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="loadingInterupted">loading interrupted. Please try again later.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="manga_plus_home">Manga Plus!</string>
@@ -56,6 +64,8 @@
     <string name="signEmailWrong">Incorrect email format \nEx:YourEmail@gmail.com</string>
     <string name="signPasswordWrong">Incorrect password \nMust be more than 8 characters</string>
     <string name="isNotLogin">You are not logged in</string>
+    <string name="emailExists">This email already exists in our system.</string>
+    <string name="typeEmailValid">Please type a valid email address.</string>
     <string name="removeFavoriteSuccess">Favorite removed successfully</string>
     <string name="removeFavoriteFail">Failed to remove favorite</string>
 
@@ -76,6 +86,9 @@
     <string name="username">Name</string>
     <!--Add a new category-->
     <string name="addANewCategory">Add A New Category</string>
+    <string name="fillCategory">Please fill in the category.</string>
+    <string name="addCategorySuccess">Category added successfully!</string>
+    <string name="addCategoryFail">Failed to add category. Please try again.</string>
     <!--Add a new Manga-->
     <string name="addANewManga">Add a New Manga</string>
     <string name="addMangaDescription">Add Manga Description</string>
@@ -83,7 +96,11 @@
     <string name="addMangaCategory">Add Manga Category</string>
     <string name="addMangaPrice">Add Manga Price</string>
     <string name="addManga">Add Manga</string>
+    <string name="addMangaSuccess">Manga added successfully.</string>
+    <string name="addMangaFail">Failed to add manga. Please try again.</string>
     <string name="addMangaPremium">Premium manga ?</string>
+    <string name="chooseCategory">Please choose a category.</string>
+    <string name="fillAllField">Please fill in all fields.</string>
     <!--Edit-->
     <string name="editDashboard">Edit Dashboard</string>
     <string name="editManga">Edit Manga</string>
@@ -97,6 +114,13 @@
     <!--Add a new Chapter-->
     <string name="addNewChapter">Add New Chapter</string>
     <string name="addChapterManga">Add Chapter Manga</string>
+    <string name="chapterSelected">Selected chapter</string>
+    <string name="fillChapter">Please fill in the chapter number.</string>
+    <string name="chooseManga">Please choose a manga.</string>
+    <string name="addChapterSuccess">Chapter added successfully.</string>
+    <string name="addChapterFail">Failed to add chapter. Please try again.</string>
+    <string name="upChapterFail">Failed to upload chapter. Please try again.</string>
+    <string name="selectPDF">Please select a PDF file.</string>
     <!--DashBoard User-->
     <string name="dashBoardUser">DashBoard User</string>
     <!--Search-->
@@ -124,11 +148,13 @@
     <string name="paymentFail">Payment failed</string>
     <string name="paymentFailRetry">Payment failed. Please retry.</string>
     <string name="buyMangSuccess">Manga purchased successfully</string>
-
+    <string name="paymentLoading">Processing payment...</string>
+    <string name="paymentCancel">Payment canceled</string>
+    <string name="areInChapter">Are in </string>
     <!--BIOMETRIC-->
     <string name="bioError">Authentication Error: </string>
     <string name="bioSuccess">Authentication successful</string>
     <string name="bioFail">Authentication failed</string>
-
+    <!--Payment-->
 
 </resources>

@@ -81,7 +81,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         Mangas mangas = mangasList.get(position);
         setFavorite(mangas.getID_MANGA(), holder);
         holder.favoName.setText(mangas.getNAME_MANGA());
-        if (Long.parseLong(mangas.getPRICE_MANGA()) == 0) {
+        if (Float.parseFloat(mangas.getPRICE_MANGA()) == 0) {
             holder.favoPrice.setText("Price: Free!");
         }
         else{
@@ -133,7 +133,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
 
     protected void removeFromFavorite(String mangaIdToRemove, FavoriteViewHolder holder){
         if(firebaseAuth.getCurrentUser() == null){
-            Toast.makeText(context,"You're not logged in", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,R.string.isNotLogin, Toast.LENGTH_SHORT).show();
             return;
         }else {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
@@ -143,13 +143,13 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
                         @Override
                         public void onSuccess(Void unused) {
                             holder.itemView.setVisibility(View.GONE);
-                            Toast.makeText(context, "Remove from favorite successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, R.string.removeFavoriteSuccess, Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context, "Failed to remove from favorite", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, R.string.removeFavoriteFail, Toast.LENGTH_SHORT).show();
                         }
                     });
 

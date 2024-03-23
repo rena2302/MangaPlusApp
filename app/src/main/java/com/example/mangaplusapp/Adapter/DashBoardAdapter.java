@@ -86,16 +86,16 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Delete")
-                            .setMessage("Are you sure wanna delete this category ?")
-                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    builder.setTitle(R.string.delete)
+                            .setMessage(R.string.deleteConfirm)
+                            .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(context, "Deleting...", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, R.string.deleting, Toast.LENGTH_LONG).show();
                                     deleteCategory(category);
                                 }
                             })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
@@ -118,16 +118,16 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
                 @Override
                 public void onClick(View v) {
                     androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
-                    builder.setTitle("Delete")
-                            .setMessage("Are you sure delete this chapter")
-                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    builder.setTitle(R.string.delete)
+                            .setMessage(R.string.deleteConfirm)
+                            .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(context, "Deleting...", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, R.string.deleting, Toast.LENGTH_LONG).show();
                                     deleteChapter(chapter);
                                 }
                             })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
@@ -171,7 +171,8 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(context,"Delete " + chapter.getNAME_CHAPTER() + " successfully", Toast.LENGTH_LONG).show();
+                        String deleteSuccessMessage = context.getString(R.string.deleteSuccess, chapter.getNAME_CHAPTER());
+                        Toast.makeText(context,deleteSuccessMessage, Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -199,7 +200,8 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(context,"Delete " + category.getNAME_CATEGORY() + " successfully", Toast.LENGTH_LONG).show();
+                        String deleteSuccessMessage = context.getString(R.string.deleteSuccess, category.getNAME_CATEGORY());
+                        Toast.makeText(context,deleteSuccessMessage, Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

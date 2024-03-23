@@ -83,8 +83,10 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                     .load(truyenTranh.getPICTURE_MANGA())
                     .into(holder.imageHot);
             holder.txtHot.setText(truyenTranh.getNAME_MANGA());
-            if(hotViewFragment != null)holder.txtView.setText("View: " + truyenTranh.getVIEW_MANGA());
-            else holder.txtView.setText("Bought: " + truyenTranh.getBOUGHT_MANGA());
+            String viewCount = context.getString(R.string.viewHot)+ ": " + truyenTranh.getVIEW_MANGA();
+            String boughtCount = context.getString(R.string.bought)+ ": " + truyenTranh.getBOUGHT_MANGA();
+            if(hotViewFragment != null)holder.txtView.setText(viewCount);
+            else holder.txtView.setText(boughtCount);
 
             holder.txtRank.setText(String.valueOf(position + 1));
             holder.itemView.setOnClickListener(new View.OnClickListener() {

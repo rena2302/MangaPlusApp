@@ -66,7 +66,7 @@
                     if (exists) {
                         Log.d("register","Email exists" );
                         Log.d("register","Case to forgot" );
-                        Toast.makeText(RegisterActivity.this, "This email already exists. Please login or use a different email.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, R.string.emailExists, Toast.LENGTH_SHORT).show();
                     } else {
                         if (db.validEmail(email)) {
                             Log.d("register","Case to Register" );
@@ -76,7 +76,7 @@
                             startActivity(intent);
 
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, R.string.typeEmailValid, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
