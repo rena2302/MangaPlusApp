@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,10 +23,7 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.mangaplusapp.Activity.User.MainActivity;
-import com.example.mangaplusapp.Activity.User.MangaDetailActivity;
 import com.example.mangaplusapp.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.AppBarLayout;
 
 import java.util.ArrayList;
@@ -216,7 +212,11 @@ public class HomeFragment extends Fragment {
                     public void transformPage(@NonNull View page, float position) {
                         float r = 1 - Math.abs(position);
                         page.setScaleY(0.85f + r * 0.15f);
-
+                        if (position == 0) {
+                            page.setTransitionAlpha(1f); // Không áp dụng alpha cho page hiện tại
+                        } else {
+                            page.setTransitionAlpha(0.5f); // Áp dụng alpha cho các page đợi
+                        }
                     }
                 });
                 viewPager2.setPageTransformer(compositePageTransformer);
@@ -225,7 +225,7 @@ public class HomeFragment extends Fragment {
                     public void onPageSelected(int position) {
                         super.onPageSelected(position);
                         handler.removeCallbacks(sliderRunnable);
-                        handler.postDelayed(sliderRunnable, 5000);
+                        handler.postDelayed(sliderRunnable, 3000);
                     }
                 });
             }
