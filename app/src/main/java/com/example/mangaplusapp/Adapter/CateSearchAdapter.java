@@ -26,12 +26,18 @@ public class CateSearchAdapter extends RecyclerView.Adapter<CateSearchAdapter.Ca
     private Context context;
     private List<Categories> categoryList, filterList;
     private FilterCategory filterCategory;
+    private OnCategoryClickListener listener;
+    public interface OnCategoryClickListener {
+        void onCategoryClick(Categories category);
+    }
     ItemCateSearchBinding binding;
     public void setData(List<Categories> categoryList){
         this.categoryList = categoryList;
         this.filterList =categoryList;
     }
-
+    public void setOnCategoryClickListener(OnCategoryClickListener listener) {
+        this.listener = listener;
+    }
     public CateSearchAdapter(List<Categories> categoryList, Context context){
         this.categoryList = categoryList;
         this.context = context;
@@ -56,7 +62,9 @@ public class CateSearchAdapter extends RecyclerView.Adapter<CateSearchAdapter.Ca
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showCategoryDialog(category);
+                if (listener != null) {
+                    listener.onCategoryClick(category);
+                }
             }
         });
     }
@@ -68,14 +76,6 @@ public class CateSearchAdapter extends RecyclerView.Adapter<CateSearchAdapter.Ca
         }
         return 0;
     }
-    private void showCategoryDialog(Categories category) {
-        MangaListFragment dialogFragment = new MangaListFragment(category);
-        Bundle args = new Bundle();
-        args.putString("tag", "category_dialog");
-        dialogFragment.setArguments(args);
-        dialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), "category_dialog");
-    }
-
     @Override
     public Filter getFilter() {
         if (filterCategory == null){

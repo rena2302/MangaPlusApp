@@ -70,12 +70,42 @@ public class SearchFragment extends Fragment {
                 cateSearchAdapter.notifyDataSetChanged();
             }
         });
+        cateSearchAdapter.setOnCategoryClickListener(category -> {
+            loadMangasByCategory(category, new OnMangaLoadedListener() {
+                @Override
+                public void onMangaLoaded(List<Mangas> truyenTranhList) {
+                    favoriteAdapter.setData(truyenTranhList);
+                    String searchBy = getContext().getString(R.string.search_by, category.getNAME_CATEGORY());
+                    Toast.makeText(getContext(),searchBy, Toast.LENGTH_SHORT).show();
+                    favoriteAdapter.notifyDataSetChanged();
+                }
+            });
+        });
         return view;
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
+    }
+    private void loadMangasByCategory(Categories category, OnMangaLoadedListener listener) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
+        reference.orderByChild("ID_CATEGORY_MANGA").equalTo(category.getID_CATEGORY()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Mangas> truyenTranhList = new ArrayList<>();
+                for(DataSnapshot ds : snapshot.getChildren()){
+                    Mangas truyenTranh = ds.getValue(Mangas.class);
+                    truyenTranhList.add(truyenTranh);
+                }
+                listener.onMangaLoaded(truyenTranhList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), R.string.loadingInterupted,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     private void loadMangas(OnMangaLoadedListener listener) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");

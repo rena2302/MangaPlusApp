@@ -22,7 +22,7 @@
         android:id="@+id/navFavorite"
         app:showAsAction="ifRoom"
         android:icon="@drawable/icon_favorite_nav"
-        android:title="@string/favorite" />
+        android:title="@string/FAVORITE" />
     <item
         android:id="@+id/navProfile"
         android:icon="@drawable/ic_bottom_nav_user"

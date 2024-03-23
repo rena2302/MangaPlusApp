@@ -17,6 +17,7 @@
     <string name="CREATOR">CREATOR</string>
     <string name="PROFILE">PROFILE</string>
     <string name="SEARCH">SEARCH</string>
+    <string name="FAVORITE">FAVORITE</string>
     <string name="viewHot">View</string>
     <string name="boughtHot">Buy</string>
     <string name="SUCCESS">SUCCESSFUL</string>
@@ -28,6 +29,7 @@
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="loadingInterupted">loading interrupted. Please try again later.</string>
+    <string name="search_by">Search by %s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="manga_plus_home">Manga Plus!</string>
@@ -184,5 +186,5 @@
     <string name="bioSuccess">Authentication successful</string>
     <string name="bioFail">Authentication failed</string>
     <!--CHAPTER-->
-    <string name="chooseChapter">Selecte chapter</string>
+    <string name="chooseChapter">Select chapter</string>
 </resources>
