@@ -47,6 +47,7 @@
             android:layout_below="@+id/Name_Title"
             android:id="@+id/dashFragmentRcv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:paddingHorizontal="30dp"/>
     </RelativeLayout>
 </RelativeLayout>
