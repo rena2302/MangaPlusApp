@@ -256,8 +256,6 @@ public class MainActivity extends BaseActivity {
         navigationView = findViewById(R.id.navigation_drawer_container);
         FrameLayout frameLayout = findViewById(R.id.frameLayout);
         NameApp=findViewById(R.id.AppName_Title);
-        int[] colors={Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW};
-        Drawable drawable=getDrawable(R.drawable.background_linear_main);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -266,7 +264,6 @@ public class MainActivity extends BaseActivity {
                 if (itemId == R.id.navHome) {
                     loadFragment(new HomeFragment(), false, R.menu.home_fragment_header_menu);
                     SwapColorBottom(R.color.Home_Bottom);
-                    headerBackgroundLinear.setBackgroundResource(R.drawable.background_linear_main);
                 } else if (itemId == R.id.navHot) {
                     loadFragment(new HotFragment(), false, R.menu.hot_fragment_header_menu);
                     SwapColorBottom(R.color.Hot_Bottom);
