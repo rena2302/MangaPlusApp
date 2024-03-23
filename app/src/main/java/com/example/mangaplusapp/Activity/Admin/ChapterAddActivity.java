@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
+import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityChapterAddBinding;
 import com.example.mangaplusapp.object.Mangas;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -63,7 +64,7 @@ public class ChapterAddActivity extends BaseActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ChapterAddActivity.this, "The loading mangas was interrupted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChapterAddActivity.this,R.string.loadingInterupted,Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -105,7 +106,7 @@ public class ChapterAddActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_PDF_FILE && resultCode == RESULT_OK && data != null) {
             pdfUri = data.getData();
-            Toast.makeText(this, "PDF selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.chapterSelected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -116,7 +117,7 @@ public class ChapterAddActivity extends BaseActivity {
         //get Data
         chapter = binding.addChapterName.getText().toString().trim();
         if(TextUtils.isEmpty(chapter)){
-            Toast.makeText(this,"Please enter chapter name...!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.fillChapter, Toast.LENGTH_SHORT).show();
         }
         else {
             addChapterFireBase();
@@ -132,7 +133,7 @@ public class ChapterAddActivity extends BaseActivity {
         //alert Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder
-                .setTitle("Pick manga")
+                .setTitle(R.string.chooseManga)
                 .setItems(mangasString, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -181,13 +182,13 @@ public class ChapterAddActivity extends BaseActivity {
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
-                                                    Toast.makeText(ChapterAddActivity.this,"Chapter add successful", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(ChapterAddActivity.this,R.string.addChapterSuccess, Toast.LENGTH_LONG).show();
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(ChapterAddActivity.this,"Chapter add fail", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(ChapterAddActivity.this,R.string.addChapterFail, Toast.LENGTH_LONG).show();
                                                 }
                                             });
                                 }
@@ -197,11 +198,11 @@ public class ChapterAddActivity extends BaseActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ChapterAddActivity.this,"PDF upload failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ChapterAddActivity.this,R.string.upChapterFail, Toast.LENGTH_LONG).show();
                         }
                     });
         } else {
-            Toast.makeText(ChapterAddActivity.this,"Please select a PDF file", Toast.LENGTH_LONG).show();
+            Toast.makeText(ChapterAddActivity.this,R.string.selectPDF, Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
+import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityAddMangaBinding;
 import com.example.mangaplusapp.object.Categories;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -59,7 +60,7 @@ public class MangaAddActivity extends BaseActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MangaAddActivity.this, "The loading categories was interrupted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MangaAddActivity.this, R.string.loadingInterupted,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -101,7 +102,7 @@ public class MangaAddActivity extends BaseActivity {
         //alert Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder
-                .setTitle("Pick category")
+                .setTitle(R.string.chooseCategory)
                 .setItems(categoriesString, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -124,13 +125,13 @@ public class MangaAddActivity extends BaseActivity {
         //get Data
         manga = binding.addMangaName.getText().toString().trim();
         if(TextUtils.isEmpty(manga)){
-            Toast.makeText(this,"Please enter manga name...!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,R.string.fillAllField, Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(binding.addMangaCategory.getText())) {
-            Toast.makeText(this,"Please pick category...!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,R.string.fillAllField, Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(binding.addMangaDescription.getText())) {
-            Toast.makeText(this,"Please enter manga description..!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,R.string.fillAllField, Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(binding.addMangaPicture.getText())) {
-            Toast.makeText(this,"Please set manga picture...!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,R.string.fillAllField, Toast.LENGTH_LONG).show();
         } else {
             addMangaFireBase();
             binding.addMangaPicture.getText().clear();
@@ -168,13 +169,13 @@ public class MangaAddActivity extends BaseActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(MangaAddActivity.this,"Manga add successful", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MangaAddActivity.this,R.string.addMangaSuccess, Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MangaAddActivity.this,"Manga add fail", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MangaAddActivity.this,R.string.addMangaFail, Toast.LENGTH_LONG).show();
                     }
                 });
     }

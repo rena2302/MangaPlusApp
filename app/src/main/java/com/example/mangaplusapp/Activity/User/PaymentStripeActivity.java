@@ -72,7 +72,7 @@ public class PaymentStripeActivity extends BaseActivity {
                         new PaymentSheet.Configuration("MangaPlus",configuration));
             }
             else{
-                Toast.makeText(getApplicationContext(),"Wait a second, page is loading,...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),R.string.paymentLoading,Toast.LENGTH_SHORT).show();
             }
         });
         paymentSheet=new PaymentSheet(this,this::onPaymentSheetResult);
@@ -114,7 +114,7 @@ public class PaymentStripeActivity extends BaseActivity {
     }
     private void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult){
         if(paymentSheetResult instanceof  PaymentSheetResult.Canceled){
-            Toast.makeText(this,"Canceled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.paymentCancel, Toast.LENGTH_SHORT).show();
         }
         if(paymentSheetResult instanceof  PaymentSheetResult.Failed){
             Toast.makeText(this,((PaymentSheetResult.Failed) paymentSheetResult).getError().getMessage(), Toast.LENGTH_SHORT).show();
@@ -126,7 +126,7 @@ public class PaymentStripeActivity extends BaseActivity {
     }
     public void isBought(){
         if(currentUser == null){
-            Toast.makeText(this,"You're not login", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.isNotLogin, Toast.LENGTH_SHORT).show();
             return;
         }else {
             HashMap<String,Object> hashMap = new HashMap<>();
@@ -137,7 +137,7 @@ public class PaymentStripeActivity extends BaseActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(PaymentStripeActivity.this,"Payment Success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PaymentStripeActivity.this,R.string.buyMangSuccess, Toast.LENGTH_SHORT).show();
                         }
                     });
         }

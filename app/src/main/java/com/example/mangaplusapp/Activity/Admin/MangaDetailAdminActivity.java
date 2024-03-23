@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.Adapter.DashBoardAdapter;
+import com.example.mangaplusapp.R;
 import com.example.mangaplusapp.databinding.ActivityMangaDetailAdminBinding;
 import com.example.mangaplusapp.object.Chapters;
 import com.google.firebase.database.DataSnapshot;
@@ -53,7 +54,7 @@ public class MangaDetailAdminActivity extends BaseActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MangaDetailAdminActivity.this, "The loading mangas was interrupted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MangaDetailAdminActivity.this, R.string.loadingInterupted,Toast.LENGTH_SHORT).show();
             }
         });
     }
