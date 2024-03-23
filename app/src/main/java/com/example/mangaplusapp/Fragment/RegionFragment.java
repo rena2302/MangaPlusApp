@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
@@ -68,8 +69,14 @@ public class RegionFragment extends Fragment {
             }
         });
         reset_btn.setOnClickListener(v->{
-            setLocal(requireContext(),GetKey[0]);
-            startAct();
+            if(GetKey[0]!=null)
+            {
+                setLocal(requireContext(),GetKey[0]);
+                startAct();
+            }
+            else {
+                Toast.makeText(getContext(),R.string.ChooseLanguages,Toast.LENGTH_SHORT).show();
+            }
         });
         backBtn.setOnClickListener(v->{
             Intent intent=new Intent(getContext(), MainActivity.class);
