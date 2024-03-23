@@ -5,7 +5,7 @@
     <!-- BASE  -->
     <string name="Finish">Hoàn tất</string>
     <string name="submit">Gửi</string>
-    <string name="testDemo">Bản thử nghiệm</string>
+    <string name="testDemo"></string>
     <string name="Home">Trang Chủ</string>
     <string name="Hot">Nổi Bật</string>
     <string name="Search">Tìm Kiếm</string>
@@ -22,7 +22,6 @@
     <string name="manga_plus_home">Manga Plus!</string>
     <string name="navigation_drawer_open">Open Navigation drawer</string>
     <string name="navigation_drawer_close">Close Navigation drawer</string>
-    <string name="SUCCESS">THÀNH CÔNG</string>
     <string name="hello_blank_fragment">cc</string>
     <!-- Begin Form    -->
     <string name="forgotPassword">Quên mật khẩu ?</string>
@@ -75,7 +74,6 @@
     <string name="oldPasswordProfileUser">Mật khẩu cũ</string>
     <string name="newPasswordProfileUser">Mật khẩu mới</string>
     <string name="confirmNewPasswordProfileUser">Xác nhận mật khẩu mới</string>
-    <string name="card_s_information">thông tin thẻ</string>
     <string name="placeForAdmin">Khu vực dành cho quản trị viên</string>
     <string name="bought">Đã mua</string>
     <string name="payment">Thanh toán</string>
@@ -85,22 +83,10 @@
     <string name="addMangaDescription">Thêm Mô tả Manga</string>
     <string name="addMangaPicture">Thêm Hình ảnh Manga</string>
     <string name="addMangaCategory">Thêm Thể loại Manga</string>
-    <string name="addMangaPrice">Thêm giá truyện tranh</string>
     <string name="addManga">Thêm Manga</string>
-    <string name="addMangaPremium">Truyện tranh cao cấp?</string>
-    <string name="editDashboard">Chỉnh sửa trang tổng quan</string>
-    <string name="editManga">Chỉnh sửa truyện tranh</string>
-    <string name="editMangaDescription">Chỉnh sửa mô tả Manga</string>
-    <string name="editMangaPicture">" 18 / 5.000 Kết quả dịch Kết quả bản dịch Chỉnh sửa ảnh Manga"</string>
-    <string name="editMangaCategory">Chỉnh sửa thể loại Manga</string>
-    <string name="editMangaName">Chỉnh sửa tên Manga</string>
-    <string name="editMangaPremium">Truyện tranh cao cấp?</string>
-    <string name="editMangaPrice">Chỉnh sửa giá truyện tranh</string>
     <string name="addNewChapter">Thêm Chương Mới</string>
     <string name="addChapterManga">Thêm Chương Manga</string>
     <string name="searchKeyWord">Tìm kiếm sách</string>
-    <string name="Buy_book">Mua sách</string>
-    <string name="Reading">Đọc</string>
     <string name="ResendCode">Gửi lại mã sau</string>
     <string name="Resend">Gửi lại mã</string>
     <string name="SendSuccessfull">Gửi thành công!</string>
@@ -128,5 +114,4 @@
     <string name="PaybyMomo">Thanh toán bằng Momo</string>
     <string name="Storygenres">Thể loại truyện</string>
     <string name="Recommended">Gợi ý</string>
-
 </resources>

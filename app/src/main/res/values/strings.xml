@@ -17,7 +17,17 @@
     <string name="CREATOR">CREATOR</string>
     <string name="PROFILE">PROFILE</string>
     <string name="SEARCH">SEARCH</string>
+    <string name="viewHot">View</string>
+    <string name="boughtHot">Buy</string>
     <string name="SUCCESS">SUCCESSFUL</string>
+    <string name="dataOccurred">An error occurred while processing data</string>
+    <string name="delete">Delete</string>
+    <string name="deleteConfirm">Are you sure you want to delete?</string>
+    <string name="deleting">Deleting...</string>
+    <string name="deleteSuccess">Deleted %s successfully!</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="loadingInterupted">loading interrupted. Please try again later.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="manga_plus_home">Manga Plus!</string>
@@ -42,10 +52,40 @@
     <string name="ChangePassword">Change Password</string>
     <string name="Connect">Connect</string>
     <string name="Logout">Log out</string>
+    <string name="logout_successful">Log out successful</string>
+    <string name="google_sign_out_fail">Google sign out failed</string>
     <string name="Language">Language</string>
     <string name="changeLanguage">Change Language</string>
     <string name="ChoosePaymentOption">Choose Payment option</string>
     <string name="EditEmail">Change Email</string>
+    <string name="googleFail">Google sign in failed. Error code: </string>
+    <string name="unexpect">An unexpected error occurred</string>
+    <string name="signInFail">Invalid Credentials</string>
+    <string name="signInSuccess">Sign-in successful</string>
+    <string name="signInTypeWrong">Please enter all fields</string>
+    <string name="signEmailWrong">Incorrect email format \nEx:YourEmail@gmail.com</string>
+    <string name="signPasswordWrong">Incorrect password \nMust be more than 6 characters</string>
+    <string name="isNotLogin">You are not logged in</string>
+    <string name="emailExists">This email already exists in our system.</string>
+    <string name="typeEmailValid">Please type a valid email address.</string>
+    <string name="removeFavoriteSuccess">Favorite removed successfully</string>
+    <string name="removeFavoriteFail">Failed to remove favorite</string>
+    <string name="invalidPasswordOrEmail">Invalid password or email</string>
+    <string name="invalidEmail">Invalid email address</string>
+    <string name="invalidPassword">Invalid password address</string>
+    <string name="emailUpdateSuccess">Email updated successfully</string>
+    <string name="emailUpdateFail">Email update failed</string>
+    <string name="password_at_least_6_chars">Please enter a password of at least 6 characters</string>
+    <string name="username_min_length">Please enter a user name of at least 5 characters</string>
+    <string name="registration_successful">Registration Successful</string>
+    <string name="registration_failed">Registration failed: </string>
+    <string name="update_username_successful">Username updated successfully</string>
+    <string name="password_reset_email_sent">Password reset email sent successfully</string>
+    <string name="password_reset_fail">Failed to send password reset email: </string>
+    <string name="otp_sent_successfully">OTP sent successfully</string>
+    <string name="wrong_otp_code">Invalid OTP code</string>
+    <string name="not_enough_otp_code">Please enter the complete OTP code</string>
+    <string name="resend_code">Resend Code</string>
     <!-- Begin Forgot -->
     <string name="forgotTittle">Forgot Password</string>
     <string name="forgotDescripstion">Forgot password? Easily recover with our apps user-friendly feature for a secure experience</string>
@@ -53,6 +93,8 @@
     <string name="sendOtp">Send OTP</string>
     <string name="VerificationTittle">Verification</string>
     <string name="VerificationNotify">We will send you one time password this email address.</string>
+    <string name="enter_email">Please enter your email</string>
+    <string name="email_not_found">Email not found in our app</string>
     <!-- End Forgot   -->
     <!-- End  Form  -->
     <!-- Begin DashBoard -->
@@ -63,6 +105,9 @@
     <string name="username">Name</string>
     <!--Add a new category-->
     <string name="addANewCategory">Add A New Category</string>
+    <string name="fillCategory">Please fill in the category.</string>
+    <string name="addCategorySuccess">Category added successfully!</string>
+    <string name="addCategoryFail">Failed to add category. Please try again.</string>
     <!--Add a new Manga-->
     <string name="addANewManga">Add a New Manga</string>
     <string name="addMangaDescription">Add Manga Description</string>
@@ -70,7 +115,11 @@
     <string name="addMangaCategory">Add Manga Category</string>
     <string name="addMangaPrice">Add Manga Price</string>
     <string name="addManga">Add Manga</string>
+    <string name="addMangaSuccess">Manga added successfully.</string>
+    <string name="addMangaFail">Failed to add manga. Please try again.</string>
     <string name="addMangaPremium">Premium manga ?</string>
+    <string name="chooseCategory">Please choose a category.</string>
+    <string name="fillAllField">Please fill in all fields.</string>
     <!--Edit-->
     <string name="editDashboard">Edit Dashboard</string>
     <string name="editManga">Edit Manga</string>
@@ -80,10 +129,23 @@
     <string name="editMangaName">Edit Manga Name</string>
     <string name="editMangaPremium">Premium manga ?</string>
     <string name="editMangaPrice">Edit manga price</string>
-
+    <string name="manga_edit_successful">Manga edit successful</string>
+    <string name="manga_edit_fail">Manga edit failed</string>
+    <string name="category_edit_successful">Category edited successfully</string>
+    <string name="category_edit_fail">Category edit failed</string>
+    <string name="file_not_found">File not found</string>
+    <string name="chapter_uploaded_successfully">Chapter uploaded successfully</string>
+    <string name="chapter_upload_failed">Failed to upload chapter</string>
     <!--Add a new Chapter-->
     <string name="addNewChapter">Add New Chapter</string>
     <string name="addChapterManga">Add Chapter Manga</string>
+    <string name="chapterSelected">Selected chapter</string>
+    <string name="fillChapter">Please fill in the chapter number.</string>
+    <string name="chooseManga">Please choose a manga.</string>
+    <string name="addChapterSuccess">Chapter added successfully.</string>
+    <string name="addChapterFail">Failed to add chapter. Please try again.</string>
+    <string name="upChapterFail">Failed to upload chapter. Please try again.</string>
+    <string name="selectPDF">Please select a PDF file.</string>
     <!--DashBoard User-->
     <string name="dashBoardUser">DashBoard User</string>
     <!--Search-->
@@ -101,8 +163,53 @@
     <string name="placeForAdmin">Place for admin</string>
     <string name="bought">Bought</string>
     <string name="payment">Payment</string>
-    <string name="favorite">FAVORITE</string>
+    <string name="favorite">Favorite</string>
     <string name="changeTheme">Change theme</string>
     <string name="Buy_book">Buy Book</string>
     <string name="Reading">Reading</string>
+    <string name="isNotMatchPassword">Passwords do not match</string>
+    <string name="avatar_update_successful">Avatar updated successfully</string>
+    <string name="avatar_update_failed">Update avatar failed</string>
+    <string name="ResendCode">Re-send code in</string>
+    <string name="Resend">Resend Code</string>
+    <string name="SendSuccessfull">Send Successfull !</string>
+    <string name="Titlesendsuccess">We\'ve sent a link to your email, click on it to update your password</string>
+    <string name="Backtologin">Back to login</string>
+    <string name="View">View</string>
+    <string name="Buy">Buy</string>
+    <string name="Languages">Languages</string>
+    <string name="Apply">Apply</string>
+    <string name="EnterNewEmail">Enter New Email</string>
+    <string name="TermsofUse">Terms of Use</string>
+    <string name="Support">Support</string>
+    <string name="Showmore">Show more</string>
+    <string name="Hideless">Hide less</string>
+    <string name="Read">Read</string>
+    <string name="Chapter">Chapter</string>
+    <string name="BookDescription">Book Description</string>
+    <string name="Mangaplusneedstoconfirm">Manga plus needs to confirm</string>
+    <string name="Fingerprintverification">Fingerprint verification</string>
+    <string name="Paybymomo">Pay by momo</string>
+    <string name="Paybymastercredit">Pay by master credit</string>
+    <string name="Price">Price :</string>
+    <string name="Paybycredit">Pay by credit</string>
+    <string name="Cancel">Cancel</string>
+    <string name="PaybyMomo">Pay by Momo</string>
+    <string name="Storygenres">Story genres</string>
+    <string name="Recommended">Recommended</string>
+    <!--MANGA-->
+    <string name="mangaLoading">Manga Loading...</string>
+    <string name="addFavoriteSuccess">Favorite added successfully</string>
+    <string name="paymentFail">Payment failed</string>
+    <string name="paymentFailRetry">Payment failed. Please retry.</string>
+    <string name="buyMangSuccess">Manga purchased successfully</string>
+    <string name="paymentLoading">Processing payment...</string>
+    <string name="paymentCancel">Payment canceled</string>
+    <string name="areInChapter">Are in </string>
+    <!--BIOMETRIC-->
+    <string name="bioError">Authentication Error: </string>
+    <string name="bioSuccess">Authentication successful</string>
+    <string name="bioFail">Authentication failed</string>
+    <!--CHAPTER-->
+    <string name="chooseChapter">Selecte chapter</string>
 </resources>
