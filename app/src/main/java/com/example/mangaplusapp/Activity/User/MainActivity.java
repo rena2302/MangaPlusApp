@@ -12,6 +12,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -68,6 +69,7 @@ public class MainActivity extends BaseActivity {
     String userName,userID;
     ImageView imgViewUser,headerBackgroundLinear;
     UserDBHelper dbHelper;
+    String userID,userEmail;
     FirebaseAuth mAuth ;
     FirebaseUser currentUser ;
     int textColor,iconColor;
@@ -79,11 +81,15 @@ public class MainActivity extends BaseActivity {
         setContentView(binding.getRoot()); // set content phải trước focus nha
         loadFragment(new HomeFragment(),false, R.menu.home_fragment_header_menu);
         sharedPreferences = this.getSharedPreferences("user_session", Context.MODE_PRIVATE);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser=mAuth.getCurrentUser();
+        userID = currentUser.getProviderId();
+        userEmail=currentUser.getEmail();
+        userName = currentUser.getDisplayName();
         BackToProfile();
         focusFragment();
         loadMenuDrawer();
         navToDrawerMenuBottom();
-        setInfo();
     }
 
     private void BackToProfile()
@@ -94,33 +100,45 @@ public class MainActivity extends BaseActivity {
             loadFragment(new UserProfileFragment(), false, R.menu.library_fragment_header_menu);
         }
     }
-
+    private boolean checkAdmin(String userEmail){
+        if(userEmail.equals("softwaretestact@gmail.com")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     private void setInfo(){
+        dbHelper = new UserDBHelper(this);
         navigationView = findViewById(R.id.navigation_drawer_container);
         userNameTxt = navigationView.getHeaderView(0).findViewById(R.id.menu_drawer_header_username);
         imgViewUser=  navigationView.getHeaderView(0).findViewById(R.id.menu_drawer_header_image_user);
-        SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
-        dbHelper = new UserDBHelper(this);
-        mAuth = FirebaseAuth.getInstance();
-        currentUser=mAuth.getCurrentUser();
-        userID = currentUser.getProviderId();
-        userName = currentUser.getDisplayName();
-        Uri imgUser = currentUser.getPhotoUrl();
         headerBackgroundLinear=findViewById(R.id.Background_Linear_main);
-        Log.d("Main", "User id : "+userID);
-        if(userID.isEmpty()){
-            Log.d("Main Activity", "can not get userID");
-        }
-        else{
-            Log.d("Main Activity", " get userID success ");
-        }
-        Log.d("Main", "user name" + userName);
+        Uri imgUser = currentUser.getPhotoUrl();
         userNameTxt.setText(userName);
         Glide.with(this).load(imgUser).into(imgViewUser);
+    }
+    private void userAuthorization(){
+        Menu menu = navigationView.getMenu();
+        MenuItem spaceItem = menu.findItem(R.id.customItem);
+        MenuItem spaceItem2= menu.findItem(R.id.customItem2);
+        if(!checkAdmin(userEmail)){
+            MenuItem menuItem = menu.findItem(R.id.adminPlace_container);
+            if (menuItem != null) {
+                menu.removeItem(menuItem.getItemId());
+                spaceItem.setVisible(true);
+                spaceItem2.setVisible(true);
+            }
+        }else{
+            spaceItem.setVisible(false);
+            spaceItem2.setVisible(false);
+        }
     }
 
     private void navToDrawerMenuBottom(){
         navigationView=findViewById(R.id.navigation_drawer_container);
+        // check admin into create layout place for admin
+        userAuthorization();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
