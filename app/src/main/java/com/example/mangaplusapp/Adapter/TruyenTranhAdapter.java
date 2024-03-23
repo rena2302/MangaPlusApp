@@ -84,7 +84,7 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                     .into(holder.imageHot);
             holder.txtHot.setText(truyenTranh.getNAME_MANGA());
             String viewCount = context.getString(R.string.viewHot)+ ": " + truyenTranh.getVIEW_MANGA();
-            String boughtCount = context.getString(R.string.bought)+ ": " + truyenTranh.getBOUGHT_MANGA();
+            String boughtCount = context.getString(R.string.boughtHot)+ ": " + truyenTranh.getBOUGHT_MANGA();
             if(hotViewFragment != null)holder.txtView.setText(viewCount);
             else holder.txtView.setText(boughtCount);
 
