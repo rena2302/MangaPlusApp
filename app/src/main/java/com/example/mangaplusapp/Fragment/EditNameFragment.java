@@ -72,6 +72,7 @@ public class EditNameFragment extends Fragment {
         }
         return  root;
     }
+
     private boolean setName(){
         userName = getUserName.getText().toString();
         if(!dbhelper.validName(userName)){
@@ -100,6 +101,7 @@ public class EditNameFragment extends Fragment {
             return true;
         }
     }
+
     private void navigate(){
         Backbtn.setOnClickListener(v->{
             Intent intent=new Intent(getContext(), MainActivity.class);
@@ -116,6 +118,7 @@ public class EditNameFragment extends Fragment {
             }
         });
     }
+
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

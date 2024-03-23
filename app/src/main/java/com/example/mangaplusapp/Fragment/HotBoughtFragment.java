@@ -29,6 +29,7 @@ public class HotBoughtFragment extends Fragment {
     public interface OnDataLoadedListener {
         void onDataLoaded(List<Mangas> truyenTranhList);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class HotBoughtFragment extends Fragment {
         });
         return binding.getRoot();
     }
+
     private void SetContentRecycleView(List<Mangas> mangasList){
         TruyenTranhAdapter adapter = new TruyenTranhAdapter(getContext(),this);
         adapter.SetData(mangasList);
@@ -49,6 +51,7 @@ public class HotBoughtFragment extends Fragment {
         binding.hotFmViewRcv.setAdapter(adapter);
 
     }
+
     private void loadTopBought(HotViewFragment.OnDataLoadedListener listener){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
         reference.orderByChild("BOUGHT_MANGA")
@@ -74,5 +77,4 @@ public class HotBoughtFragment extends Fragment {
                     }
                 });
     }
-
 }

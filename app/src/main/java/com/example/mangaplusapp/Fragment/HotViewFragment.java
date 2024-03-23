@@ -28,9 +28,11 @@ import java.util.List;
 
 public class HotViewFragment extends Fragment {
     FragmentHotViewBinding binding;
+
     public interface OnDataLoadedListener {
         void onDataLoaded(List<Mangas> truyenTranhList);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,13 +46,14 @@ public class HotViewFragment extends Fragment {
         });
         return binding.getRoot();
     }
+
     private void SetContentRecycleView(List<Mangas> mangasList){
         TruyenTranhAdapter adapter = new TruyenTranhAdapter(getContext(),this);
         adapter.SetData(mangasList);
         binding.hotFmViewRcv.setLayoutManager(new GridLayoutManager(getContext(), 1));
         binding.hotFmViewRcv.setAdapter(adapter);
-
     }
+
     private void loadTopView(OnDataLoadedListener listener){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
         reference.orderByChild("VIEW_MANGA")
@@ -66,7 +69,6 @@ public class HotViewFragment extends Fragment {
                         Collections.reverse(mangasList);
                         listener.onDataLoaded(mangasList);
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 

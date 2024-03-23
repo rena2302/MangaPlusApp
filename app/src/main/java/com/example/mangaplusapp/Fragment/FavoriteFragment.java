@@ -37,9 +37,11 @@ public class FavoriteFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
     FavoriteAdapter adapter;
+
     public interface OnDataLoadedListener {
         void onDataLoaded(List<Mangas> truyenTranhList);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class FavoriteFragment extends Fragment {
         });
         return binding.getRoot();
     }
+
     private void setRecyclerView(List<Mangas> mangasList){
         adapter = new FavoriteAdapter(getContext());
         adapter.setData(mangasList);
@@ -62,6 +65,7 @@ public class FavoriteFragment extends Fragment {
         binding.favoFmRcv.setAdapter(adapter);
 
     }
+
     private void loadMangas(OnDataLoadedListener listener){
         String uid = currentUser.getUid();
         DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference("Users")

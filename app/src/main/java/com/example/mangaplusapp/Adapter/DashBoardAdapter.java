@@ -47,12 +47,13 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
         this.filterList = categoryList;
     }
     public DashBoardAdapter(){
-
     }
+
     public DashBoardAdapter(Context context, List<Chapters> chapterList){
         this.context = context;
         this.chapterList = chapterList;
     }
+
     public void setCategoryList(List<Categories> categoryList) {
         this.categoryList = categoryList;
     }
@@ -163,6 +164,7 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
             });
         }
     }
+
     private void deleteChapter(Chapters chapter) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chapters");
         String chapterId = chapter.getID_CHAPTER();
@@ -183,6 +185,7 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
                 });
 
     }
+
     private void showCategoryDialog(Categories category) {
          MangaListFragment dialogFragment = new MangaListFragment(category);
          Bundle args = new Bundle();
@@ -190,6 +193,7 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
          dialogFragment.setArguments(args);
          dialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), "category_dialog");
     }
+
     private void deleteCategory(Categories category) {
         //get id from object
         String idCategory = category.getID_CATEGORY();

@@ -21,6 +21,7 @@ public class CreatorFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_creator, container, false);
         return view;
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);

@@ -42,15 +42,12 @@ public class ChangePasswordFragment extends Fragment {
     FirebaseUser currentUser;
     AuthCredential credential;
     String data;
-    public  ChangePasswordFragment()
-    {
-
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,6 +68,7 @@ public class ChangePasswordFragment extends Fragment {
         //****************************************************************************************//
         return  root;
     }
+
     private void navigate(){
         backBtn.setOnClickListener(v->{
             Intent intent=new Intent(getContext(), MainActivity.class);
@@ -82,10 +80,9 @@ public class ChangePasswordFragment extends Fragment {
             CheckOldEmail();
         });
     }
+
     private void CheckOldEmail()
     {
-        Log.d("Email", currentUser.getEmail());
-
         oldPass=getOldPass.getText().toString();
         Log.d("Password", oldPass);
         credential = EmailAuthProvider.getCredential(currentUser.getEmail(), oldPass);
@@ -99,5 +96,4 @@ public class ChangePasswordFragment extends Fragment {
                     }
                 });
     }
-
 }

@@ -50,6 +50,7 @@ public class SuccessFragment extends Fragment {
         }
         return root;
     }
+
     private void navigate(){
         btn.setOnClickListener(v->{
             getActivity().finish();
@@ -57,6 +58,7 @@ public class SuccessFragment extends Fragment {
             startActivity(intent);
         });
     }
+
     private void sendResetPasswordByEmail (String userEmail){
         FirebaseAuth.getInstance().sendPasswordResetEmail(userEmail)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

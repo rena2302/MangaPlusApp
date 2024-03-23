@@ -34,15 +34,18 @@ public class DashBoardAdminActivity extends BaseActivity {
     public interface OnDataLoadedListener {
         void onDataLoaded(List<Categories> categoryList);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDashBoardAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         onClickEvent();
+
         //setup LayoutManager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(binding.getRoot().getContext(), RecyclerView.VERTICAL,false);
         binding.adminRcvContainer.setLayoutManager(linearLayoutManager);
+
         //set adapter
         binding.adminRcvContainer.setAdapter(dashBoardAdapter);
         backToMain();
@@ -60,9 +63,7 @@ public class DashBoardAdminActivity extends BaseActivity {
         binding.adminDashSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //called as when user type each letters
@@ -72,10 +73,8 @@ public class DashBoardAdminActivity extends BaseActivity {
                     Toast.makeText(binding.getRoot().getContext(), " " + e.getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
     }
@@ -99,7 +98,6 @@ public class DashBoardAdminActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -127,6 +125,7 @@ public class DashBoardAdminActivity extends BaseActivity {
             }
         });
     }
+
     private void backToMain()
     {
         shutDown=findViewById(R.id.shutDownAdmin);

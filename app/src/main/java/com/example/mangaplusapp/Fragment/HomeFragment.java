@@ -56,12 +56,15 @@ public class HomeFragment extends Fragment {
     List<Categories> categoryList = new ArrayList<>();
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
+
     public interface OnDataLoadedListener {
         void onDataLoaded(List<Mangas> truyenTranhList);
     }
+
     public interface OnPurchasedMangaIdsLoadedListener {
         void onPurchasedMangaIdsLoaded(List<String> purchasedMangaIds);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -110,9 +113,11 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     private void AddListCnT(){
         loadCategories();
     }
+
     private void loadMangas(Categories category, OnDataLoadedListener listener) {
         //Get all data from firebase > Categories
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
@@ -133,6 +138,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     private void loadCategories() {
 
         //Get all data from firebase > Categories
@@ -165,6 +171,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     // Set content for recycleView
     private void SetContentRecycleView(){
         recyclerViewCategory = view.findViewById(R.id.rcv_category);
@@ -180,8 +187,8 @@ public class HomeFragment extends Fragment {
         recyclerViewCategory.setAdapter(categoryAdapter);
 
         recyclerViewCategory.setNestedScrollingEnabled(false);
-
     }
+
     private void SetContentImageSlider(){
         List<Mangas> truyenTranhList = new ArrayList<>();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
@@ -213,7 +220,6 @@ public class HomeFragment extends Fragment {
                     }
                 });
                 viewPager2.setPageTransformer(compositePageTransformer);
-
                 viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
                     @Override
                     public void onPageSelected(int position) {
@@ -229,6 +235,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {

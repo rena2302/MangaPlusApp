@@ -110,7 +110,7 @@ public class VerificationFragment extends Fragment{
         //=========================================SEND OTP=======================================//
         keyOtp = otpHelper.generateOTP();
         otpHelper.sendOTPByEmail(keyOtp,emailUser);
-        Toast.makeText(getContext(),"Send OTP successfully",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),R.string.SendOTPsuccessfully,Toast.LENGTH_SHORT).show();
         BackPageVertication();
         //Event start running timer resend OTP
         //        First run
@@ -136,8 +136,6 @@ public class VerificationFragment extends Fragment{
         DeleteMoveUp(otp3Input,otp2Input);
         DeleteMoveUp(otp4Input,otp3Input);
 
-
-
         reSendOtp.setOnClickListener(v->{
             if(resendEnable)
             {
@@ -146,6 +144,7 @@ public class VerificationFragment extends Fragment{
                 startCountDownTimer();
             }
         });
+
         submitOtp.setOnClickListener(v->{
             String otp1 = otp1Input.getText().toString();
             String otp2 = otp2Input.getText().toString();
@@ -174,21 +173,17 @@ public class VerificationFragment extends Fragment{
                     });
                 }
                 else{
-                    Toast.makeText(getContext(),"Wrong OTP code", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),R.string.WrongOTPcode, Toast.LENGTH_SHORT).show();
                 }
             }
             else
             {
-                Toast.makeText(getContext(),"Not entering enough OTP code", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),R.string.NotenteringenoughOTPcode, Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
-
         return root;
     }
+
     private  void BackPageVertication(){
         backOTPBtn.setOnClickListener(v->{
             dbHelper.checkEmailExists(emailUser, new UserDBHelper.userCheckFirebaseListener() {
@@ -205,6 +200,7 @@ public class VerificationFragment extends Fragment{
             });
         });
     }
+
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -217,6 +213,7 @@ public class VerificationFragment extends Fragment{
         }
         fragmentTransaction.commit();
     }
+
     //Check Editext has data or not
     private int ListenNullText(int SelectedPosition,EditText input1,EditText input2, EditText input3, EditText input4)
     {

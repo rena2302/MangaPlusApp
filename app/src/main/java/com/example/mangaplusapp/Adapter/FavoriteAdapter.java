@@ -66,6 +66,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         this.mangasList = mangasList;
         this.filterList = mangasList;
     }
+
     public void setFilterManga(List<Mangas> truyenTranhList) {this.mangasList = truyenTranhList;}
     @NonNull
     @Override
@@ -118,12 +119,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         });
     }
 
-
     @Override
     public int getItemCount() {
         if(mangasList != null) return mangasList.size();
         return 0;
     }
+
     @Override
     public Filter getFilter() {
         if(filterManga == null){
@@ -156,6 +157,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
 
         }
     }
+
     private void toggleFavorite(String mangaId, FavoriteViewHolder holder) {
         DatabaseReference userFavoritesRef = FirebaseDatabase.getInstance().getReference("Users")
                 .child(currentUser.getUid()).child("Favorites");
@@ -175,6 +177,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
                     }
                 });
     }
+
     private void setFavorite(String mangaId, FavoriteViewHolder holder){
         DatabaseReference userFavoritesRef = FirebaseDatabase.getInstance().getReference("Users")
                 .child(currentUser.getUid()).child("Favorites");
@@ -192,6 +195,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
                     }
                 });
     }
+
     public static class FavoriteViewHolder extends RecyclerView.ViewHolder {
         ImageView favoImg;
         TextView favoName, favoPrice;

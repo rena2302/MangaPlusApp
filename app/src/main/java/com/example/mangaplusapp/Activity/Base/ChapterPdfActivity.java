@@ -68,6 +68,7 @@ public class ChapterPdfActivity extends BaseActivity implements ChapterViewFragm
                 "PDF_CHAPTER", getIntent().getStringExtra("PDF_CHAPTER"),
                 "ID_MANGA_CHAPTER", getIntent().getStringExtra("ID_MANGA_CHAPTER"));
     }
+
     private void showChapterDialog() {
         ChapterListFragment dialogFragment = new ChapterListFragment();
         Bundle args = new Bundle();
@@ -77,6 +78,7 @@ public class ChapterPdfActivity extends BaseActivity implements ChapterViewFragm
         // Sử dụng getChildFragmentManager() để quản lý Fragment trong Fragment
         dialogFragment.show(getSupportFragmentManager(), "chapter_dialog");
     }
+
     private void onClickEvent(){
         binding.pdfViewBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +93,7 @@ public class ChapterPdfActivity extends BaseActivity implements ChapterViewFragm
             }
         });
     }
+
     private void loadFragmentBasic(Fragment fragment, boolean isAppInitialized, String... extras) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

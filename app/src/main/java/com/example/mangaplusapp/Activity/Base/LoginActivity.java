@@ -62,6 +62,7 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
     //Call PresenterLogin
     private LoginPresenter ResAction;
     private LoginPresenter ForAction;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

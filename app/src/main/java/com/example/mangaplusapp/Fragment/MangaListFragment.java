@@ -90,7 +90,6 @@ public class MangaListFragment extends DialogFragment {
             background_dialog.setBackgroundResource(R.drawable.background_bought_dialog);
         }
 
-
         // Load dữ liệu và cập nhật adapter khi dữ liệu đã sẵn sàng
         loadMangas(tag, new OnDataLoadedListener() {
             @Override
@@ -99,9 +98,9 @@ public class MangaListFragment extends DialogFragment {
                 adapter.notifyDataSetChanged();
             }
         });
-
         return builder.create();
     }
+
     private void loadMangas(String tag, OnDataLoadedListener listener) {
         if (tag.equals("Favorite")) {
             // Load danh sách manga được người dùng đánh dấu là yêu thích
@@ -137,7 +136,6 @@ public class MangaListFragment extends DialogFragment {
                                                 listener.onDataLoaded(mangasList);
                                             }
                                         }
-
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
                                             // Xử lý lỗi nếu cần
@@ -146,7 +144,6 @@ public class MangaListFragment extends DialogFragment {
                                     });
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         // Xử lý lỗi nếu cần
@@ -197,7 +194,6 @@ public class MangaListFragment extends DialogFragment {
                                     });
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         // Xử lý lỗi nếu cần
@@ -228,5 +224,4 @@ public class MangaListFragment extends DialogFragment {
             });
         }
     }
-
 }

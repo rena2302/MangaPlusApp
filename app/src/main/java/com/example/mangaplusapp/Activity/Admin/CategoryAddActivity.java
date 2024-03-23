@@ -28,13 +28,11 @@ public class CategoryAddActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCategoryAddBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
         onClickEvent();
-
-
     }
+
     private void onClickEvent(){
         binding.addCategorySubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +75,8 @@ public class CategoryAddActivity extends BaseActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Categories");
         reference.child(""+timestamp)
                 .setValue(hashMap)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                .addOnSuccessListener(new OnSuccessListener<Void>()
+                {
                     @Override
                     public void onSuccess(Void unused) {
                         //category add success

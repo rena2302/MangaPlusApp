@@ -76,9 +76,11 @@ public class ChapterListFragment extends DialogFragment {
 
         return builder.create();
     }
+
     public void setPdfLoaded(boolean pdfLoaded) {
         this.isPdfLoaded = pdfLoaded;
     }
+
     private void loadChapters(OnDataLoadedListener listener) {
         List<Chapters> chaptersList = new ArrayList<>();
         //Get all data from firebase > Categories

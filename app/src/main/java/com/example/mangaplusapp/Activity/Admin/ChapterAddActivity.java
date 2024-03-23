@@ -96,12 +96,14 @@ public class ChapterAddActivity extends BaseActivity {
             }
         });
     }
+
     private void pickPdfFile() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("application/pdf");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(Intent.createChooser(intent, "Select PDF"), PICK_PDF_FILE);
     }
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_PDF_FILE && resultCode == RESULT_OK && data != null) {
@@ -123,6 +125,7 @@ public class ChapterAddActivity extends BaseActivity {
             addChapterFireBase();
         }
     }
+
     private void mangaPickDialog() {
         //get string Array from categoryList
         String[] mangasString = new String[truyenTranhList.size()];
@@ -148,6 +151,7 @@ public class ChapterAddActivity extends BaseActivity {
                 })
                 .show();
     }
+
     private void addChapterFireBase() {
         long timestamp = System.currentTimeMillis();
 
