@@ -219,4 +219,5 @@
     <string name="NotenteringenoughOTPcode">Không nhập đủ mã OTP</string>
     <string name="Admin">Quản trị viên</string>
     <string name="Profile">Hồ sơ</string>
+    <string name="ChooseLanguages">Vui lòng chọn ngôn ngữ!</string>
 </resources>

@@ -219,5 +219,6 @@
     <string name="NotenteringenoughOTPcode">पर्याप्त ओटीपी कोड दर्ज नहीं करना</string>
     <string name="Admin">व्यवस्थापक</string>
     <string name="Profile">प्रोफ़ाइल</string>
+    <string name="ChooseLanguages">कृपया भाषा चुनें!</string>
 </resources>
 
