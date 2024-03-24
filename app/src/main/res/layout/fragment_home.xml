@@ -18,7 +18,7 @@
             <TextView
                 android:id="@+id/Popular"
                 android:layout_marginTop="90dp"
-                android:text="Popular"
+                android:text="@string/Popular"
                 android:textSize="24sp"
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/jost_extrabold"

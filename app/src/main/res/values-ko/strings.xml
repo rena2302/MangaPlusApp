@@ -221,4 +221,5 @@
     <string name="Profile">프로필</string>
     <string name="ChooseLanguages">언어를 선택해주세요!</string>
     <string name="ContinueWithGG">Google로 계속하기</string>
+    <string name="Popular">포비엔</string>
 </resources>

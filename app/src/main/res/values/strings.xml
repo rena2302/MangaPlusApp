@@ -227,4 +227,5 @@
     <string name="Profile">Profile</string>
     <string name="ChooseLanguages">Please select language!</string>
     <string name="ContinueWithGG">Continue with Google</string>
+    <string name="Popular">Popular</string>
 </resources>
