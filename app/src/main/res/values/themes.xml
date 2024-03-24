@@ -16,6 +16,10 @@
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">#E7DFDD</item>
     </style>
+    <style name="Base.Theme.ChapterPdf" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="android:colorAccent">#000000</item>
+    </style>
     <style name="Theme.MangaPlusApp" parent="Base.Theme.MangaPlusApp" />
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
