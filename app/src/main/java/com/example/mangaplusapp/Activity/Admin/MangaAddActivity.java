@@ -37,6 +37,7 @@ public class MangaAddActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAddMangaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.addMangaPrice.setEnabled(false);
         loadCategories();
         onClickEvent();
     }
@@ -122,6 +123,11 @@ public class MangaAddActivity extends BaseActivity {
         /*before adding validate data*/
         //get Data
         manga = binding.addMangaName.getText().toString().trim();
+        if (binding.addMangaPreCheck.isChecked()) {
+            if (TextUtils.isEmpty(binding.addMangaPrice.getText())) {
+                Toast.makeText(this, R.string.fillAllField, Toast.LENGTH_LONG).show();
+            }
+        }
         if(TextUtils.isEmpty(manga)){
             Toast.makeText(this,R.string.fillAllField, Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(binding.addMangaCategory.getText())) {
@@ -130,10 +136,6 @@ public class MangaAddActivity extends BaseActivity {
             Toast.makeText(this,R.string.fillAllField, Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(binding.addMangaPicture.getText())) {
             Toast.makeText(this,R.string.fillAllField, Toast.LENGTH_LONG).show();
-        } else if (binding.addMangaPreCheck.isChecked()) {
-            if(TextUtils.isEmpty(binding.addMangaPrice.getText())){
-                Toast.makeText(this,R.string.fillAllField, Toast.LENGTH_LONG).show();
-            }
         } else {
             addMangaFireBase();
             binding.addMangaPicture.getText().clear();
@@ -142,6 +144,7 @@ public class MangaAddActivity extends BaseActivity {
             binding.addMangaName.getText().clear();
             binding.addMangaPreCheck.setChecked(false);
             binding.addMangaPrice.getText().clear();
+            binding.addMangaPre.setEnabled(false);
         }
     }
 
@@ -159,7 +162,7 @@ public class MangaAddActivity extends BaseActivity {
 
         if (binding.addMangaPreCheck.isChecked()){
             hashMap.put("PREMIUM_MANGA",true);
-            hashMap.put("PRICE_MANGA", binding.addMangaPrice.getText());
+            hashMap.put("PRICE_MANGA", ""+binding.addMangaPrice.getText());
         }
         else {
             hashMap.put("PREMIUM_MANGA",false);

@@ -132,6 +132,11 @@ public class EditorFragment extends Fragment {
         private void validateData() {
             /*before adding validate data*/
             //get Data
+            if (binding.editMangaPreCheck.isChecked()) {
+                if (TextUtils.isEmpty(binding.editMangaPrice.getText())) {
+                    Toast.makeText(getContext(), R.string.fillAllField, Toast.LENGTH_LONG).show();
+                }
+            }
             manga = binding.editMangaName.getText().toString().trim();
             if(TextUtils.isEmpty(manga)){
                 Toast.makeText(getContext(),R.string.fillAllField, Toast.LENGTH_LONG).show();
@@ -141,10 +146,6 @@ public class EditorFragment extends Fragment {
                 Toast.makeText(getContext(),R.string.fillAllField, Toast.LENGTH_LONG).show();
             } else if (TextUtils.isEmpty(binding.editMangaPicture.getText())) {
                 Toast.makeText(getContext(),R.string.fillAllField, Toast.LENGTH_LONG).show();
-            } else if (binding.editMangaPreCheck.isChecked()) {
-                if(TextUtils.isEmpty(binding.editMangaPrice.getText())){
-                    Toast.makeText(getContext(),R.string.fillAllField, Toast.LENGTH_LONG).show();
-                }
             } else {
                 editMangaFireBase();
                 binding.editMangaPicture.getText().clear();
@@ -153,6 +154,7 @@ public class EditorFragment extends Fragment {
                 binding.editMangaName.getText().clear();
                 binding.editMangaPreCheck.setChecked(false);
                 binding.editMangaPrice.getText().clear();
+                binding.editMangaPre.setEnabled(false);
             }
         }
 
@@ -166,7 +168,7 @@ public class EditorFragment extends Fragment {
             hashMap.put("ID_CATEGORY_MANGA",""+extras.getString("ID_CATEGORY_MANGA"));
             if (binding.editMangaPreCheck.isChecked()){
                 hashMap.put("PREMIUM_MANGA",true);
-                hashMap.put("PRICE_MANGA", binding.editMangaPrice.getText().toString());
+                hashMap.put("PRICE_MANGA", ""+binding.editMangaPrice.getText().toString());
             }
             else {
                 hashMap.put("PREMIUM_MANGA",false);

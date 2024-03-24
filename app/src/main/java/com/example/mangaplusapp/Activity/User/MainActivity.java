@@ -144,8 +144,7 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
                 if (itemId == R.id.adminPlace) {
-                    Intent intent = new Intent(MainActivity.this, DashBoardAdminActivity.class);
-                    startActivity(intent);
+                    startNewActivityAndFinishCurrent(DashBoardAdminActivity.class);
                 }
                 else if(itemId == R.id.menu_drawer_favorite){
                     MangaListFragment dialogFragment = new MangaListFragment();
