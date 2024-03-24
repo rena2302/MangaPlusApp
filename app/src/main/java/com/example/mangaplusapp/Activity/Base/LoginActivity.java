@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,11 +56,12 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
     FirebaseAuth mAuth;
     FirebaseDatabase databaseFirebase;
     GoogleSignInClient mGoogleSignInClient;
-    ImageView googleBtn;
+    LinearLayout googleBtn;
     int RC_SIGN_IN = 20;
     //End sign in Google
-    private LoginPresenter loginPresenter;
     //Call PresenterLogin
+
+    private LoginPresenter loginPresenter;
     private LoginPresenter ResAction;
     private LoginPresenter ForAction;
 
@@ -131,7 +133,6 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
     private void googleSignIn() {
         Intent intent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(intent,RC_SIGN_IN);
-
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -142,11 +143,8 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuth(account.getIdToken());
             } catch (ApiException e) {
-                // Lấy mã lỗi từ ApiException
-                int errorCode = e.getStatusCode();
-                Toast.makeText(this, R.string.googleFail + errorCode, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.googleFail, Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                // Nếu không phải ApiException, hiển thị lỗi khác
                 Toast.makeText(this, R.string.unexpect + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
@@ -163,7 +161,6 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
                             FirebaseUser user = mAuth.getCurrentUser();
                             HashMap<String,Object> map = new HashMap<>();
                             map.put("idUser",user.getUid());
-//                            map.put("name",user.getDisplayName());
                             map.put("userEmail",user.getEmail());
                             map.put("userAvt",user.getPhotoUrl().toString());
                             databaseFirebase.getReference().child("Users").child(user.getUid()).updateChildren(map);

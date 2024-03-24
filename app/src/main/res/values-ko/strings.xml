@@ -129,7 +129,7 @@
     <string name="search_by">%s로 검색</string>
     <string name="logout_successful">로그아웃 성공</string>
     <string name="google_sign_out_fail">구글 로그 아웃 실패</string>
-    <string name="googleFail">구글 로그인 실패. 오류 코드:</string>
+    <string name="googleFail">구글 로그인 실패 !</string>
     <string name="unexpect">예기치 않은 오류가 발생했습니다.</string>
     <string name="signInFail">잘못된 자격 증명</string>
     <string name="signInSuccess">로그인 성공</string>
@@ -219,4 +219,5 @@
     <string name="Admin">관리자</string>
     <string name="Profile">프로필</string>
     <string name="ChooseLanguages">언어를 선택해주세요!</string>
+    <string name="ContinueWithGG">Google로 계속하기</string>
 </resources>

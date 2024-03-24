@@ -45,7 +45,6 @@ public class RegionFragment extends Fragment {
         spinner =root.findViewById(R.id.regionSpinner);
         backBtn=root.findViewById(R.id.backEditRegionToProfileBtn);
         adapter = new ArrayAdapter<String>(requireContext(),R.layout.list_item_laguage,languages);
-//        adapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
         spinner.setAdapter(adapter);
         spinner.setSelection(0);
         reset_btn=root.findViewById(R.id.Language_Apply);
