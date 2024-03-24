@@ -130,7 +130,7 @@
     <string name="search_by">%s द्वारा खोजें</string>
     <string name="logout_successful">सफलतापूर्वक लॉग आउट</string>
     <string name="google_sign_out_fail">गूगल साइन आउट विफल रहा</string>
-    <string name="googleFail">गूगल साइन इन विफल रहा। त्रुटि कोड:</string>
+    <string name="googleFail">गूगल साइन इन विफल रहा। त्रु !</string>
     <string name="unexpect">एक अप्रत्याशित त्रुटि हुई।</string>
     <string name="signInFail">अमान्य प्रमाणपत्र</string>
     <string name="signInSuccess">साइन-इन सफल</string>
@@ -220,5 +220,6 @@
     <string name="Admin">व्यवस्थापक</string>
     <string name="Profile">प्रोफ़ाइल</string>
     <string name="ChooseLanguages">कृपया भाषा चुनें!</string>
+    <string name="ContinueWithGG">Google के साथ जारी रखें</string>
 </resources>
 

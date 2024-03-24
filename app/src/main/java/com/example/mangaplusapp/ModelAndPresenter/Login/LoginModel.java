@@ -8,12 +8,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginModel {
+
     //tao element để khi xử lí logic xong sẽ trả về thông báo cho presenter thông qua interface MVPLoginPresenter
 MVPLoginPresenter ModelResponseToPresenter;
+
 public LoginModel(MVPLoginPresenter ModelResponseToPresenter)
 {
     this.ModelResponseToPresenter=ModelResponseToPresenter;
 }
+
 //END CREATE
     //Xử lí logic cho presenter
     public void handleLogin(EditText emailTxt, EditText passwordTxt, UserDBHelper db, SharedPreferences.Editor editor){
@@ -63,10 +66,12 @@ public LoginModel(MVPLoginPresenter ModelResponseToPresenter)
             }
         }
     }
+
     public void ResAction()
     {
        ModelResponseToPresenter.ResActionPage();
     }
+
     public void ForgotAction()
     {
         ModelResponseToPresenter.ForgotAction();
