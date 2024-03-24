@@ -143,7 +143,7 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                     if (context instanceof DashBoardAdminActivity){
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setTitle("Manga DashBoard")
-                                .setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+                                .setPositiveButton(R.string.EDIT, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         SharedPreferences sharedPreferences = context.getSharedPreferences("session_edit", Context.MODE_PRIVATE);
@@ -161,10 +161,10 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                                                 "PRICE_MANGA",truyenTranh.getPRICE_MANGA());
                                     }
                                 })
-                                .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                                .setNegativeButton(R.string.delete, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Toast.makeText(context, "Deleting...", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, R.string.deleting, Toast.LENGTH_LONG).show();
                                         deleteMangas(truyenTranh);
                                     }
                                 })
@@ -184,7 +184,8 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(context,R.string.Delete + truyenTranh.getNAME_MANGA() + R.string.successfully, Toast.LENGTH_LONG).show();
+                        String delete = context.getString(R.string.deleteSuccess, truyenTranh.getNAME_MANGA());
+                        Toast.makeText(context, delete , Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

@@ -137,6 +137,7 @@
     <string name="signInTypeWrong">कृपया सभी क्षेत्र भरें</string>
     <string name="signEmailWrong">गलत ईमेल प्रारूप \\nउदाहरण: YourEmail@gmail.com</string>
     <string name="signPasswordWrong">" गलत पासवर्ड 6 अक्षरों से अधिक होना चाहिए"</string>
+    <string name="EDIT">"संपादन करें "</string>
     <string name="PRICE">मूल्य: %s$</string>
     <string name="priceFree">मूल्य: मुफ़्त!</string>
     <string name="isNotLogin">आप लॉग इन नहीं हैं।</string>

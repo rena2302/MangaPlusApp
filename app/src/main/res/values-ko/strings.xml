@@ -137,6 +137,7 @@
     <string name="signInTypeWrong">모든 필드를 입력하세요</string>
     <string name="signEmailWrong">잘못된 이메일 형식 \\nEx:YourEmail@gmail.com</string>
     <string name="signPasswordWrong">잘못된 비밀번호</string>
+    <string name="EDIT">편집하다</string>
     <string name="PRICE">가격: %s$</string>
     <string name="priceFree">가격: 무료!</string>
     <string name="isNotLogin">로그인되지 않았습니다.</string>

@@ -137,6 +137,7 @@
     <string name="signInTypeWrong">Vui lòng nhập đầy đủ thông tin</string>
     <string name="signEmailWrong">Định dạng email không đúng \\nVí dụ: YourEmail@gmail.com</string>
     <string name="signPasswordWrong">Mật khẩu không chính xác \\nPhải có nhiều hơn 6 ký tự</string>
+    <string name="EDIT">Chỉnh sửa</string>
     <string name="PRICE">Giá: %s$</string>
     <string name="priceFree">Giá: Miễn phí!</string>
     <string name="isNotLogin">Bạn chưa đăng nhập.</string>

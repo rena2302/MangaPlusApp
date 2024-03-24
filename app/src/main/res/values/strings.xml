@@ -21,6 +21,7 @@
     <string name="viewHot">View</string>
     <string name="boughtHot">Buy</string>
     <string name="SUCCESS">SUCCESSFUL</string>
+    <string name="EDIT">Edit</string>
     <string name="PRICE">Price: %s$</string>
     <string name="priceFree">Price: Free!</string>
     <string name="dataOccurred">An error occurred while processing data</string>

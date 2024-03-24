@@ -227,7 +227,7 @@ public class MangaDetailActivity extends BaseActivity {
 
     protected void addToFavorite(){
         if(firebaseAuth.getCurrentUser() == null){
-            Toast.makeText(this,"You're not login", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.isNotLogin, Toast.LENGTH_SHORT).show();
             return;
         }else {
             long timestamp = System.currentTimeMillis();
