@@ -90,6 +90,8 @@ dependencies {
     //Authenticate your phone's PIN and fingerprint in Java
     implementation ("androidx.biometric:biometric:1.1.0")
     //===========================================END GOOGLE=======================================//
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 
 
 }

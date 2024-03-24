@@ -185,19 +185,19 @@ public class HomeFragment extends Fragment {
         recyclerViewCategory.setNestedScrollingEnabled(false);
     }
 
-    private void SetContentImageSlider(){
+    private void SetContentImageSlider() {
         List<Mangas> truyenTranhList = new ArrayList<>();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()){
+                for (DataSnapshot ds : snapshot.getChildren()) {
                     Mangas truyenTranh = ds.getValue(Mangas.class);
                     truyenTranhList.add(truyenTranh);
                 }
                 viewPager2 = view.findViewById(R.id.vp2_image_slider);
 
-                imageSliderAdapter = new ImageSliderAdapter(getContext(),truyenTranhList, viewPager2);
+                imageSliderAdapter = new ImageSliderAdapter(getContext(), truyenTranhList, viewPager2);
                 viewPager2.setAdapter(imageSliderAdapter);
 
                 viewPager2.setClipToPadding(false);
@@ -205,21 +205,9 @@ public class HomeFragment extends Fragment {
                 viewPager2.setOffscreenPageLimit(3);
                 viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
-                CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
-                compositePageTransformer.addTransformer(new MarginPageTransformer(40));
-                compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
-                    @Override
-                    public void transformPage(@NonNull View page, float position) {
-                        float r = 1 - Math.abs(position);
-                        page.setScaleY(0.85f + r * 0.15f);
-                        if (position == 0) {
-                            page.setTransitionAlpha(1f); // Không áp dụng alpha cho page hiện tại
-                        } else {
-                            page.setTransitionAlpha(0.5f); // Áp dụng alpha cho các page đợi
-                        }
-                    }
-                });
-                viewPager2.setPageTransformer(compositePageTransformer);
+                // Apply BlurTransformation to ViewPager2
+                BlurTransformation blurTransformation = new BlurTransformation();
+                viewPager2.setPageTransformer(blurTransformation);
                 viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
                     @Override
                     public void onPageSelected(int position) {
@@ -234,6 +222,28 @@ public class HomeFragment extends Fragment {
 
             }
         });
+    }
+
+    public class BlurTransformation implements ViewPager2.PageTransformer {
+        @Override
+        public void transformPage(@NonNull View page, float position) {
+            float r = 1 - Math.abs(position);
+            page.setScaleY(0.85f + r * 0.15f);
+            if (position == 0) {
+                page.setTransitionAlpha(1f);
+            } else {
+                page.setTransitionAlpha(1f);
+            }
+
+            // Khoảng cách các item
+            float offset = position*-(page.getWidth()/10) ;
+            page.setTranslationX(offset);
+
+            //Mức độ scale
+            float scaleFactor = 1 - Math.abs(position) / 3; // Adjust the scaleFactor as needed
+            page.setScaleX(scaleFactor);
+            page.setScaleY(scaleFactor);
+        }
     }
 
     private Runnable sliderRunnable = new Runnable() {

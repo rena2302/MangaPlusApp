@@ -3,13 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingVertical="85dp"
     android:background="@drawable/background_fav"
     tools:context=".Fragment.FavoriteFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favoFmRcv"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:paddingTop="85dp"
+            android:paddingBottom="85dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favoFmRcv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+    <!-- TODO: Update blank fragment layout -->
 </RelativeLayout>

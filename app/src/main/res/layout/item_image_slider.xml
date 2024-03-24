@@ -9,8 +9,8 @@
         android:translationZ="2dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_width="180dp"
-        android:layout_height="310dp"
+        android:layout_width="186.68dp"
+        android:layout_height="298.35dp"
         android:layout_weight="1"
         android:scaleType="centerCrop"
         app:cardCornerRadius="12dp">
