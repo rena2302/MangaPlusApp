@@ -164,7 +164,7 @@ public class TruyenTranhAdapter extends RecyclerView.Adapter<TruyenTranhAdapter.
                                 .setNegativeButton(R.string.delete, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Toast.makeText(context, R.string.deleting, Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, R.string.deleting, Toast.LENGTH_SHORT).show();
                                         deleteMangas(truyenTranh);
                                     }
                                 })
