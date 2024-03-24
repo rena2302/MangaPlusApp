@@ -74,7 +74,14 @@ public class MangaListFragment extends DialogFragment {
         RecyclerView recyclerView = view.findViewById(R.id.dashFragmentRcv);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setAdapter(adapter);
+        if(tag.equals("category_dialog")) {
+            builder
+                    .setView(view);
+            TitleName_Dialog.setText(category.getNAME_CATEGORY());
+            Closed_Dialog.setOnClickListener(v -> {dismiss();});
+            background_dialog.getBackground().setAlpha(80);
 
+        }
         if (tag.equals("Favorite")){
             builder
                     .setView(view);

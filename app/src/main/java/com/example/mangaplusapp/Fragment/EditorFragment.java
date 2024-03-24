@@ -131,7 +131,6 @@ public class EditorFragment extends Fragment {
 
         private void validateData() {
             /*before adding validate data*/
-
             //get Data
             manga = binding.editMangaName.getText().toString().trim();
             if(TextUtils.isEmpty(manga)){
@@ -142,12 +141,17 @@ public class EditorFragment extends Fragment {
                 Toast.makeText(getContext(),R.string.fillAllField, Toast.LENGTH_LONG).show();
             } else if (TextUtils.isEmpty(binding.editMangaPicture.getText())) {
                 Toast.makeText(getContext(),R.string.fillAllField, Toast.LENGTH_LONG).show();
+            } else if (binding.editMangaPreCheck.isChecked()) {
+                if(TextUtils.isEmpty(binding.editMangaPrice.getText())){
+                    Toast.makeText(getContext(),R.string.fillAllField, Toast.LENGTH_LONG).show();
+                }
             } else {
                 editMangaFireBase();
                 binding.editMangaPicture.getText().clear();
                 binding.editMangaCategory.setText("");
                 binding.editMangaDescription.getText().clear();
                 binding.editMangaName.getText().clear();
+                binding.editMangaPreCheck.setChecked(false);
                 binding.editMangaPrice.getText().clear();
             }
         }
@@ -352,15 +356,16 @@ public class EditorFragment extends Fragment {
             chapter = binding.editChapterName.getText().toString().trim();
             if(TextUtils.isEmpty(chapter)){
                 Toast.makeText(getContext(),R.string.fillChapter, Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else if (binding.editChapterManga.getText() == null) {
+                Toast.makeText(getContext(), R.string.fillAllField, Toast.LENGTH_SHORT).show();
+            } else {
                 editChapterFireBase();
             }
         }
 
         private void editChapterFireBase() {
 
-            //setup info to add in firebase db
+            //setup info to edit in firebase db
             HashMap<String,Object> hashMap = new HashMap<>();
             hashMap.put("NAME_CHAPTER", ""+chapter);
             hashMap.put("MANGA_CHAPTER", ""+binding.editChapterManga.getText());

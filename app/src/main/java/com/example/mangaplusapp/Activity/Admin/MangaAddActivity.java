@@ -130,12 +130,18 @@ public class MangaAddActivity extends BaseActivity {
             Toast.makeText(this,R.string.fillAllField, Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(binding.addMangaPicture.getText())) {
             Toast.makeText(this,R.string.fillAllField, Toast.LENGTH_LONG).show();
+        } else if (binding.addMangaPreCheck.isChecked()) {
+            if(TextUtils.isEmpty(binding.addMangaPrice.getText())){
+                Toast.makeText(this,R.string.fillAllField, Toast.LENGTH_LONG).show();
+            }
         } else {
             addMangaFireBase();
             binding.addMangaPicture.getText().clear();
             binding.addMangaCategory.setText("");
             binding.addMangaDescription.getText().clear();
             binding.addMangaName.getText().clear();
+            binding.addMangaPreCheck.setChecked(false);
+            binding.addMangaPrice.getText().clear();
         }
     }
 

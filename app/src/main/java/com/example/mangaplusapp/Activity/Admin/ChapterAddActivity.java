@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.mangaplusapp.Activity.Base.BaseActivity;
 import com.example.mangaplusapp.R;
@@ -120,8 +121,9 @@ public class ChapterAddActivity extends BaseActivity {
         chapter = binding.addChapterName.getText().toString().trim();
         if(TextUtils.isEmpty(chapter)){
             Toast.makeText(this,R.string.fillChapter, Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else if (binding.addChapterManga.getText() == null) {
+            Toast.makeText(this, R.string.fillAllField, Toast.LENGTH_SHORT).show();
+        } else {
             addChapterFireBase();
         }
     }
