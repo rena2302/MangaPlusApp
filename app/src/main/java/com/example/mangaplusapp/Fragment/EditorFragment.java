@@ -176,7 +176,6 @@ public class EditorFragment extends Fragment {
                 hashMap.put("PREMIUM_MANGA",false);
                 hashMap.put("PRICE_MANGA", "0");
             }
-            //hashMap.put("UID_MANGA", firebaseAuth.getUid());
 
             //add to firebase db
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Mangas").child(extras.getString("ID_MANGA"));
@@ -227,7 +226,6 @@ public class EditorFragment extends Fragment {
         }
 
         private void editCategoryFireBase() {
-            long timestamp = System.currentTimeMillis();
 
             //setup info to add in firebase db
             HashMap<String, Object> hashMap = new HashMap<>();
@@ -427,7 +425,6 @@ public class EditorFragment extends Fragment {
             mangaSession.binding.editMangaName.setText(extras.getString("NAME_MANGA"));
             mangaSession.binding.editMangaDescription.setText(extras.getString("DESCRIPTION_MANGA"));
             mangaSession.binding.editMangaPicture.setText(extras.getString("PICTURE_MANGA"));
-            mangaSession.binding.editMangaCategory.setText(extras.getString("CATEGORY_MANGA"));
             if(!Boolean.parseBoolean(extras.getString("PREMIUM_MANGA"))) {
                 mangaSession.binding.editMangaPreCheck.setChecked(false);
                 mangaSession.binding.editMangaPrice.setEnabled(false);
@@ -435,6 +432,14 @@ public class EditorFragment extends Fragment {
                 mangaSession.binding.editMangaPreCheck.setChecked(true);
                 mangaSession.binding.editMangaPrice.setText(extras.getString("PRICE_MANGA"));
             }
+            mangaSession.binding.editMangaPreCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(!isChecked){
+                        mangaSession.binding.editMangaPrice.getText().clear();
+                    }
+                }
+            });
         }
         /*Category Session*/
         else if (sharedPreferences.getString("session","").equals("category")) {
