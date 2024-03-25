@@ -398,6 +398,20 @@ public class VerificationFragment extends Fragment{
             }
         }
     }
+
+    //Handle the cursor of editext and place each index data of the text in the correct editext
+    private  void setEditTextValues(String text) {
+        otp1Input.setText(String.valueOf(text.charAt(0)));
+        otp2Input.setText(String.valueOf(text.charAt(1)));
+        otp3Input.setText(String.valueOf(text.charAt(2)));
+        otp4Input.setText(String.valueOf(text.charAt(3)));
+        otp1Input.setSelection(otp2Input.getText().length());
+        otp2Input.setSelection(otp2Input.getText().length());
+        otp3Input.setSelection(otp3Input.getText().length());
+        otp4Input.setSelection(otp4Input.getText().length());
+    }
+
+
     private void changeEmailWithoutUpdateEmail(String OldEmail, String OldPass) {
         if (currentUser != null) {
 
@@ -445,17 +459,6 @@ public class VerificationFragment extends Fragment{
                 });
     }
 
-    //Handle the cursor of editext and place each index data of the text in the correct editext
-    private  void setEditTextValues(String text) {
-        otp1Input.setText(String.valueOf(text.charAt(0)));
-        otp2Input.setText(String.valueOf(text.charAt(1)));
-        otp3Input.setText(String.valueOf(text.charAt(2)));
-        otp4Input.setText(String.valueOf(text.charAt(3)));
-        otp1Input.setSelection(otp2Input.getText().length());
-        otp2Input.setSelection(otp2Input.getText().length());
-        otp3Input.setSelection(otp3Input.getText().length());
-        otp4Input.setSelection(otp4Input.getText().length());
-    }
     private void ShowDialog()
     {
         final Dialog dialog=new Dialog(getContext());

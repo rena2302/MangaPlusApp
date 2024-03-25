@@ -118,17 +118,4 @@ public class EditNameFragment extends Fragment {
             }
         });
     }
-
-    private void loadFragment(Fragment fragment, boolean isAppInitialized) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        if (isAppInitialized) {
-            fragmentTransaction.add(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
-        } else {
-            fragmentTransaction.replace(R.id.frameLayout, fragment, fragment.getClass().getSimpleName());
-            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
-        }
-        fragmentTransaction.commit();
-    }
 }

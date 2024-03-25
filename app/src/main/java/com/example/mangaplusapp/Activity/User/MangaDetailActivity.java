@@ -120,48 +120,6 @@ public class MangaDetailActivity extends BaseActivity {
         });
     }
 
-    private void onClickEvent(){
-        binding.backDetailProductBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        binding.ContentShowmore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (binding.mangaDetailDescription.getMaxLines() == Integer.MAX_VALUE) {
-                    binding.mangaDetailDescription.setLineSpacing(10,1);
-                    binding.mangaDetailDescription.setLetterSpacing(0.02f);
-                    binding.mangaDetailDescription.setMaxLines(10);
-                    binding.ContentShowmore.setText(R.string.Showmore);
-                    binding.ContentShowmore.setTextColor(Color.BLACK);
-                    binding.mangaDetailDescription.animate().translationY(0).alpha(0.3f).setDuration(500).start();
-                } else {
-                    binding.mangaDetailDescription.setMaxLines(Integer.MAX_VALUE);
-                    binding.mangaDetailDescription.setLineSpacing(20,1);
-                    binding.mangaDetailDescription.setLetterSpacing(0.035f);
-                    binding.ContentShowmore.setText(R.string.Hideless);
-                    binding.ContentShowmore.setTextColor(Color.GRAY);
-                    binding.mangaDetailDescription.animate().translationY(8).alpha(0.7f).setDuration(500).start();
-                }
-            }
-        });
-        binding.mangaDetailFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleFavorite();
-            }
-        });
-    }
-
-    private BiometricPrompt.PromptInfo.Builder dialogMetric()
-    {
-        return new BiometricPrompt.PromptInfo.Builder()
-                .setTitle(getString(R.string.Mangaplusneedstoconfirm))
-                .setSubtitle(getString(R.string.Fingerprintverification));
-    }
-
     private void onClickPayment(Boolean isPremium){
         binding.BuyBook.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -411,6 +369,48 @@ public class MangaDetailActivity extends BaseActivity {
                     "PRICE_MANGA", mangaPrice);
             dialog.dismiss();
         });
+    }
+
+    private void onClickEvent(){
+        binding.backDetailProductBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        binding.ContentShowmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (binding.mangaDetailDescription.getMaxLines() == Integer.MAX_VALUE) {
+                    binding.mangaDetailDescription.setLineSpacing(10,1);
+                    binding.mangaDetailDescription.setLetterSpacing(0.02f);
+                    binding.mangaDetailDescription.setMaxLines(10);
+                    binding.ContentShowmore.setText(R.string.Showmore);
+                    binding.ContentShowmore.setTextColor(Color.BLACK);
+                    binding.mangaDetailDescription.animate().translationY(0).alpha(0.3f).setDuration(500).start();
+                } else {
+                    binding.mangaDetailDescription.setMaxLines(Integer.MAX_VALUE);
+                    binding.mangaDetailDescription.setLineSpacing(20,1);
+                    binding.mangaDetailDescription.setLetterSpacing(0.035f);
+                    binding.ContentShowmore.setText(R.string.Hideless);
+                    binding.ContentShowmore.setTextColor(Color.GRAY);
+                    binding.mangaDetailDescription.animate().translationY(8).alpha(0.7f).setDuration(500).start();
+                }
+            }
+        });
+        binding.mangaDetailFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleFavorite();
+            }
+        });
+    }
+
+    private BiometricPrompt.PromptInfo.Builder dialogMetric()
+    {
+        return new BiometricPrompt.PromptInfo.Builder()
+                .setTitle(getString(R.string.Mangaplusneedstoconfirm))
+                .setSubtitle(getString(R.string.Fingerprintverification));
     }
 
     private void checkBioMetricSpperted()
