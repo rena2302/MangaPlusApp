@@ -37,6 +37,7 @@ import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
+import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -86,6 +87,7 @@ public class ChapterViewFragment extends Fragment {
                     @Override
                     public void onSuccess(byte[] bytes) {
                         chapterViewBinding.pdfView.fromBytes(bytes)
+                                .scrollHandle(new DefaultScrollHandle(getContext()))
                                 .swipeHorizontal(false)// false = vertical , true = horizontal
                                 .onLoad(new OnLoadCompleteListener() {
                                     @Override
