@@ -51,7 +51,7 @@ public class ChangeEmailFragment extends Fragment {
     UserDBHelper db;
     EditText InputEmail;
     ImageButton Backbtn;
-
+    LoadFragment fragmentHelper;
     String NewEmail;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -112,25 +112,13 @@ public class ChangeEmailFragment extends Fragment {
                         bundle.putBoolean("KeyChangeEmail", true);
                         VerificationFragment fragment = new VerificationFragment();
                         fragment.setArguments(bundle);
-                        loadFragment(fragment, false);
+                        fragmentHelper = new LoadFragment();
+                        fragmentHelper.loadFragment(getParentFragmentManager(), fragment, false, R.id.editFmContainer);
                     } else {
                         Toast.makeText(getContext(), R.string.typeEmailValid, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
-    }
-
-    private void loadFragment(Fragment fragment, boolean isAppInitialized) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        if (isAppInitialized) {
-            fragmentTransaction.add(R.id.editFmContainer, fragment, fragment.getClass().getSimpleName());
-        } else {
-            fragmentTransaction.replace(R.id.editFmContainer, fragment, fragment.getClass().getSimpleName());
-            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
-        }
-        fragmentTransaction.commit();
     }
 }

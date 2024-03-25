@@ -211,12 +211,14 @@ public class VerificationFragment extends Fragment{
                 @Override
                 public void onEmailCheckResult(boolean exists) {
                     if(exists){
-                        loadFragment(new ForgotFragment(),false);
+                        fragmentHelper = new LoadFragment();
+                        fragmentHelper.loadFragment(getParentFragmentManager(), new ForgotFragment(), false, R.id.forgotContainer);
                     }
                     else {
                         if(keyChange)
                         {
-                            loadFragment1(new ChangeEmailFragment(),false);
+                            fragmentHelper = new LoadFragment();
+                            fragmentHelper.loadFragment(getParentFragmentManager(), new ChangeEmailFragment(), false, R.id.editFmContainer);
                         }
                         else {
                             Intent loadToRegister = new Intent(getContext(), RegisterActivity.class);
@@ -228,31 +230,6 @@ public class VerificationFragment extends Fragment{
         });
     }
 
-    private void loadFragment(Fragment fragment, boolean isAppInitialized) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        if (isAppInitialized) {
-            fragmentTransaction.add(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
-        } else {
-            fragmentTransaction.replace(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
-            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
-        }
-        fragmentTransaction.commit();
-    }
-
-    private void loadFragment1(Fragment fragment, boolean isAppInitialized) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        if (isAppInitialized) {
-            fragmentTransaction.add(R.id.editFmContainer, fragment, fragment.getClass().getSimpleName());
-        } else {
-            fragmentTransaction.replace(R.id.editFmContainer, fragment, fragment.getClass().getSimpleName());
-            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
-        }
-        fragmentTransaction.commit();
-    }
 
     //Check Editext has data or not
     private int ListenNullText(int SelectedPosition,EditText input1,EditText input2, EditText input3, EditText input4)
