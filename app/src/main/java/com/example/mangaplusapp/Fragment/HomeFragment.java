@@ -232,7 +232,7 @@ public class HomeFragment extends Fragment {
             if (position == 0) {
                 page.setTransitionAlpha(1f);
             } else {
-                page.setTransitionAlpha(0.7f);
+                page.setTransitionAlpha(1f);
             }
 
             // Khoảng cách các item
