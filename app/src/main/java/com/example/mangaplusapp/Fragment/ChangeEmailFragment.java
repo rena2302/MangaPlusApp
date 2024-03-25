@@ -40,6 +40,10 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class ChangeEmailFragment extends Fragment {
     AppCompatButton AcceptnewEmail, SubmitChange;
@@ -134,11 +138,18 @@ public class ChangeEmailFragment extends Fragment {
         
     private void changeNewEmail(String newEmail)
     {
+        String oldIdCurrentUser = currentUser.getUid();
         currentUser.updateEmail(newEmail)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            String newIdCurrentUser = currentUser.getUid();
+                            DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Users");
+                            HashMap<String,Object> hashMap=new HashMap<>();
+                            hashMap.put("userEmail",newEmail);
+                            hashMap.put("idUser",newIdCurrentUser);
+                            reference.child(oldIdCurrentUser).updateChildren(hashMap);
                             Toast.makeText(getContext(), R.string.emailUpdateSuccess, Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(getContext(), MainActivity.class);
                             intent.putExtra("BackToProfile", 1);
