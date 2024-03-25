@@ -78,12 +78,15 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
         forgotPasswordTxt = (TextView) findViewById(R.id.forgotPassword_act);
         //================================End get id for login basic==============================//
         //****************************************************************************************//
+
         //================================Begin get data for login basic==========================//
         KeyBoardHelper.ActionRemoveKeyBoardForActivity(scrollView,this);
         SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         //================================END get data for login basic============================//
+
         //****************************************************************************************//
+
         //===============================Begin get id for login with social=======================//
         googleBtn = findViewById(R.id.googleBtn_login);
         mAuth = FirebaseAuth.getInstance();
@@ -92,11 +95,14 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
+
         googleBtn.setOnClickListener(v->{
             googleSignIn();
         });
         //===============================End get id for login with social=========================//
+
         //****************************************************************************************//
+
         //===============================CONNECT DATABASE=========================================//
         db = new UserDBHelper(this);
         //=============================== End Connect DataBase====================================//
@@ -188,6 +194,9 @@ public class LoginActivity extends BaseActivity implements MVPLoginView {
         });
         //****************************************************************************************//
     }
+
+
+
     //Callback by Presenter
     @Override
     public void LoginSuccess() {
