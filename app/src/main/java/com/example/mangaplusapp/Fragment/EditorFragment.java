@@ -260,6 +260,7 @@ public class EditorFragment extends Fragment {
         private  Bundle extras;
         private static final int PICK_PDF_FILE = 1;
         private Uri pdfUri;
+        private String selectedMangaId;
         private ChapterSession(Bundle extras){
             this.extras = extras;
             loadMangas();
@@ -329,6 +330,7 @@ public class EditorFragment extends Fragment {
                             String manga = mangasString[which];
                             //set category to textView
                             binding.editChapterManga.setText(manga);
+                            selectedMangaId = truyenTranhList.get(which).getID_MANGA();
                         }
                     })
                     .show();
@@ -373,7 +375,7 @@ public class EditorFragment extends Fragment {
             HashMap<String,Object> hashMap = new HashMap<>();
             hashMap.put("NAME_CHAPTER", ""+chapter);
             hashMap.put("MANGA_CHAPTER", ""+binding.editChapterManga.getText());
-            hashMap.put("ID_MANGA_CHAPTER", ""+extras.getString("ID_MANGA_CHAPTER"));
+            hashMap.put("ID_MANGA_CHAPTER", ""+selectedMangaId);
             //hashMap.put("UID_MANGA", firebaseAuth.getUid());
             // Upload PDF file to Firebase Storage
             try {
