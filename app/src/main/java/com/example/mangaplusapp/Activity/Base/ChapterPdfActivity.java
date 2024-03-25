@@ -118,12 +118,11 @@ public class ChapterPdfActivity extends BaseActivity implements ChapterViewFragm
     @Override
     public void onBackPressed() {
         if (isPdfLoaded) {
-            startNewActivityAndFinishCurrent(MainActivity.class);
+            startNewActivity(MainActivity.class);
             super.onBackPressed(); // Chỉ cho phép back khi PDF đã load xong
         } else {
             Toast.makeText(ChapterPdfActivity.this,R.string.mangaLoading, Toast.LENGTH_LONG).show();
         }
-
     }
 
     @Override

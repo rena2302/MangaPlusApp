@@ -74,7 +74,8 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
                             "ID_MANGA_CHAPTER", chapter.getID_MANGA_CHAPTER(),
                             "MANGA_CHAPTER", chapter.getMANGA_CHAPTER(),
                             "PDF_CHAPTER", chapter.getPDF_CHAPTER());
-                    Toast.makeText(context, R.string.areInChapter + chapter.getNAME_CHAPTER(), Toast.LENGTH_SHORT).show();
+                    String areInChapter = context.getString(R.string.areInChapter) + chapter.getNAME_CHAPTER();
+                    Toast.makeText(context, areInChapter, Toast.LENGTH_SHORT).show();
                 } else {
                     dialog.dismiss();
                     Toast.makeText(context, R.string.mangaLoading, Toast.LENGTH_SHORT).show();
