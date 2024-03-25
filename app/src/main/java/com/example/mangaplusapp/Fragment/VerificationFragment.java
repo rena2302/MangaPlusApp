@@ -2,21 +2,25 @@ package com.example.mangaplusapp.Fragment;
 
 import static android.content.Intent.getIntent;
 
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -44,21 +48,26 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class VerificationFragment extends Fragment{
-    FirebaseAuth auth;
     FirebaseUser currentUser;
-    String userID;
+    FirebaseAuth auth;
     String emailUser;
     TextView getEmailUserTxt,reSendOtp;
     UserDBHelper dbHelper;
-    AppCompatButton submitOtp;
+    AppCompatButton submitOtp, SubmitChange;
     OTP otpHelper;
     LoadFragment fragmentHelper;
     String keyOtp;
     EditText otp1Input,otp2Input,otp3Input,otp4Input;
     ImageButton backOTPBtn;
-    DatabaseReference usersRef;
+
+    String OldEmail,OldPass;
+    EditText oldEmail, oldPass;
+    boolean keyChange;
 
     //Resend OTP time
     private final int resendTime=60;
@@ -94,10 +103,17 @@ public class VerificationFragment extends Fragment{
         //****************************************************************************************//
         //=========================================GET DATA=======================================//
         SharedPreferences preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+
         otpHelper = new OTP();
         dbHelper=new UserDBHelper(getContext());
         auth=FirebaseAuth.getInstance();
+        currentUser=auth.getCurrentUser();
+
+        Bundle bundle=getArguments();
+        if(bundle!=null)
+        {
+            keyChange=bundle.getBoolean("KeyChangeEmail");
+        }
         //****************************************************************************************//
         //=========================================GET HELPER=======================================//
         //****************************************************************************************//
@@ -151,11 +167,10 @@ public class VerificationFragment extends Fragment{
             String otp3 = otp3Input.getText().toString();
             String otp4 = otp4Input.getText().toString();
             String otp= otp1+otp2+otp3+otp4;
-            String fakeOtp = "1111";
             Log.d("keyOTPtest", keyOtp);
             if(otp.length()==4)
             {
-                if(otp.equals(keyOtp)||otp.equals(fakeOtp)){
+                if(otp.equals(keyOtp)){
                     dbHelper.checkEmailExists(emailUser, new UserDBHelper.userCheckFirebaseListener() {
                         @Override
                         public void onEmailCheckResult(boolean exists) {
@@ -165,9 +180,15 @@ public class VerificationFragment extends Fragment{
                                  fragmentHelper.loadFragment(getParentFragmentManager(), new SuccessFragment(), false, R.id.forgotContainer);
                             }
                             else {
+                                if(keyChange)
+                                {
+                                    ShowDialog();
+                                }
+                                else {
+                                    fragmentHelper = new LoadFragment();
+                                    fragmentHelper.loadFragment(getParentFragmentManager(), new CreatePasswordFragment(), false, R.id.forgotContainer);
+                                }
                                 //===========================Case Register========================//
-                                fragmentHelper = new LoadFragment();
-                                fragmentHelper.loadFragment(getParentFragmentManager(), new CreatePasswordFragment(), false, R.id.forgotContainer);
                             }
                         }
                     });
@@ -193,8 +214,14 @@ public class VerificationFragment extends Fragment{
                         loadFragment(new ForgotFragment(),false);
                     }
                     else {
-                        Intent loadToRegister = new Intent(getContext(), RegisterActivity.class);
-                        startActivity(loadToRegister);
+                        if(keyChange)
+                        {
+                            loadFragment1(new ChangeEmailFragment(),false);
+                        }
+                        else {
+                            Intent loadToRegister = new Intent(getContext(), RegisterActivity.class);
+                            startActivity(loadToRegister);
+                        }
                     }
                 }
             });
@@ -209,6 +236,19 @@ public class VerificationFragment extends Fragment{
             fragmentTransaction.add(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
         } else {
             fragmentTransaction.replace(R.id.forgotContainer, fragment, fragment.getClass().getSimpleName());
+            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
+        }
+        fragmentTransaction.commit();
+    }
+
+    private void loadFragment1(Fragment fragment, boolean isAppInitialized) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        if (isAppInitialized) {
+            fragmentTransaction.add(R.id.editFmContainer, fragment, fragment.getClass().getSimpleName());
+        } else {
+            fragmentTransaction.replace(R.id.editFmContainer, fragment, fragment.getClass().getSimpleName());
             fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
         }
         fragmentTransaction.commit();
@@ -381,6 +421,52 @@ public class VerificationFragment extends Fragment{
             }
         }
     }
+    private void changeEmailWithoutUpdateEmail(String OldEmail, String OldPass) {
+        if (currentUser != null) {
+
+            AuthCredential credential = EmailAuthProvider.getCredential(OldEmail, OldPass);
+            currentUser.reauthenticate(credential)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> reauthTask) {
+                            if (reauthTask.isSuccessful()) {
+                                changeNewEmail(emailUser);
+                            } else {
+                                Toast.makeText(getContext(), R.string.invalidPasswordOrEmail, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+        else {
+            Toast.makeText(getContext(),R.string.invalidEmail,Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void changeNewEmail(String newEmail)
+    {
+        String oldIdCurrentUser = currentUser.getUid();
+        currentUser.updateEmail(newEmail)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            String newIdCurrentUser = currentUser.getUid();
+                            DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Users");
+                            HashMap<String,Object> hashMap=new HashMap<>();
+                            hashMap.put("userEmail",newEmail);
+                            hashMap.put("idUser",newIdCurrentUser);
+                            reference.child(oldIdCurrentUser).updateChildren(hashMap);
+                            Toast.makeText(getContext(), R.string.emailUpdateSuccess, Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(getContext(), MainActivity.class);
+                            intent.putExtra("BackToProfile", 1);
+                            startActivity(intent);
+                            getActivity().finish();
+                        } else {
+                            Toast.makeText(getContext(), R.string.emailUpdateFail, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
 
     //Handle the cursor of editext and place each index data of the text in the correct editext
     private  void setEditTextValues(String text) {
@@ -392,5 +478,31 @@ public class VerificationFragment extends Fragment{
         otp2Input.setSelection(otp2Input.getText().length());
         otp3Input.setSelection(otp3Input.getText().length());
         otp4Input.setSelection(otp4Input.getText().length());
+    }
+    private void ShowDialog()
+    {
+        final Dialog dialog=new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_check_oldemailpass);
+
+        oldEmail=dialog.findViewById(R.id.EmailTxt);
+        oldPass=dialog.findViewById(R.id.OldPassTxt);
+        SubmitChange=dialog.findViewById(R.id.btnSubmitChange);
+
+        SubmitChange.setOnClickListener(v->{
+            OldEmail=oldEmail.getText().toString();
+            OldPass=oldPass.getText().toString();
+            if(OldPass.isEmpty()||OldPass.isEmpty())
+            {
+                Toast.makeText(getContext(),R.string.invalidPasswordOrEmail,Toast.LENGTH_SHORT).show();
+            }
+            else {
+                changeEmailWithoutUpdateEmail(OldEmail,OldPass);
+            }
+        });
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.show();
     }
 }

@@ -31,6 +31,7 @@ import com.example.mangaplusapp.Activity.User.MainActivity;
 import com.example.mangaplusapp.Activity.User.RegisterActivity;
 import com.example.mangaplusapp.Helper.ActionHelper.KeyBoardHelper;
 import com.example.mangaplusapp.Helper.DBHelper.UserDBHelper;
+import com.example.mangaplusapp.Helper.LoadHelper.LoadFragment;
 import com.example.mangaplusapp.R;
 import com.google.android.gms.common.internal.Preconditions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,14 +47,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 public class ChangeEmailFragment extends Fragment {
-    AppCompatButton AcceptnewEmail, SubmitChange;
+    AppCompatButton AcceptnewEmail;
     UserDBHelper db;
     EditText InputEmail;
     ImageButton Backbtn;
-    FirebaseAuth mAuth;
-    FirebaseUser currentUser;
-    String NewEmail,OldEmail,OldPass;
-    EditText oldEmail, oldPass;
+
+    String NewEmail;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     public ChangeEmailFragment() {
     }
@@ -75,8 +76,9 @@ public class ChangeEmailFragment extends Fragment {
         Backbtn = root.findViewById(R.id.backEditEmailBtn);
 
         db = new UserDBHelper(getContext());
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
+
+        preferences = getContext().getSharedPreferences("user_session", Context.MODE_PRIVATE);
+        editor=preferences.edit();
 
         BackToPro();
         AcceptnewEmail.setOnClickListener(v->{
@@ -104,8 +106,13 @@ public class ChangeEmailFragment extends Fragment {
                     Toast.makeText(getContext(), R.string.emailExists, Toast.LENGTH_SHORT).show();
                 } else {
                     if (db.validEmail(email)) {
-                        ShowDialog();
-
+                        editor.putString("user_email", email);
+                        editor.apply(); // apply session
+                        Bundle bundle = new Bundle();
+                        bundle.putBoolean("KeyChangeEmail", true);
+                        VerificationFragment fragment = new VerificationFragment();
+                        fragment.setArguments(bundle);
+                        loadFragment(fragment, false);
                     } else {
                         Toast.makeText(getContext(), R.string.typeEmailValid, Toast.LENGTH_SHORT).show();
                     }
@@ -114,78 +121,16 @@ public class ChangeEmailFragment extends Fragment {
         });
     }
 
-    private void changeEmailWithoutUpdateEmail(String OldEmail, String OldPass) {
-        if (currentUser != null) {
+    private void loadFragment(Fragment fragment, boolean isAppInitialized) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                AuthCredential credential = EmailAuthProvider.getCredential(OldEmail, OldPass);
-                currentUser.reauthenticate(credential)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> reauthTask) {
-                                if (reauthTask.isSuccessful()) {
-                                    NewEmail=InputEmail.getText().toString();
-                                    changeNewEmail(NewEmail);
-                                } else {
-                                    Toast.makeText(getContext(), R.string.invalidPasswordOrEmail, Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            }
-            else {
-                Toast.makeText(getContext(),R.string.invalidEmail,Toast.LENGTH_SHORT).show();
-            }
+        if (isAppInitialized) {
+            fragmentTransaction.add(R.id.editFmContainer, fragment, fragment.getClass().getSimpleName());
+        } else {
+            fragmentTransaction.replace(R.id.editFmContainer, fragment, fragment.getClass().getSimpleName());
+            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
         }
-        
-    private void changeNewEmail(String newEmail)
-    {
-        String oldIdCurrentUser = currentUser.getUid();
-        currentUser.updateEmail(newEmail)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            String newIdCurrentUser = currentUser.getUid();
-                            DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Users");
-                            HashMap<String,Object> hashMap=new HashMap<>();
-                            hashMap.put("userEmail",newEmail);
-                            hashMap.put("idUser",newIdCurrentUser);
-                            reference.child(oldIdCurrentUser).updateChildren(hashMap);
-                            Toast.makeText(getContext(), R.string.emailUpdateSuccess, Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(getContext(), MainActivity.class);
-                            intent.putExtra("BackToProfile", 1);
-                            startActivity(intent);
-                            getActivity().finish();
-                        } else {
-                            Toast.makeText(getContext(), R.string.emailUpdateFail, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    private void ShowDialog()
-    {
-        final Dialog dialog=new Dialog(getContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_check_oldemailpass);
-
-        oldEmail=dialog.findViewById(R.id.EmailTxt);
-        oldPass=dialog.findViewById(R.id.OldPassTxt);
-        SubmitChange=dialog.findViewById(R.id.btnSubmitChange);
-
-        SubmitChange.setOnClickListener(v->{
-            OldEmail=oldEmail.getText().toString();
-            OldPass=oldPass.getText().toString();
-            if(OldPass.isEmpty()||OldPass.isEmpty())
-            {
-                Toast.makeText(getContext(),R.string.invalidPasswordOrEmail,Toast.LENGTH_SHORT).show();
-            }
-            else {
-                changeEmailWithoutUpdateEmail(OldEmail,OldPass);
-            }
-        });
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().setGravity(Gravity.CENTER);
-        dialog.show();
+        fragmentTransaction.commit();
     }
 }
