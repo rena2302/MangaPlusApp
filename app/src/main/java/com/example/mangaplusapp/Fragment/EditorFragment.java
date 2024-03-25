@@ -49,6 +49,7 @@ public class EditorFragment extends Fragment {
     class MangaSession {
         private List<Categories> categoryList;
         private  Bundle extras;
+        private String selectedCategoryId;
         FragmentEditorMangaBinding binding = FragmentEditorMangaBinding.inflate(getLayoutInflater());
 
         private MangaSession(Bundle extras){
@@ -100,6 +101,7 @@ public class EditorFragment extends Fragment {
                             String category = categoriesString[which];
                             //set category to textView
                             binding.editMangaCategory.setText(category);
+                            selectedCategoryId = categoryList.get(which).getID_CATEGORY();
 
                         }
                     })
@@ -165,7 +167,7 @@ public class EditorFragment extends Fragment {
             hashMap.put("DESCRIPTION_MANGA", ""+binding.editMangaDescription.getText());
             hashMap.put("PICTURE_MANGA", ""+binding.editMangaPicture.getText());
             hashMap.put("CATEGORY_MANGA", ""+binding.editMangaCategory.getText());
-            hashMap.put("ID_CATEGORY_MANGA",""+extras.getString("ID_CATEGORY_MANGA"));
+            hashMap.put("ID_CATEGORY_MANGA",""+selectedCategoryId);
             if (binding.editMangaPreCheck.isChecked()){
                 hashMap.put("PREMIUM_MANGA",true);
                 hashMap.put("PRICE_MANGA", ""+binding.editMangaPrice.getText().toString());
