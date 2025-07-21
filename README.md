@@ -1,61 +1,136 @@
-Architecture
-(MVP)
-Feature 
-  {UI}
-      + Send OTP when Sign in/up            done
-      + Send OTP with forgot password       done
-      + Banner AD                           done
-      + Support center
-      + Change country                     done
-      + Sreach                             done       
-      + Hot
-      + Music
-      + Payment                            done
-      + Library
-      + Control info                       done
-      + accpect permission                 done 
-  {DASHBOARD}
-      + CRUD                               done       
-      + Control Payment                    
-  {SERVICE}
-      + Play Music
-      + Buy book
-      + Sign in/up Social  
+# MangaPlusApp
 
-      
-DATABASE
-      + NO SQL
-      + FIREBASE
+A comprehensive Android manga reading application built with Java and following the MVP (Model-View-Presenter) architecture pattern. The app provides both user and admin functionalities for managing and reading manga content.
 
-API / RESFULAPI
-      + MOMO API
-      + ZALO SDK API
-      + GOOGLE API
+## 🏗️ Architecture
 
- // use bundle when put and get data from activity into fragment
-        Bundle bundle = new Bundle();
-        bundle.putString("email", email);
-put get extra when activity to acitivity
+The application follows the **MVP (Model-View-Presenter)** architectural pattern for clean separation of concerns and maintainable code structure.
 
-file apk : keytool -list -v -keystore "D:\android Project\key.jks" -alias key0 -storepass 123456789@asd -keypass 123456789@asd
-coppy sha-1 , add into firebase sha-1
+## ✨ Features
 
-/////////////////////////
-Alias name: key0
-Creation date: Mar 18, 2024
-Entry type: PrivateKeyEntry
-Certificate chain length: 1
-Certificate[1]:
-Owner: C=VI, ST=H? Chí Minh, L=Vi?t Nam, O=Android Mate, OU=1, CN=Phan V?n N?ng
-Issuer: C=VI, ST=H? Chí Minh, L=Vi?t Nam, O=Android Mate, OU=1, CN=Phan V?n N?ng
-Serial number: 1
-Valid from: Mon Mar 18 15:05:44 ICT 2024 until: Fri Mar 12 15:05:44 ICT 2049
-Certificate fingerprints:
-         SHA1: 68:03:E1:B8:BF:1F:BE:CA:66:3B:1C:CD:CF:5D:0B:F9:1A:B5:1B:23
-         SHA256: F4:2D:1C:27:EE:25:28:00:98:00:C0:61:4D:8F:F1:4B:0B:9C:C4:11:8D:FC:29:05:58:8C:30:22:78:3A:2C:58
-Signature algorithm name: SHA256withRSA
-Subject Public Key Algorithm: 2048-bit RSA key
-Version: 1
+### User Features
+- **Authentication System**
+  - OTP verification for Sign in/Sign up
+  - OTP verification for forgot password
+  - Social login integration (Google, Zalo)
+  - Biometric authentication support
 
-/////////////////////////
-  
+- **Content Discovery**
+  - Search functionality 
+  - Hot/trending manga section
+  - Category browsing
+  - Favorites management
+  - Region/country selection
+
+- **Reading Experience**
+  - Chapter viewing and navigation
+  - Manga detail pages
+  - Library management
+  - Reading progress tracking
+
+- **Payment & Premium**
+  - Multiple payment methods (MoMo, Stripe)
+  - Premium content access
+  - Purchase history
+
+- **Additional Features**
+  - Banner advertisements
+  - Music player integration
+  - Profile management
+  - Permission handling
+  - Support center
+
+### Admin Features
+- **Content Management (CRUD)**
+  - Add/Edit/Delete manga
+  - Chapter management
+  - Category management
+  - Content editor with rich text support
+
+- **Dashboard**
+  - Admin dashboard interface
+  - Payment control and monitoring
+  - User management
+
+## 🛠️ Technical Stack
+
+### Frontend
+- **Language**: Java
+- **UI Framework**: Android Native
+- **Architecture**: MVP Pattern
+- **View Binding**: Enabled for type-safe view references
+
+### Backend & Database
+- **Database**: Firebase (NoSQL)
+- **Authentication**: Firebase Auth
+- **Storage**: Firebase Storage
+
+### APIs & Integrations
+- **Payment**: MoMo API, Stripe API
+- **Social Login**: Zalo SDK, Google API
+- **Analytics**: Google Services
+
+### Development Tools
+- **Build System**: Gradle with Kotlin DSL
+- **Min SDK**: 30
+- **Target SDK**: 34
+- **Permissions**: Internet, Media access, External storage, Biometric
+
+## 📱 App Structure
+
+```
+app/
+├── Activity/
+│   ├── Admin/          # Admin panel activities
+│   ├── Base/           # Base activity classes
+│   └── User/           # User-facing activities
+├── Adapter/            # RecyclerView adapters
+├── Database/           # Database helper classes
+├── Fragment/           # UI fragments
+├── Helper/             # Utility helper classes
+├── ModelAndPresenter/  # MVP pattern implementation
+├── object/             # Data models
+└── util/              # Utility classes
+```
+
+## 🔧 Setup Instructions
+
+### Prerequisites
+- Android Studio
+- JDK 8 or higher
+- Firebase project setup
+
+### Installation
+1. Clone the repository
+2. Open the project in Android Studio
+3. Add your `google-services.json` file to the `app/` directory
+4. Configure your signing key:
+   ```bash
+   keytool -list -v -keystore "path/to/key.jks" -alias key0 -storepass your_password -keypass your_password
+   ```
+5. Add the SHA-1 fingerprint to your Firebase project
+6. Build and run the application
+
+### Build Configuration
+- **Release APK**: Located in `app/release/app-release.apk`
+- **Keystore**: `key.jks` (password protected)
+- **Signing Config**: Configured for release builds
+
+## 🔐 Security Features
+- Biometric authentication
+- Secure payment processing
+- ProGuard obfuscation for release builds
+- Encrypted user data storage
+
+## 📄 License
+This project is developed by Android Mate team.
+
+## 🤝 Contributing
+Please follow the established MVP architecture pattern when contributing to this project.
+
+## 📞 Support
+For support and queries, please contact through the in-app support center.
+
+---
+
+**Note**: This application requires proper Firebase configuration and API keys for full functionality.
